@@ -1,0 +1,115 @@
+name: hand_bill
+description: A new Flutter project.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.0-271.7.beta <3.0.0'
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+  fluttertoast: ^8.1.1
+  cupertino_icons: ^1.0.2
+  bloc: ^7.1.0
+  flutter_bloc: ^7.1.0
+  equatable: ^2.0.5
+  dio: ^4.0.6
+    #  http: ^0.13.4
+  flutter_svg: ^1.1.0
+  dots_indicator: ^2.1.0
+  intl: ^0.17.0
+  video_player: ^2.4.8
+  chewie: ^1.3.2
+  flutter_secure_storage: ^6.0.0
+  cached_network_image: ^3.2.1
+  carousel_slider: ^4.0.0
+    #  provider: ^5.0.0
+    #  flutter_rating_bar: ^4.0.0
+    #  shimmer: ^2.0.0
+    #  flutter_html: ^2.1.1
+    #  html: ^0.15.0
+  google_nav_bar: ^5.0.5
+  flutter_staggered_grid_view: ^0.4.0
+  flutter_toggle_tab: ^1.1.6
+    #  flutter_translate: ^4.0.2
+    #  firebase_auth: ^3.0.1
+    #  firebase_core: ^1.4.0
+#  firebase_messaging: ^14.1.1
+  flutter_local_notifications: ^8.1.1+1
+  url_launcher: ^6.0.9
+  collection: ^1.15.0-nullsafety.4
+  image_picker: ^0.8.4
+  pin_code_fields: ^7.3.0
+  timeago: ^3.1.0
+  flutter_screenutil: ^5.0.2
+  country_picker: ^2.0.16
+  intl_phone_field: ^3.1.0
+  conditional_builder_null_safety: ^0.0.6
+  store_redirect: ^2.0.1
+  easy_search_bar: ^2.3.1
+  flutter_phoenix: ^1.1.0
+  easy_localization: ^3.0.1
+  im_animations: ^0.1.2
+
+      #  floating_action_bubble: ^1.1.2
+      #flutter_ijkplayer: ^0.3.5+1
+    #chewie: ^1.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/translate/en.json
+    - assets/translate/ar.json
+    - assets/icons/
+    - assets/images/
+    - assets/icons/account/
+
+
+  fonts:
+
+    - family: Courgette
+      fonts:
+        - asset: assets/fonts/courgette_regular.ttf
+
+    - family: FugazOne
+      fonts:
+        - asset: assets/fonts/FugazOne-Regular.ttf
+
+    - family: LilyScriptOne
+      fonts:
+        - asset: assets/fonts/LilyScriptOne-Regular.ttf
+
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
