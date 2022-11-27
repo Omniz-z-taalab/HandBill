@@ -79,7 +79,7 @@ class SearchRepository {
       log("getSearchCompanies: ${jsonEncode(response.data)}");
 
       companyResponse = SearchCompaniesResponse.fromJson(response.data);
-      print(companyResponse.data!.first.name);
+      // print(companyResponse.data!.first.name);
       if (companyResponse.data != null) {
         return companyResponse;
       } else {

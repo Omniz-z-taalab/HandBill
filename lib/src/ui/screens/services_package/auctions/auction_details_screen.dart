@@ -18,6 +18,8 @@ import 'package:hand_bill/src/ui/screens/common/image_full_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../common/api_data.dart';
+
 class AuctionDetailsScreen extends StatefulWidget {
   static const routeName = "/AuctionDetailsScreen";
 
@@ -73,7 +75,7 @@ class _AuctionDetailsScreenState extends State<AuctionDetailsScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: RegularAppBar(label: "Auction Details"),
+      appBar: RegularAppBar(label: "AuctionDetails".tr()),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -145,28 +147,20 @@ class _AuctionDetailsScreenState extends State<AuctionDetailsScreen> {
                           SizedBox(height: _marginVer),
                           ExpandableTextWidget(text: _model.description!),
                           _divider(),
-                          InkWell(
-                              onTap: () {
-                                // Navigator.pushNamed(
-                                //     context, CompanyScreen.routeName,
-                                //     arguments: RouteArgument(param: Market()));
-                              },
-                              child: SizedBox(
-                                  height: 60,
-                                  child: Row(children: [
+                         Container(
+                                height: 100,
+                                  child: Row(
+                                      children: [
                                     AspectRatio(
-                                        aspectRatio: 1 / 1,
+                                        aspectRatio: 1 /1,
                                         child: Container(
                                             decoration: BoxDecoration(
                                                 image: DecorationImage(
                                                     image:
                                                     CachedNetworkImageProvider(
-                                                        _model.company!
-                                                            .logo ==
-                                                            null
+                                                        _model.company!.logo == null
                                                             ? placeholder
-                                                            : _model.company!
-                                                            .logo!.url!),
+                                                            : "${_model.company!.logo!.thump}"),
                                                     fit: BoxFit.cover),
                                                 color: Color(0xffeeeeee),
                                                 borderRadius:
@@ -180,7 +174,7 @@ class _AuctionDetailsScreenState extends State<AuctionDetailsScreen> {
                                         crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                         children: [
-                                          Text("Seller",
+                                          Text("Seller".tr(),
                                               style: TextStyle(
                                                   fontSize: 14,
                                                   color: textDarkColor,
@@ -188,15 +182,15 @@ class _AuctionDetailsScreenState extends State<AuctionDetailsScreen> {
                                           SizedBox(
                                             height: 100.h,
                                             width: 600.w,
-                                            child: Text(_model.company!.name!,
-                                                maxLines: 2,
+                                            child: Text(_model.company!.id!.toString(),
+                                                maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     color: textDarkColor)),
                                           ),
                                         ]),
-                                  ]))),
+                                  ])),
                           // SizedBox(height: _marginVer),
                           _divider(),
 
@@ -208,7 +202,7 @@ class _AuctionDetailsScreenState extends State<AuctionDetailsScreen> {
                                     mainAxisAlignment:
                                     MainAxisAlignment.start,
                                     children: [
-                                      Text("Phone : ",
+                                      Text("Phone : ".tr(),
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 13,
@@ -221,7 +215,7 @@ class _AuctionDetailsScreenState extends State<AuctionDetailsScreen> {
                                     mainAxisAlignment:
                                     MainAxisAlignment.start,
                                     children: [
-                                      Text("Location : ",
+                                      Text("Location : ".tr(),
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 13,
@@ -254,7 +248,7 @@ class _AuctionDetailsScreenState extends State<AuctionDetailsScreen> {
                     borderRadius: BorderRadius.circular(30)
                 ),
                 padding: EdgeInsets.all(12),
-                child: Icon(showContact?Icons.close:Icons.chat,size: 60.w,
+                child: Icon(showContact?Icons.close:Icons.chat,size: 30.w,
                   color: Colors.white,),
               ),
             ),),

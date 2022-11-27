@@ -59,7 +59,7 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     _onSubmitted(value) async {
-      if (_searchController.text.length >= 2) {
+      if (_searchController.text.length >= 1) {
         if (selectedPage == 0) {
           _searchBloc..add(SearchProductEvent(searchKey: value));
         }

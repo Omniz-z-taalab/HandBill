@@ -40,7 +40,7 @@ class _SearchSuppliersState extends State<SearchSuppliers> {
   @override
   Widget build(BuildContext context) {
     _onSubmitted(value) async {
-      if (_searchController.text.length >= 2) {
+      if (_searchController.text.length >= 1) {
           serviceBloc!..add(SearchMarketEvent(searchKey: value));
       }
     }

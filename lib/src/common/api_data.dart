@@ -1,6 +1,6 @@
 class APIData {
-  static const domainLink = "http://test.hand-bill.com/";
-  static const domainLinkApi = "http://test.hand-bill.com/api/";
+  static const domainLink = "https://test.hand-bill.com/";
+  static const domainLinkApi = "https://test.hand-bill.com/api/";
 
   static const secretKey = "5aoIrZjQvSPA2K3po1HeKHZHowNQdTOPrGQ1Ze0";
 
@@ -24,8 +24,8 @@ class APIData {
   static const getSliders = domainLinkApi + 'user/top-banners';
   static const getTopCompanies = domainLinkApi + 'user/top-companies';
   static const getPopular = domainLinkApi + 'user/top-products';
-  static const userProfile = domainLinkApi + 'users/profile';
-  static const editProfile = domainLinkApi + 'user/edit';
+  static const userProfile = domainLinkApi + 'user/profile';
+  static const editProfile = domainLinkApi + 'user/edit/';
   static const changePassword = domainLinkApi + 'user/change-password';
 
   // categories
@@ -92,6 +92,7 @@ class APIData {
   static const productBySubCategory = domainLinkApi + 'user/products/2';
   static const getFeatured = domainLinkApi + 'foods';
   static const productDetails = domainLinkApi + 'user/products/';
+  static const productOfCompany = domainLinkApi + 'user/products-companies';
 
   // company
   static const getCompanyDetails = domainLinkApi + 'user/details-company';
@@ -117,4 +118,5 @@ class APIData {
 //banners
   static const CategoryProductBanner = domainLinkApi + 'user/top-banners-sub-category-products';
   static const ServiceBanner = domainLinkApi + 'user/top-banners-sub-category-services';
+
 }

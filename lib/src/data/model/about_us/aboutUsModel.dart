@@ -57,7 +57,6 @@ class Videos {
     return data;
   }
 }
-
 class Banners {
   String? image;
 

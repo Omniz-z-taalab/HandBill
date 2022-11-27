@@ -40,46 +40,48 @@ class _AuthScreenState extends State<AuthScreen> {
                   scale: 0.5, child: Image.asset("assets/images/hb_logo.jpeg"))
             ])),
         Container(
-            height: size.height * 0.30,
+            height: size.height * 0.40,
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CustomButton(
-                      title: "login.login".tr(),
-                      color: mainColorLite,
-                      borderColor: mainColorLite,
-                      borderWidth: 1,
-                      textStyle: TextStyle(color: Colors.white),
-                      radius: 900,
-                      onPress: () =>
-                          Navigator.pushNamed(context, LoginScreen.routeName)),
-                  SizedBox(height: 24),
-                  CustomButton(
-                      title: "signup.signup".tr(),
-                      color: Colors.transparent,
-                      textStyle: TextStyle(color: mainColorLite),
-                      borderColor: mainColorLite,
-                      radius: 900,
-                      onPress: () => Navigator.pushNamed(
-                          context, RegisterScreen.routeName)),
-                  SizedBox(height: 16),
-                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    InkWell(
-                        onTap: () => Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            NavigationScreen.routeName,
-                            ModalRoute.withName('/')),
-                        child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 16),
-                            child: Text("login.skip".tr(),
-                                style: TextStyle(
-                                    fontSize: 16, color: textLiteColor))))
-                  ])
-                ]))
+            child: SingleChildScrollView(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CustomButton(
+                        title: "login.login".tr(),
+                        color: mainColorLite,
+                        borderColor: mainColorLite,
+                        borderWidth: 1,
+                        textStyle: TextStyle(color: Colors.white),
+                        radius: 900,
+                        onPress: () =>
+                            Navigator.pushNamed(context, LoginScreen.routeName)),
+                    SizedBox(height: 24),
+                    CustomButton(
+                        title: "signup.signup".tr(),
+                        color: Colors.transparent,
+                        textStyle: TextStyle(color: mainColorLite),
+                        borderColor: mainColorLite,
+                        radius: 900,
+                        onPress: () => Navigator.pushNamed(
+                            context, RegisterScreen.routeName)),
+                    SizedBox(height: 16),
+                    Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                      InkWell(
+                          onTap: () => Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              NavigationScreen.routeName,
+                              ModalRoute.withName('/')),
+                          child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 16),
+                              child: Text("login.skip".tr(),
+                                  style: TextStyle(
+                                      fontSize: 16, color: textLiteColor))))
+                    ])
+                  ]),
+            ))
       ]),
     ));
   }

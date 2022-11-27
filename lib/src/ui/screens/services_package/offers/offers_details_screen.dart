@@ -66,7 +66,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: RegularAppBar(label: "Offer Details"),
+        appBar: RegularAppBar(label: "Offer_Details".tr()),
         floatingActionButton: FloatingActionButton(
             backgroundColor: mainColorLite,
             onPressed: () {
@@ -190,7 +190,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text("Seller",
+                                            Text("Seller".tr(),
                                                 style: TextStyle(
                                                     fontSize: 14,
                                                     color: textDarkColor,
@@ -209,7 +209,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(children: [
-                                    Text("Price : ",
+                                    Text("Price : ".tr(),
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 13,
@@ -234,7 +234,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text("new price : ",
+                                        Text("new price : ".tr(),
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 13,
@@ -255,7 +255,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text("You Save : ",
+                                        Text("You Save : ".tr(),
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 13,
@@ -271,12 +271,12 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text("Location : ",
+                                        Text("Location : ".tr(),
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 13,
                                                 fontWeight: FontWeight.bold)),
-                                        Text(_model.company!.flag!,
+                                        Text(_model.company!.country,
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 14))

@@ -49,12 +49,12 @@ Future<void> main() async {
 
   runApp(EasyLocalization(
       supportedLocales: const [
-        Locale('ar'),
         Locale('en'),
-        Locale.fromSubtags(languageCode: 'ar')
+        Locale('ar'),
+        // Locale.fromSubtags(languageCode: 'ar')
       ],
-      path: 'assets/translate', // <-- change the path of the translation files
-      fallbackLocale: Locale(lang == null ? 'en ' : lang),
+      path: 'assets/translate',
+      fallbackLocale: Locale('en'),// <-- change the path of the translation files
       child: Phoenix(child: MyApp())
 
   ));
@@ -109,10 +109,12 @@ class MyApp extends StatelessWidget {
                   designSize: const Size(375, 812),
                   builder: (context, child) => MaterialApp(
                       localizationsDelegates: context.localizationDelegates,
-                      supportedLocales: context.supportedLocales, title: 'Handbill',
+                      supportedLocales: context.supportedLocales,
+                      title: 'Handbill',
                       debugShowCheckedModeBanner: false,
                       theme: _globalRepository.liteTheme,
                       themeMode: ThemeMode.light,
+                      locale: context.locale,
                       // supportedLocales: [
                       //   const Locale('en'),
                       //   const Locale('ar'),

@@ -22,7 +22,7 @@ class GlobalRepository {
   Future<String> getLanguage() async{
     String? language = await storage.read(key: "lang");
     if (language == null){
-      language = "en_US";
+      language = "en";
     }
     return language ;
   }

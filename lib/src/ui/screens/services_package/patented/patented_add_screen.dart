@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -92,7 +93,7 @@ class _PatentedAddScreenState extends State<PatentedAddScreen> {
     _onAddButtonPressed() {
       if (!_user!.profileCompleted()) {
         Fluttertoast.showToast(
-            msg:  'Complete Your Profile',
+            msg:  'CompleteYourProfile'.tr(),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
@@ -113,7 +114,7 @@ class _PatentedAddScreenState extends State<PatentedAddScreen> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: RegularAppBar(
-            label: _model.id == null ? "Add Patented" : "Edit Patented"),
+            label: _model.id == null ? "AddPatented".tr() : "Edit Patented"),
         body: BlocBuilder<PatentsBloc, PatentsState>(builder: (context, state) {
           if (state is PatentsErrorState) {
             SchedulerBinding.instance?.addPostFrameCallback((_) {
@@ -199,7 +200,7 @@ class _PatentedAddScreenState extends State<PatentedAddScreen> {
                     SizedBox(height: 16),
                     Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: _jobLabel(label: "Images")),
+                        child: _jobLabel(label: "Images".tr())),
                     SizedBox(height: 16),
                     Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -222,7 +223,11 @@ class _PatentedAddScreenState extends State<PatentedAddScreen> {
                                             color: mainColorLite),
                                         SizedBox(width: 12),
                                         Text(
-                                            "Add Image    ${(_images.length)}/$_maxImages ",
+                                            "Add Image".tr(),
+                                            style:
+                                                TextStyle(color: textDarkColor)),
+                                        Text(
+          " ${(_images.length)}/$_maxImages ",
                                             style:
                                                 TextStyle(color: textDarkColor))
                                       ])))

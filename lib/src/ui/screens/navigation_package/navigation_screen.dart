@@ -153,7 +153,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                     tabs: [
                       GButton(
                           icon: Icons.home_filled,
-                          text: "title_Home".tr()),
+                          text: "titleHome".tr()),
                       GButton(
                           icon: Icons.widgets_outlined,
                           text: "all_market".tr()),

@@ -98,9 +98,8 @@ import 'package:hand_bill/src/common/api_data.dart';
 import 'package:hand_bill/src/data/model/about_us/aboutUsModel.dart';
 import 'package:hand_bill/src/repositories/aboutUs_repository.dart';
 
-class AboutUsBloc extends Cubit<ShopIntresStates> {
+class AboutUsBloc extends Bloc<AboutUsEvent, ShopIntresStates>{
   AboutUsBloc() : super(ShopCubitIntialStates());
-  static AboutUsBloc get(context) => BlocProvider.of(context);
   AboutUsRepository aboutUsRepository = AboutUsRepository();
 
   //  AboutUsModel aboutUsModel;
@@ -129,8 +128,7 @@ class AboutUsBloc extends Cubit<ShopIntresStates> {
   //   return aboutUsModel;
   // }
 
-  List<AboutUsModel>? aboutCat;
-  @override
+  List<Videos>? aboutCat;
   // ignore: override_on_non_overriding_member
   Stream<ShopIntresStates> mapEventToState(AboutUsEvent event) async* {
     if (event is FetchaboutItemEvent) {
@@ -141,17 +139,19 @@ class AboutUsBloc extends Cubit<ShopIntresStates> {
   Stream<ShopIntresStates> _mapFetchabout(FetchaboutItemEvent event) async* {
     yield ShopIntresLoadingState();
     final response = await aboutUsRepository.getItemData();
-
-    if (response.status!) {
-      final items = response.data;
+    print('rrrr');
+      final items = response!.videos;
       if (aboutCat == null) {
+        print('wwwvvvvv');
+
         // items!.first.. = true;
         aboutCat = items;
+        print(aboutCat);
+        print('wwwvvvvv');
       }
       yield ShopIntresSuccessStates();
-    } else {
-      yield ShopIntresErrorStates(error: response.message);
-    }
+      // yield ShopIntresErrorStates(error: response);
+
   }
 }
 

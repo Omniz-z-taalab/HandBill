@@ -43,7 +43,7 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
 
   String ar = 'ar';
 
-  String en = 'en_US';
+  String en = 'en';
 
   @override
   Widget build(BuildContext context) {
@@ -179,14 +179,14 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                                                       .pushNamed(AboutUsScreen
                                                           .routeName)
                                                   : Container();
-          if (widget.model.title.toString() == 'تسجيل الخروج') {
+          if (widget.model.title.toString() == 'خروج') {
             BlocProvider.of<GlobalBloc>(context).user = null;
             storage.deleteAll();
             Navigator.pushReplacementNamed(context, AuthScreen.routeName);
           }
           widget.model.title.toString() =="مركز المساعده"
               ? Navigator.of(context).pushNamed(HelpCenterScreen.routeName)
-              : widget.model.title.toString() == 'قائمتي'
+              : widget.model.title.toString() == 'قائمتى'
               ? Navigator.of(context).pushNamed(WishListScreen.routeName)
               : widget.model.title.toString() == 'عروض'
               ? Navigator.of(context).pushNamed(OffersScreen.routeName)
@@ -227,7 +227,7 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      widget.model.title.toString() == 'Help Center'
+                      widget.model.title.toString() == 'Help Center' ||  widget.model.title.toString() == 'مركز المساعدة'
                           ? Image.asset(
                               'assets/icons/account/help.png',
                               // "assets/icons/account/wishlist.svg",
@@ -235,7 +235,7 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                               width: icSize,
                               fit: BoxFit.cover,
                             )
-                          : widget.model.title.toString() == 'Wish List'
+                          : widget.model.title.toString() == 'Wish List' || widget.model.title.toString() == 'قائمتى'
                               ? SvgPicture.asset(
                                   'assets/icons/account/wishlist.svg',
                                   // "assets/icons/account/wishlist.svg",
@@ -243,7 +243,7 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                                   width: icSize,
                                   fit: BoxFit.cover,
                                 )
-                              : widget.model.title.toString() == 'Offers'
+                              : widget.model.title.toString() == 'Offers' || widget.model.title.toString() == 'عروض'
                                   ? SvgPicture.asset(
                                       'assets/icons/account/sale_tag.svg',
                                       // "assets/icons/account/wishlist.svg",
@@ -251,7 +251,7 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                                       width: icSize,
                                       fit: BoxFit.cover,
                                     )
-                                  : widget.model.title.toString() == 'Auctions'
+                                  : widget.model.title.toString() == 'Auctions' || widget.model.title.toString() == 'مزادات'
                                       ? SvgPicture.asset(
                                           'assets/icons/account/auction.svg',
                                           // "assets/icons/account/wishlist.svg",
@@ -259,8 +259,7 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                                           width: icSize,
                                           fit: BoxFit.cover,
                                         )
-                                      : widget.model.title.toString() ==
-                                              'Assets'
+                                      : widget.model.title.toString() == 'Assets' || widget.model.title.toString() == 'مرافق'
                                           ? SvgPicture.asset(
                                               'assets/icons/account/asset.svg',
                                               // "assets/icons/account/wishlist.svg",
@@ -268,8 +267,7 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                                               width: icSize,
                                               fit: BoxFit.cover,
                                             )
-                                          : widget.model.title.toString() ==
-                                                  'Patented'
+                                          : widget.model.title.toString() == 'Patented' ||  widget.model.title.toString() == 'برائات أختراع'
                                               ? SvgPicture.asset(
                                                   'assets/icons/account/certificate.svg',
                                                   // "assets/icons/account/wishlist.svg",
@@ -277,18 +275,16 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                                                   width: icSize,
                                                   fit: BoxFit.cover,
                                                 )
-                                              : widget.model.title.toString() ==
-                                                      'Jobs'
-                                                  ? SvgPicture.asset(
+                                              : widget.model.title.toString() == 'Jobs' || widget.model.title.toString() == 'وظائف'
+
+                                 ? SvgPicture.asset(
                                                       'assets/icons/account/job_search.svg',
                                                       // "assets/icons/account/wishlist.svg",
                                                       height: icSize,
                                                       width: icSize,
                                                       fit: BoxFit.cover,
                                                     )
-                                                  : widget.model.title
-                                                              .toString() ==
-                                                          'Hand Made'
+                                                  : widget.model.title.toString() == 'Hand Made' || widget.model.title.toString() == 'صناعات يدوية'
                                                       ? SvgPicture.asset(
                                                           'assets/icons/account/handmade.svg',
                                                           // "assets/icons/account/wishlist.svg",
@@ -296,9 +292,7 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                                                           width: icSize,
                                                           fit: BoxFit.cover,
                                                         )
-                                                      : widget.model.title
-                                                                  .toString() ==
-                                                              'To Be Seller'
+                                                      : widget.model.title.toString() == 'To Be Seller' || widget.model.title.toString() == 'كن بائعا'
                                                           ? SvgPicture.asset(
                                                               'assets/icons/account/asset.svg',
                                                               // "assets/icons/account/wishlist.svg",
@@ -306,9 +300,7 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                                                               width: icSize,
                                                               fit: BoxFit.cover,
                                                             )
-                                                          : widget.model.title
-                                                                      .toString() ==
-                                                                  'Agents'
+                                                          : widget.model.title.toString() == 'Agents' || widget.model.title.toString() == 'الوكلاء'
                                                               ? SvgPicture
                                                                   .asset(
                                                                   'assets/icons/account/customer_service.svg',
@@ -319,10 +311,7 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                                                                   fit: BoxFit
                                                                       .cover,
                                                                 )
-                                                              : widget.model
-                                                                          .title
-                                                                          .toString() ==
-                                                                      'Change Language'
+                                                              : widget.model.title.toString() == 'Change Language' ||  widget.model.title.toString() == 'تغيير اللغة'
                                                                   ? Image.asset(
                                                                       'assets/icons/language.png',
                                                                       // "assets/icons/account/wishlist.svg",
@@ -333,10 +322,7 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                                                                       fit: BoxFit
                                                                           .cover,
                                                                     )
-                                                                  : widget.model
-                                                                              .title
-                                                                              .toString() ==
-                                                                          'LogOut'
+                                                                  : widget.model.title.toString() == 'LogOut' || widget.model.title.toString() == 'خروج'
                                                                       ? SvgPicture
                                                                           .asset(
                                                                           'assets/icons/account/arrow.svg',
@@ -349,7 +335,7 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                                                                               .cover,
                                                                         )
                                                                       : widget.model.title.toString() ==
-                                                                              'About Us'
+                                                                              'About Us' || widget.model.title.toString() == 'من نحن'
                                                                           ? SvgPicture
                                                                               .asset(
                                                                               'assets/icons/account/arrow.svg',

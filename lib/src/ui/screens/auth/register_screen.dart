@@ -507,25 +507,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomTextFormField(
-                                      hintText: "signup.username".tr(),
+                                      hintText: "username".tr(),
                                       icon: Icons.person_outline,
                                       controller: _nameController,
                                       validator: (input) {
                                         if (input.toString().length < 4) {
                                           return
-                                              "signup.enter_user_name".tr();
+                                              "enter_user_name".tr();
                                         }
                                         return null;
                                       }),
                                   SizedBox(height: marginVer),
                                   CustomTextFormField(
-                                      hintText: "signup.ArabicName".tr(),
+                                      hintText: "ArabicName".tr(),
                                       icon: Icons.person_outline,
                                       controller: _namearController,
                                       validator: (input) {
                                         if (input.toString().length < 4) {
                                           return
-                                              "signup.enter_arabic_name".tr();
+                                              "enter_arabic_name".tr();
                                         }
                                         return null;
                                       }),
@@ -534,7 +534,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   Row(children: [
                                     Expanded(
                                         child: CustomTextFormField(
-                                            hintText: "signup.email".tr(),
+                                            hintText: "email".tr(),
                                             icon: Icons.alternate_email,
                                             isEmail: true,
                                             controller: _emailController,
@@ -543,7 +543,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                   .toString()
                                                   .contains('@')) {
                                                 return
-                                                    "signup.valid_email".tr();
+                                                    "valid_email".tr();
                                               }
                                               return null;
                                             }))
@@ -615,7 +615,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                       color: borderColor)),
                                           // contentPadding: EdgeInsets.all(0),
                                           hintText:
-                                              "signup.password".tr(),
+                                              "password".tr(),
                                           hintStyle:
                                               TextStyle(color: textLiteColor)),
                                       controller: _passwordController,
@@ -623,7 +623,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       // onSaved: (input) => widget.onSave!(input),
                                       validator: (input) {
                                         if (input.toString().length < 6) {
-                                          return "signup.pass_short".tr();
+                                          return "pass_short".tr();
                                         }
                                         return null;
                                       },
@@ -659,7 +659,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     Expanded(
                                         child: CustomTextFormField(
                                             hintText:
-                                                "signup.toast_sure".tr(),
+                                                "toast_sure".tr(),
                                             icon: Icons.lock_outline_rounded,
                                             controller:
                                                 _confirmpasswordController,
@@ -667,7 +667,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             validator: (input) {
                                               if (input.toString().length < 6) {
                                                 return
-                                                    "signup.pass_short".tr();
+                                                    "pass_short".tr();
                                               }
                                               return null;
                                             }))
@@ -746,7 +746,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     // initialCountryCode: 'EG',
                                     decoration: InputDecoration(
                                       // prefixIcon: Icon(Icons.phone),
-                                      hintText: "signup.phone".tr(),
+                                      hintText: "phone".tr(),
                                       hintStyle:
                                           TextStyle(color: textLiteColor),
                                       border: new UnderlineInputBorder(
@@ -798,7 +798,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           MainAxisAlignment.center,
                                       children: [
                                         CustomButton(
-                                            title: "signup.signup",
+                                            title: "signup",
                                             width: size.width * 0.7,
                                             radius: 900,
                                             onPress: () {
@@ -855,7 +855,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       border: Border.symmetric(
                           horizontal: BorderSide(color: Color(0xfff5f5f5)))),
                   child: Center(
-                      child: Text("signup.already_have_account".tr(),
+                      child: Text("already_have_account".tr(),
                           style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.normal,
