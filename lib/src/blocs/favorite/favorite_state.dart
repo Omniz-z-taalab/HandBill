@@ -22,7 +22,10 @@ class FavoriteErrorState extends FavoriteState {
 class FavoriteSuccessState extends FavoriteState {
   final List<FavoriteModel>? items;
 
-  FavoriteSuccessState({required this.items});
+  FavoriteSuccessState({required this.items}){
+    print('sddd');
+    print(items![0].product);
+}
 }
 /////// is fav
 

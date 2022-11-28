@@ -28,6 +28,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   @override
   void initState() {
+
     super.initState();
     _animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 2));

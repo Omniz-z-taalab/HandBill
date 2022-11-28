@@ -6,6 +6,8 @@ import 'package:equatable/equatable.dart';
 import 'package:hand_bill/src/data/model/user.dart';
 import 'package:hand_bill/src/repositories/global_repository.dart';
 
+import '../../common/global.dart';
+
 part 'global_event.dart';
 
 part 'global_state.dart';
@@ -25,7 +27,7 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
       yield* _mapStartAppToState(event);
     }
     if (event is SaveLanguageEvent) {
-      yield* saveLanguageToState(event);
+       yield* saveLanguageToState(event);
     }
     if (event is UserStatusChangeEvent) {
       yield* _mapUserStatusChangeToState(event);
@@ -33,11 +35,12 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
   }
 
   Stream<GlobalState> saveLanguageToState(SaveLanguageEvent event ) async*{
-      yield GlobalLoading();
+      // yield GlobalLoading();
       String? _lang ;
       _lang = await globalRepository.getLanguage();
       if(_lang == null ){
         lang = null ;
+        storage.delete(key: 'lang');
       }else{
         lang = _lang ;
         log("AppLanguage ${lang}");
@@ -51,6 +54,7 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
     User? _user;
     _user = await globalRepository.getCurrentUser();
     if (_user == null) {
+
       user = null;
     } else {
       user = _user;

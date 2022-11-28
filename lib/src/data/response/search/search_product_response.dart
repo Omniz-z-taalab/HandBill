@@ -3,6 +3,7 @@ import 'package:hand_bill/src/data/model/product.dart';
 
 import '../../model/company.dart';
 import '../../model/shippingData.dart';
+import '../../model/shipping_data.dart';
 import '../../model/specifications.dart';
 
 

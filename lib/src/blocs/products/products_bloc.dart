@@ -38,12 +38,12 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     final response = await productsRepository.getProductsBySubCategory(
         subcategoryId: event.subcategoryId);
 
-    if (response.status!) {
+    if (response.data!=null) {
       yield ProductsSuccessState(products: response.data);
       page++;
       isFetching = false;
     } else {
-      yield ProductsErrorState(error: response.message);
+      // yield ProductsErrorState(error: response.message);
       isFetching = false;
     }
   }
@@ -54,12 +54,12 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     final response = await productsRepository.getProductsBySubCategory(
         subcategoryId: event.subcategoryId,);
 
-    if (response.status!) {
+    if (response.data!=null) {
       yield SimilarProductsSuccessState(products: response.data);
       similarPage++;
       isFetching = false;
     } else {
-      yield ProductsErrorState(error: response.message);
+      // yield ProductsErrorState(error: response.message);
       isFetching = false;
     }
   }

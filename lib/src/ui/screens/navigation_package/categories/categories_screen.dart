@@ -1156,12 +1156,11 @@ class _CategoriesScreenState extends State<CategoriesScreen>
   }
 
   onCategoryTap(
-    CategoryModel categoryModel,
-  ) {
+    CategoryModel categoryModel,) {
     if (_categoryBloc!.categories!.first.selected == true) {
       _categoryBloc!.categories!.first.selected = false;
     }
-    // setState(() {
+     setState(() {
     if (_selectedCategory != null) {
       _selectedCategory!.selected = false;
     }
@@ -1169,7 +1168,6 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     setState(() {
       _showRealLength = false;
       _showRealSubLengthIndex = -100;
-      // _categoryBloc!.isPaginationFinished = false;
       categoryModel.selected = !categoryModel.selected!;
       _selectedCategory = categoryModel;
       _categoryBloc!.subCatPage = 1;
@@ -1182,7 +1180,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     _categoryBloc!
         .add(FetchSubCategoriesEvent(categoryId: categoryModel.id.toString()));
     // });
-  }
+  });}
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 // import 'dart:async';

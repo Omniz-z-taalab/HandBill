@@ -64,7 +64,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: RegularAppBar(label: "Product Details"),
+        appBar: RegularAppBar(label: "ProductDetails".tr()),
         body: Stack(
           children: [
             RefreshIndicator(
@@ -153,7 +153,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       borderRadius: BorderRadius.circular(30)
                   ),
                   padding: EdgeInsets.all(12),
-                  child: Icon(showContact?Icons.close:Icons.chat,size: 60.w,
+                  child: Icon(showContact?Icons.close:Icons.chat,size: 30.w,
                     color: Colors.white,),
                 ),
               ),),
@@ -204,7 +204,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       }
                     },
                     color: Colors.white,
-                    icon: Icon(Icons.phone,size: 60.w,),),
+                    icon: Icon(Icons.phone,size: 30.w,),),
                 ),),
               Positioned(
                 bottom: 220.h,
@@ -217,7 +217,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   child: IconButton(
                     onPressed: ()async{
                       if (_user == null) {
-                        Fluttertoast.showToast(msg: "toast.login".tr());
+                        Fluttertoast.showToast(msg: "login".tr());
                       }else{
                         final Uri params = Uri(
                           scheme: 'mailto',
@@ -231,7 +231,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       }
                     },
                     color: Colors.white,
-                    icon: Icon(Icons.email,size: 60.w,),),
+                    icon: Icon(Icons.email,size: 30.w,),),
                 ),
               ),
             ],

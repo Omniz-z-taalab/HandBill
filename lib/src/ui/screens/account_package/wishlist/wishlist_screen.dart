@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -37,7 +38,7 @@ class _WishListScreenState extends State<WishListScreen> {
       _favoriteBloc..add(FetchFavoriteEvent(user: _user!));
     }
     _scrollController = ScrollController()..addListener(_onScroll);
-
+    print(';;;;;;;;;;;;;');
     super.initState();
   }
 
@@ -56,7 +57,7 @@ class _WishListScreenState extends State<WishListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: RegularAppBar(label: "WishList"),
+        appBar: RegularAppBar(label: "WishList".tr()),
         body: RefreshIndicator(
             onRefresh: () async {
               if (_user != null) {
@@ -73,15 +74,17 @@ class _WishListScreenState extends State<WishListScreen> {
             child: BlocListener<FavoriteBloc, FavoriteState>(
                 listener: (context, state) {
               if (state is FavoriteErrorState) {
+
                 _items = [];
                 // showToast(state.error!, context);
-                BlocProvider.of<FavoriteBloc>(context).isFetching = false;
+                // BlocProvider.of<FavoriteBloc>(context).isFetching = false;
               }
 
               if (state is FavoriteSuccessState) {
+                print(state.items![0].product);
                 _items = [];
                 _items!.addAll(state.items!);
-                BlocProvider.of<FavoriteBloc>(context).isFetching = false;
+                // BlocProvider.of<FavoriteBloc>(context).isFetching = false;
               }
               if (state is RemoveFromFavoriteSuccessState) {
                 setState(() {

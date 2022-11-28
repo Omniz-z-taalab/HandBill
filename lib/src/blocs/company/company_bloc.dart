@@ -11,6 +11,8 @@ import 'package:hand_bill/src/data/response/market/company_details_response.dart
 import 'package:hand_bill/src/data/response/market/company_product_response.dart';
 import 'package:hand_bill/src/repositories/company_repository.dart';
 
+import '../../data/response/search/search_product_response.dart';
+
 part 'company_event.dart';
 part 'company_state.dart';
 
@@ -56,13 +58,12 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
       yield CompanyErrorState(error: response.message);
     }
   }
-
   Stream<CompanyState> _mapFetchFeaturedProductCompany(
       FetchFeaturedProductCompany event) async* {
     yield CompanyLoadingState();
 
     FeaturedProductsResponse response =
-        await _companyRepository.getFeaturedProductOfCompany(id: event.id);
+    await _companyRepository.getFeaturedProductOfCompany(id: event.id);
     if (response.status!) {
       yield GetFeaturedProductCompanySuccessState(items: response.data);
     } else {

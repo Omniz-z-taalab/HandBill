@@ -537,7 +537,7 @@ class _SubCategoriesState extends State<SubCategories>
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
                     child: Padding(
-                        padding: EdgeInsets.all(30),
+                        padding: EdgeInsets.all(10),
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             // crossAxisAlignment: CrossAxisAlignment.start,
@@ -552,8 +552,9 @@ class _SubCategoriesState extends State<SubCategories>
                                     )
                                   : Image.network(
                                       '${APIData.domainLink}${model.data![index].icon!.thump}',
-                                      height: 30,
+                                      height: 50,
                                     ),
+                              SizedBox(height: 10,),
                               Text(model.data![index].name.toString(),
                                   style: model.data![index].id.toString() ==
                                           model.data!.first.id.toString()

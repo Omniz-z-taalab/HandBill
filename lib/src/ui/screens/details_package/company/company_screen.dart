@@ -14,6 +14,7 @@ import 'package:hand_bill/src/data/model/local/chat_user.dart';
 import 'package:hand_bill/src/data/model/local/route_argument.dart';
 import 'package:hand_bill/src/data/model/product.dart';
 import 'package:hand_bill/src/data/model/user.dart';
+import 'package:hand_bill/src/data/response/search/search_product_response.dart';
 import 'package:hand_bill/src/ui/component/custom/regular_app_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'component/company_board.dart';
@@ -70,7 +71,7 @@ class _CompanyScreenState extends State<CompanyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: RegularAppBar(
-            label: 'Company Details', textStyle: TextStyle(fontSize: 15)),
+            label: 'CompanyDetails'.tr(), textStyle: TextStyle(fontSize: 15)),
         backgroundColor: Color(0xfffafafa),
         body: Stack(
           alignment: Alignment.bottomRight,

@@ -42,22 +42,20 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
-  String? lang = await storage.read(key: "lang");
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   // await Firebase.initializeApp();
+  String? value = await storage.read(key: "lang");
 
   runApp(EasyLocalization(
-      supportedLocales: const [
-        Locale('en'),
-        Locale('ar'),
-        // Locale.fromSubtags(languageCode: 'ar')
-      ],
       path: 'assets/translate',
-      fallbackLocale: Locale('en'),// <-- change the path of the translation files
-      child: Phoenix(child: MyApp())
-
-  ));
+      fallbackLocale: value == null ?Locale( 'en','US') : null,
+      supportedLocales: [
+        Locale('en', 'US'),
+        Locale('ar', 'EG'),
+        // Locale.fromSubtags(languageCode: 'en')
+      ],
+      child: Phoenix(child: MyApp())));
 }
 
 class MyApp extends StatelessWidget {
@@ -69,84 +67,64 @@ class MyApp extends StatelessWidget {
         statusBarColor: Colors.white, brightness: Brightness.dark);
     // Helper.chaneStatusBarColor(
     //     statusBarColor: mainColorLite, brightness: Brightness.light);
-    return
-      MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => GlobalBloc()..add(StartAppEvent())),
-            // BlocProvider(create: (context) => GlobalBloc()..add(SaveLanguageEvent())),
-            BlocProvider(create: (context) => AuthBloc(context: context)),
-            BlocProvider(create: (context) => ExploreBloc(context: context)),
-            BlocProvider(create: (context) => NotificationsBloc(context: context)),
-            BlocProvider(create: (context) => FavoriteBloc(context: context)),
-            BlocProvider(create: (context) => HomeBloc()),
-            BlocProvider(create: (context) => ServiceBloc(context: context),),
-            BlocProvider(create: (context) => ServiceBlocData(context: context)),
-            BlocProvider(create: (context) => JobsBloc(context: context)),
-            BlocProvider(create: (context) => AuctionsBloc(context: context)),
-            BlocProvider(create: (context) => OffersBloc(context: context)),
-            BlocProvider(create: (context) => ProductsBloc(context: context)),
-            BlocProvider(create: (context) => CompanyBloc()),
-            BlocProvider(create: (context) => SearchBloc(context: context)),
-            BlocProvider(create: (context) => ChatBloc()),
-            BlocProvider(create: (context) => HelpBloc(context: context)),
-            BlocProvider(create: (context) => OtherCompanyBloc(context: context)),
-            BlocProvider(create: (context) => AssetsBloc(context: context)),
-            BlocProvider(create: (context) => PatentsBloc(context: context)),
-            BlocProvider(create: (context) => HandmadeBloc(context: context)),
-            BlocProvider(create: (context) => ProfileBloc(context: context)),
-            BlocProvider(create: (context) => ProfileBloc(context: context)),
-            BlocProvider(create: (context) => CategoryBloc()),
-            BlocProvider(create: (context) => AboutUsBloc()),
-            BlocProvider(create: (context) => ShippingBloc()),
-          ],
-          child:
-          BlocBuilder<GlobalBloc, GlobalState>(
-              builder: (BuildContext context, state) {
-                if (state is StartAppSuccess) {
-                  // print("${state.user!.name}");
-                }
-                return ScreenUtilInit(
-                  designSize: const Size(375, 812),
-                  builder: (context, child) => MaterialApp(
-                      localizationsDelegates: context.localizationDelegates,
-                      supportedLocales: context.supportedLocales,
-                      title: 'Handbill',
-                      debugShowCheckedModeBanner: false,
-                      theme: _globalRepository.liteTheme,
-                      themeMode: ThemeMode.light,
-                      locale: context.locale,
-                      // supportedLocales: [
-                      //   const Locale('en'),
-                      //   const Locale('ar'),
-                      //   const Locale('es'),
-                      //   const Locale('de'),
-                      //   const Locale('fr'),
-                      //   const Locale('el'),
-                      //   const Locale('et'),
-                      //   const Locale('nb'),
-                      //   const Locale('nn'),
-                      //   const Locale('pl'),
-                      //   const Locale('pt'),
-                      //   const Locale('ru'),
-                      //   const Locale('hi'),
-                      //   const Locale('ne'),
-                      //   const Locale('uk'),
-                      //   const Locale('hr'),
-                      //   const Locale('tr'),
-                      //   const Locale('lv'),
-                      //   const Locale('lt'),
-                      //   const Locale('ku'),
-                      //   const Locale.fromSubtags(
-                      //       languageCode: 'zh',
-                      //       scriptCode: 'Hans'), // Generic Simplified Chinese 'zh_Hans'
-                      //   const Locale.fromSubtags(
-                      //       languageCode: 'zh',
-                      //       scriptCode: 'Hant'), // Generic traditional Chinese 'zh_Hant'
-                      // ],
-                      home: SplashPage(),
-                      // home: ServicesCompanyDetailsScreen(routeArgument: RouteArgument(param: 1),),
-                      onGenerateRoute: RouteGenerator.generateRoute),
-                );
-              }));
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => GlobalBloc()..add(StartAppEvent())),
+          // BlocProvider(create: (context) => GlobalBloc()..add(SaveLanguageEvent())),
+          BlocProvider(create: (context) => AuthBloc(context: context)),
+          BlocProvider(create: (context) => ExploreBloc(context: context)),
+          BlocProvider(
+              create: (context) => NotificationsBloc(context: context)),
+          BlocProvider(create: (context) => FavoriteBloc(context: context)),
+          BlocProvider(create: (context) => HomeBloc()),
+          BlocProvider(
+            create: (context) => ServiceBloc(context: context),
+          ),
+          BlocProvider(create: (context) => ServiceBlocData(context: context)),
+          BlocProvider(create: (context) => JobsBloc(context: context)),
+          BlocProvider(create: (context) => AuctionsBloc(context: context)),
+          BlocProvider(create: (context) => OffersBloc(context: context)),
+          BlocProvider(create: (context) => ProductsBloc(context: context)),
+          BlocProvider(create: (context) => CompanyBloc()),
+          BlocProvider(create: (context) => SearchBloc(context: context)),
+          BlocProvider(create: (context) => ChatBloc()),
+          BlocProvider(create: (context) => HelpBloc(context: context)),
+          BlocProvider(create: (context) => OtherCompanyBloc(context: context)),
+          BlocProvider(create: (context) => AssetsBloc(context: context)),
+          BlocProvider(create: (context) => PatentsBloc(context: context)),
+          BlocProvider(create: (context) => HandmadeBloc(context: context)),
+          BlocProvider(create: (context) => ProfileBloc(context: context)),
+          BlocProvider(create: (context) => ProfileBloc(context: context)),
+          BlocProvider(create: (context) => CategoryBloc()),
+          BlocProvider(create: (context) => AboutUsBloc()),
+          BlocProvider(create: (context) => ShippingBloc()),
+        ],
+        child: BlocBuilder<GlobalBloc, GlobalState>(
+            builder: (BuildContext context, state) {
+          if (state is StartAppSuccess) {
+            print('object');
+          }
+          if (state is SaveLanguageState) {
+            print(state);
+            print('object');
+          }
+          print('======--====');
+          print(context.locale);
+
+          return ScreenUtilInit(
+            designSize: const Size(375, 812),
+            builder: (context, child) => MaterialApp(
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: context.locale,
+                title: 'Handbill',
+                debugShowCheckedModeBanner: false,
+                theme: _globalRepository.liteTheme,
+                themeMode: ThemeMode.light,
+                home: SplashPage(),
+                // home: ServicesCompanyDetailsScreen(routeArgument: RouteArgument(param: 1),),
+                onGenerateRoute: RouteGenerator.generateRoute),
+          );
+        }));
   }
 }

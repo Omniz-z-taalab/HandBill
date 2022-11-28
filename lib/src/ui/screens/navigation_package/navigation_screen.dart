@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui' as ui;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   @override
   void initState() {
+
     closeDrawer();
     _selectedPageIndex = 0;
     // _selectedPageIndex = 3;

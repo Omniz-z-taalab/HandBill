@@ -1,4 +1,11 @@
   {
+    "CompanyDetails" : "تفاصيل الشركه ",
+    "ProductDetails": "تفاصيل المنتج",
+    "Similarproducts": "منتجات مماثلة",
+    "Specifications": "تحديد",
+    "Description": "شرح",
+    "VERIFIEDMEMBER": "عضو مصدق",
+    "empty": "لايوجد",
     "Add Image": "اضلف صوره",
     "Images": "صور",
     "AddPatented": "اضف براءه اختراع",
@@ -178,7 +185,7 @@
           "hand_made": "صنع يدوي",
           "shipping_customs_broker": "شحن/ملخص جمركى",
         "account_info": "معلومات الحساب",
-        "wishlist": "المفضلة",
+        "WishList": "المفضلة",
         "help_center": "مركز المساعدة",
         "agents": "عملاء",
       "be_a_seller": "كن بائعا",
@@ -225,8 +232,6 @@
           "by_visa": "الدفع اون لاين",
 
 
-        "en": "English",
-        "ar": "Arabic",
       "selected_message": "{language} اللغة الحالة هى",
         "message": "أختر اللغة التى تريدها",
         "title": "تحديد اللغة",

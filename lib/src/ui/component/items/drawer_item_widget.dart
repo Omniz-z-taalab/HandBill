@@ -41,7 +41,7 @@ class DrawerItemWidget extends StatefulWidget {
 class _DrawerItemWidgetState extends State<DrawerItemWidget> {
   final double icSize = 32;
 
-  String ar = 'ar';
+  String ar =  'ar';
 
   String en = 'en';
 
@@ -74,30 +74,27 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
           }
 
           if (widget.model.title.toString() == 'Change Language') {
-            if(context.locale.toString() == "ar"){
+            if(context.locale.toString() == "en_US"){
+              print('wewewewe');
               print(context.locale);
-              await storage.write(key: "lang", value: en);
-
-              setState(() {
-                context.locale = const Locale('en');
+                context.locale = const Locale('ar','EG');
                  Phoenix.rebirth(context);
-
-              });}
-            else{
               await storage.write(key: "lang", value: ar);
 
-              print(context.locale);
-              setState(() {
-                context.locale = const Locale('ar');
-                Phoenix.rebirth(context);
+            }
+            else {
+              await storage.write(key: "lang", value: en);
 
-              });}}
+              print(context.locale);
+              context.locale = const Locale('en','US');
+              Phoenix.rebirth(context);
+            }}
           if (widget.model.title.toString() == 'تغيير اللغة') {
-            if(context.locale.toString() == "en"){
+            if(context.locale.toString() == "en_US"){
               await storage.write(key: "lang", value: ar);
               print(context.locale);
               setState(() {
-                context.locale = const Locale('ar');
+                context.locale = const Locale('ar','EG');
                 Phoenix.rebirth(context);
 
               });}
@@ -105,7 +102,7 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
               await storage.write(key: "lang", value: en);
               print(context.locale);
               setState(() {
-                context.locale = const Locale('en');
+                context.locale = const Locale('en','US');
                 Phoenix.rebirth(context);
 
               });}}

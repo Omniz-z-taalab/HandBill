@@ -18,6 +18,7 @@ class ServiceBlocData extends Bloc<ServiceEvent, ServiceState> {
   final ServiceRepository serviceRepository = ServiceRepository();
   final SearchRepository searchRepository = SearchRepository();
   late GlobalBloc globalBloc;
+  int subCatPage = 1;
 
   // ServiceBloc() : super(ServiceInitialState());
   ServiceBlocData({required BuildContext context})

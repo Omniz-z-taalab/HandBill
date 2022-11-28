@@ -359,6 +359,8 @@ class _ShippingMainScreenState extends State<ShippingMainScreen>
   @override
   void initState() {
     _serviceBloc = BlocProvider.of<ServiceBlocData>(context);
+    if (_serviceBloc!.categories == null ||
+        _serviceBloc!.categories!.length == 0)
     _serviceBloc!..add(FetchServiceEvent());
     // _serviceBloc!..add(ServiceBannerCompanyEvent());
 
@@ -663,32 +665,28 @@ class _ShippingMainScreenState extends State<ShippingMainScreen>
   }
 
   onCategoryTap(
-      GetDataCategory serviceCategoryModel,
-  ) {
-    // if (_serviceBloc!.categories!.first.data!.first.s == true) {
-      // _serviceBloc!.categories!.first.selected = false;
-    // }
-    // setState(() {
+      GetDataCategory serviceCategoryModel,) {
+    if (_serviceBloc!.categories!.first.selected == false) {
+      _serviceBloc!.categories!.first.selected = true;
+    }
+    setState(() {
     if (_selectedCategory != null) {
-      // _selectedCategory!.selected = false;
+       _selectedCategory!.selected = false;
     }
     if (_subCategories != null) _subCategories!.clear();
     setState(() {
       _showRealLength = false;
       _showRealSubLengthIndex = -100;
-      // _serviceBloc!.isPaginationFinished = false;
-      // serviceCategoryModel.selected = !serviceCategoryModel.selected!;
+       serviceCategoryModel.selected = !serviceCategoryModel.selected!;
       _selectedCategory = serviceCategoryModel;
-      // _serviceBloc!.subCatPage = 1;
+        _serviceBloc!.subCatPage = 1;
 
       Navigator.pushNamed(context, ShippingScreen.routeName,
           arguments: RouteArgument(
               param: serviceCategoryModel.name,
               id: serviceCategoryModel.id.toString()));
     });
-    // _categoryBloc!
-    //     .add(FetchSubCategoriesEvent(categoryId: categoryModel.id.toString()));
-    // });
+    });
   }
 
   Widget builditem() => ListView(children: [
