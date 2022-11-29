@@ -56,9 +56,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     _productsBloc = BlocProvider.of<ProductsBloc>(context);
     _favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
     _companyBloc = BlocProvider.of<CompanyBloc>(context);
-    _productsBloc..add(FetchProductDetails(id: _product.id));
+    _productsBloc.add(FetchProductDetails(id: _product.id));
     _productsBloc.similarPage = 1;
-    // _productsBloc..add(FetchSimilarProductsEvent(subcategoryId: _product.id!, user: _user));
+    // _productsBloc.add(FetchSimilarProductsEvent(subcategoryId: _product.id!, user: _user));
     super.initState();
   }
 
@@ -74,7 +74,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     // _productsBloc.add(FetchProductDetails(id: savedId));
                     _productsBloc.similarPage = 1;
                     _productsBloc
-                      ..add(FetchSimilarProductsEvent(
+                      .add(FetchSimilarProductsEvent(
                           subcategoryId: _product.subSubCategoryId!, user: _user));
                   });
                 },

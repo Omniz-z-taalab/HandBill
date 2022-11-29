@@ -1,10 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hand_bill/src/blocs/home/home_event.dart';
-import 'package:hand_bill/src/blocs/home/home_state.dart';
 import 'package:hand_bill/src/data/model/company.dart';
 import 'package:hand_bill/src/data/model/home/banner.dart';
 import 'package:hand_bill/src/data/model/product.dart';
 import 'package:hand_bill/src/repositories/home_repository.dart';
+import 'package:equatable/equatable.dart';
+
+part 'home_event.dart';
+
+part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   String tag = "HomeBloc";
@@ -13,39 +16,31 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   List<Product> popularList = [];
   final HomeRepository homeRepository = HomeRepository();
 
-  HomeBloc() : super(HomeInitialState());
-
-  @override
-  Stream<HomeState> mapEventToState(HomeEvent event) async* {
-    if (event is HomeFetchSliders) {
-      yield* _mapSliders();
-    }
-    if (event is HomeFetchTopCompanies) {
-      yield* _mapTopCompanies();
-    }
-    if (event is HomeFetchPopular) {
-      yield* _mapPopular();
-    }
+  HomeBloc() : super(HomeInitialState()) {
+    on<HomeFetchSliders>(_mapSliders);
+    on<HomeFetchTopCompanies>(_mapTopCompanies);
+    on<HomeFetchPopular>(_mapPopular);
   }
 
-  Stream<HomeState> _mapSliders() async* {
+  void _mapSliders(HomeFetchSliders event, Emitter<HomeState> emit) async {
     try {
-      yield SliderLoadingState();
+      emit(SliderLoadingState());
       final response = await homeRepository.geySliderData();
-      if (response.status!) {
+      if (response.status == true) {
         final items = response.data;
         sliders = items!;
-        yield SliderSuccessState(items: items);
+        emit(SliderSuccessState(items: items));
       } else {
-        yield SliderErrorState(errors: response.message.toString());
+        emit(SliderErrorState(errors: response.message.toString()));
       }
     } catch (e) {
       print(e);
     }
   }
 
-  Stream<HomeState> _mapTopCompanies() async* {
-    yield TopCompaniesLoadingState();
+  void _mapTopCompanies(
+      HomeFetchTopCompanies event, Emitter<HomeState> emit) async {
+    emit(TopCompaniesLoadingState());
     print('isis');
 
     final response = await homeRepository.getTopCompaniesData();
@@ -53,28 +48,28 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       if (response.status!) {
         final items = response.data;
         print(items!.first.name);
-        print('dataa');
+        print('dataa + ');
 
-        if(topCompaniesList.isEmpty)topCompaniesList = items!;
-        yield TopCompaniesSuccessState(items: items);
+        if (topCompaniesList.isEmpty) topCompaniesList = items;
+        emit(TopCompaniesSuccessState(items: items));
       } else {
-        yield TopCompaniesErrorState(errors: response.message.toString());
+        emit(TopCompaniesErrorState(errors: response.message.toString()));
       }
     } catch (e) {
       print(e);
     }
   }
 
-  Stream<HomeState> _mapPopular() async* {
+  void _mapPopular(HomeFetchPopular, Emitter<HomeState> emit) async {
     try {
-      yield PopularLoadingState();
+      emit(PopularLoadingState());
       final response = await homeRepository.getPopularData();
       if (response.status!) {
         final items = response.data;
         popularList = items!;
-        yield PopularSuccessState(items: items);
+        emit(PopularSuccessState(items: items));
       } else {
-        yield PopularErrorState(errors: response.message.toString());
+        emit(PopularErrorState(errors: response.message.toString()));
       }
     } catch (e) {
       print(e);

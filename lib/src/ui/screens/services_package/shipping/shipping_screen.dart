@@ -57,9 +57,9 @@ import 'ShippingBloc /ShippingState.dart';
 //     _otherCompanyBloc = BlocProvider.of<OtherCompanyBloc>(context);
 //     // _otherCompanyBloc.shippingPage = 1;
 //     _otherCompanyBloc
-//       ..add(FetchShippingCompaniesEvent(
+//       .add(FetchShippingCompaniesEvent(
 //           subNature: widget.routeArgument!.param.toString()));
-//     _scrollController = ScrollController()..addListener(_onScroll);
+//     _scrollController = ScrollController().addListener(_onScroll);
 //     _tabController = new TabController(vsync: this, length: 2);
 //     super.initState();
 //   }
@@ -218,11 +218,11 @@ import 'ShippingBloc /ShippingState.dart';
 //     _categoryBloc = BlocProvider.of<CategoryBloc>(context);
 //     if (_categoryBloc!.categories == null ||
 //         _categoryBloc!.categories!.length == 0)
-//       _categoryBloc!..add(FetchCategoriesEvent());
+//       _categoryBloc!.add(FetchCategoriesEvent());
 //     if (_categoryBloc!.ShippingScreen == null ||
 //         _categoryBloc!.ShippingScreen!.length == 0)
 //       _categoryBloc!
-//         ..add(FetchShippingScreenEvent(
+//         .add(FetchShippingScreenEvent(
 //             categoryId: widget.routeArgument!.id.toString()));
 //     if (_categoryBloc!.ShippingScreen != null &&
 //         _categoryBloc!.categories!.length != 0) {
@@ -236,7 +236,7 @@ import 'ShippingBloc /ShippingState.dart';
 //         });
 //       }
 //     });
-//     _scrollController = ScrollController()..addListener(_onScroll);
+//     _scrollController = ScrollController().addListener(_onScroll);
 //     super.initState();
 //   }
 
@@ -567,8 +567,8 @@ SubCategoryModel? companyModel;
     super.initState();
     print(widget!.routeArgument!.id);
     shippingBloc = BlocProvider.of<ShippingBloc>(context);
-    shippingBloc!..add(ShippingSliderServiceEvent());
-    shippingBloc!..add(ShippingCategoryServiceEvent(widget!.routeArgument!.id));
+    shippingBloc!.add(ShippingSliderServiceEvent());
+    shippingBloc!.add(ShippingCategoryServiceEvent(widget!.routeArgument!.id));
   }
 
   @override

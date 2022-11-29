@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hand_bill/src/blocs/global_bloc/global_bloc.dart';
 import 'package:hand_bill/src/repositories/assets_repository.dart';
 
 import 'assets_event.dart';
@@ -16,27 +13,22 @@ class AssetsBloc extends Bloc<AssetsEvent, AssetsState> {
   int page = 1;
   bool isFetching = true;
 
-  AssetsBloc({required BuildContext context})
-      : super(AssetsInitialState()) ;
-
-  @override
-  Stream<AssetsState> mapEventToState(AssetsEvent event) async* {
-    if (event is FetchAssetsEvent) {
-      yield* _mapFetchAssets();
-    }
+  AssetsBloc({required BuildContext context}) : super(AssetsInitialState()) {
+    on<FetchAssetsEvent>(_mapFetchAssets);
   }
 
-  Stream<AssetsState> _mapFetchAssets() async* {
-    yield AssetsLoadingState();
+  void _mapFetchAssets(
+      FetchAssetsEvent event, Emitter<AssetsState> emit) async {
+    emit(AssetsLoadingState());
     final response = await _auctionsRepository.getAssetsData();
 
     if (response.status!) {
       final items = response.data;
-      yield AssetsSuccessState(items: items);
+      emit(AssetsSuccessState(items: items));
       page++;
       isFetching = false;
     } else {
-      yield AssetsErrorState(error: response.message);
+      emit(AssetsErrorState(error: response.message));
       isFetching = false;
     }
   }

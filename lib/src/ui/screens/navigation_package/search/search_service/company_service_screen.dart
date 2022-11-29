@@ -23,7 +23,7 @@ class CompanyServiceScreen extends StatefulWidget {
 
 class _CompanyServiceScreenState extends State<CompanyServiceScreen> {
   late int companyId;
-  ServiceBlocData? serviceBloc;
+ late ServiceBlocData serviceBloc;
   List<Company>? company;
 
   @override
@@ -31,8 +31,8 @@ class _CompanyServiceScreenState extends State<CompanyServiceScreen> {
     companyId = widget.routeArgument.param;
     print(companyId);
     print('aaaaaaaaaaaaaaaa');
-    serviceBloc = BlocProvider.of<ServiceBlocData>(context);
-    serviceBloc!.add(ServiceCompanyEvent(searchKey: companyId));
+    // serviceBloc = BlocProvider.of<ServiceBlocData>(context);
+    // serviceBloc.add(ServiceCompanyEvent(searchKey: companyId));
     super.initState();
   }
 

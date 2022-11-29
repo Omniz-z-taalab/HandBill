@@ -16,31 +16,36 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
   int page = 1;
   bool isFetching = true;
 
-  ExploreBloc({required BuildContext context})
-      : super(ExploreInitialState()) ;
-
-  @override
-  Stream<ExploreState> mapEventToState(ExploreEvent event) async* {
-    if (event is FetchExploreEvent) {
-      yield* _mapFetchExplore();
-    }
+  ExploreBloc({required BuildContext context}) : super(ExploreInitialState()) {
+    on<FetchExploreEvent>(_mapFetchExplore);
   }
 
-  List<ExploreModel>? items  = [];
+  List<ExploreModel>? items = [];
   List<VideoPlayerController> controllers = [];
   bool? isLoaded;
-  Stream<ExploreState> _mapFetchExplore() async* {
-    if(items!.length==0){
+
+  void _mapFetchExplore(ExploreEvent event, Emitter<ExploreState> emit) async {
+    if (items!.length == 0) {
       log("fetch videos list.....");
       // yield ExploreLoadingState();
       // final response = await _exploreRepository.getExploreData(page: page);
       // if (response.status!) {
       //   final items = response.data;
-      items!.add(ExploreModel(link:"https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4"));
-      items!.add(ExploreModel(link:"https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4"));
-      items!.add(ExploreModel(link:"https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4"));
-      items!.add(ExploreModel(link:"https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4"));
-      items!.add(ExploreModel(link:"https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4"));
+      items!.add(ExploreModel(
+          link:
+              "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4"));
+      items!.add(ExploreModel(
+          link:
+              "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4"));
+      items!.add(ExploreModel(
+          link:
+              "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4"));
+      items!.add(ExploreModel(
+          link:
+              "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4"));
+      items!.add(ExploreModel(
+          link:
+              "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4"));
       items!.forEach((element) {
         controllers.add(VideoPlayerController.network(element.link!,
             videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true)));
@@ -55,5 +60,4 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
       // }
     }
   }
-  
 }

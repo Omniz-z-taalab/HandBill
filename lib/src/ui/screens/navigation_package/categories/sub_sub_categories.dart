@@ -41,11 +41,11 @@ class _SubSubCatScreenState extends State<SubSubCatScreen> {
     super.initState();
     print('ssdsddrrreeee');
     shippingBloc!
-      ..add(ShippingSliderEvent(widget.routeArgument!.id.toString()));
+      .add(ShippingSliderEvent(widget.routeArgument!.id.toString()));
 
     print(widget.routeArgument!.id.toString());
     shippingBloc!
-      ..add(ShippingSubSubCategoryEvent(widget.routeArgument!.id.toString()));
+      .add(ShippingSubSubCategoryEvent(widget.routeArgument!.id.toString()));
   }
 
   @override

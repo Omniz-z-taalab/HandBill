@@ -23,29 +23,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthBloc({required BuildContext context}) : super(AuthInitial()) {
     globalBloc = BlocProvider.of<GlobalBloc>(context);
-  }
-
-  @override
-  Stream<AuthState> mapEventToState(AuthEvent event) async* {
-    // await authInit();
-    if (event is LoginEvent) {
-      yield* _mapLoginWithEmailToState(event);
-    }
-    if (event is RegisterButtonPressed) {
-      yield* _mapRegisterToState(event);
-    }
-    if (event is RestPasswordEvent) {
-      yield* _mapRestPasswordToState(event);
-    }
-    if (event is ForgetPasswordEvent) {
-      yield* _mapSendVerificationCodeToState(event);
-    }
-    if (event is CheckVerificationCodeEvent) {
-      yield* _mapCheckVerificationCodeToState(event);
-    }
-    if (event is FetchCountriesEvent) {
-      yield* _mapFetchCountries(event);
-    }
+    on<LoginEvent>(_mapLoginWithEmailToState);
+    on<RegisterButtonPressed>(_mapRegisterToState);
+    on<RestPasswordEvent>(_mapRestPasswordToState);
+    on<ForgetPasswordEvent>(_mapSendVerificationCodeToState);
+    on<CheckVerificationCodeEvent>(_mapCheckVerificationCodeToState);
+    on<FetchCountriesEvent>(_mapFetchCountries);
   }
 
   // authInit() async {
@@ -59,35 +42,38 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   // }
 
   // login
-  Stream<AuthState> _mapLoginWithEmailToState(LoginEvent event) async* {
-    yield AuthLoading();
+  void _mapLoginWithEmailToState(
+      LoginEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
     // _user!.email = event.email;
     // _user!.password = event.password;
     LoginResponse? response;
     // try {
     //   if (_user!.deviceToken == null) {
-    //     yield AuthFailure(error: "not device token");
+    //     emit(uthFailure(error: "not device token"));
     //     return;
     //   } else {
     //     log("token ${_user!.deviceToken}");
-        response = await authRepository.login(mail: event.email,password: event.password);
-        if (response!.status!) {
-          globalBloc!.user = response.data;
-          authRepository.setCurrentUser(response.data);
-          yield LoginSuccess(message: response.message, user: response.data);
-        } else {
-          yield AuthFailure(error: response.message);
-        }
+    response =
+        await authRepository.login(mail: event.email, password: event.password);
+    if (response!.status!) {
+      globalBloc!.user = response.data;
+      authRepository.setCurrentUser(response.data);
+      emit(LoginSuccess(message: response.message, user: response.data));
+    } else {
+      emit(AuthFailure(error: response.message));
+    }
 
     // } catch (err, stack) {
-    //   yield AuthFailure(error: err.toString());
+    //   emit(uthFailure(error: err.toString()));
     //   print(err.toString() + stack.toString());
     // }
   }
 
   // register
-  Stream<AuthState> _mapRegisterToState(RegisterButtonPressed event) async* {
-    yield AuthLoading();
+  void _mapRegisterToState(
+      RegisterButtonPressed event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
     _user!.name = event.name;
     _user!.namear = event.namear;
     _user!.email = event.email;
@@ -101,83 +87,85 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     RegisterResponse? response;
     try {
       if (_user!.deviceToken == null) {
-        yield AuthFailure(error: "not device token");
+        emit(AuthFailure(error: "not device token"));
         return;
       } else {
         response = await authRepository.register(user: _user!);
         if (response!.status!) {
           globalBloc!.user = response.data;
           authRepository.setCurrentUser(response.data);
-          yield RegisterSuccess(message: response.message, user: response.data);
+          emit(RegisterSuccess(message: response.message, user: response.data));
         } else {
-          yield AuthFailure(error: response.message);
+          emit(AuthFailure(error: response.message));
         }
       }
     } catch (err) {
-      yield AuthFailure(error: err.toString());
+      emit(AuthFailure(error: err.toString()));
     }
   }
 
   //  rest password
-  Stream<AuthState> _mapRestPasswordToState(RestPasswordEvent event) async* {
-    yield AuthLoading();
+  void _mapRestPasswordToState(
+      RestPasswordEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
     try {
       CommonResponse? response = await authRepository.restPassword(
           code: event.code, newPassword: event.newPassword);
       if (response!.status!) {
-        yield RestPasswordSuccess(message: response.message);
+        emit(RestPasswordSuccess(message: response.message));
       } else {
-        yield AuthFailure(error: response.message);
+        emit(AuthFailure(error: response.message));
       }
     } catch (e) {
-      yield AuthFailure(error: e.toString());
+      emit(AuthFailure(error: e.toString()));
     }
   }
 
   //  forget password
-  Stream<AuthState> _mapSendVerificationCodeToState(
-      ForgetPasswordEvent event) async* {
-    yield AuthLoading();
+  void _mapSendVerificationCodeToState(
+      ForgetPasswordEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
     try {
       CommonResponse? response =
           await authRepository.forgetPassword(event.email);
       if (response!.status!) {
-        yield ForgetPasswordSuccess(message: response.message);
+        emit(ForgetPasswordSuccess(message: response.message));
       } else {
-        yield AuthFailure(error: response.message);
+        emit(AuthFailure(error: response.message));
       }
     } catch (e) {
-      yield AuthFailure(error: e.toString());
+      emit(AuthFailure(error: e.toString()));
     }
   }
 
-  Stream<AuthState> _mapCheckVerificationCodeToState(
-      CheckVerificationCodeEvent event) async* {
-    yield AuthLoading();
+  void _mapCheckVerificationCodeToState(
+      CheckVerificationCodeEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
     try {
       SendCodeResponse? response =
           await authRepository.checkVerificationCode(event.code);
       if (response!.status!) {
-        yield CheckVerificationCodeSuccess(message: response.message);
+        emit(CheckVerificationCodeSuccess(message: response.message));
       } else {
-        yield AuthFailure(error: response.message);
+        emit(AuthFailure(error: response.message));
       }
     } catch (e) {
-      yield AuthFailure(error: e.toString());
+      emit(AuthFailure(error: e.toString()));
     }
   }
 
   // fetch countries
-  Stream<AuthState> _mapFetchCountries(FetchCountriesEvent event) async* {
+  void _mapFetchCountries(
+      FetchCountriesEvent event, Emitter<AuthState> emit) async {
     try {
       if (countries == [] || countries.length == 0) {
-        yield AuthLoading();
+        emit(AuthLoading());
         final response = await authRepository.fetchCountriesData();
         countries = response!.data!;
         if (response.status!) {
-          yield CountriesSuccessState(items: response.data!);
+          emit(CountriesSuccessState(items: response.data!));
         } else {
-          yield AuthFailure(error: response.message.toString());
+          emit(AuthFailure(error: response.message.toString()));
         }
       }
     } catch (e) {

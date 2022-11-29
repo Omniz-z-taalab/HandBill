@@ -34,7 +34,7 @@ class _AgentsScreenState extends State<AgentsScreen> {
   @override
   void initState() {
     _helpBloc = BlocProvider.of<HelpBloc>(context);
-    _helpBloc..add(FetchAgentEvent());
+    _helpBloc.add(FetchAgentEvent());
 
     super.initState();
   }

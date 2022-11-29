@@ -84,11 +84,11 @@
 //     _categoryBloc = BlocProvider.of<CategoryBloc>(context);
 //     if (_categoryBloc!.categories == null ||
 //         _categoryBloc!.categories!.length == 0)
-//       _categoryBloc!..add(FetchCategoriesEvent());
+//       _categoryBloc!.add(FetchCategoriesEvent());
 //     if (_categoryBloc!.subCategories == null ||
 //         _categoryBloc!.subCategories!.length == 0)
 //       _categoryBloc!
-//         ..add(FetchSubCategoriesEvent(
+//         .add(FetchSubCategoriesEvent(
 //             categoryId: _categoryBloc!.categories!.first.id.toString()));
 //     if (_categoryBloc!.subCategories != null &&
 //         _categoryBloc!.categories!.length != 0) {
@@ -102,7 +102,7 @@
 //     //     });
 //     //   }
 //     // });
-//     _scrollController = ScrollController()..addListener(_onScroll);
+//     _scrollController = ScrollController().addListener(_onScroll);
 //     super.initState();
 //   }
 
@@ -450,11 +450,11 @@
 // // //     _categoryBloc = BlocProvider.of<CategoryBloc>(context);
 // // //     if (_categoryBloc!.categories == null ||
 // // //         _categoryBloc!.categories!.length == 0)
-// // //       _categoryBloc!..add(FetchCategoriesEvent());
+// // //       _categoryBloc!.add(FetchCategoriesEvent());
 // // //     if (_categoryBloc!.subCategories == null ||
 // // //         _categoryBloc!.subCategories!.length == 0)
 // // //       _categoryBloc!
-// // //         ..add(FetchSubCategoriesEvent(
+// // //         .add(FetchSubCategoriesEvent(
 // // //             categoryId: _categoryBloc!.categories!.first.id.toString()));
 // // //     if (_categoryBloc!.subCategories != null &&
 // // //         _categoryBloc!.categories!.length != 0) {
@@ -468,7 +468,7 @@
 // // //     //     });
 // // //     //   }
 // // //     // });
-// // //     _scrollController = ScrollController()..addListener(_onScroll);
+// // //     _scrollController = ScrollController().addListener(_onScroll);
 // // //     super.initState();
 // // //   }
 
@@ -803,11 +803,11 @@
 // //     _categoryBloc = BlocProvider.of<CategoryBloc>(context);
 // //     if (_categoryBloc!.categories == null ||
 // //         _categoryBloc!.categories!.length == 0)
-// //       _categoryBloc!..add(FetchCategoriesEvent());
+// //       _categoryBloc!.add(FetchCategoriesEvent());
 // //     if (_categoryBloc!.subCategories == null ||
 // //         _categoryBloc!.subCategories!.length == 0)
 // //       _categoryBloc!
-// //         ..add(FetchSubCategoriesEvent(
+// //         .add(FetchSubCategoriesEvent(
 // //             categoryId: _categoryBloc!.categories!.first.id.toString()));
 // //     if (_categoryBloc!.subCategories != null &&
 // //         _categoryBloc!.categories!.length != 0) {
@@ -821,7 +821,7 @@
 // //     //     });
 // //     //   }
 // //     // });
-// //     // _scrollController = ScrollController()..addListener(_onScroll);
+// //     // _scrollController = ScrollController().addListener(_onScroll);
 // //     super.initState();
 // //   }
 

@@ -48,7 +48,7 @@ class _CompaniesJobsScreenState extends State<CompaniesJobsScreen> {
     _scrollController = ScrollController()..addListener(_onScroll);
     _user = BlocProvider.of<GlobalBloc>(context).user;
 
-    _jobsBloc..add(FetchCompaniesJobsEvent());
+    _jobsBloc.add(FetchCompaniesJobsEvent());
     _jobsBloc.add(FetchJobsCategoriesEvent());
     _jobCategoryModel = JobCategoryModel(id: 0, name: "category");
     _jobSubCategoryModel = JobCategoryModel(id: 0, name: "subcategory");
@@ -221,7 +221,7 @@ class _CompaniesJobsScreenState extends State<CompaniesJobsScreen> {
     });
     _jobsBloc.allPage = 1;
     _jobsBloc
-      ..add(FetchCompaniesJobsEvent(
+      .add(FetchCompaniesJobsEvent(
           categoryId: _jobCategoryModel.id,
           subcategoryId: _jobSubCategoryModel.id));
   }

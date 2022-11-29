@@ -24,60 +24,33 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   ProfileBloc({required BuildContext context}) : super(ProfileInitialState()) {
     globalBloc = BlocProvider.of<GlobalBloc>(context);
+    on<ProfileFetchEvent>(_mapFetchProfileToState);
+    on<EditProfileEvent>(_mapEditProfileToState);
+    on<ChangePasswordEvent>(_mapChangePasswordToState);
   }
 
-  @override
-  Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
-    // if (event is ProfileFetchDtaEvent) {
-    //   yield* _mapFetchProfileDataToState();
-    // }
-    if (event is ProfileFetchEvent) {
-      yield* _mapFetchProfileToState(event);
-    }
-    if (event is EditProfileEvent) {
-      yield* _mapEditProfileToState(event);
-    }
-    if (event is ChangePasswordEvent) {
-      yield* _mapChangePasswordToState(event);
-    }
-  }
-
-  // Stream<ProfileState> _mapFetchProfileDataToState() async* {
-  //   try {
-  //     yield ProfileLoadingState();
-  //     final ProfileResponse? response = await profileRepository.fetchData();
-  //     globalBloc.user = response!.data;
-  //     log("parse profile data from db to local >>>>>>> ${globalBloc.user!.toJson()}");
-  //     if (response.status!) {
-  //       yield ProfileSuccessState(user: response.data);
-  //     } else {
-  //       yield ProfileErrorState(error: response.message.toString());
-  //     }
-  //   } catch (e) {
-  //     print("$e");
-  //   }
-  // }
-
-  Stream<ProfileState> _mapFetchProfileToState(ProfileFetchEvent event) async* {
+  void _mapFetchProfileToState(
+      ProfileFetchEvent event, Emitter<ProfileState> emit) async {
     try {
-      yield ProfileLoadingState();
+      emit(ProfileLoadingState());
       ProfileResponse? response =
           await profileRepository.fetchUserData(user: event.user);
-      globalBloc.user = response!.data as User? ;
+      globalBloc.user = response!.data as User?;
       log("parse profile data from db to local >>>>>>> ${globalBloc.user!.toJson()}");
       if (response.status!) {
-        yield ProfileSuccessState(user: response.data);
+        emit(ProfileSuccessState(user: response.data));
       } else {
-        yield ProfileErrorState(error: response.message.toString());
+        emit(ProfileErrorState(error: response.message.toString()));
       }
     } catch (e) {
       print("$e");
     }
   }
 
-  Stream<ProfileState> _mapEditProfileToState(EditProfileEvent event) async* {
+  void _mapEditProfileToState(
+      EditProfileEvent event, Emitter<ProfileState> emit) async {
     try {
-      yield EditProfileLoadingState();
+      emit(EditProfileLoadingState());
       EditProfileResponse? response = await profileRepository.editProfile(
           user: event.user!, image: event.image);
       print(event.user!.phone);
@@ -86,28 +59,28 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         print(globalBloc.user!.phone);
         print('yaaaaaaaaraaaaaaab');
         authRepository.setCurrentUser(globalBloc.user);
-        yield EditProfileSuccessState(
-            user: response.data, message: response.message);
+        emit(EditProfileSuccessState(
+            user: response.data, message: response.message));
       } else {
-        yield EditProfileErrorState(error: response.message);
+        emit(EditProfileErrorState(error: response.message));
       }
     } catch (e) {
       print(e.toString());
     }
   }
 
-  Stream<ProfileState> _mapChangePasswordToState(
-      ChangePasswordEvent event) async* {
-    yield EditProfileLoadingState();
+  void _mapChangePasswordToState(
+      ChangePasswordEvent event, Emitter<ProfileState> emit) async {
+    emit(EditProfileLoadingState());
     CommonResponse? response = await profileRepository.changePassword(
         user: event.user!,
         currentPass: event.currentPassword,
         newPass: event.newPassword);
 
     if (response!.status!) {
-      yield ChangePasswordSuccessState(message: response.message);
+      emit(ChangePasswordSuccessState(message: response.message));
     } else {
-      yield EditProfileErrorState(error: response.message);
+      emit(EditProfileErrorState(error: response.message));
     }
   }
 }

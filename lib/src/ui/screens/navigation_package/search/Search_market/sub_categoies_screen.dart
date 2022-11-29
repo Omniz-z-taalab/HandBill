@@ -35,7 +35,7 @@ class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
     id = widget!.routeArgument!.param;
 
     _searchBloc = BlocProvider.of<SearchBloc>(context);
-    _searchBloc..add(SearchAllSubCategoriesEvent(id: id));
+    _searchBloc.add(SearchAllSubCategoriesEvent(id: id));
     super.initState();
   }
 

@@ -33,7 +33,7 @@ class _HandmadeScreenState extends State<HandmadeScreen> {
   void initState() {
     _handmadeBloc = BlocProvider.of<HandmadeBloc>(context);
     _handmadeBloc.allPage = 1;
-    _handmadeBloc..add(FetchHandmadeEvent());
+    _handmadeBloc.add(FetchHandmadeEvent());
     _scrollController = ScrollController()..addListener(_onScroll);
 
     super.initState();
@@ -46,7 +46,7 @@ class _HandmadeScreenState extends State<HandmadeScreen> {
   }
 
   init() {
-    _handmadeBloc..add(FetchHandmadeEvent());
+    _handmadeBloc.add(FetchHandmadeEvent());
   }
 
   @override

@@ -11,8 +11,6 @@ import 'package:hand_bill/src/blocs/favorite/favorite_bloc.dart';
 import 'package:hand_bill/src/blocs/favorite/favorite_state.dart';
 import 'package:hand_bill/src/blocs/global_bloc/global_bloc.dart';
 import 'package:hand_bill/src/blocs/home/home_bloc.dart';
-import 'package:hand_bill/src/blocs/home/home_event.dart';
-import 'package:hand_bill/src/blocs/home/home_state.dart';
 import 'package:hand_bill/src/common/constns.dart';
 import 'package:hand_bill/src/data/model/user.dart';
 import 'package:hand_bill/src/ui/component/company/company_empty_widget.dart';
@@ -27,31 +25,38 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  HomeBloc? _homeBloc;
+  late HomeBloc _homeBloc;
 
   double marginVertical = 24;
   User? _user;
   int _sliderPosition = 0;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   // FavoriteBloc? _favoriteBloc;
-  CategoryBloc? _categoryBloc;
-  ExploreBloc? _exploreBloc;
+  late CategoryBloc _categoryBloc;
+  late ExploreBloc _exploreBloc;
+
+  @override
+  void initState() {
+    _homeBloc = BlocProvider.of<HomeBloc>(context);
+    super.initState();
+  }
+
   @override
   void didChangeDependencies() {
-    _homeBloc = BlocProvider.of<HomeBloc>(context);
     // _favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
     _user = BlocProvider.of<GlobalBloc>(context).user;
     _categoryBloc = BlocProvider.of<CategoryBloc>(context);
-    if (_categoryBloc!.categories == null ||
-        _categoryBloc!.categories!.length == 0)
-      _categoryBloc!..add(FetchCategoriesEvent());
-    // if (_categoryBloc!.subCategories == null ||
-    //     _categoryBloc!.subCategories!.length == 0 &&
-    //         _categoryBloc!.categories!.isNotEmpty &&
-    //         _categoryBloc!.categories != null)
-    //   _categoryBloc!
-    //     ..add(FetchSubCategoriesEvent(
-    //         categoryId: _categoryBloc!.categories!.first.id.toString()));
+    if (_categoryBloc.categories == null ||
+        _categoryBloc.categories!.length == 0)
+      _categoryBloc.add(FetchCategoriesEvent());
+    // if (_categoryBloc.subCategories == null ||
+    //     _categoryBloc.subCategories!.length == 0 &&
+    //         _categoryBloc.categories!.isNotEmpty &&
+    //         _categoryBloc.categories != null)
+    //   _categoryBloc
+    //     .add(FetchSubCategoriesEvent(
+    //         categoryId: _categoryBloc.categories!.first.id.toString()));
     // _exploreBloc = BlocProvider.of<ExploreBloc>(context);
     // _exploreBloc!.add(FetchExploreEvent());
     // if(_exploreBloc!.items!=null&&_exploreBloc!.items!.length!=0){
@@ -76,50 +81,50 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       backgroundColor: Color(0xfff5f5f5),
-
       key: _scaffoldKey,
       body: RefreshIndicator(
           onRefresh: () async {
-            _homeBloc!.sliders.clear();
-            _homeBloc!.topCompaniesList.clear();
-            _homeBloc!.popularList.clear();
-            _homeBloc!.add(HomeFetchSliders());
-            _homeBloc!.add(HomeFetchTopCompanies());
-            _homeBloc!.add(HomeFetchPopular());
+            _homeBloc.sliders.clear();
+            _homeBloc.topCompaniesList.clear();
+            _homeBloc.popularList.clear();
+            _homeBloc.add(HomeFetchSliders());
+            _homeBloc.add(HomeFetchTopCompanies());
+            _homeBloc.add(HomeFetchPopular());
           },
           child: MultiBlocListener(
               listeners: [
-                BlocListener<HomeBloc, HomeState>
-                  (listener: (context, state) {
-                  if (state is SliderLoadingState) {
-                  } else if (state is SliderErrorState) {
+                BlocListener<HomeBloc, HomeState>(listener: (context, state) {
+                  if (state is SliderErrorState) {
                     displaySnackBar(
                         title: state.errors, scaffoldKey: _scaffoldKey);
-                  } else if (state is SliderSuccessState) {
-                    if (_homeBloc!.sliders == [])
-                      _homeBloc!.sliders.addAll(state.items!);
                   }
-                  if (state is TopCompaniesLoadingState) {
-                  } else if (state is TopCompaniesErrorState) {
+                  // else
+                  if (state is SliderSuccessState) {
+                    if (_homeBloc.sliders == [])
+                      _homeBloc.sliders.addAll(state.items!);
+                  }
+                  if (state is TopCompaniesLoadingState) {}
+                  if (state is TopCompaniesErrorState) {
                     displaySnackBar(
                         title: state.errors, scaffoldKey: _scaffoldKey);
-                  } else if (state is TopCompaniesSuccessState) {
-                    if (_homeBloc!.topCompaniesList == [])
-                      _homeBloc!.topCompaniesList.addAll(state.items!);
+                  }
+                  if (state is TopCompaniesSuccessState) {
+                    if (_homeBloc.topCompaniesList == [])
+                      _homeBloc.topCompaniesList.addAll(state.items!);
                   }
                   if (state is PopularLoadingState) {
                   } else if (state is PopularErrorState) {
                     displaySnackBar(
                         title: state.errors, scaffoldKey: _scaffoldKey);
                   } else if (state is PopularSuccessState) {
-                    if (_homeBloc!.popularList == [])
-                      _homeBloc!.popularList.addAll(state.items!);
+                    if (_homeBloc.popularList == [])
+                      _homeBloc.popularList.addAll(state.items!);
                   }
                 }),
                 BlocListener<FavoriteBloc, FavoriteState>(
                     listener: (context, state) {
                   if (state is AddToFavoriteSuccessState) {
-                    _homeBloc!.popularList.forEach((element) {
+                    _homeBloc.popularList.forEach((element) {
                       if (element.id == state.favoriteId) {
                         setState(() {
                           element.isFavourite = '0';
@@ -133,11 +138,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         timeInSecForIosWeb: 1,
                         backgroundColor: Colors.green,
                         textColor: Colors.white,
-                        fontSize: 16.0
-                    );
+                        fontSize: 16.0);
                   }
                   if (state is RemoveFromFavoriteSuccessState) {
-                    _homeBloc!.popularList.forEach((element) {
+                    _homeBloc.popularList.forEach((element) {
                       if (element.id == state.productId) {
                         setState(() {
                           element.isFavourite = '1';
@@ -151,8 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         timeInSecForIosWeb: 1,
                         backgroundColor: Colors.green,
                         textColor: Colors.white,
-                        fontSize: 16.0
-                    );
+                        fontSize: 16.0);
                   }
                 })
               ],
@@ -161,41 +164,41 @@ class _HomeScreenState extends State<HomeScreen> {
                   alignment: Alignment.topCenter,
                   child: Stack(
                     children: [
-                       CarouselSlider.builder(
-                              itemCount: _homeBloc!.sliders.isNotEmpty
-                                  ? _homeBloc!.sliders.length
-                                  : 6,
-                              itemBuilder:
-                                  (BuildContext context, int index, int idx) {
-                                if (_homeBloc!.sliders.isNotEmpty) {
-                                  return SliderWidget(
-                                      model: _homeBloc!.sliders[index]);
-                                }
-                                return SliderEmptyWidget();
-                              },
-                              options: CarouselOptions(
-                                  viewportFraction: 1,
-                                  initialPage: 0,
-                                  // enlargeCenterPage: true,
-                                  scrollDirection: Axis.horizontal,
-                                  autoPlay: true,
-                                  enableInfiniteScroll: true,
-                                  autoPlayInterval:
-                                      Duration(milliseconds: 4000),
-                                  autoPlayCurve: Curves.easeOutSine,
-                                  onPageChanged: (index, reason) {
-                                    setState(() {
-                                      _sliderPosition = index;
-                                    });
-                                  }),),
-                      _homeBloc!.sliders.isEmpty
+                      CarouselSlider.builder(
+                        itemCount: _homeBloc.sliders.isNotEmpty
+                            ? _homeBloc.sliders.length
+                            : 6,
+                        itemBuilder:
+                            (BuildContext context, int index, int idx) {
+                          if (_homeBloc.sliders.isNotEmpty) {
+                            return SliderWidget(
+                                model: _homeBloc.sliders[index]);
+                          }
+                          return SliderEmptyWidget();
+                        },
+                        options: CarouselOptions(
+                            viewportFraction: 1,
+                            initialPage: 0,
+                            // enlargeCenterPage: true,
+                            scrollDirection: Axis.horizontal,
+                            autoPlay: true,
+                            enableInfiniteScroll: true,
+                            autoPlayInterval: Duration(milliseconds: 4000),
+                            autoPlayCurve: Curves.easeOutSine,
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                _sliderPosition = index;
+                              });
+                            }),
+                      ),
+                      _homeBloc.sliders.isEmpty
                           ? SizedBox()
                           : Positioned(
                               bottom: 8,
                               right: 0,
                               left: 0,
                               child: DotsIndicator(
-                                  dotsCount: _homeBloc!.sliders.length,
+                                  dotsCount: _homeBloc.sliders.length,
                                   position: _sliderPosition.toDouble(),
                                   decorator: DotsDecorator(
                                       color: Color(0xffffffff),
@@ -213,13 +216,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     shrinkWrap: true,
                     padding: EdgeInsets.symmetric(horizontal: 6, vertical: 20),
                     scrollDirection: Axis.vertical,
-                    itemCount: _homeBloc!.topCompaniesList.isNotEmpty
-                        ? _homeBloc!.topCompaniesList.length
+                    itemCount: _homeBloc.topCompaniesList.isNotEmpty
+                        ? _homeBloc.topCompaniesList.length
                         : 6,
                     itemBuilder: (context, index) {
-                      if (index < _homeBloc!.topCompaniesList.length) {
+                      if (index < _homeBloc.topCompaniesList.length) {
                         return CompanyHorWidget(
-                            model: _homeBloc!.topCompaniesList[index],
+                            model: _homeBloc.topCompaniesList[index],
                             isHome: true);
                       }
                       return MarketEmptyWidget();

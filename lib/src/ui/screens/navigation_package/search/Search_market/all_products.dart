@@ -33,7 +33,7 @@ class _AllProductsState extends State<AllProducts> {
   void initState() {
     id = widget!.routeArgument!.param;
     _searchBloc = BlocProvider.of<SearchBloc>(context);
-    _searchBloc..add(ProductEvent(id: id));
+    _searchBloc.add(ProductEvent(id: id));
     print(id);
     print('djddjdjdjdjdjdj');
     // TODO: implement initState

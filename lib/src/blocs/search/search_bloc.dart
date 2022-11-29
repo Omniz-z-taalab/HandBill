@@ -16,40 +16,20 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   int page = 1;
   bool isFetching = false;
   String num = "0";
-  SearchBloc({required BuildContext context}) : super(SearchInitialState());
-  @override
-  Stream<SearchState> mapEventToState(SearchEvent event) async* {
-    if (event is SearchProductEvent) {
-      yield* _mapSearchProduct(event);}
-    if(event is SearchComEvent){
-      yield* _mapSearchcompany(event);
-    }
 
-    // if (event is SearchMarketEvent) {
-    //   yield* _mapSearchCompanies(event);
-    // }
-    if (event is SearchAllCategoriesEvent) {
-      yield* _mapSearchCategories();
-    }
-    if (event is SearchAllSubCategoriesEvent) {
-      yield* _mapSearchSubCategories(event);
-    }
-    if (event is SearchSubSubCategoriesEvent) {
-      yield* _mapSearchSubSubCategories(event);
-    }
-
-    if (event is ProductEvent) {
-       yield* SearchProduct(event);
-    }
-    if (event is isFavourite) {
-      if (event.num == "1") {
-        num = event.num! ;}
-        emit( isFavouriteSuccessState(num: event.num));
-    }
+  SearchBloc({required BuildContext context}) : super(SearchInitialState()) {
+    on<SearchProductEvent>(_mapSearchProduct);
+    on<SearchComEvent>(_mapSearchcompany);
+    on<SearchAllCategoriesEvent>(_mapSearchCategories);
+    on<SearchAllSubCategoriesEvent>(_mapSearchSubCategories);
+    on<SearchSubSubCategoriesEvent>(_mapSearchSubSubCategories);
+    on<ProductEvent>(SearchProduct);
+    // on<isFavourite>(isFavouriteSuccessState);
   }
 
-  Stream<SearchState> _mapSearchProduct(SearchProductEvent event) async* {
-    yield SearchProductsLoadingState();
+  void _mapSearchProduct(
+      SearchProductEvent event, Emitter<SearchState> emit) async {
+    emit(SearchProductsLoadingState());
     var response = await searchRepository.getSearchProducts(event.searchKey!);
     try {
       print(response.data);
@@ -58,16 +38,18 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         print('omniaaa');
         print(products);
         // print(products!.data!.first.name);
-        yield SearchProductsSuccessState(products: products);
+        emit(SearchProductsSuccessState(products: products));
       } else {
-        yield SearchProductsErrorState(error: response.message.toString());
+        emit(SearchProductsErrorState(error: response.message.toString()));
       }
     } catch (err) {
-      yield SearchProductsErrorState(error: err.toString());
+      emit(SearchProductsErrorState(error: err.toString()));
     }
   }
-  Stream<SearchState> _mapSearchcompany(SearchComEvent event) async* {
-    yield SearchProductsLoadingState();
+
+  void _mapSearchcompany(
+      SearchComEvent event, Emitter<SearchState> emit) async {
+    emit(SearchProductsLoadingState());
     var response = await searchRepository.getSearchProducts(event.searchKey!);
     try {
       print(response.data);
@@ -75,104 +57,104 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         final products = response.data!;
         print('omniaaa');
         print(products);
-        yield SearchcompanySuccessState(products: products);
+        emit(SearchcompanySuccessState(products: products));
       } else {
-        yield SearchProductsErrorState(error: response.message.toString());
+        emit(SearchProductsErrorState(error: response.message.toString()));
       }
     } catch (err) {
-      yield SearchProductsErrorState(error: err.toString());
+      emit(SearchProductsErrorState(error: err.toString()));
     }
   }
 
-  // Stream<SearchState> _mapSearchCompanies(SearchMarketEvent event) async* {
-  //   yield SearchCompaniesLoadingState();
+  // Stream<SearchState> _mapSearchCompanies(SearchMarketEvent event, Emitter<SearchState> emit) async {
+  //   emit(earchCompaniesLoadingState());
   //
   //   final response =
   //       await searchRepository.getSearchCompanies(event.searchKey!);
   //   try {
   //     if (response.data != null) {
   //       final companies = response.data;
-  //       yield SearchCompaniesSuccessState(companies: companies);
+  //       emit(earchCompaniesSuccessState(companies: companies));
   //     } else {
-  //       // yield SearchCompaniesErrorState(error: response.message.toString());
+  //       // emit(earchCompaniesErrorState(error: response.message.toString()));
   //     }
   //   } catch (err) {
-  //     yield SearchCompaniesErrorState(error: err.toString());
+  //     emit(earchCompaniesErrorState(error: err.toString()));
   //   }
   // }
 
-
-  Stream<SearchState> _mapSearchCategories() async* {
-    yield SearchCategoriesLoadingState();
+  void _mapSearchCategories(
+      SearchAllCategoriesEvent event, Emitter<SearchState> emit) async {
+    emit(SearchCategoriesLoadingState());
     final response = await searchRepository.getAllCategories();
     try {
-      if (response?.data != null) {
-        print(response!.data);
+      if (response.data != null) {
+        print(response.data);
         print('ssasaas');
-        final products = response?.data;
-        yield SearchCategoriesSuccessState(products: products);
+        final products = response.data;
+        emit(SearchCategoriesSuccessState(products: products));
       } else {
-        yield SearchCategoriesErrorState(error: response!.message.toString());
+        emit(SearchCategoriesErrorState(error: response.message.toString()));
       }
     } catch (err) {
-      yield SearchCategoriesErrorState(error: err.toString());
+      emit(SearchCategoriesErrorState(error: err.toString()));
     }
   }
 
-  Stream<SearchState> _mapSearchSubCategories(SearchAllSubCategoriesEvent event) async* {
-    yield SearchSubCategoriesLoadingState();
+  void _mapSearchSubCategories(
+      SearchAllSubCategoriesEvent event, Emitter<SearchState> emit) async {
+    emit(SearchSubCategoriesLoadingState());
     final response = await searchRepository.getAllSubCategories(event.id);
     print(event.id);
     print(response.data);
     print('lalalaalalalalaalalalalal');
     try {
-      if (response?.data != null) {
+      if (response.data != null) {
         final subCategories = response.data;
-        yield SearchSubCategoriesSuccessState(subCategories: subCategories);
+        emit(SearchSubCategoriesSuccessState(subCategories: subCategories));
       } else {
         print(response.message);
-        yield SearchSubCategoriesErrorState(error: response.message.toString());
+        emit(SearchSubCategoriesErrorState(error: response.message.toString()));
       }
     } catch (err) {
-      yield SearchSubCategoriesErrorState(error: err.toString());
+      emit(SearchSubCategoriesErrorState(error: err.toString()));
     }
   }
 
-  Stream<SearchState> _mapSearchSubSubCategories(
-      SearchSubSubCategoriesEvent event) async* {
-    yield SearchSubSubCategoriesLoadingState();
+  void _mapSearchSubSubCategories(
+      SearchSubSubCategoriesEvent event, Emitter<SearchState> emit) async {
+    emit(SearchSubSubCategoriesLoadingState());
     final response = await searchRepository.getSubSubCategories(event.id);
     print(event.id);
     print(response.data);
     print('lalalaalalalalaalalalalal');
     try {
-      if (response?.data != null) {
+      if (response.data != null) {
         final subSubCategories = response.data;
-        yield SearchSubSubCategoriesSuccessState(
-            subSubCategories: subSubCategories);
+        emit(SearchSubSubCategoriesSuccessState(
+            subSubCategories: subSubCategories));
       } else {
         print(response.message);
-        yield SearchSubCategoriesErrorState(error: response.message.toString());
+        emit(SearchSubCategoriesErrorState(error: response.message.toString()));
       }
     } catch (err) {
-      yield SearchSubSubCategoriesErrorState(error: err.toString());
+      emit(SearchSubSubCategoriesErrorState(error: err.toString()));
     }
   }
+
 // final List<Product products;
-  Stream<SearchState> SearchProduct(ProductEvent event) async* {
-    yield ProductLoadingState();
+  void SearchProduct(ProductEvent event, Emitter<SearchState> emit) async {
+    emit(ProductLoadingState());
     final response = await searchRepository.getSearchProduct(event.id);
     try {
       if (response.status!) {
         final products = response.data!.products!.data;
-        yield ProductSuccessState(products: products);
+        emit(ProductSuccessState(products: products));
       } else {
-        yield ProductErrorState(error: response.message.toString());
+        emit(ProductErrorState(error: response.message.toString()));
       }
     } catch (err) {
-      yield SearchProductsErrorState(error: err.toString());
+      emit(SearchProductsErrorState(error: err.toString()));
     }
   }
-
-
 }

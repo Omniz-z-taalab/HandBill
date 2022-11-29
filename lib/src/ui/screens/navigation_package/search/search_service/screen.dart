@@ -20,7 +20,7 @@ class SearchSuppliers extends StatefulWidget {
 }
 
 class _SearchSuppliersState extends State<SearchSuppliers> {
-  ServiceBlocData? serviceBloc;
+  late ServiceBlocData serviceBloc;
   SearchBloc? searchBloc;
   FocusNode focusNode = FocusNode();
   List<ServiceModel>? items;
@@ -32,7 +32,7 @@ class _SearchSuppliersState extends State<SearchSuppliers> {
   @override
   void initState() {
     serviceBloc = BlocProvider.of<ServiceBlocData>(context);
-    serviceBloc!.add(FetchData());
+    serviceBloc.add(FetchData());
     // serviceBloc!.add(SearchMarketEvent(searchKey: _searchController.text));
     super.initState();
   }
@@ -41,7 +41,7 @@ class _SearchSuppliersState extends State<SearchSuppliers> {
   Widget build(BuildContext context) {
     _onSubmitted(value) async {
       if (_searchController.text.length >= 1) {
-          serviceBloc!..add(SearchMarketEvent(searchKey: value));
+          // serviceBloc.add(SearchMarketEvent(searchKey: value));
       }
     }
 
@@ -67,7 +67,7 @@ class _SearchSuppliersState extends State<SearchSuppliers> {
                 onChanged: (value) {
                   _onSubmitted(value.trim());
 
-                  if (_searchController!.text.isEmpty!) {
+                  if (_searchController.text.isEmpty) {
                     setState(() {
                       companies!.clear();
                     });

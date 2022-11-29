@@ -94,7 +94,7 @@ class _ShippingMainScreenState extends State<ShippingMainScreen>
   // //   });
   // //   _otherCompanyBloc.shippingPage = 1;
   // //   _otherCompanyBloc
-  // //     ..add(FetchShippingCompaniesEvent(subNature: selectSubNatureValue));
+  // //     .add(FetchShippingCompaniesEvent(subNature: selectSubNatureValue));
   // // }
 
   // @override
@@ -102,11 +102,11 @@ class _ShippingMainScreenState extends State<ShippingMainScreen>
   //   _serviceBloc = BlocProvider.of<ServiceBloc>(context);
   //   if (_serviceBloc!.categories == null ||
   //       _serviceBloc!.categories!.length == 0)
-  //     _serviceBloc!..add(FetchServiceEvent());
+  //     _serviceBloc!.add(FetchServiceEvent());
   //   // _otherCompanyBloc.shippingPage = 1;
   //   // _otherCompanyBloc
-  //   //   ..add(FetchShippingCompaniesEvent(subNature: selectSubNatureValue));
-  //   // _scrollController = ScrollController()..addListener(_onScroll);
+  //   //   .add(FetchShippingCompaniesEvent(subNature: selectSubNatureValue));
+  //   // _scrollController = ScrollController().addListener(_onScroll);
 
   //   super.initState();
   // }
@@ -359,14 +359,14 @@ class _ShippingMainScreenState extends State<ShippingMainScreen>
   @override
   void initState() {
     _serviceBloc = BlocProvider.of<ServiceBlocData>(context);
-    _serviceBloc!..add(FetchServiceEvent());
-    // _serviceBloc!..add(ServiceBannerCompanyEvent());
+    _serviceBloc!.add(FetchServiceEvent());
+    // _serviceBloc!.add(ServiceBannerCompanyEvent());
 
 
     // if (_serviceBloc!.subCategories == null ||
     //     _serviceBloc!.subCategories!.length == 0)
     //   _serviceBloc!
-    //     ..add(FetchSubCategoriesEvent(
+    //     .add(FetchSubCategoriesEvent(
     //         categoryId: _categoryBloc!.categories!.first.id.toString()));
     // if (_serviceBloc!.subCategories != null &&
     //     _serviceBloc!.categories!.length != 0) {
@@ -380,7 +380,7 @@ class _ShippingMainScreenState extends State<ShippingMainScreen>
     //     });
     //   }
     // });
-    // _scrollController = ScrollController()..addListener(_onScroll);
+    // _scrollController = ScrollController().addListener(_onScroll);
     super.initState();
   }
 

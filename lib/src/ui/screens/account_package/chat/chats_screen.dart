@@ -40,7 +40,7 @@
 //
 //   getUser() async {
 //     if (_user != null) {
-//       _chatBloc..add(FetchConversationEvent(user: _user!));
+//       _chatBloc.add(FetchConversationEvent(user: _user!));
 //
 //       FirebaseFirestore.instance
 //           .collection("conversations")

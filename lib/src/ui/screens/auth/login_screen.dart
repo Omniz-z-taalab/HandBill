@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     _onLoginButtonPressed() {
-      _authBloc!..add(LoginEvent(
+      _authBloc!.add(LoginEvent(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim()));
     }

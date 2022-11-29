@@ -9,7 +9,6 @@ import 'package:hand_bill/src/blocs/category/category_bloc.dart';
 import 'package:hand_bill/src/blocs/category/category_event.dart';
 import 'package:hand_bill/src/blocs/global_bloc/global_bloc.dart';
 import 'package:hand_bill/src/blocs/home/home_bloc.dart';
-import 'package:hand_bill/src/blocs/home/home_event.dart';
 import 'package:hand_bill/src/blocs/profile/profile_bloc.dart';
 import 'package:hand_bill/src/ui/screens/navigation_package/navigation_screen.dart';
 
@@ -18,6 +17,7 @@ import '../../../blocs/profile/profile_event.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
+
   @override
   _SplashPageState createState() => _SplashPageState();
 }
@@ -25,10 +25,25 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   AnimationController? _animationController;
   Animation<Offset>? _animation;
-
+  late HomeBloc _homeBloc;
+  late GlobalBloc _globalBloc;
+  late CategoryBloc _categoryBloc;
+  late ServiceBlocData _serviceBloc;
+  late AuthBloc _authBloc;
   @override
   void initState() {
-    super.initState();
+
+    _homeBloc = BlocProvider.of<HomeBloc>(context);
+    _serviceBloc = BlocProvider.of<ServiceBlocData>(context);
+    _globalBloc = BlocProvider.of<GlobalBloc>(context);
+    _categoryBloc = BlocProvider.of<CategoryBloc>(context);
+    _authBloc = BlocProvider.of<AuthBloc>(context);
+
+    _authBloc.add(FetchCountriesEvent());
+    _homeBloc.add(HomeFetchTopCompanies());
+    _serviceBloc.add(FetchServiceEvent());
+    _categoryBloc.add(FetchCategoriesEvent());
+    _homeBloc.add(HomeFetchSliders());
     _animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 2));
     _animation = Tween<Offset>(
@@ -38,32 +53,21 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     _animationController?.forward().whenComplete(() {
       // when animation completes, put your code here
     });
+    super.initState();
   }
 
-  HomeBloc? _homeBloc;
-  GlobalBloc? _globalBloc;
-  CategoryBloc? _categoryBloc;
-  // ProfileBloc? _profileBloc;
-  ServiceBlocData? _serviceBloc;
-  AuthBloc? _authBloc;
+
+
   @override
   void didChangeDependencies() {
     //Future<User?> user =
-    _serviceBloc = BlocProvider.of<ServiceBlocData>(context);
-    _globalBloc = BlocProvider.of<GlobalBloc>(context);
-    _homeBloc = BlocProvider.of<HomeBloc>(context);
-    // _profileBloc = BlocProvider.of<ProfileBloc>(context);
-    _categoryBloc = BlocProvider.of<CategoryBloc>(context);
-    _globalBloc!..add(StartAppEvent());
-    _homeBloc!..add(HomeFetchSliders());
-    // _profileBloc!..add((ProfileFetchDtaEvent()));
 
-    // _homeBloc!..add(HomeFetchPopular());
-    _authBloc = BlocProvider.of<AuthBloc>(context);
-    _authBloc!..add(FetchCountriesEvent());
-    _homeBloc!..add(HomeFetchTopCompanies());
-    _serviceBloc!..add(FetchServiceEvent());
-    _categoryBloc!..add(FetchCategoriesEvent());
+    // _globalBloc.add(StartAppEvent());
+
+    // _profileBloc!.add((ProfileFetchDtaEvent()));
+
+    // _homeBloc.add(HomeFetchPopular());
+
     Timer(Duration(seconds: 4), () {
       Navigator.pushReplacement(
           context,

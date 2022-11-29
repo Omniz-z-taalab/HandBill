@@ -45,7 +45,7 @@ import '../../../data/model/local/nature_of_activity_model.dart';
 //   void initState() {
 //     _countryModel = CountryModel(id: 0, name: translate("signup.select_country"));
 //     _authBloc = BlocProvider.of<AuthBloc>(context);
-//     _authBloc!..add(FetchCountriesEvent());
+//     _authBloc!.add(FetchCountriesEvent());
 //     super.initState();
 //   }
 //   @override
@@ -61,7 +61,7 @@ import '../../../data/model/local/nature_of_activity_model.dart';
 //       if (_countryModel!.id == 0) {
 //         Fluttertoast.showToast(msg: translate("signup.select_country"));
 //       }else
-//       _authBloc!..add(RegisterButtonPressed(
+//       _authBloc!.add(RegisterButtonPressed(
 //           name: _nameController.text.trim(),
 //           email: _emailController.text.trim(),
 //           password: _passwordController.text.trim(),
@@ -412,7 +412,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _countryModel =
         CountryModel(id: 0, name: "signup.select_country".tr());
     _authBloc = BlocProvider.of<AuthBloc>(context);
-    _authBloc!..add(FetchCountriesEvent());
+    _authBloc!.add(FetchCountriesEvent());
     super.initState();
   }
 
@@ -807,7 +807,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 print(countryname);
                                                 print('khaled');
                                                 _authBloc!
-                                                  ..add(RegisterButtonPressed(
+                                                  .add(RegisterButtonPressed(
                                                      namear:_namearController.text.trim(),
                                                       confirimpassword:
                                                           _confirmpasswordController

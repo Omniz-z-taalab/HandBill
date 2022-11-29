@@ -16,64 +16,54 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   ProductsBloc({required BuildContext context})
       : super(ProductsInitialState()) {
     productsRepository.user = BlocProvider.of<GlobalBloc>(context).user;
+    on<FetchProductsBySubCategoryEvent>(_mapFetchProducts);
+    on<FetchSimilarProductsEvent>(_mapFetchSimilarProducts);
+    on<FetchProductDetails>(_mapFetchProductDetails);
   }
 
-  @override
-  Stream<ProductsState> mapEventToState(ProductsEvent event) async* {
-    if (event is FetchProductsBySubCategoryEvent) {
-      yield* _mapFetchProducts(event);
-    }
-    if (event is FetchSimilarProductsEvent) {
-      yield* _mapFetchSimilarProducts(event);
-    }
-
-    if (event is FetchProductDetails) {
-      yield* _mapFetchProductDetails(event);
-    }
-  }
-
-  Stream<ProductsState> _mapFetchProducts(
-      FetchProductsBySubCategoryEvent event) async* {
-    yield ProductsLoadingState();
+  void _mapFetchProducts(FetchProductsBySubCategoryEvent event,
+      Emitter<ProductsState> emit) async {
+    emit(ProductsLoadingState());
     final response = await productsRepository.getProductsBySubCategory(
         subcategoryId: event.subcategoryId);
 
     if (response.status!) {
-      yield ProductsSuccessState(products: response.data);
+      emit(ProductsSuccessState(products: response.data));
       page++;
       isFetching = false;
     } else {
-      yield ProductsErrorState(error: response.message);
+      emit(ProductsErrorState(error: response.message));
       isFetching = false;
     }
   }
 
-  Stream<ProductsState> _mapFetchSimilarProducts(
-      FetchSimilarProductsEvent event) async* {
-    yield ProductsLoadingState();
+  void _mapFetchSimilarProducts(
+      FetchSimilarProductsEvent event, Emitter<ProductsState> emit) async {
+    emit(ProductsLoadingState());
     final response = await productsRepository.getProductsBySubCategory(
-        subcategoryId: event.subcategoryId,);
+      subcategoryId: event.subcategoryId,
+    );
 
     if (response.status!) {
-      yield SimilarProductsSuccessState(products: response.data);
+      emit(SimilarProductsSuccessState(products: response.data));
       similarPage++;
       isFetching = false;
     } else {
-      yield ProductsErrorState(error: response.message);
+      emit(ProductsErrorState(error: response.message));
       isFetching = false;
     }
   }
 
-  Stream<ProductsState> _mapFetchProductDetails(
-      FetchProductDetails event) async* {
-    yield ProductsLoadingState();
+  void _mapFetchProductDetails(
+      FetchProductDetails event, Emitter<ProductsState> emit) async {
+    emit(ProductsLoadingState());
 
     ProductDetailsResponse response =
         await productsRepository.getProductDetail(id: event.id!);
     if (response.status!) {
-      yield ProductDetailsSuccessState(model: response.data);
+      emit(ProductDetailsSuccessState(model: response.data));
     } else {
-      yield ProductsErrorState(error: response.message);
+      emit(ProductsErrorState(error: response.message));
     }
   }
 }

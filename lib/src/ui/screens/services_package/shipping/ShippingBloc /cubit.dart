@@ -19,50 +19,38 @@ class ShippingBloc extends Bloc<ShippingInitEvent, ShippingState> {
   String tag = "ShippingBloc";
 
   final HomeRepository homeRepository = HomeRepository();
-
-  ShippingBloc() : super(ShippingInitState());
   List<DataPro> sliders = [];
 
   Dio _dio = Dio();
 
   Future<void> getdata() async {}
 
-  // CompanyModel? companyModel;
-
-  Stream<ShippingState> mapEventToState(ShippingInitEvent event) async* {
-    if (event is ShippingSliderEvent) {
-      yield* _mapFetchSlider(event);
-    }
-    if (event is ShippingSubCategoryEvent) {
-       yield* _mapCategory(event);
-    }
-    if(event is ShippingSubSubCategoryEvent){
-      yield* _mapSubCategory(event);
-    }
-    if(event is ShippingSliderServiceEvent){
-      yield* _mapBannerCompanies();
-    }
-    if(event is ShippingCategoryServiceEvent){
-      yield* _mapCategoryService(event);
-    }
+  ShippingBloc() : super(ShippingInitState()) {
+    on<ShippingSliderEvent>(_mapFetchSlider);
+    on<ShippingSubCategoryEvent>(_mapCategory);
+    on<ShippingSubSubCategoryEvent>(_mapSubCategory);
+    on<ShippingSliderServiceEvent>(_mapBannerCompanies);
+    on<ShippingCategoryServiceEvent>(_mapCategoryService);
   }
+
+  // CompanyModel? companyModel;
 
   CompanyModel? companyModel;
 
-  Stream<ShippingState> _mapBannerCompanies() async* {
-    yield BannerCompanyLoadingState();
+  void _mapBannerCompanies(
+      ShippingSliderServiceEvent event, Emitter<ShippingState> emit) async {
+    emit(BannerCompanyLoadingState());
 
-    final response =
-    await homeRepository.geySliderServiceData();
+    final response = await homeRepository.geySliderServiceData();
     try {
       if (response.data != null) {
         final banner = response.data;
-        yield BannerCompanySuccessState(banner);
+        emit(BannerCompanySuccessState(banner));
       } else {
-        // yield SearchCompaniesErrorState(error: response.message.toString());
+        // emit(SearchCompaniesErrorState(error: response.message.toString()));
       }
     } catch (err) {
-      yield BannerCompaniesErrorState(err.toString());
+      emit(BannerCompaniesErrorState(err.toString()));
     }
   }
 
@@ -84,58 +72,61 @@ class ShippingBloc extends Bloc<ShippingInitEvent, ShippingState> {
 
   SubCategoryModel? subCategoryModel;
 
-  Stream<ShippingState> _mapFetchSlider(ShippingSliderEvent event) async* {
+  void _mapFetchSlider(
+      ShippingSliderEvent event, Emitter<ShippingState> emit) async {
     try {
       final response = await homeRepository.geySlidersubData(event.id);
       if (response.status!) {
         // final sliders = response.data;
       }
-      yield ShippingSuccessSliderState(response.data!);
+      emit(ShippingSuccessSliderState(response.data!));
     } catch (e) {}
   }
 
-  Stream<ShippingState> _mapCategory(ShippingSubCategoryEvent event) async* {
+  void _mapCategory(
+      ShippingSubCategoryEvent event, Emitter<ShippingState> emit) async {
     try {
       final response = await homeRepository.getSubCategories(event.id);
       if (response.status!) {
         final category = response;
         print(category);
         print('[[[[[[[[[[[[[[[[[[[[');
-        yield ShippingSuccessSubState(category);
+        emit(ShippingSuccessSubState(category));
       }
     } catch (e) {
-      yield ShippingErrorSubState(e.toString());
+      emit(ShippingErrorSubState(e.toString()));
     }
   }
-  Stream<ShippingState> _mapCategoryService(ShippingCategoryServiceEvent event) async* {
+
+  void _mapCategoryService(
+      ShippingCategoryServiceEvent event, Emitter<ShippingState> emit) async {
     try {
       final response = await homeRepository.getSubCategories(event.id);
       if (response.status!) {
         final category = response;
         print(category.data![0].name);
         print('[[[[[[[[[[[[[[[[[[[[');
-        yield GebServiceCatSuccessStates(category);
+        emit(GebServiceCatSuccessStates(category));
       }
     } catch (e) {
-      // yield ShippingErrorSubState(e.toString());
+      // emit(ShippingErrorSubState(e.toString()));
     }
   }
 
-  Stream<ShippingState> _mapSubCategory(ShippingSubSubCategoryEvent event) async* {
+  void _mapSubCategory(
+      ShippingSubSubCategoryEvent event, Emitter<ShippingState> emit) async {
     try {
       final response = await homeRepository.getSubsubCategories(event.id);
       if (response.status!) {
         final category = response;
         print(category);
         print('[[[[[[[[[[[[[[[[[[[[');
-        yield ShippingSuccessSubSubState(category);
+        emit(ShippingSuccessSubSubState(category));
       }
     } catch (e) {
-      yield ShippingErrorSubState(e.toString());
+      emit(ShippingErrorSubState(e.toString()));
     }
   }
 
-
   SubSubCategoryModel? subsubCategoryModel;
-
 }

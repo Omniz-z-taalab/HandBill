@@ -34,7 +34,7 @@ class _WishListScreenState extends State<WishListScreen> {
     _user = BlocProvider.of<GlobalBloc>(context).user;
     if (_user != null) {
       _favoriteBloc.page = 1;
-      _favoriteBloc..add(FetchFavoriteEvent(user: _user!));
+      _favoriteBloc.add(FetchFavoriteEvent(user: _user!));
     }
     _scrollController = ScrollController()..addListener(_onScroll);
 
@@ -47,9 +47,8 @@ class _WishListScreenState extends State<WishListScreen> {
 
     if (offset + offsetVisibleThreshold >= max &&
         !BlocProvider.of<FavoriteBloc>(context).isFetching) {
-      _favoriteBloc
-        ..isFetching = true
-        ..add(FetchFavoriteEvent(user: _user!));
+      _favoriteBloc..isFetching = true;
+      _favoriteBloc.add(FetchFavoriteEvent(user: _user!));
     }
   }
 
@@ -96,21 +95,22 @@ class _WishListScreenState extends State<WishListScreen> {
                   physics: BouncingScrollPhysics(),
                   slivers: [
                     _items == null
-                        ? SliverToBoxAdapter(
-                            child: StaggeredGridView.countBuilder(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 24),
-                                shrinkWrap: true,
-                                primary: false,
-                                crossAxisCount: 4,
-                                mainAxisSpacing: 16,
-                                crossAxisSpacing: 16,
-                                staggeredTileBuilder: (int x) =>
-                                    StaggeredTile.count(2, x.isEven ? 4 : 3),
-                                itemBuilder:
-                                    (BuildContext context, int index) =>
-                                        ProductVerEmptyWidget(),
-                                itemCount: 4))
+                        ? SizedBox()
+                        // SliverToBoxAdapter(
+                        //     child: StaggeredGridView.countBuilder(
+                        //         padding: EdgeInsets.symmetric(
+                        //             horizontal: 16, vertical: 24),
+                        //         shrinkWrap: true,
+                        //         primary: false,
+                        //         crossAxisCount: 4,
+                        //         mainAxisSpacing: 16,
+                        //         crossAxisSpacing: 16,
+                        //         staggeredTileBuilder: (int x) =>
+                        //             StaggeredTile.count(2, x.isEven ? 4 : 3),
+                        //         itemBuilder:
+                        //             (BuildContext context, int index) =>
+                        //                 ProductVerEmptyWidget(),
+                        //         itemCount: 4))
                         : _items!.length == 0
                             ? CenterWidgetListSliver(
                                 label: "your wishlist is currently empty")
@@ -139,9 +139,8 @@ class _WishListScreenState extends State<WishListScreen> {
   }
 
   _onFavTap(FavoriteModel model) {
-    _favoriteBloc
-      ..add(
-          RemoveFromFavoriteEvent(user: _user!, favoriteId: model.product!.id!));
+    _favoriteBloc.add(
+        RemoveFromFavoriteEvent(user: _user!, favoriteId: model.product!.id!));
   }
 
   @override

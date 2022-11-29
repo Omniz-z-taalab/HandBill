@@ -21,7 +21,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   void didChangeDependencies() {
     _authBloc = BlocProvider.of<AuthBloc>(context);
-    _authBloc!..add(FetchCountriesEvent());
+    _authBloc!.add(FetchCountriesEvent());
     super.didChangeDependencies();
   }
   @override

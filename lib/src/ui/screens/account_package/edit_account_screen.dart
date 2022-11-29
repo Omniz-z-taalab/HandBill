@@ -116,13 +116,13 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
             name: _userNameController.text.trim(),
             phone: _phoneController.text.trim(),
             address: _addressController.text.trim());
-        _profileBloc!..add(EditProfileEvent(user: user, image: image));
+        _profileBloc!.add(EditProfileEvent(user: user, image: image));
       }
     }
 
     _onEditPasswordButtonPress() {
       if (_passwordFormKey!.currentState!.validate()) {
-        _profileBloc!..add(ChangePasswordEvent(
+        _profileBloc!.add(ChangePasswordEvent(
             user: _user,
             currentPassword: _currentPasswordController.text.trim(),
             newPassword: _newPasswordController.text.trim()));

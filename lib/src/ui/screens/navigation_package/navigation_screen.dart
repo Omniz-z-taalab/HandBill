@@ -70,8 +70,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
     // _user = BlocProvider.of<GlobalBloc>(context).user;
     // print("user nav ${_user?.name}");
     // if (_user != null) {
-    //   _notificationsBloc..add(NotificationsFetchEvent());
-    //   _cartBloc..add(FetchCartEvent());
+    //   _notificationsBloc.add(NotificationsFetchEvent());
+    //   _cartBloc.add(FetchCartEvent());
     // }
   }
 

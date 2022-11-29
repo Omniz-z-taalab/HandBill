@@ -1,7 +1,4 @@
-import 'package:equatable/equatable.dart';
-import 'package:hand_bill/src/data/model/company.dart';
-import 'package:hand_bill/src/data/model/home/banner.dart';
-import 'package:hand_bill/src/data/model/product.dart';
+part of 'home_bloc.dart';
 
 abstract class HomeState extends Equatable {
   const HomeState();
@@ -56,4 +53,3 @@ class PopularErrorState extends HomeState {
 
   const PopularErrorState({required this.errors});
 }
-

@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,17 +40,16 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
   ];
   bool gridOrList = true;
 
-
   final double size = 20;
   int selectedPage = 0;
   FocusNode focusNode = FocusNode();
-  List<DataProductSearch>? product;
-  List<DataCompanySearch>? companyy;
+  List<DataProductSearch>? product = [];
+  List<DataCompanySearch>? companyy = [];
 
   @override
   void initState() {
     _searchBloc = BlocProvider.of<SearchBloc>(context);
-    _searchBloc..add(SearchAllCategoriesEvent());
+    _searchBloc.add(SearchAllCategoriesEvent());
 
     super.initState();
   }
@@ -61,21 +59,21 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
     _onSubmitted(value) async {
       if (_searchController.text.length >= 1) {
         if (selectedPage == 0) {
-          _searchBloc..add(SearchProductEvent(searchKey: value));
+          _searchBloc.add(SearchProductEvent(searchKey: value));
         }
-        if(selectedPage == 1){
-          _searchBloc..add(SearchComEvent(searchKey: value));
-
+        if (selectedPage == 1) {
+          _searchBloc.add(SearchComEvent(searchKey: value));
         }
-        if(product!.isEmpty){
+        if (product!.isEmpty) {
           product!.clear();
           product = null;
-        }else if(companyy!.isEmpty) {
+        } else if (companyy!.isEmpty) {
           companyy!.clear();
           companyy = null;
         }
-      // }
-    }}
+        // }
+      }
+    }
 
     Color borderColor = Color(0xffeeeeee);
 
@@ -96,17 +94,15 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
             width: 370,
             height: 40,
             child: TextField(
-                controller : _searchController,
+                controller: _searchController,
                 textAlignVertical: TextAlignVertical.center,
                 onChanged: (value) {
                   _onSubmitted(value);
-                  if(_searchController!.text.isEmpty!){
+                  if (_searchController.text.isEmpty) {
                     setState(() {
                       product!.clear();
                       companyy!.clear();
-
                     });
-
                   }
                 },
                 style: TextStyle(color: textLiteColor),
@@ -115,7 +111,7 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         child: SvgPicture.asset("assets/icons/search_ic.svg",
                             height: size, width: size)),
-                    hintText:"text".tr(),
+                    hintText: "text".tr(),
                     filled: true,
                     focusColor: mainColor,
                     hintStyle: Theme.of(context).textTheme.headline2,
@@ -135,9 +131,8 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-
               Padding(
-                padding: const EdgeInsets.only(top: 10.0,right: 20,left: 20),
+                padding: const EdgeInsets.only(top: 10.0, right: 20, left: 20),
                 child: CustomTabToggle(
                     items: labelList,
                     initIndex: selectedPage,
@@ -150,32 +145,29 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
               ),
               SizedBox(
                 height: 600,
-                child:
-                    BlocConsumer<SearchBloc, SearchState>(listener: (context, state) {
+                child: BlocConsumer<SearchBloc, SearchState>(
+                    listener: (context, state) {
                   if (state is SearchProductsSuccessState) {
-                  if (state.products!.products!.data!.isEmpty!) {
-                    product = null;
-                  } else {
-                    product = [];
-                    product!.clear();
-                    product = state!.products!.products!.data!;
-                    _searchBloc.isFetching = false;
+                    if (state.products!.products!.data!.isEmpty) {
+                      product = null;
+                    } else {
+                      product = [];
+                      product!.clear();
+                      product = state.products!.products!.data!;
+                      _searchBloc.isFetching = false;
+                    }
+                    product = state.products!.products!.data!;
                   }
-                  product = state!.products!.products!.data!;
-                  }
-                  if(state is SearchcompanySuccessState){
-
-                    if (state.products!.companies!.data!.isEmpty!) {
+                  if (state is SearchcompanySuccessState) {
+                    if (state.products!.companies!.data!.isEmpty) {
                       companyy = null;
                     } else {
                       companyy = [];
                       companyy!.clear();
-                      companyy = state!.products!.companies!.data!;
+                      companyy = state.products!.companies!.data!;
                       _searchBloc.isFetching = false;
                     }
-                    companyy = state!.products!.companies!.data!;
-
-
+                    companyy = state.products!.companies!.data!;
                   }
                   if (state is SearchCategoriesSuccessState) {
                     if (state.products!.isEmpty) {
@@ -189,108 +181,147 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                   }
                 }, builder: (context, state) {
                   return SingleChildScrollView(
-                    child: SafeArea(
-                        child:
-                        Column(
-                          children: [
-                            Column(
-                              children: [
-                                selectedPage ==0
-                               ? Column(children: [
-                                  _searchController.text.isEmpty
-                                      ?Container(
+                      child: SafeArea(
+                          child: Column(children: [
+                    Column(
+                      children: [
+                        selectedPage == 0
+                            ? Column(children: [
+                                _searchController.text.isEmpty
+                                    ? Container(
                                         height: 10,
-                                  )
-                                  :   product == null
-                                  ? Container(
-                                     height: 100,
-                                    width: 400,
-                                    child:  Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Icon(Icons.search_off_sharp,color: Colors.red,size: 30,),
-                                          Text('Search_is_empty'.tr(),style: TextStyle(fontSize: 20,color: Colors.black54),),
-                                        ],
-                                    ),
-                                  )
-                                  :
-                                  SizedBox(
-                                        height: 130,
-                                        child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Container(
-                                              color: Colors.white38,
-                                              child: ListView.separated(
-                                                itemBuilder: (BuildContext context, int index) {
-                                                  return SearchProduct(product![index],context);
-                                                },
-                                                itemCount: product!.length,
-                                                separatorBuilder: (BuildContext context, int index) =>
-                                                    Container(
+                                      )
+                                    : product == null
+                                        ? Container(
+                                            height: 100,
+                                            width: 400,
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Icon(
+                                                  Icons.search_off_sharp,
+                                                  color: Colors.red,
+                                                  size: 30,
+                                                ),
+                                                Text(
+                                                  'Search_is_empty'.tr(),
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      color: Colors.black54),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        : SizedBox(
+                                            height: 130,
+                                            child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                child: Container(
+                                                  color: Colors.white38,
+                                                  child: ListView.separated(
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return SearchProduct(
+                                                          product![index],
+                                                          context);
+                                                    },
+                                                    itemCount: product!.length,
+                                                    separatorBuilder:
+                                                        (BuildContext context,
+                                                                int index) =>
+                                                            Container(
                                                       height: 1,
                                                       width: double.infinity,
-                                                      color: Colors.grey.shade300,
+                                                      color:
+                                                          Colors.grey.shade300,
                                                     ),
-                                              ),
-                                            ))),
-                                  Container(width: double.infinity,
-                                    height: 1,
-                                    color: Colors.grey.shade300,),
-                      ])
-                                :Column(children: [
-                                  selectedPage == 1 && _searchController.text.isEmpty
-                                      ?Container(
-                                    height: 10,
-                                  )
-                                  :  companyy == null
-                                      ? Container(
-                                    height: 100,
-                                    width: 400,
-                                    child:  Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Icon(Icons.search_off_sharp,color: Colors.red,size: 30,),
-                                        Text('Search_is_empty'.tr(),style: TextStyle(fontSize: 20,color: Colors.black54),),
-                                      ],
-                                    ),
-                                  )
-                                      : SizedBox(
-                                      height: 130,
-                                      child: Padding(
-                                          padding: const EdgeInsets.all(5.0),
-                                          child: Container(
-                                            color: Colors.white38,
-                                            child: ListView.separated(
-                                              itemBuilder: (BuildContext context, int index) {
-                                                return SearchCompanyData(companyy![index],context);
-                                              },
-                                              itemCount: companyy!.length,
-                                              separatorBuilder: (BuildContext context, int index) =>
-                                                  Container(
-                                                    height: 1,
-                                                    width: double.infinity,
-                                                    color: Colors.grey.shade300,
                                                   ),
+                                                ))),
+                                Container(
+                                  width: double.infinity,
+                                  height: 1,
+                                  color: Colors.grey.shade300,
+                                ),
+                              ])
+                            : Column(children: [
+                                selectedPage == 1 &&
+                                        _searchController.text.isEmpty
+                                    ? Container(
+                                        height: 10,
+                                      )
+                                    : companyy == null
+                                        ? Container(
+                                            height: 100,
+                                            width: 400,
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Icon(
+                                                  Icons.search_off_sharp,
+                                                  color: Colors.red,
+                                                  size: 30,
+                                                ),
+                                                Text(
+                                                  'Search_is_empty'.tr(),
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      color: Colors.black54),
+                                                ),
+                                              ],
                                             ),
-                                          ))),
-                                  Container(width: double.infinity,
-                                    height: 1,
-                                    color: Colors.grey.shade300,),
-                                ])
-                              ],
-                            ),
-
-
-                            data == null
+                                          )
+                                        : SizedBox(
+                                            height: 130,
+                                            child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                child: Container(
+                                                  color: Colors.white38,
+                                                  child: ListView.separated(
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return SearchCompanyData(
+                                                          companyy![index],
+                                                          context);
+                                                    },
+                                                    itemCount: companyy!.length,
+                                                    separatorBuilder:
+                                                        (BuildContext context,
+                                                                int index) =>
+                                                            Container(
+                                                      height: 1,
+                                                      width: double.infinity,
+                                                      color:
+                                                          Colors.grey.shade300,
+                                                    ),
+                                                  ),
+                                                ))),
+                                Container(
+                                  width: double.infinity,
+                                  height: 1,
+                                  color: Colors.grey.shade300,
+                                ),
+                              ])
+                      ],
+                    ),
+                    data == null
                         ? CircularProgressIndicator()
                         : data!.length == 0
-                            ? CenterWidgetListSliver(label: "search_is_empty".tr())
+                            ? CenterWidgetListSliver(
+                                label: "search_is_empty".tr())
                             : Column(
-                              children: [
-                                SizedBox(
-                                  child: Padding(
+                                children: [
+                                  SizedBox(
+                                    child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Align(
                                         alignment: Alignment.centerLeft,
@@ -303,30 +334,30 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                                         ),
                                       ),
                                     ),
-                                ),
-
-                                SizedBox(
-                                    height: 630,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Container(
-
-                                        height: 600,
-                                        width: 520,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: ListView.builder(
-                                            itemBuilder: (BuildContext context, int index) {
-                                              return SearchCategories(model: data![index]);
-                                            },
-                                            itemCount: data!.length,
+                                  ),
+                                  SizedBox(
+                                      height: 630,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Container(
+                                          height: 600,
+                                          width: 520,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ListView.builder(
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return SearchCategories(
+                                                    model: data![index]);
+                                              },
+                                              itemCount: data!.length,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    )),
-                              ],
-                            ),
-
+                                      )),
+                                ],
+                              ),
                   ])));
                 }),
               ),
@@ -336,8 +367,6 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
       ),
     );
   }
-
-
 }
 
 class SearchCategories extends StatelessWidget {

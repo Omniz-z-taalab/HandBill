@@ -31,7 +31,7 @@ class _CustomsScreenState extends State<CustomsScreen> {
   void initState() {
     _otherCompanyBloc = BlocProvider.of<OtherCompanyBloc>(context);
     _otherCompanyBloc.customsPage = 1;
-    _otherCompanyBloc..add(FetchCustomsCompaniesEvent());
+    _otherCompanyBloc.add(FetchCustomsCompaniesEvent());
     _scrollController = ScrollController()..addListener(_onScroll);
 
     super.initState();

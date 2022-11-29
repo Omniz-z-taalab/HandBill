@@ -43,11 +43,11 @@
 //         categoryId: widget.routeArgument!.id.toString()));
 //     // if (_categoryBloc!.categories == null ||
 //     //     _categoryBloc!.categories!.length == 0)
-//     //   _categoryBloc!..add(FetchCategoriesEvent());
+//     //   _categoryBloc!.add(FetchCategoriesEvent());
 //     // if (_categoryBloc!.subCategories == null ||
 //     //     _categoryBloc!.subCategories!.length == 0)
 //     //   _categoryBloc!
-//     //     ..add(FetchSubCategoriesEvent(
+//     //     .add(FetchSubCategoriesEvent(
 //     //         categoryId: _categoryBloc!.categories!.first.id.toString()));
 //     // if (_categoryBloc!.subCategories != null &&
 //     //     _categoryBloc!.categories!.length != 0) {
@@ -61,7 +61,7 @@
 //     //     });
 //     //   }
 //     // });
-//     // _scrollController = ScrollController()..addListener(_onScroll);
+//     // _scrollController = ScrollController().addListener(_onScroll);
 //     super.initState();
 //   }
 
@@ -316,11 +316,11 @@ class _SubCategoriesState extends State<SubCategories>
     // _categoryBloc = BlocProvider.of<CategoryBloc>(context);
     // if (_categoryBloc!.categories == null ||
     //     _categoryBloc!.categories!.length == 0)
-    //   _categoryBloc!..add(FetchCategoriesEvent());
+    //   _categoryBloc!.add(FetchCategoriesEvent());
     // if (_categoryBloc!.subCategories == null ||
     //     _categoryBloc!.subCategories!.length == 0)
     //   _categoryBloc!
-    //     ..add(FetchSubCategoriesEvent(
+    //     .add(FetchSubCategoriesEvent(
     //         categoryId: widget.routeArgument!.id.toString()));
     // if (_categoryBloc!.subCategories != null &&
     //     _categoryBloc!.categories!.length != 0) {
@@ -334,11 +334,11 @@ class _SubCategoriesState extends State<SubCategories>
     //     });
     //   }
     // });
-    // _scrollController = ScrollController()..addListener(_onScroll);
+    // _scrollController = ScrollController().addListener(_onScroll);
     super.initState();
     shippingBloc = BlocProvider.of<ShippingBloc>(context);
-    shippingBloc!..add(ShippingSliderEvent(id));
-    shippingBloc!..add(ShippingSubCategoryEvent(id));
+    shippingBloc!.add(ShippingSliderEvent(id));
+    shippingBloc!.add(ShippingSubCategoryEvent(id));
   }
 
   @override
@@ -383,7 +383,7 @@ class _SubCategoriesState extends State<SubCategories>
               if(sliders.isEmpty){
               sliders = state.sliders!;
               print('ssswwwww');
-               print(sliders![0].id);
+               print(sliders[0].id);
             }}
           },
           builder: (context, state) {
@@ -410,7 +410,7 @@ class _SubCategoriesState extends State<SubCategories>
                                 int pageViewIndex) {
                               if (sliders.isNotEmpty) {
                                 return SliderWidget(
-                                    model: sliders![index]);
+                                    model: sliders[index]);
                               }
                               return SliderEmptyWidget();
                             },

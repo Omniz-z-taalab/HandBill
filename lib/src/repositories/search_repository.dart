@@ -33,7 +33,7 @@ class SearchRepository {
     Response response;
     try {
       response =
-      await dio.get(APIData.searchProduct, queryParameters: queryParams);
+          await dio.get(APIData.searchProduct, queryParameters: queryParams);
       log("sss: ${jsonEncode(response.data)}");
       print(response.data);
       searchResponse = SearchProductResponse.fromJson(response.data);
@@ -53,71 +53,65 @@ class SearchRepository {
     String? value = await storage.read(key: "lang");
     // print(id);
     Map<String, dynamic> queryParams =
-    ({"secret": APIData.secretKey, "language": value});
+        ({"secret": APIData.secretKey, "language": value});
 
     SubSubCategoryModel? subCategoryModel;
-    Response response = await dio.get(
-        APIData.getSubsubCategory, queryParameters: queryParams);
+    Response response =
+        await dio.get(APIData.getSubsubCategory, queryParameters: queryParams);
     subCategoryModel = SubSubCategoryModel.fromJson(response.data);
     print(response.data);
     return subCategoryModel;
     // emit(GetSubSubCatSuccessStates());
   }
 
-  Future<SearchCompaniesResponse> getSearchCompanies(String search) async {
+  Future<SearchCompaniesResponse?> getSearchCompanies(String search) async {
     String? value = await storage.read(key: "lang");
 
     Map<String, String> queryParams =
-    ({ "search": '$search',
-      "language": value!
-    });
+        ({"search": '$search', "language": value!});
 
-    late SearchCompaniesResponse companyResponse;
+    SearchCompaniesResponse? companyResponse;
     try {
-      Response response =
-      await dio.get(APIData.searchCompanies, queryParameters: queryParams);
+      Response? response =
+          await dio.get(APIData.searchCompanies, queryParameters: queryParams);
       log("getSearchCompanies: ${jsonEncode(response.data)}");
 
       companyResponse = SearchCompaniesResponse.fromJson(response.data);
       // print(companyResponse.data!.first.name);
-      if (companyResponse.data != null) {
-        return companyResponse;
-      } else {
-        return companyResponse;
-      }
     } catch (error, stackTrace) {
+      companyResponse == null;
       print("$tag error : $error , stackTrace:  $stackTrace");
     }
     return companyResponse;
   }
 
-  Future<SearchCompaniesResponse> getServiceCompanies(int search) async {
-    String? value = await storage.read(key: "lang");
-    print(value);
-    print('languageeee');
-    Map<String, dynamic> queryParams =
-    ({ "category_id": '$search',
-      "language": value
-    });
-
-    late SearchCompaniesResponse companyResponse;
-    try {
-      Response response =
-      await dio.get(APIData.searchCompanies, queryParameters: queryParams);
-      log("getSearchCompanies: ${jsonEncode(response.data)}");
-
-      companyResponse = SearchCompaniesResponse.fromJson(response.data);
-      // print(companyResponse.data!.first.name);
-      if (companyResponse.data != null) {
-        return companyResponse;
-      } else {
-        return companyResponse;
-      }
-    } catch (error, stackTrace) {
-      print("$tag error : $error , stackTrace:  $stackTrace");
-    }
-    return companyResponse;
-  }
+  // Future<SearchCompaniesResponse> getServiceCompanies(int search) async {
+  //   String? value = await storage.read(key: "lang");
+  //   print(value);
+  //   print('languageeee');
+  //   Map<String, dynamic> queryParams =
+  //   ({ "category_id": '$search',
+  //     "language": value
+  //   });
+  //
+  //   late SearchCompaniesResponse companyResponse;
+  //   try {
+  //     Response response =
+  //     await dio.get(APIData.searchCompanies, queryParameters: queryParams);
+  //     log("getSearchCompanies: ${jsonEncode(response.data)}");
+  //
+  //     companyResponse = SearchCompaniesResponse.fromJson(response.data);
+  //     // print(companyResponse.data!.first.name);
+  //     if (companyResponse.data != null) {
+  //       return companyResponse;
+  //     } else {
+  //       return companyResponse;
+  //     }
+  //   } catch (error, stackTrace) {
+  //     print("$tag error : $error , stackTrace:  $stackTrace");
+  //   }
+  //   return companyResponse;
+  // }
 
   // Future<ServiceResponse> getCategoryCompanies() async {
   //   var queryParameters = {"secret": APIData.secretKey,
@@ -147,15 +141,12 @@ class SearchRepository {
     String? value = await storage.read(key: "lang");
     print(value);
     print('languageeee');
-    Map<String, dynamic> queryParams =
-    ({
-      "language": value
-    });
+    Map<String, dynamic> queryParams = ({"language": value});
 
     late SearchCategoriesResponse searchCategoriesResponse;
     try {
       Response response =
-      await dio.get(APIData.searchCategories, queryParameters: queryParams);
+          await dio.get(APIData.searchCategories, queryParameters: queryParams);
       log("getSearchCategories: ${jsonEncode(response.data)}");
       searchCategoriesResponse =
           SearchCategoriesResponse.fromJson(response.data);
@@ -172,18 +163,15 @@ class SearchRepository {
     return searchCategoriesResponse;
   }
 
-
   Future<SearchSubCategoriesResponse> getAllSubCategories(int id) async {
     String? value = await storage.read(key: "lang");
 
-    Map<String, String> queryParams =
-    ({ "id": '$id',
-      "language": value!});
+    Map<String, String> queryParams = ({"id": '$id', "language": value!});
 
     late SearchSubCategoriesResponse searchCategoriesResponse;
     try {
-      Response response =
-      await dio.get(APIData.searchSubCategories, queryParameters: queryParams);
+      Response response = await dio.get(APIData.searchSubCategories,
+          queryParameters: queryParams);
       log("getSearchSubSubCategories: ${jsonEncode(response.data)}");
 
       searchCategoriesResponse =
@@ -202,15 +190,12 @@ class SearchRepository {
   Future<SearchSubSubCategoriesResponse> getSubSubCategories(int id) async {
     String? value = await storage.read(key: "lang");
 
-    Map<String, String> queryParams =
-    ({ "id": '$id',
-      "language": value!});
+    Map<String, String> queryParams = ({"id": '$id', "language": value!});
 
     late SearchSubSubCategoriesResponse searchSubSubCategoriesResponse;
     try {
-      Response response =
-      await dio.get(
-          APIData.searchSubSubCategories, queryParameters: queryParams);
+      Response response = await dio.get(APIData.searchSubSubCategories,
+          queryParameters: queryParams);
       log("getSearchSubCategories: ${jsonEncode(response.data)}");
 
       searchSubSubCategoriesResponse =
@@ -229,14 +214,13 @@ class SearchRepository {
   Future<SearchProductResponse> getSearchProduct(int id) async {
     String? value = await storage.read(key: "lang");
 
-    Map<String, dynamic> queryParams = ({
-      "language": value!,
-      "sub_sub_category_id ": id});
+    Map<String, dynamic> queryParams =
+        ({"language": value!, "sub_sub_category_id ": id});
     SearchProductResponse searchProductResponse;
-    Response response =await dio.get(APIData.searchSubSubCategories, queryParameters: queryParams);
+    Response response = await dio.get(APIData.searchSubSubCategories,
+        queryParameters: queryParams);
     searchProductResponse = SearchProductResponse.fromJson(response.data);
     print(response.data);
     return searchProductResponse;
-
   }
 }

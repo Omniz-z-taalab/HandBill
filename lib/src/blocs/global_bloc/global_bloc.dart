@@ -12,42 +12,33 @@ part 'global_state.dart';
 
 class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
   User? user;
-  String? lang ;
+  String? lang;
+
   final GlobalRepository globalRepository = GlobalRepository();
 
-  GlobalBloc() : super(GlobalInitial());
-
-  @override
-  Stream<GlobalState> mapEventToState(
-    GlobalEvent event,
-  ) async* {
-    if (event is StartAppEvent) {
-      yield* _mapStartAppToState(event);
-    }
-    if (event is SaveLanguageEvent) {
-      yield* saveLanguageToState(event);
-    }
-    if (event is UserStatusChangeEvent) {
-      yield* _mapUserStatusChangeToState(event);
-    }
+  GlobalBloc() : super(GlobalInitial()) {
+    on<StartAppEvent>(_mapStartAppToState);
+    on<SaveLanguageEvent>(saveLanguageToState);
+    on<UserStatusChangeEvent>(_mapUserStatusChangeToState);
   }
 
-  Stream<GlobalState> saveLanguageToState(SaveLanguageEvent event ) async*{
-      yield GlobalLoading();
-      String? _lang ;
-      _lang = await globalRepository.getLanguage();
-      if(_lang == null ){
-        lang = null ;
-      }else{
-        lang = _lang ;
-        log("AppLanguage ${lang}");
-
-      }
-      yield SaveLanguageState();
+  void saveLanguageToState(
+      SaveLanguageEvent event, Emitter<GlobalState> emit) async {
+    emit(GlobalLoading());
+    String? _lang;
+    _lang = await globalRepository.getLanguage();
+    if (_lang == null) {
+      lang = null;
+    } else {
+      lang = _lang;
+      log("AppLanguage ${lang}");
+    }
+    emit(SaveLanguageState());
   }
 
-  Stream<GlobalState> _mapStartAppToState(StartAppEvent event) async* {
-    yield GlobalLoading();
+  void _mapStartAppToState(
+      StartAppEvent event, Emitter<GlobalState> emit) async {
+    emit(GlobalLoading());
     User? _user;
     _user = await globalRepository.getCurrentUser();
     if (_user == null) {
@@ -56,19 +47,19 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
       user = _user;
       log("token ${user!.apiToken}");
     }
-    yield StartAppSuccess(user: _user);
+    emit(StartAppSuccess(user: _user));
   }
 
-  Stream<GlobalState> _mapUserStatusChangeToState(
-      UserStatusChangeEvent event) async* {
-    yield GlobalLoading();
+  void _mapUserStatusChangeToState(
+      UserStatusChangeEvent event, Emitter<GlobalState> emit) async {
+    emit(GlobalLoading());
     User? _user = await globalRepository.getCurrentUser();
     if (_user == null) {
       user = null;
-      yield UserStatusChangeSuccess();
+      emit(UserStatusChangeSuccess());
     } else {
       user = _user;
-      yield UserStatusChangeSuccess();
+      emit(UserStatusChangeSuccess());
     }
   }
 }

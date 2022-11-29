@@ -41,7 +41,7 @@ class _MyHandmadeScreenState extends State<MyHandmadeScreen> {
     _user = BlocProvider.of<GlobalBloc>(context).user;
     if (_user != null) {
       // _handmaneBloc.myPage = 1;
-      _handmaneBloc..add(FetchMyHandmadeEvent(user: _user!));
+      _handmaneBloc.add(FetchMyHandmadeEvent(user: _user!));
     }
     super.initState();
   }

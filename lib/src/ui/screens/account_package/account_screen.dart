@@ -62,7 +62,7 @@ class _AccountScreenState extends State<AccountScreen> {
     _profileBloc = BlocProvider.of<ProfileBloc>(context);
     _user = _globalBloc.user;
     Timer(Duration(seconds: 2), () {
-      if (_user != null) _profileBloc..add(ProfileFetchEvent(user: _user!));
+      if (_user != null) _profileBloc.add(ProfileFetchEvent(user: _user!));
     });
     super.initState();
   }

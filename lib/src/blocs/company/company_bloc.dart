@@ -12,6 +12,7 @@ import 'package:hand_bill/src/data/response/market/company_product_response.dart
 import 'package:hand_bill/src/repositories/company_repository.dart';
 
 part 'company_event.dart';
+
 part 'company_state.dart';
 
 class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
@@ -21,29 +22,16 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
   bool isFetching = true;
   Company? company;
 
-  CompanyBloc() : super(CompanyInitialState());
-
-  @override
-  Stream<CompanyState> mapEventToState(CompanyEvent event) async* {
-    if (event is FetchCompanyDetails) {
-      yield* _mapFetchCompanyDetails(event);
-    }
-    if (event is FetchFeaturedProductCompany) {
-      yield* _mapFetchFeaturedProductCompany(event);
-    }
-
-    if (event is FetchCompanyProducts) {
-      yield* _mapCompanyProducts(event);
-    }
-
-    if (event is FetchCompanyCategories) {
-      yield* _mapCategories(event);
-    }
+  CompanyBloc() : super(CompanyInitialState()) {
+    on<FetchCompanyDetails>(_mapFetchCompanyDetails);
+    on<FetchFeaturedProductCompany>(_mapFetchFeaturedProductCompany);
+    on<FetchCompanyProducts>(_mapCompanyProducts);
+    on<FetchCompanyCategories>(_mapCategories);
   }
 
-  Stream<CompanyState> _mapFetchCompanyDetails(
-      FetchCompanyDetails event) async* {
-    yield CompanyLoadingState();
+  void _mapFetchCompanyDetails(
+      FetchCompanyDetails event, Emitter<CompanyState> emit) async {
+    emit(CompanyLoadingState());
     CompanyDetailsResponse response =
         await _companyRepository.getCompanyDetail(companyId: event.id);
     company = response.data;
@@ -51,49 +39,51 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
     print('pppp');
     // emit(state);
     if (response.status!) {
-      yield GetCompanySuccessState(company: response.data);
+      emit(GetCompanySuccessState(company: response.data));
     } else {
-      yield CompanyErrorState(error: response.message);
+      emit(CompanyErrorState(error: response.message));
     }
   }
 
-  Stream<CompanyState> _mapFetchFeaturedProductCompany(
-      FetchFeaturedProductCompany event) async* {
-    yield CompanyLoadingState();
+  void _mapFetchFeaturedProductCompany(
+      FetchFeaturedProductCompany event, Emitter<CompanyState> emit) async {
+    emit(CompanyLoadingState());
 
     FeaturedProductsResponse response =
         await _companyRepository.getFeaturedProductOfCompany(id: event.id);
     if (response.status!) {
-      yield GetFeaturedProductCompanySuccessState(items: response.data);
+      emit(GetFeaturedProductCompanySuccessState(items: response.data));
     } else {
-      yield CompanyErrorState(error: response.message);
+      emit(CompanyErrorState(error: response.message));
     }
   }
 
-  Stream<CompanyState> _mapCompanyProducts(FetchCompanyProducts event) async* {
-    yield CompanyLoadingState();
+  void _mapCompanyProducts(
+      FetchCompanyProducts event, Emitter<CompanyState> emit) async {
+    emit(CompanyLoadingState());
 
     CompanyProductsResponse response = await _companyRepository
         .getCompanyProducts(companyId: event.companyId, page: page);
     if (response.status!) {
-      yield GetCompanyProductsSuccessState(items: response.data);
+      emit(GetCompanyProductsSuccessState(items: response.data));
       page++;
       isFetching = false;
     } else {
-      yield CompanyErrorState(error: response.message);
+      emit(CompanyErrorState(error: response.message));
       isFetching = false;
     }
   }
 
-  Stream<CompanyState> _mapCategories(FetchCompanyCategories event) async* {
-    yield CompanyLoadingState();
+  void _mapCategories(
+      FetchCompanyCategories event, Emitter<CompanyState> emit) async {
+    emit(CompanyLoadingState());
     CompanyCategoriesResponse response =
         await _companyRepository.getCompanyCategories(companyId: event.id);
 
     if (response.status!) {
-      yield GetCompanyCategoriesSuccessState(items: response.data);
+      emit(GetCompanyCategoriesSuccessState(items: response.data));
     } else {
-      yield CompanyErrorState(error: response.message.toString());
+      emit(CompanyErrorState(error: response.message.toString()));
     }
   }
 }

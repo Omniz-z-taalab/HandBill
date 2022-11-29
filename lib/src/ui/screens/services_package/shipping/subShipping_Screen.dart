@@ -78,7 +78,7 @@ class _SubShipingScreenState extends State<SubShipingScreen>
     });
     _otherCompanyBloc.shippingPage = 1;
     _otherCompanyBloc
-      ..add(FetchShippingCompaniesEvent(subNature: selectSubNatureValue));
+      .add(FetchShippingCompaniesEvent(subNature: selectSubNatureValue));
   }
 
   @override
@@ -86,8 +86,8 @@ class _SubShipingScreenState extends State<SubShipingScreen>
     _otherCompanyBloc = BlocProvider.of<OtherCompanyBloc>(context);
     _otherCompanyBloc.shippingPage = 1;
     _otherCompanyBloc
-      ..add(FetchShippingCompaniesEvent(subNature: selectSubNatureValue));
-    // _scrollController = ScrollController()..addListener(_onScroll);
+      .add(FetchShippingCompaniesEvent(subNature: selectSubNatureValue));
+    // _scrollController = ScrollController().addListener(_onScroll);
     super.initState();
   }
 

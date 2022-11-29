@@ -37,7 +37,7 @@ class _SubSubCategoriesState extends State<SubSubCategories> {
     print(id);
     print('id');
     _searchBloc = BlocProvider.of<SearchBloc>(context);
-    _searchBloc..add(SearchSubSubCategoriesEvent(id: id));
+    _searchBloc.add(SearchSubSubCategoriesEvent(id: id));
 
     super.initState();
   }

@@ -17,49 +17,42 @@ class OtherCompanyBloc extends Bloc<OtherCompanyEvent, OtherCompanyState> {
   bool isFetching = true;
 
   OtherCompanyBloc({required BuildContext context})
-      : super(OtherCompanyInitialState());
-
-  @override
-  Stream<OtherCompanyState> mapEventToState(OtherCompanyEvent event) async* {
-    if (event is FetchShippingCompaniesEvent) {
-      yield* _mapFetchShipping(
-          FetchShippingCompaniesEvent(subNature: event.subNature));
-    }
-    if (event is FetchCustomsCompaniesEvent) {
-      yield* _mapFetchCustomsCompanies();
-    }
+      : super(OtherCompanyInitialState()) {
+    on<FetchShippingCompaniesEvent>(_mapFetchShipping);
+    on<FetchCustomsCompaniesEvent>(_mapFetchCustomsCompanies);
   }
 
-  Stream<OtherCompanyState> _mapFetchShipping(
-      FetchShippingCompaniesEvent event) async* {
-    yield OtherCompanyLoadingState();
+  void _mapFetchShipping(FetchShippingCompaniesEvent event,
+      Emitter<OtherCompanyState> emit) async {
+    emit(OtherCompanyLoadingState());
     final response = await _otherCompanyRepository.getShippingCompanies(
         // page: shippingPage,
         subNature: event.subNature);
 
     if (response.status!) {
       final items = response.data;
-      yield ShippingSuccessState(items: items);
+      emit(ShippingSuccessState(items: items));
       shippingPage++;
       isFetching = false;
     } else {
-      yield OtherCompanyErrorState(error: response.message);
+      emit(OtherCompanyErrorState(error: response.message));
       isFetching = false;
     }
   }
 
-  Stream<OtherCompanyState> _mapFetchCustomsCompanies() async* {
-    yield OtherCompanyLoadingState();
+  void _mapFetchCustomsCompanies(
+      FetchCustomsCompaniesEvent event, Emitter<OtherCompanyState> emit) async {
+    emit(OtherCompanyLoadingState());
     final response =
         await _otherCompanyRepository.getCustomsCompanies(page: customsPage);
 
     if (response.status!) {
       final items = response.data;
-      yield CustomsCompaniesSuccessState(items: items);
+      emit(CustomsCompaniesSuccessState(items: items));
       customsPage++;
       isFetching = false;
     } else {
-      yield OtherCompanyErrorState(error: response.message);
+      emit(OtherCompanyErrorState(error: response.message));
       isFetching = false;
     }
   }

@@ -16,43 +16,36 @@ class HelpBloc extends Bloc<HelpEvent, HelpState> {
   HelpRepository _helpRepository = HelpRepository();
   bool isFetching = true;
 
-  HelpBloc({required BuildContext context})
-      : super(HelpInitialState()) ;
-
-  @override
-  Stream<HelpState> mapEventToState(HelpEvent event) async* {
-    if (event is FetchAgentEvent) {
-      yield* _mapFetchAgent();
-    }
-    if(event is HelpCenterEvent){
-      yield* _mapFetchHelpCenter();
-    }
+  HelpBloc({required BuildContext context}) : super(HelpInitialState()) {
+    on<FetchAgentEvent>(_mapFetchAgent);
+    on<HelpCenterEvent>(_mapFetchHelpCenter);
   }
 
-  Stream<HelpState> _mapFetchAgent() async* {
-    yield HelpLoadingState();
+  void _mapFetchAgent(FetchAgentEvent event, Emitter<HelpState> emit) async {
+    emit(HelpLoadingState());
     final response = await _helpRepository.getAgentData();
 
     if (response.status!) {
       final items = response.data;
-      yield AgentSuccessState(items: items);
+      emit(AgentSuccessState(items: items));
       isFetching = false;
     } else {
-      yield HelpErrorState(error: response.message);
+      emit(HelpErrorState(error: response.message));
       isFetching = false;
     }
   }
 
-  Stream<HelpState> _mapFetchHelpCenter() async* {
-    yield HelpCenterLoading();
+  void _mapFetchHelpCenter(
+      HelpCenterEvent event, Emitter<HelpState> emit) async {
+    emit(HelpCenterLoading());
     final response = await _helpRepository.getHelpData();
 
     if (response.status!) {
       final items = response.data;
       print(items!.first.email!);
-      yield HelpCenterSuccess(items: items);
+      emit(HelpCenterSuccess(items: items));
     } else {
-      yield HelpErrorState(error: response.message);
+      emit(HelpErrorState(error: response.message));
     }
   }
 }

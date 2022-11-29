@@ -166,7 +166,7 @@ class _ProductDetailsBoardState extends State<ProductDetailsBoard> {
         _productsBloc.isFetching = true;
       });
       // _productsBloc
-      //   ..add(FetchProductsBySubCategoryEvent(
+      //   .add(FetchProductsBySubCategoryEvent(
       //       subcategoryId: _model.categoryId!, user: _user));
     }
   }
@@ -185,11 +185,11 @@ class _ProductDetailsBoardState extends State<ProductDetailsBoard> {
     if (_user != null) {
       if (_favorite == false) {
         _favoriteBloc
-          ..add(
+          .add(
               AddToFavoriteEvent(user: widget.user!, productId: _product.id!));
       } else {
         _favoriteBloc
-          ..add(RemoveFromFavoriteEvent(
+          .add(RemoveFromFavoriteEvent(
               user: widget.user!, favoriteId: _product.id!));
       }
     } else {

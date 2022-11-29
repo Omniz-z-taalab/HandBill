@@ -1,6 +1,3 @@
-import 'dart:async';
-
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -21,51 +18,42 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   NotificationsBloc({required BuildContext context})
       : super(NotificationsInitialState()) {
     notificationsRepository.user = BlocProvider.of<GlobalBloc>(context).user;
+    on<NotificationsFetchEvent>(_mapFetchNotifications);
+    on<ChangeReadNotificationEvent>(_mapChangeReadNotificationsToState);
+    on<RemoveFromNotificationsButtonPressedEvent>(
+        _mapRemoveFromNotificationsToState);
   }
 
-  @override
-  Stream<NotificationsState> mapEventToState(NotificationsEvent event) async* {
-    if (event is NotificationsFetchEvent) {
-      yield* _mapFetchNotifications();
-    }
+  void _mapFetchNotifications(
+      NotificationsFetchEvent event, Emitter<NotificationsState> emit) async {
+    emit(NotificationsLoadingState());
 
-    if (event is ChangeReadNotificationEvent) {
-      yield* _mapChangeReadNotificationsToState(event);
-    }
-
-    if (event is RemoveFromNotificationsButtonPressedEvent) {
-      yield* _mapRemoveFromNotificationsToState(event);
-    }
-  }
-
-  Stream<NotificationsState> _mapFetchNotifications() async* {
-    yield NotificationsLoadingState();
     final response =
         await notificationsRepository.getNotificationsData(page: page);
 
     if (response.status!) {
       final items = response.data;
-      yield NotificationsSuccessState(items: items);
+      emit(NotificationsSuccessState(items: items));
       page++;
       isFetching = false;
     } else {
-      yield NotificationsErrorState(error: response.message);
+      emit(NotificationsErrorState(error: response.message));
       isFetching = false;
     }
   }
 
-  Stream<NotificationsState> _mapChangeReadNotificationsToState(
-      ChangeReadNotificationEvent event) async* {
-    yield NotificationsLoadingState();
+  void _mapChangeReadNotificationsToState(ChangeReadNotificationEvent event,
+      Emitter<NotificationsState> emit) async {
+    emit(NotificationsLoadingState());
 
     GeneralResponse response =
         await notificationsRepository.markReadNotifiactions(event.model!);
     try {
       if (response.status!) {
-        yield ChangeReadNotificationsSuccessState(
-            message: response.message, model: event.model);
+        emit(ChangeReadNotificationsSuccessState(
+            message: response.message, model: event.model));
       } else {
-        yield NotificationsErrorState(error: response.message);
+        emit(NotificationsErrorState(error: response.message));
         Fluttertoast.showToast(msg: response.message!);
       }
     } catch (error, stackTrace) {
@@ -73,18 +61,19 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     }
   }
 
-  Stream<NotificationsState> _mapRemoveFromNotificationsToState(
-      RemoveFromNotificationsButtonPressedEvent event) async* {
-    yield NotificationsLoadingState();
+  void _mapRemoveFromNotificationsToState(
+      RemoveFromNotificationsButtonPressedEvent event,
+      Emitter<NotificationsState> emit) async {
+    emit(NotificationsLoadingState());
 
     GeneralResponse response =
         await notificationsRepository.removeFromNotifiactions(event.model!);
     try {
       if (response.status!) {
-        yield RemoveFromNotificationsSuccessState(
-            message: response.message, model: event.model);
+        emit(RemoveFromNotificationsSuccessState(
+            message: response.message, model: event.model));
       } else {
-        yield NotificationsErrorState(error: response.message);
+        emit(NotificationsErrorState(error: response.message));
         Fluttertoast.showToast(msg: response.message!);
       }
     } catch (error, stackTrace) {

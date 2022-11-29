@@ -35,17 +35,17 @@
 //   @override
 //   void initState() {
 //     _categoryBloc = BlocProvider.of<CategoryBloc>(context);
-//     if (_categoryBloc!.categories == null ||
-//         _categoryBloc!.categories!.length == 0)
-//       _categoryBloc!..add(FetchCategoriesEvent());
-//     if (_categoryBloc!.subCategories == null ||
-//         _categoryBloc!.subCategories!.length == 0)
-//       _categoryBloc!
-//         ..add(FetchSubCategoriesEvent(
-//             categoryId: _categoryBloc!.categories!.first.id.toString()));
-//     if (_categoryBloc!.subCategories != null &&
-//         _categoryBloc!.categories!.length != 0) {
-//       _subCategories = _categoryBloc!.subCategories;
+//     if (_categoryBloc.categories == null ||
+//         _categoryBloc.categories!.length == 0)
+//       _categoryBloc.add(FetchCategoriesEvent());
+//     if (_categoryBloc.subCategories == null ||
+//         _categoryBloc.subCategories!.length == 0)
+//       _categoryBloc
+//         .add(FetchSubCategoriesEvent(
+//             categoryId: _categoryBloc.categories!.first.id.toString()));
+//     if (_categoryBloc.subCategories != null &&
+//         _categoryBloc.categories!.length != 0) {
+//       _subCategories = _categoryBloc.subCategories;
 //     }
 //     // SchedulerBinding.instance!.addPostFrameCallback((_) {
 //     //   if (_categories != null) {
@@ -55,7 +55,7 @@
 //     //     });
 //     //   }
 //     // });
-//     _scrollController = ScrollController()..addListener(_onScroll);
+//     _scrollController = ScrollController().addListener(_onScroll);
 //     super.initState();
 //   }
 
@@ -70,16 +70,16 @@
 //   void _onScroll() {
 //     final max = _scrollController!.position.maxScrollExtent;
 //     final offset = _scrollController!.offset;
-//     if (offset + offsetVisibleThreshold >= max && !_categoryBloc!.isFetching) {
-//       _categoryBloc!.isFetching = true;
+//     if (offset + offsetVisibleThreshold >= max && !_categoryBloc.isFetching) {
+//       _categoryBloc.isFetching = true;
 //       if (_selectedCategory == null)
-//         _selectedCategory = _categoryBloc!.categories!.first;
+//         _selectedCategory = _categoryBloc.categories!.first;
 //       if (_showRealLength == false)
 //         setState(() {
 //           _showRealLength = true;
 //         });
 //       Timer(Duration(seconds: 6), () {
-//         _categoryBloc!.add(FetchSubCategoriesEvent(
+//         _categoryBloc.add(FetchSubCategoriesEvent(
 //             categoryId: _selectedCategory!.id.toString()));
 //       });
 //     }
@@ -151,7 +151,7 @@
 //                       //             border: Border.symmetric(
 //                       //                 vertical: BorderSide(
 //                       //                     color: Color(0xffeeeeee)))),
-//                       //         child: _categoryBloc!.categories == null
+//                       //         child: _categoryBloc.categories == null
 //                       //             ? ListView.builder(
 //                       //                 shrinkWrap: true,
 //                       //                 physics: BouncingScrollPhysics(),
@@ -163,15 +163,15 @@
 //                       //                 shrinkWrap: true,
 //                       //                 physics: BouncingScrollPhysics(),
 //                       //                 itemCount:
-//                       //                     _categoryBloc!.categories!.length,
+//                       //                     _categoryBloc.categories!.length,
 //                 itemBuilder: (context, index) {
-//                   if (_categoryBloc!
+//                   if (_categoryBloc
 //                       .categories!.isNotEmpty) {
 //                     return CategoryWidget(
-//                         model: _categoryBloc!
+//                         model: _categoryBloc
 //                             .categories![index],
 //                         onTap: () => onCategoryTap(
-//                             _categoryBloc!
+//                             _categoryBloc
 //                                 .categories![index]));
 //                   }
 //                   return CategoryEmptyWidget();
@@ -186,7 +186,7 @@
 //                                   border: Border.symmetric(
 //                                       vertical: BorderSide(
 //                                           color: Color(0xffeeeeee)))),
-//                               child: _categoryBloc!.categories == null
+//                               child: _categoryBloc.categories == null
 //                                   ? ListView.builder(
 //                                       shrinkWrap: true,
 //                                       physics: BouncingScrollPhysics(),
@@ -198,15 +198,15 @@
 //                                       shrinkWrap: true,
 //                                       physics: BouncingScrollPhysics(),
 //                                       itemCount:
-//                                           _categoryBloc!.categories!.length,
+//                                           _categoryBloc.categories!.length,
 //                                       itemBuilder: (context, index) {
-//                                         if (_categoryBloc!
+//                                         if (_categoryBloc
 //                                             .categories!.isNotEmpty) {
 //                                           return CategoryWidget(
-//                                               model: _categoryBloc!
+//                                               model: _categoryBloc
 //                                                   .categories![index],
 //                                               onTap: () => onCategoryTap(
-//                                                   _categoryBloc!
+//                                                   _categoryBloc
 //                                                       .categories![index]));
 //                                         }
 //                                         return CategoryEmptyWidget();
@@ -348,7 +348,7 @@
 //                 //             border: Border.symmetric(
 //                 //                 vertical: BorderSide(
 //                 //                     color: Color(0xffeeeeee)))),
-//                 //         child: _categoryBloc!.categories == null
+//                 //         child: _categoryBloc.categories == null
 //                 //             ? ListView.builder(
 //                 //                 shrinkWrap: true,
 //                 //                 physics: BouncingScrollPhysics(),
@@ -360,15 +360,15 @@
 //                 //                 shrinkWrap: true,
 //                 //                 physics: BouncingScrollPhysics(),
 //                 //                 itemCount:
-//                 //                     _categoryBloc!.categories!.length,
+//                 //                     _categoryBloc.categories!.length,
 //                 //                 itemBuilder: (context, index) {
-//                 //                   if (_categoryBloc!
+//                 //                   if (_categoryBloc
 //                 //                       .categories!.isNotEmpty) {
 //                 //                     return CategoryWidget(
-//                 //                         model: _categoryBloc!
+//                 //                         model: _categoryBloc
 //                 //                             .categories![index],
 //                 //                         onTap: () => onCategoryTap(
-//                 //                             _categoryBloc!
+//                 //                             _categoryBloc
 //                 //                                 .categories![index]));
 //                 //                   }
 //                 //                   return CategoryEmptyWidget();
@@ -383,7 +383,7 @@
 //                             border: Border.symmetric(
 //                                 vertical:
 //                                     BorderSide(color: Color(0xffeeeeee)))),
-//                         child: _categoryBloc!.categories == null
+//                         child: _categoryBloc.categories == null
 //                             ? ListView.builder(
 //                                 shrinkWrap: true,
 //                                 physics: BouncingScrollPhysics(),
@@ -394,14 +394,14 @@
 //                             : ListView.builder(
 //                                 shrinkWrap: true,
 //                                 physics: BouncingScrollPhysics(),
-//                                 itemCount: _categoryBloc!.categories!.length,
+//                                 itemCount: _categoryBloc.categories!.length,
 //                                 itemBuilder: (context, index) {
-//                                   if (_categoryBloc!.categories!.isNotEmpty) {
+//                                   if (_categoryBloc.categories!.isNotEmpty) {
 //                                     return CategoryWidget(
 //                                         model:
-//                                             _categoryBloc!.categories![index],
+//                                             _categoryBloc.categories![index],
 //                                         onTap: () => onCategoryTap(
-//                                             _categoryBloc!.categories![index]));
+//                                             _categoryBloc.categories![index]));
 //                                   }
 //                                   return CategoryEmptyWidget();
 //                                 }))),
@@ -519,8 +519,8 @@
 //   }
 
 //   onCategoryTap(CategoryModel categoryModel) {
-//     if (_categoryBloc!.categories!.first.selected == true) {
-//       _categoryBloc!.categories!.first.selected = false;
+//     if (_categoryBloc.categories!.first.selected == true) {
+//       _categoryBloc.categories!.first.selected = false;
 //     }
 //     // setState(() {
 //     if (_selectedCategory != null) {
@@ -530,12 +530,12 @@
 //     setState(() {
 //       _showRealLength = false;
 //       _showRealSubLengthIndex = -100;
-//       _categoryBloc!.isPaginationFinished = false;
+//       _categoryBloc.isPaginationFinished = false;
 //       categoryModel.selected = !categoryModel.selected!;
 //       _selectedCategory = categoryModel;
-//       _categoryBloc!.subCatPage = 1;
+//       _categoryBloc.subCatPage = 1;
 //     });
-//     _categoryBloc!
+//     _categoryBloc
 //         .add(FetchSubCategoriesEvent(categoryId: categoryModel.id.toString()));
 //     // });
 //   }
@@ -582,17 +582,17 @@
 //   @override
 //   void initState() {
 //     _categoryBloc = BlocProvider.of<CategoryBloc>(context);
-//     if (_categoryBloc!.categories == null ||
-//         _categoryBloc!.categories!.length == 0)
-//       _categoryBloc!..add(FetchCategoriesEvent());
-//     if (_categoryBloc!.subCategories == null ||
-//         _categoryBloc!.subCategories!.length == 0)
-//       _categoryBloc!
-//         ..add(FetchSubCategoriesEvent(
-//             categoryId: _categoryBloc!.categories!.first.id.toString()));
-//     if (_categoryBloc!.subCategories != null &&
-//         _categoryBloc!.categories!.length != 0) {
-//       _subCategories = _categoryBloc!.subCategories;
+//     if (_categoryBloc.categories == null ||
+//         _categoryBloc.categories!.length == 0)
+//       _categoryBloc.add(FetchCategoriesEvent());
+//     if (_categoryBloc.subCategories == null ||
+//         _categoryBloc.subCategories!.length == 0)
+//       _categoryBloc
+//         .add(FetchSubCategoriesEvent(
+//             categoryId: _categoryBloc.categories!.first.id.toString()));
+//     if (_categoryBloc.subCategories != null &&
+//         _categoryBloc.categories!.length != 0) {
+//       _subCategories = _categoryBloc.subCategories;
 //     }
 //     // SchedulerBinding.instance!.addPostFrameCallback((_) {
 //     //   if (_categories != null) {
@@ -602,7 +602,7 @@
 //     //     });
 //     //   }
 //     // });
-//     _scrollController = ScrollController()..addListener(_onScroll);
+//     _scrollController = ScrollController().addListener(_onScroll);
 //     super.initState();
 //   }
 
@@ -617,16 +617,16 @@
 //   void _onScroll() {
 //     final max = _scrollController!.position.maxScrollExtent;
 //     final offset = _scrollController!.offset;
-//     if (offset + offsetVisibleThreshold >= max && !_categoryBloc!.isFetching) {
-//       _categoryBloc!.isFetching = true;
+//     if (offset + offsetVisibleThreshold >= max && !_categoryBloc.isFetching) {
+//       _categoryBloc.isFetching = true;
 //       if (_selectedCategory == null)
-//         _selectedCategory = _categoryBloc!.categories!.first;
+//         _selectedCategory = _categoryBloc.categories!.first;
 //       if (_showRealLength == false)
 //         setState(() {
 //           _showRealLength = true;
 //         });
 //       Timer(Duration(seconds: 6), () {
-//         _categoryBloc!.add(FetchSubCategoriesEvent(
+//         _categoryBloc.add(FetchSubCategoriesEvent(
 //             categoryId: _selectedCategory!.id.toString()));
 //       });
 //     }
@@ -694,16 +694,16 @@
 //                                 scrollDirection: Axis.horizontal,
 //                                 shrinkWrap: true,
 //                                 itemBuilder: (context, index) {
-//                                   if (_categoryBloc!.categories!.isNotEmpty) {
+//                                   if (_categoryBloc.categories!.isNotEmpty) {
 //                                     return CategoryWidget(
 //                                         model:
-//                                             _categoryBloc!.categories![index],
+//                                             _categoryBloc.categories![index],
 //                                         onTap: () => onCategoryTap(
-//                                             _categoryBloc!.categories![index]));
+//                                             _categoryBloc.categories![index]));
 //                                   }
 //                                   return CategoryEmptyWidget();
 //                                 },
-//                                 itemCount: _categoryBloc!.categories!.length,
+//                                 itemCount: _categoryBloc.categories!.length,
 //                                 separatorBuilder:
 //                                     (BuildContext context, int index) =>
 //                                         SizedBox(
@@ -722,7 +722,7 @@
 //                         //             border: Border.symmetric(
 //                         //                 vertical:
 //                         //                     BorderSide(color: Color(0xffeeeeee)))),
-//                         //         child: _categoryBloc!.categories == null
+//                         //         child: _categoryBloc.categories == null
 //                         //             ? ListView.builder(
 //                         //                 shrinkWrap: true,
 //                         //                 physics: BouncingScrollPhysics(),
@@ -733,14 +733,14 @@
 //                         //             : ListView.builder(
 //                         //                 shrinkWrap: true,
 //                         //                 physics: BouncingScrollPhysics(),
-//                         //                 itemCount: _categoryBloc!.categories!.length,
+//                         //                 itemCount: _categoryBloc.categories!.length,
 //                         //                 itemBuilder: (context, index) {
-//                         //                   if (_categoryBloc!.categories!.isNotEmpty) {
+//                         //                   if (_categoryBloc.categories!.isNotEmpty) {
 //                         //                     return CategoryWidget(
 //                         //                         model:
-//                         //                             _categoryBloc!.categories![index],
+//                         //                             _categoryBloc.categories![index],
 //                         //                         onTap: () => onCategoryTap(
-//                         //                             _categoryBloc!.categories![index]));
+//                         //                             _categoryBloc.categories![index]));
 //                         //                   }
 //                         //                   return CategoryEmptyWidget();
 //                         //                 }))),
@@ -867,8 +867,8 @@
 //   }
 
 //   onCategoryTap(CategoryModel categoryModel) {
-//     if (_categoryBloc!.categories!.first.selected == true) {
-//       _categoryBloc!.categories!.first.selected = false;
+//     if (_categoryBloc.categories!.first.selected == true) {
+//       _categoryBloc.categories!.first.selected = false;
 //     }
 //     // setState(() {
 //     if (_selectedCategory != null) {
@@ -878,12 +878,12 @@
 //     setState(() {
 //       _showRealLength = false;
 //       _showRealSubLengthIndex = -100;
-//       _categoryBloc!.isPaginationFinished = false;
+//       _categoryBloc.isPaginationFinished = false;
 //       categoryModel.selected = !categoryModel.selected!;
 //       _selectedCategory = categoryModel;
-//       _categoryBloc!.subCatPage = 1;
+//       _categoryBloc.subCatPage = 1;
 //     });
-//     _categoryBloc!
+//     _categoryBloc
 //         .add(FetchSubCategoriesEvent(categoryId: categoryModel.id.toString()));
 //     // });
 //   }
@@ -929,22 +929,23 @@ class _CategoriesScreenState extends State<CategoriesScreen>
   double offsetVisibleThreshold = 100;
 
   CategoryModel? _selectedCategory;
-  CategoryBloc? _categoryBloc;
+  late CategoryBloc _categoryBloc;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     _categoryBloc = BlocProvider.of<CategoryBloc>(context);
-    if (_categoryBloc!.categories == null ||
-        _categoryBloc!.categories!.length == 0)
-      _categoryBloc!..add(FetchCategoriesEvent());
-    // if (_categoryBloc!.subCategories == null ||
-    //     _categoryBloc!.subCategories!.length == 0)
-    //   _categoryBloc!
-    //     ..add(FetchSubCategoriesEvent(
-    //         categoryId: _categoryBloc!.categories!.first.id.toString()));
-    // if (_categoryBloc!.subCategories != null &&
-    //     _categoryBloc!.categories!.length != 0) {
-    //   _subCategories = _categoryBloc!.subCategories;
+    if (_categoryBloc.categories == null ||
+        _categoryBloc.categories!.length == 0)
+      _categoryBloc.add(FetchCategoriesEvent());
+    // if (_categoryBloc.subCategories == null ||
+    //     _categoryBloc.subCategories!.length == 0)
+    //   _categoryBloc
+    //     .add(FetchSubCategoriesEvent(
+    //         categoryId: _categoryBloc.categories!.first.id.toString()));
+    // if (_categoryBloc.subCategories != null &&
+    //     _categoryBloc.categories!.length != 0) {
+    //   _subCategories = _categoryBloc.subCategories;
     // }
     // SchedulerBinding.instance!.addPostFrameCallback((_) {
     //   if (_categories != null) {
@@ -954,7 +955,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     //     });
     //   }
     // });
-    // _scrollController = ScrollController()..addListener(_onScroll);
+    // _scrollController = ScrollController().addListener(_onScroll);
     super.initState();
   }
 
@@ -966,19 +967,20 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 
   bool _showRealLength = false;
   int? _showRealSubLengthIndex;
+
   // void _onScroll() {
   //   final max = _scrollController!.position.maxScrollExtent;
   //   final offset = _scrollController!.offset;
-  //   if (offset + offsetVisibleThreshold >= max && !_categoryBloc!.isFetching) {
-  //     _categoryBloc!.isFetching = true;
+  //   if (offset + offsetVisibleThreshold >= max && !_categoryBloc.isFetching) {
+  //     _categoryBloc.isFetching = true;
   //     if (_selectedCategory == null)
-  //       _selectedCategory = _categoryBloc!.categories!.first;
+  //       _selectedCategory = _categoryBloc.categories!.first;
   //     if (_showRealLength == false)
   //       setState(() {
   //         _showRealLength = true;
   //       });
   //     Timer(Duration(seconds: 6), () {
-  //       _categoryBloc!.add(FetchSubCategoriesEvent(
+  //       _categoryBloc.add(FetchSubCategoriesEvent(
   //           categoryId: _selectedCategory!.id.toString()));
   //     });
   //   }
@@ -994,7 +996,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
             listener: (context, state) {
               if (state is CategoryErrorState) {
                 _categories = [];
-                SchedulerBinding.instance?.addPostFrameCallback((_) {
+                SchedulerBinding.instance.addPostFrameCallback((_) {
                   displaySnackBar(
                       title: state.errors, scaffoldKey: _scaffoldKey);
                 });
@@ -1012,7 +1014,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                     state.items != null &&
                     state.items!.length != 0) {
                   if (_showRealLength == false) {
-                    SchedulerBinding.instance?.addPostFrameCallback((_) {
+                    SchedulerBinding.instance.addPostFrameCallback((_) {
                       setState(() {
                         _showRealLength = true;
                       });
@@ -1038,11 +1040,11 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                   shrinkWrap: true,
                   primary: false,
                   children:
-                      List.generate(_categoryBloc!.categories!.length, (index) {
+                      List.generate(_categoryBloc.categories!.length, (index) {
                     return CategoryWidget(
-                        model: _categoryBloc!.categories![index],
+                        model: _categoryBloc.categories![index],
                         onTap: () =>
-                            onCategoryTap(_categoryBloc!.categories![index]));
+                            onCategoryTap(_categoryBloc.categories![index]));
                   })),
               SizedBox(height: 80),
             ]),
@@ -1056,15 +1058,15 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 
             //           shrinkWrap: true,
             //           itemBuilder: (context, index) {
-            //             if (_categoryBloc!.categories!.isNotEmpty) {
+            //             if (_categoryBloc.categories!.isNotEmpty) {
             //               return CategoryWidget(
-            //                   model: _categoryBloc!.categories![index],
+            //                   model: _categoryBloc.categories![index],
             //                   onTap: () => onCategoryTap(
-            //                       _categoryBloc!.categories![index]));
+            //                       _categoryBloc.categories![index]));
             //             }
             //             return CategoryEmptyWidget();
             //           },
-            //           itemCount: _categoryBloc!.categories!.length,
+            //           itemCount: _categoryBloc.categories!.length,
             //           gridDelegate:
             //               const SliverGridDelegateWithFixedCrossAxisCount(
             //             crossAxisCount: 2,
@@ -1130,15 +1132,15 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 
     //                   shrinkWrap: true,
     //                   itemBuilder: (context, index) {
-    //                     if (_categoryBloc!.categories!.isNotEmpty) {
+    //                     if (_categoryBloc.categories!.isNotEmpty) {
     //                       return CategoryWidget(
-    //                           model: _categoryBloc!.categories![index],
+    //                           model: _categoryBloc.categories![index],
     //                           onTap: () => onCategoryTap(
-    //                               _categoryBloc!.categories![index]));
+    //                               _categoryBloc.categories![index]));
     //                     }
     //                     return CategoryEmptyWidget();
     //                   },
-    //                   itemCount: _categoryBloc!.categories!.length,
+    //                   itemCount: _categoryBloc.categories!.length,
     //                   gridDelegate:
     //                       const SliverGridDelegateWithFixedCrossAxisCount(
     //                     crossAxisCount: 2,
@@ -1158,8 +1160,8 @@ class _CategoriesScreenState extends State<CategoriesScreen>
   onCategoryTap(
     CategoryModel categoryModel,
   ) {
-    if (_categoryBloc!.categories!.first.selected == true) {
-      _categoryBloc!.categories!.first.selected = false;
+    if (_categoryBloc.categories!.first.selected == true) {
+      _categoryBloc.categories!.first.selected = false;
     }
     // setState(() {
     if (_selectedCategory != null) {
@@ -1169,17 +1171,17 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     setState(() {
       _showRealLength = false;
       _showRealSubLengthIndex = -100;
-      // _categoryBloc!.isPaginationFinished = false;
+      // _categoryBloc.isPaginationFinished = false;
       categoryModel.selected = !categoryModel.selected!;
       _selectedCategory = categoryModel;
-      _categoryBloc!.subCatPage = 1;
+      _categoryBloc.subCatPage = 1;
 
       Navigator.pushNamed(context, SubCategories.routeName,
           arguments: RouteArgument(
               param: categoryModel.name.toString(),
               id: categoryModel.id.toString()));
     });
-    _categoryBloc!
+    _categoryBloc
         .add(FetchSubCategoriesEvent(categoryId: categoryModel.id.toString()));
     // });
   }
@@ -1222,17 +1224,17 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 //   @override
 //   void initState() {
 //     _categoryBloc = BlocProvider.of<CategoryBloc>(context);
-//     if (_categoryBloc!.categories == null ||
-//         _categoryBloc!.categories!.length == 0)
-//       _categoryBloc!..add(FetchCategoriesEvent());
-//     if (_categoryBloc!.subCategories == null ||
-//         _categoryBloc!.subCategories!.length == 0)
-//       _categoryBloc!
-//         ..add(FetchSubCategoriesEvent(
-//             categoryId: _categoryBloc!.categories!.first.id.toString()));
-//     if (_categoryBloc!.subCategories != null &&
-//         _categoryBloc!.categories!.length != 0) {
-//       _subCategories = _categoryBloc!.subCategories;
+//     if (_categoryBloc.categories == null ||
+//         _categoryBloc.categories!.length == 0)
+//       _categoryBloc.add(FetchCategoriesEvent());
+//     if (_categoryBloc.subCategories == null ||
+//         _categoryBloc.subCategories!.length == 0)
+//       _categoryBloc
+//         .add(FetchSubCategoriesEvent(
+//             categoryId: _categoryBloc.categories!.first.id.toString()));
+//     if (_categoryBloc.subCategories != null &&
+//         _categoryBloc.categories!.length != 0) {
+//       _subCategories = _categoryBloc.subCategories;
 //     }
 //     // SchedulerBinding.instance!.addPostFrameCallback((_) {
 //     //   if (_categories != null) {
@@ -1242,7 +1244,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 //     //     });
 //     //   }
 //     // });
-//     _scrollController = ScrollController()..addListener(_onScroll);
+//     _scrollController = ScrollController().addListener(_onScroll);
 //     super.initState();
 //   }
 
@@ -1257,16 +1259,16 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 //   void _onScroll() {
 //     final max = _scrollController!.position.maxScrollExtent;
 //     final offset = _scrollController!.offset;
-//     if (offset + offsetVisibleThreshold >= max && !_categoryBloc!.isFetching) {
-//       _categoryBloc!.isFetching = true;
+//     if (offset + offsetVisibleThreshold >= max && !_categoryBloc.isFetching) {
+//       _categoryBloc.isFetching = true;
 //       if (_selectedCategory == null)
-//         _selectedCategory = _categoryBloc!.categories!.first;
+//         _selectedCategory = _categoryBloc.categories!.first;
 //       if (_showRealLength == false)
 //         setState(() {
 //           _showRealLength = true;
 //         });
 //       Timer(Duration(seconds: 6), () {
-//         _categoryBloc!.add(FetchSubCategoriesEvent(
+//         _categoryBloc.add(FetchSubCategoriesEvent(
 //             categoryId: _selectedCategory!.id.toString()));
 //       });
 //     }
@@ -1338,7 +1340,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 //                       //             border: Border.symmetric(
 //                       //                 vertical: BorderSide(
 //                       //                     color: Color(0xffeeeeee)))),
-//                       //         child: _categoryBloc!.categories == null
+//                       //         child: _categoryBloc.categories == null
 //                       //             ? ListView.builder(
 //                       //                 shrinkWrap: true,
 //                       //                 physics: BouncingScrollPhysics(),
@@ -1350,15 +1352,15 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 //                       //                 shrinkWrap: true,
 //                       //                 physics: BouncingScrollPhysics(),
 //                       //                 itemCount:
-//                       //                     _categoryBloc!.categories!.length,
+//                       //                     _categoryBloc.categories!.length,
 //                       //                 itemBuilder: (context, index) {
-//                       //                   if (_categoryBloc!
+//                       //                   if (_categoryBloc
 //                       //                       .categories!.isNotEmpty) {
 //                       //                     return CategoryWidget(
-//                       //                         model: _categoryBloc!
+//                       //                         model: _categoryBloc
 //                       //                             .categories![index],
 //                       //                         onTap: () => onCategoryTap(
-//                       //                             _categoryBloc!
+//                       //                             _categoryBloc
 //                       //                                 .categories![index]));
 //                       //                   }
 //                       //                   return CategoryEmptyWidget();
@@ -1372,7 +1374,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 //                                   border: Border.symmetric(
 //                                       vertical: BorderSide(
 //                                           color: Color(0xffeeeeee)))),
-//                               child: _categoryBloc!.categories == null
+//                               child: _categoryBloc.categories == null
 //                                   ? ListView.builder(
 //                                       shrinkWrap: true,
 //                                       physics: BouncingScrollPhysics(),
@@ -1384,15 +1386,15 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 //                                       shrinkWrap: true,
 //                                       physics: BouncingScrollPhysics(),
 //                                       itemCount:
-//                                           _categoryBloc!.categories!.length,
+//                                           _categoryBloc.categories!.length,
 //                                       itemBuilder: (context, index) {
-//                                         if (_categoryBloc!
+//                                         if (_categoryBloc
 //                                             .categories!.isNotEmpty) {
 //                                           return CategoryWidget(
-//                                               model: _categoryBloc!
+//                                               model: _categoryBloc
 //                                                   .categories![index],
 //                                               onTap: () => onCategoryTap(
-//                                                   _categoryBloc!
+//                                                   _categoryBloc
 //                                                       .categories![index]));
 //                                         }
 //                                         return CategoryEmptyWidget();
@@ -1525,8 +1527,8 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 //   }
 
 //   onCategoryTap(CategoryModel categoryModel) {
-//     if (_categoryBloc!.categories!.first.selected == true) {
-//       _categoryBloc!.categories!.first.selected = false;
+//     if (_categoryBloc.categories!.first.selected == true) {
+//       _categoryBloc.categories!.first.selected = false;
 //     }
 //     // setState(() {
 //     if (_selectedCategory != null) {
@@ -1536,12 +1538,12 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 //     setState(() {
 //       _showRealLength = false;
 //       _showRealSubLengthIndex = -100;
-//       _categoryBloc!.isPaginationFinished = false;
+//       _categoryBloc.isPaginationFinished = false;
 //       categoryModel.selected = !categoryModel.selected!;
 //       _selectedCategory = categoryModel;
-//       _categoryBloc!.subCatPage = 1;
+//       _categoryBloc.subCatPage = 1;
 //     });
-//     _categoryBloc!
+//     _categoryBloc
 //         .add(FetchSubCategoriesEvent(categoryId: categoryModel.id.toString()));
 //     // });
 //   }

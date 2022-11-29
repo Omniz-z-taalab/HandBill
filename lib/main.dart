@@ -1,13 +1,10 @@
-import 'package:country_picker/country_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hand_bill/src/blocs/Companies/bloc.dart';
 import 'package:hand_bill/src/blocs/Services/bloc.dart';
-import 'package:hand_bill/src/blocs/about_us/bloc.dart';
 import 'package:hand_bill/src/blocs/assets/assets_bloc.dart';
 import 'package:hand_bill/src/blocs/auction/aucations_bloc.dart';
 import 'package:hand_bill/src/blocs/auth/auth_bloc.dart';
@@ -32,11 +29,10 @@ import 'package:hand_bill/src/common/global.dart';
 import 'package:hand_bill/src/common/routes.dart';
 import 'package:hand_bill/src/helper/helpers.dart';
 import 'package:hand_bill/src/repositories/global_repository.dart';
-import 'package:hand_bill/src/ui/screens/auth/login_screen.dart';
-import 'package:hand_bill/src/ui/screens/auth/register_screen.dart';
 import 'package:hand_bill/src/ui/screens/auth/splash_screen.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hand_bill/src/ui/screens/services_package/shipping/ShippingBloc%20/cubit.dart';
+import 'package:hand_bill/src/blocs/about_us_bloc/about_us_bloc.dart';
+// import 'src/blocs/about_us_bloc/about_us_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,20 +43,55 @@ Future<void> main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   // await Firebase.initializeApp();
 
-  runApp(EasyLocalization(
-      supportedLocales: const [
-        Locale('en'),
-        Locale('ar'),
-        // Locale.fromSubtags(languageCode: 'ar')
+  runApp(MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => GlobalBloc()..add(StartAppEvent())),
+        // BlocProvider(create: (context) => GlobalBloc().add(SaveLanguageEvent())),
+        BlocProvider(create: (context) => AuthBloc(context: context)),
+        BlocProvider(create: (context) => ExploreBloc(context: context)),
+        BlocProvider(create: (context) => NotificationsBloc(context: context)),
+        BlocProvider(create: (context) => FavoriteBloc(context: context)),
+        BlocProvider(create: (context) => HomeBloc()),
+        BlocProvider(create: (context) => ServiceBloc(context: context)),
+        BlocProvider(create: (context) => ServiceBlocData(context: context)),
+        BlocProvider(create: (context) => JobsBloc(context: context)),
+        BlocProvider(create: (context) => AuctionsBloc(context: context)),
+        BlocProvider(create: (context) => OffersBloc(context: context)),
+        BlocProvider(create: (context) => ProductsBloc(context: context)),
+        BlocProvider(create: (context) => CompanyBloc()),
+        BlocProvider(create: (context) => SearchBloc(context: context)),
+        BlocProvider(create: (context) => ChatBloc()),
+        BlocProvider(create: (context) => HelpBloc(context: context)),
+        BlocProvider(create: (context) => OtherCompanyBloc(context: context)),
+        BlocProvider(create: (context) => AssetsBloc(context: context)),
+        BlocProvider(create: (context) => PatentsBloc(context: context)),
+        BlocProvider(create: (context) => HandmadeBloc(context: context)),
+        BlocProvider(create: (context) => ProfileBloc(context: context)),
+        BlocProvider(create: (context) => ProfileBloc(context: context)),
+        BlocProvider(create: (context) => CategoryBloc()),
+        BlocProvider(create: (context) => AboutUsBloc()),
+        BlocProvider(create: (context) => ShippingBloc()),
       ],
-      path: 'assets/translate',
-      fallbackLocale: Locale('en'),// <-- change the path of the translation files
-      child: Phoenix(child: MyApp())
-
-  ));
+      child: EasyLocalization(
+          supportedLocales: const [
+            Locale('en'),
+            Locale('ar'),
+            // Locale.fromSubtags(languageCode: 'ar')
+          ],
+          path: 'assets/translate',
+          fallbackLocale: Locale('en'),
+          // <-- change the path of the translation files
+          child: MyApp())));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final GlobalRepository _globalRepository = GlobalRepository();
 
   @override
@@ -69,84 +100,53 @@ class MyApp extends StatelessWidget {
         statusBarColor: Colors.white, brightness: Brightness.dark);
     // Helper.chaneStatusBarColor(
     //     statusBarColor: mainColorLite, brightness: Brightness.light);
-    return
-      MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => GlobalBloc()..add(StartAppEvent())),
-            // BlocProvider(create: (context) => GlobalBloc()..add(SaveLanguageEvent())),
-            BlocProvider(create: (context) => AuthBloc(context: context)),
-            BlocProvider(create: (context) => ExploreBloc(context: context)),
-            BlocProvider(create: (context) => NotificationsBloc(context: context)),
-            BlocProvider(create: (context) => FavoriteBloc(context: context)),
-            BlocProvider(create: (context) => HomeBloc()),
-            BlocProvider(create: (context) => ServiceBloc(context: context),),
-            BlocProvider(create: (context) => ServiceBlocData(context: context)),
-            BlocProvider(create: (context) => JobsBloc(context: context)),
-            BlocProvider(create: (context) => AuctionsBloc(context: context)),
-            BlocProvider(create: (context) => OffersBloc(context: context)),
-            BlocProvider(create: (context) => ProductsBloc(context: context)),
-            BlocProvider(create: (context) => CompanyBloc()),
-            BlocProvider(create: (context) => SearchBloc(context: context)),
-            BlocProvider(create: (context) => ChatBloc()),
-            BlocProvider(create: (context) => HelpBloc(context: context)),
-            BlocProvider(create: (context) => OtherCompanyBloc(context: context)),
-            BlocProvider(create: (context) => AssetsBloc(context: context)),
-            BlocProvider(create: (context) => PatentsBloc(context: context)),
-            BlocProvider(create: (context) => HandmadeBloc(context: context)),
-            BlocProvider(create: (context) => ProfileBloc(context: context)),
-            BlocProvider(create: (context) => ProfileBloc(context: context)),
-            BlocProvider(create: (context) => CategoryBloc()),
-            BlocProvider(create: (context) => AboutUsBloc()),
-            BlocProvider(create: (context) => ShippingBloc()),
-          ],
-          child:
-          BlocBuilder<GlobalBloc, GlobalState>(
-              builder: (BuildContext context, state) {
-                if (state is StartAppSuccess) {
-                  // print("${state.user!.name}");
-                }
-                return ScreenUtilInit(
-                  designSize: const Size(375, 812),
-                  builder: (context, child) => MaterialApp(
-                      localizationsDelegates: context.localizationDelegates,
-                      supportedLocales: context.supportedLocales,
-                      title: 'Handbill',
-                      debugShowCheckedModeBanner: false,
-                      theme: _globalRepository.liteTheme,
-                      themeMode: ThemeMode.light,
-                      locale: context.locale,
-                      // supportedLocales: [
-                      //   const Locale('en'),
-                      //   const Locale('ar'),
-                      //   const Locale('es'),
-                      //   const Locale('de'),
-                      //   const Locale('fr'),
-                      //   const Locale('el'),
-                      //   const Locale('et'),
-                      //   const Locale('nb'),
-                      //   const Locale('nn'),
-                      //   const Locale('pl'),
-                      //   const Locale('pt'),
-                      //   const Locale('ru'),
-                      //   const Locale('hi'),
-                      //   const Locale('ne'),
-                      //   const Locale('uk'),
-                      //   const Locale('hr'),
-                      //   const Locale('tr'),
-                      //   const Locale('lv'),
-                      //   const Locale('lt'),
-                      //   const Locale('ku'),
-                      //   const Locale.fromSubtags(
-                      //       languageCode: 'zh',
-                      //       scriptCode: 'Hans'), // Generic Simplified Chinese 'zh_Hans'
-                      //   const Locale.fromSubtags(
-                      //       languageCode: 'zh',
-                      //       scriptCode: 'Hant'), // Generic traditional Chinese 'zh_Hant'
-                      // ],
-                      home: SplashPage(),
-                      // home: ServicesCompanyDetailsScreen(routeArgument: RouteArgument(param: 1),),
-                      onGenerateRoute: RouteGenerator.generateRoute),
-                );
-              }));
+    return BlocListener<GlobalBloc, GlobalState>(
+      listener: (BuildContext context, state) {
+        if (state is StartAppSuccess) {
+          // print("${state.user!.name}");
+        }
+      },
+      child: MaterialApp(
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          title: 'Handbill',
+          debugShowCheckedModeBanner: false,
+          theme: _globalRepository.liteTheme,
+          themeMode: ThemeMode.light,
+          locale: context.locale,
+          // supportedLocales: [
+          //   const Locale('en'),
+          //   const Locale('ar'),
+          //   const Locale('es'),
+          //   const Locale('de'),
+          //   const Locale('fr'),
+          //   const Locale('el'),
+          //   const Locale('et'),
+          //   const Locale('nb'),
+          //   const Locale('nn'),
+          //   const Locale('pl'),
+          //   const Locale('pt'),
+          //   const Locale('ru'),
+          //   const Locale('hi'),
+          //   const Locale('ne'),
+          //   const Locale('uk'),
+          //   const Locale('hr'),
+          //   const Locale('tr'),
+          //   const Locale('lv'),
+          //   const Locale('lt'),
+          //   const Locale('ku'),
+          //   const Locale.fromSubtags(
+          //       languageCode: 'zh',
+          //       scriptCode: 'Hans'), // Generic Simplified Chinese 'zh_Hans'
+          //   const Locale.fromSubtags(
+          //       languageCode: 'zh',
+          //       scriptCode: 'Hant'), // Generic traditional Chinese 'zh_Hant'
+          // ],
+          home: ScreenUtilInit(
+              designSize: const Size(375, 812),
+              builder: (context, child) => SplashPage()),
+          // home: ServicesCompanyDetailsScreen(routeArgument: RouteArgument(param: 1),),
+          onGenerateRoute: RouteGenerator.generateRoute),
+    );
   }
 }

@@ -41,7 +41,7 @@ class _MyPatentsScreenState extends State<MyPatentsScreen> {
 
     _user = BlocProvider.of<GlobalBloc>(context).user;
     if (_user != null) {
-      _patentsBloc..add(FetchMyPatentsEvent(user: _user!));
+      _patentsBloc.add(FetchMyPatentsEvent(user: _user!));
     }
     super.initState();
   }

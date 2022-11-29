@@ -16,82 +16,59 @@ class PatentsBloc extends Bloc<PatentsEvent, PatentsState> {
   int myPage = 1;
   bool isFetching = true;
 
-  PatentsBloc({required BuildContext context}) : super(PatentsInitialState()) {}
-
-  @override
-  Stream<PatentsState> mapEventToState(PatentsEvent event) async* {
-    // if (event is FetchPatentsEvent) {
-    //   yield* _mapFetchAllPatents();
-    // }
-    if (event is FetchMyPatentsEvent) {
-      yield* _mapFetchMyPatents(event);
-    }
-    if (event is PatentedAddEvent) {
-      yield* _mapAddPatented(event);
-    }
-    if (event is PatentedRemoveEvent) {
-      yield* _mapRemovePatented(event);
-    }
+  PatentsBloc({required BuildContext context}) : super(PatentsInitialState()) {
+    on<FetchMyPatentsEvent>(_mapFetchMyPatents);
+    on<PatentedAddEvent>(_mapAddPatented);
+    on<PatentedRemoveEvent>(_mapRemovePatented);
   }
 
-  // Stream<PatentsState> _mapFetchAllPatents() async* {
-  //   yield PatentsLoadingState();
-  //   final response = await _patentsRepository.getAllPatentsData(page: allPage);
-  //
-  //   if (response!.status!) {
-  //     final items = response.data;
-  //     yield PatentsSuccessState(items: items);
-  //     allPage++;
-  //     isFetching = false;
-  //   } else {
-  //     yield PatentsErrorState(error: response.message);
-  //     isFetching = false;
-  //   }
-  // }
-
-  Stream<PatentsState> _mapFetchMyPatents(FetchMyPatentsEvent event) async* {
-    yield PatentsLoadingState();
-    final response = await _patentsRepository.getMyPatentsData(user: event.user);
+  void _mapFetchMyPatents(
+      FetchMyPatentsEvent event, Emitter<PatentsState> emit) async {
+    emit(PatentsLoadingState());
+    final response =
+        await _patentsRepository.getMyPatentsData(user: event.user);
 
     if (response!.status!) {
       final items = response.data;
       print(items!.first.title);
-      yield MyPatentsSuccessState(items: items);
+      emit(MyPatentsSuccessState(items: items));
       myPage++;
       isFetching = false;
     } else {
-      yield PatentsErrorState(error: response.message);
+      emit(PatentsErrorState(error: response.message));
       isFetching = false;
     }
   }
 
   // add
-  Stream<PatentsState> _mapAddPatented(PatentedAddEvent event) async* {
-    yield PatentsLoadingState();
+  void _mapAddPatented(
+      PatentedAddEvent event, Emitter<PatentsState> emit) async {
+    emit(PatentsLoadingState());
     final response = await _patentsRepository.addPatented(
         model: event.model, user: event.user, images: event.images);
 
     if (response!.status!) {
-      yield PatentedAddSuccessState(message: response.message!);
+      emit(PatentedAddSuccessState(message: response.message!));
       isFetching = false;
     } else {
-      yield PatentsErrorState(error: response.message);
+      emit(PatentsErrorState(error: response.message));
       isFetching = false;
     }
   }
 
   // remove
-  Stream<PatentsState> _mapRemovePatented(PatentedRemoveEvent event) async* {
-    yield PatentsLoadingState();
+  void _mapRemovePatented(
+      PatentedRemoveEvent event, Emitter<PatentsState> emit) async {
+    emit(PatentsLoadingState());
     final response = await _patentsRepository.removePatented(
         model: event.model, user: event.user);
 
     if (response!.status!) {
-      yield PatentedRemoveSuccessState(
-          message: response.message!, model: event.model);
+      emit(PatentedRemoveSuccessState(
+          message: response.message!, model: event.model));
       isFetching = false;
     } else {
-      yield PatentsErrorState(error: response.message);
+      emit(PatentsErrorState(error: response.message));
       isFetching = false;
     }
   }

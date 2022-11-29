@@ -26,7 +26,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
   @override
   void initState() {
     helpBloc = BlocProvider.of<HelpBloc>(context);
-    helpBloc..add(HelpCenterEvent());
+    helpBloc.add(HelpCenterEvent());
     // TODO: implement initState
     super.initState();
   }

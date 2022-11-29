@@ -54,21 +54,21 @@
 //   @override
 //   void didChangeDependencies() {
 //     _serviceBloc = BlocProvider.of<ServiceBloc>(context);
-//     _serviceBloc!..add(FetchServiceEvent());
+//     _serviceBloc!.add(FetchServiceEvent());
 //     // _searchBloc = BlocProvider.of<SearchBloc>(context);
-//     // _searchBloc!..add(SearchMarketEvent(searchKey: _searchController.text));
+//     // _searchBloc!.add(SearchMarketEvent(searchKey: _searchController.text));
 //     super.didChangeDependencies();
 //   }
 //
 //   @override
 //   void initState() {
 //      // _serviceBloc = BlocProvider.of<ServiceBloc>(context);
-//      // _serviceBloc!..add(FetchServiceEvent());
+//      // _serviceBloc!.add(FetchServiceEvent());
 //     // _searchBloc = BlocProvider.of<SearchBloc>(context);
-//     // _searchBloc!..add(SearchMarketEvent(searchKey: _searchController.text));
+//     // _searchBloc!.add(SearchMarketEvent(searchKey: _searchController.text));
 //     // // _notificationsBloc!.page = 1;
 //     // // _notificationsBloc!.add(NotificationsFetchEvent());
-//     // // _scrollController = ScrollController()..addListener(_onScroll);
+//     // // _scrollController = ScrollController().addListener(_onScroll);
 //
 //     super.initState();
 //   }
@@ -97,7 +97,7 @@
 //     _onSubmitted(value) async {
 //       if (_searchController.text.length >= 3) {
 //         if (selectedPage == 0) {
-//           _searchBloc!..add(SearchMarketEvent(searchKey: value));
+//           _searchBloc!.add(SearchMarketEvent(searchKey: value));
 //         }
 //       }
 //     }
@@ -124,7 +124,7 @@
 //                 onChanged: (value) {
 //                   _onSubmitted(value.trim());
 //                   _searchBloc!
-//                     ..add(SearchMarketEvent(searchKey: _searchController.text));
+//                     .add(SearchMarketEvent(searchKey: _searchController.text));
 //                 },
 //                 style: TextStyle(color: textLiteColor),
 //                 decoration: InputDecoration(

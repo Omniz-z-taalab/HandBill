@@ -76,7 +76,7 @@
 //       // from chats
 //       if (_chatBloc.conversation!.id != null) {
 //         _chatBloc
-//           ..add(FetchChatsEvent(
+//           .add(FetchChatsEvent(
 //               conversation: _chatBloc.conversation, user: _chatUser));
 //       } else {
 //         // from company
@@ -122,7 +122,7 @@
 //             user: _chatUser));
 //         if (_chatBloc.conversation!.id != null) {
 //           _chatBloc
-//             ..add(FetchChatsEvent(
+//             .add(FetchChatsEvent(
 //                 conversation: _chatBloc.conversation, user: _chatUser));
 //         }
 //         _messageController.clear();

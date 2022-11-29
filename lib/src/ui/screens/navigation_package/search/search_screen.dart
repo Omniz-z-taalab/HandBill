@@ -85,14 +85,14 @@ class _SearchScreenState extends State<SearchScreen> {
       recentSearchProduct = await storage.read(key: "recentSearchProduct");
       recentSearchMarket = await storage.read(key: "recentSearchMarket");
       if (recentSearchProduct == null) {
-        _searchBloc..add(SearchProductEvent(searchKey: ""));
+        _searchBloc.add(SearchProductEvent(searchKey: ""));
       } else {
-        _searchBloc..add(SearchProductEvent(searchKey: recentSearchProduct));
+        _searchBloc.add(SearchProductEvent(searchKey: recentSearchProduct));
       }
       if (recentSearchMarket == null) {
-        // _searchBloc..add(SearchMarketEvent(searchKey: ""));
+        // _searchBloc.add(SearchMarketEvent(searchKey: ""));
       // } else {
-      //   _searchBloc..add(SearchMarketEvent(searchKey: recentSearchMarket));
+      //   _searchBloc.add(SearchMarketEvent(searchKey: recentSearchMarket));
       }
     }catch(e){print(e.toString());}
   }
@@ -102,10 +102,10 @@ class _SearchScreenState extends State<SearchScreen> {
       _onSubmitted(value) async {
       if (_searchController.text.length >= 3) {
         if (selectedPage == 0) {
-          _searchBloc..add(SearchProductEvent
+          _searchBloc.add(SearchProductEvent
             (searchKey: value));
         } else {
-          // _searchBloc..add(SearchMarketEvent(searchKey: value));
+          // _searchBloc.add(SearchMarketEvent(searchKey: value));
         }
       }
     }
