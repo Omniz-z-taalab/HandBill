@@ -26,6 +26,7 @@ import 'package:video_player/video_player.dart';
 
 import '../../../../blocs/products/products_bloc.dart';
 import '../../../../data/response/search/search_product_response.dart';
+import '../../../component/product/product_ver_empty_widget.dart';
 
 class ProductDetailsBoard extends StatefulWidget {
   late DataProductSearch model;
@@ -69,15 +70,7 @@ class _ProductDetailsBoardState extends State<ProductDetailsBoard> {
   List<DataVariable> _shippingList = [];
 
   @override
-  void initState() {
-    _productsBloc = BlocProvider.of<ProductsBloc>(context);
-    _favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
 
-    _scrollController = ScrollController()..addListener(_onScroll);
-    // getData();
-
-    super.initState();
-  }
 
   Future<void> initializePlayer(String url) async {
     _videoPlayerController1 = VideoPlayerController.network(url);
@@ -122,7 +115,7 @@ class _ProductDetailsBoardState extends State<ProductDetailsBoard> {
       _name = _product.name;
       _description = _product.name;
       _imageList = _product.images!;
-      _country = _product.flag!;
+      _country = _product.company!.country;
       _price = _product.price!;
       _mqo = _product.shippingData! as ShippingData?;
       _specifications = _product.specifications!;
@@ -155,6 +148,16 @@ class _ProductDetailsBoardState extends State<ProductDetailsBoard> {
         }
       }
     }
+  }
+  void initState() {
+    _productsBloc = BlocProvider.of<ProductsBloc>(context);
+    _favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
+
+    _scrollController = ScrollController()..addListener(_onScroll);
+    // getData();
+
+    super.initState();
+    print('$_country =ddddd');
   }
 
   void _onScroll() {
@@ -193,7 +196,7 @@ class _ProductDetailsBoardState extends State<ProductDetailsBoard> {
               user: widget.user!, favoriteId: _product.id!));
       }
     } else {
-      Fluttertoast.showToast(msg: "toast.login".tr());
+      Fluttertoast.showToast(msg: "login".tr());
     }
   }
 
@@ -291,7 +294,7 @@ class _ProductDetailsBoardState extends State<ProductDetailsBoard> {
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 13)),
                                           TextSpan(text: _mqo.toString()),
-                                          TextSpan(text: " Pieces")
+                                          TextSpan(text: "Price :".tr())
                                         ])),
                                   ]),
                             ])),
@@ -323,7 +326,7 @@ class _ProductDetailsBoardState extends State<ProductDetailsBoard> {
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(color: Color(0xffeeeeee))),
                               child: Row(children: [
-                                Text("Price",
+                                Text("Price :".tr(),
                                     style: TextStyle(
                                         color: textDarkColor, fontSize: 14)),
                                 SizedBox(width: 4),
@@ -338,7 +341,7 @@ class _ProductDetailsBoardState extends State<ProductDetailsBoard> {
                                   children: [
                                 Icon(Icons.location_on),
                                 SizedBox(width: 8),
-                                Text(_country.toString(),
+                                Text( _country == "" ? "---" : _country,
                                     style: TextStyle(
                                         fontSize: 14, color: textDarkColor)),
                               ]))
@@ -405,7 +408,7 @@ class _ProductDetailsBoardState extends State<ProductDetailsBoard> {
                                           // fontWeight: FontWeight.w500
                                         ),
                                         maxLines: 1),
-                                    Text("VERIFIED MEMBER",
+                                    Text("VERIFIEDMEMBER".tr(),
                                         style: TextStyle(
                                           fontSize: 14,
                                           color: textDarkColor,
@@ -468,7 +471,7 @@ class _ProductDetailsBoardState extends State<ProductDetailsBoard> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Specifications",
+                    Text("Specifications".tr(),
                         style: TextStyle(
                             fontSize: 14,
                             color: Colors.black,
@@ -489,7 +492,7 @@ class _ProductDetailsBoardState extends State<ProductDetailsBoard> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Description",
+                    Text("Description".tr(),
                         style: TextStyle(
                             fontSize: 14,
                             color: Colors.black,
@@ -502,7 +505,7 @@ class _ProductDetailsBoardState extends State<ProductDetailsBoard> {
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Text("Similar products",
+                child: Text("Similarproducts".tr(),
                     style: TextStyle(
                         fontSize: 14,
                         color: Colors.black,
@@ -520,9 +523,9 @@ class _ProductDetailsBoardState extends State<ProductDetailsBoard> {
                     itemCount:
                         _similarList.isNotEmpty ? _similarList.length : 6,
                     itemBuilder: (context, index) {
-                      // if (_productsBloc.isFetching == true) {
-                      //   return ProductVerEmptyWidget();
-                      // }
+                      if (_productsBloc.isFetching == true) {
+                        return ProductVerEmptyWidget();
+                      }
 
                       if (_similarList.isNotEmpty) {
                         return ProductHorWidget(

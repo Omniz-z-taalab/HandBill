@@ -12,8 +12,7 @@ part 'global_state.dart';
 
 class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
   User? user;
-  String? lang;
-
+  String? lang ;
   final GlobalRepository globalRepository = GlobalRepository();
 
   GlobalBloc() : super(GlobalInitial()) {

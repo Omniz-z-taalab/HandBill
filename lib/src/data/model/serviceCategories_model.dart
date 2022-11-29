@@ -237,6 +237,7 @@ List<GetDataCategory>? data;
 bool? status;
 String? message;
 
+
 ServiceCategoryModel({this.data, this.status, this.message});
 
 ServiceCategoryModel.fromJson(Map<String, dynamic> json) {
@@ -248,6 +249,7 @@ data!.add(new GetDataCategory.fromJson(v));
 }
 status = json['status'];
 message = json['message'];
+
 }
 
 Map<String, dynamic> toJson() {
@@ -262,31 +264,53 @@ Map<String, dynamic> toJson() {
 }
 
 class GetDataCategory {
-  int? id;
-  String? name;
-  String? description;
-  String? createdAt;
-  String? updatedAt;
-  Null? deletedAt;
-  Imagess? image;
-
+  int? _id;
+  String? _name;
+  String? _description;
+  String? _createdAt;
+  String? _updatedAt;
+  Null? _deletedAt;
+  Imagess? _image;
+  bool? _selected;
+  bool? get selected => _selected;
+int? get id => _id;
+  String? get name  => _name;
+  String? get description  => _description;
+  String? get createdAt  => _createdAt;
+  String? get updatedAt  => _updatedAt;
+  Null? get deletedAt  => _deletedAt;
+  Imagess? get image  => _image;
   GetDataCategory(
-      {this.id,
-        this.name,
-        this.description,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt,
-        this.image});
+      {
+        bool? selected,
+        String? name,
+        String? description,
+        String? createdAt,
+        String? updatedAt,
+        // Imagess? _image,
+      }
+
+      ){
+    _id =id;
+    _selected = selected;
+    _image = image;
+    _deletedAt = deletedAt;
+    _description= description;
+    _updatedAt =updatedAt;
+    _createdAt =createdAt;
+    _name = name;
+  }
 
   GetDataCategory.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    description = json['description'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    deletedAt = json['deleted_at'];
-    image = json['image'] != null ? new Imagess.fromJson(json['image']) : null;
+    _id = json['id'];
+    _name = json['name'];
+    _description = json['description'];
+    _createdAt = json['created_at'];
+    _updatedAt = json['updated_at'];
+    _deletedAt = json['deleted_at'];
+    _image = json['image'] != null ? new Imagess.fromJson(json['image']) : null;
+    _selected = false;
+
   }
 
   Map<String, dynamic> toJson() {
@@ -302,7 +326,11 @@ class GetDataCategory {
     }
     return data;
   }
+  set selected(bool? value) {
+    _selected = value;
+  }
 }
+
 
 class Imagess {
   int? id;

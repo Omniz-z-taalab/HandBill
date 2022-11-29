@@ -26,7 +26,6 @@ class FavoriteRepository {
   Future<FavoriteResponse> getFavoriteProducts(
       {required int page, required User user}) async {
     String? value = await storage.read(key: "lang");
-
     _dio.options.headers["Authorization"] =
         "Bearer " + user.apiToken.toString();
     _dio.options.headers["Accept"] = "application/json";
@@ -39,7 +38,7 @@ class FavoriteRepository {
     late FavoriteResponse favoriteResponse;
     Response response;
     try {
-      print('omniaaaaaaaaaaaaaaaa');
+      print('rrrrrr');
       response = await _dio.get(APIData.favouriteProduct,queryParameters: queryParams);
       print('omniaaaaaaaaaaaaaaaa');
 

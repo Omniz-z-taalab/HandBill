@@ -12,7 +12,6 @@ import 'package:hand_bill/src/data/response/market/company_product_response.dart
 import 'package:hand_bill/src/repositories/company_repository.dart';
 
 part 'company_event.dart';
-
 part 'company_state.dart';
 
 class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {

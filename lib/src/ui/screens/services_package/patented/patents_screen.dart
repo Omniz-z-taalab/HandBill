@@ -45,7 +45,7 @@ class _PatentsScreenState extends State<PatentsScreen> {
     _patentsBloc = BlocProvider.of<PatentsBloc>(context);
     _scrollController = ScrollController()..addListener(_onScroll);
     _patentsBloc.allPage = 1;
-    _patentsBloc.add(FetchPatentsEvent());
+    // _patentsBloc.add(FetchPatentsEvent());
     _user = BlocProvider.of<GlobalBloc>(context).user;
 
     super.initState();

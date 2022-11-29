@@ -190,7 +190,7 @@ class Meta {
   int? lastPage;
   List<Links>? links;
   String? path;
-  int? perPage;
+  dynamic perPage;
   int? to;
   int? total;
 

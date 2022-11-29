@@ -10,11 +10,12 @@ class GlobalRepository {
     String? sName;
     sName = await storage.read(key: "currentUser");
     if (sName != null) {
-
       myUser = User.fromJson(json.decode(sName));
+      return myUser;
       // print("$tag  currentUser = ${json.decode(sName)}");
     } else {
       myUser = null;
+
     }
     return myUser;
   }
