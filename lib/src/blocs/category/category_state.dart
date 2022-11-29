@@ -21,9 +21,9 @@ class CategoryErrorState extends CategoryState {
 }
 //  Categories
 class CategoriesSuccessState extends CategoryState {
-  final List<CategoryModel>? items;
+   List<CategoryModel>? items;
 
-  const CategoriesSuccessState({required this.items});
+   CategoriesSuccessState(this.items);
 }
 
 // subcategories

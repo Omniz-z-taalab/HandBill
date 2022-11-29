@@ -41,7 +41,7 @@ class DrawerItemWidget extends StatefulWidget {
 class _DrawerItemWidgetState extends State<DrawerItemWidget> {
   final double icSize = 32;
 
-  String ar =  'ar';
+  String ar = 'ar';
 
   String en = 'en';
 
@@ -55,9 +55,9 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
               await canLaunch('') ? launch("") : print("can not open the link");
             } else {
               await canLaunch(
-                      'https://play.google.com/store/apps/details?id=gyapp.hand_bill_manger')
+                  'https://play.google.com/store/apps/details?id=gyapp.hand_bill_manger')
                   ? launch(
-                      "https://play.google.com/store/apps/details?id=com.egyapp.hand_bill_manger")
+                  "https://play.google.com/store/apps/details?id=com.egyapp.hand_bill_manger")
                   : print("can not open the link");
             }
           }
@@ -74,39 +74,44 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
           }
 
           if (widget.model.title.toString() == 'Change Language') {
-            if(context.locale.toString() == "en_US"){
+            if (context.locale.toString() == "en_US") {
               print('wewewewe');
               print(context.locale);
-                context.locale = const Locale('ar','EG');
-                 Phoenix.rebirth(context);
+              setState(() {
+                context.locale = const Locale('ar', 'EG');
+              });
               await storage.write(key: "lang", value: ar);
 
+              Phoenix.rebirth(context);
             }
             else {
+              setState(() {
+                context.locale = const Locale('en', 'US');
+              });
               await storage.write(key: "lang", value: en);
 
               print(context.locale);
-              context.locale = const Locale('en','US');
               Phoenix.rebirth(context);
-            }}
+            }
+          }
           if (widget.model.title.toString() == 'تغيير اللغة') {
-            if(context.locale.toString() == "en_US"){
+            if (context.locale.toString() == "en_US") {
+              print(context.locale);
+              setState(() {
+                context.locale = const Locale('ar', 'EG');
+              });
               await storage.write(key: "lang", value: ar);
+              Phoenix.rebirth(context);
+            }
+            else {
               print(context.locale);
               setState(() {
-                context.locale = const Locale('ar','EG');
-                Phoenix.rebirth(context);
-
-              });}
-            else{
+                context.locale = const Locale('en', 'US');
+              });
               await storage.write(key: "lang", value: en);
-              print(context.locale);
-              setState(() {
-                context.locale = const Locale('en','US');
-                Phoenix.rebirth(context);
-
-              });}}
-
+              Phoenix.rebirth(context);
+            }
+          }
 
 
           //   await Locale(
@@ -140,48 +145,52 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
           //
 
           if (widget.model.title.toString() == 'LogOut') {
-            BlocProvider.of<GlobalBloc>(context).user = null;
+            BlocProvider
+                .of<GlobalBloc>(context)
+                .user = null;
             storage.deleteAll();
             Navigator.pushReplacementNamed(context, AuthScreen.routeName);
           }
           widget.model.title.toString() == 'Help Center'
               ? Navigator.of(context).pushNamed(HelpCenterScreen.routeName)
               : widget.model.title.toString() == 'Wish List'
-                  ? Navigator.of(context).pushNamed(WishListScreen.routeName)
-                  : widget.model.title.toString() == 'Offers'
-                      ? Navigator.of(context).pushNamed(OffersScreen.routeName)
-                      : widget.model.title.toString() == 'Auctions'
-                          ? Navigator.of(context)
-                              .pushNamed(AuctionsScreen.routeName)
-                          : widget.model.title.toString() == 'Assets'
-                              ? Navigator.of(context)
-                                  .pushNamed(AssetsScreen.routeName)
-                              : widget.model.title.toString() == 'Patented'
-                                  ? Navigator.of(context)
-                                      .pushNamed(PatentsScreen.routeName)
-                                  : widget.model.title.toString() == 'Jobs'
-                                      ? Navigator.of(context).pushNamed(
-                                          CompaniesJobsScreen.routeName)
-                                      : widget.model.title.toString() ==
-                                              'Hand Made'
-                                          ? Navigator.of(context).pushNamed(
-                                              HandmadeScreen.routeName)
-                                          : widget.model.title.toString() ==
-                                                  'Agents'
-                                              ? Navigator.of(context).pushNamed(
-                                                  AgentsScreen.routeName)
-                                              : widget.model.title.toString() ==
-                                                      'About Us'
-                                                  ? Navigator.of(context)
-                                                      .pushNamed(AboutUsScreen
-                                                          .routeName)
-                                                  : Container();
+              ? Navigator.of(context).pushNamed(WishListScreen.routeName)
+              : widget.model.title.toString() == 'Offers'
+              ? Navigator.of(context).pushNamed(OffersScreen.routeName)
+              : widget.model.title.toString() == 'Auctions'
+              ? Navigator.of(context)
+              .pushNamed(AuctionsScreen.routeName)
+              : widget.model.title.toString() == 'Assets'
+              ? Navigator.of(context)
+              .pushNamed(AssetsScreen.routeName)
+              : widget.model.title.toString() == 'Patented'
+              ? Navigator.of(context)
+              .pushNamed(PatentsScreen.routeName)
+              : widget.model.title.toString() == 'Jobs'
+              ? Navigator.of(context).pushNamed(
+              CompaniesJobsScreen.routeName)
+              : widget.model.title.toString() ==
+              'Hand Made'
+              ? Navigator.of(context).pushNamed(
+              HandmadeScreen.routeName)
+              : widget.model.title.toString() ==
+              'Agents'
+              ? Navigator.of(context).pushNamed(
+              AgentsScreen.routeName)
+              : widget.model.title.toString() ==
+              'About Us'
+              ? Navigator.of(context)
+              .pushNamed(AboutUsScreen
+              .routeName)
+              : Container();
           if (widget.model.title.toString() == 'خروج') {
-            BlocProvider.of<GlobalBloc>(context).user = null;
+            BlocProvider
+                .of<GlobalBloc>(context)
+                .user = null;
             storage.deleteAll();
             Navigator.pushReplacementNamed(context, AuthScreen.routeName);
           }
-          widget.model.title.toString() =="مركز المساعده"
+          widget.model.title.toString() == "مركز المساعده"
               ? Navigator.of(context).pushNamed(HelpCenterScreen.routeName)
               : widget.model.title.toString() == 'قائمتى'
               ? Navigator.of(context).pushNamed(WishListScreen.routeName)
@@ -217,131 +226,145 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
         child: Card(
             elevation: 5,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      widget.model.title.toString() == 'Help Center' ||  widget.model.title.toString() == 'مركز المساعدة'
+                      widget.model.title.toString() == 'Help Center' ||
+                          widget.model.title.toString() == 'مركز المساعدة'
                           ? Image.asset(
-                              'assets/icons/account/help.png',
-                              // "assets/icons/account/wishlist.svg",
-                              height: icSize,
-                              width: icSize,
-                              fit: BoxFit.cover,
-                            )
-                          : widget.model.title.toString() == 'Wish List' || widget.model.title.toString() == 'قائمتى'
-                              ? SvgPicture.asset(
-                                  'assets/icons/account/wishlist.svg',
-                                  // "assets/icons/account/wishlist.svg",
-                                  height: icSize,
-                                  width: icSize,
-                                  fit: BoxFit.cover,
-                                )
-                              : widget.model.title.toString() == 'Offers' || widget.model.title.toString() == 'عروض'
-                                  ? SvgPicture.asset(
-                                      'assets/icons/account/sale_tag.svg',
-                                      // "assets/icons/account/wishlist.svg",
-                                      height: icSize,
-                                      width: icSize,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : widget.model.title.toString() == 'Auctions' || widget.model.title.toString() == 'مزادات'
-                                      ? SvgPicture.asset(
-                                          'assets/icons/account/auction.svg',
-                                          // "assets/icons/account/wishlist.svg",
-                                          height: icSize,
-                                          width: icSize,
-                                          fit: BoxFit.cover,
-                                        )
-                                      : widget.model.title.toString() == 'Assets' || widget.model.title.toString() == 'مرافق'
-                                          ? SvgPicture.asset(
-                                              'assets/icons/account/asset.svg',
-                                              // "assets/icons/account/wishlist.svg",
-                                              height: icSize,
-                                              width: icSize,
-                                              fit: BoxFit.cover,
-                                            )
-                                          : widget.model.title.toString() == 'Patented' ||  widget.model.title.toString() == 'برائات أختراع'
-                                              ? SvgPicture.asset(
-                                                  'assets/icons/account/certificate.svg',
-                                                  // "assets/icons/account/wishlist.svg",
-                                                  height: icSize,
-                                                  width: icSize,
-                                                  fit: BoxFit.cover,
-                                                )
-                                              : widget.model.title.toString() == 'Jobs' || widget.model.title.toString() == 'وظائف'
+                        'assets/icons/account/help.png',
+                        // "assets/icons/account/wishlist.svg",
+                        height: icSize,
+                        width: icSize,
+                        fit: BoxFit.cover,
+                      )
+                          : widget.model.title.toString() == 'Wish List' ||
+                          widget.model.title.toString() == 'قائمتى'
+                          ? SvgPicture.asset(
+                        'assets/icons/account/wishlist.svg',
+                        // "assets/icons/account/wishlist.svg",
+                        height: icSize,
+                        width: icSize,
+                        fit: BoxFit.cover,
+                      )
+                          : widget.model.title.toString() == 'Offers' ||
+                          widget.model.title.toString() == 'عروض'
+                          ? SvgPicture.asset(
+                        'assets/icons/account/sale_tag.svg',
+                        // "assets/icons/account/wishlist.svg",
+                        height: icSize,
+                        width: icSize,
+                        fit: BoxFit.cover,
+                      )
+                          : widget.model.title.toString() == 'Auctions' ||
+                          widget.model.title.toString() == 'مزادات'
+                          ? SvgPicture.asset(
+                        'assets/icons/account/auction.svg',
+                        // "assets/icons/account/wishlist.svg",
+                        height: icSize,
+                        width: icSize,
+                        fit: BoxFit.cover,
+                      )
+                          : widget.model.title.toString() == 'Assets' ||
+                          widget.model.title.toString() == 'مرافق'
+                          ? SvgPicture.asset(
+                        'assets/icons/account/asset.svg',
+                        // "assets/icons/account/wishlist.svg",
+                        height: icSize,
+                        width: icSize,
+                        fit: BoxFit.cover,
+                      )
+                          : widget.model.title.toString() == 'Patented' ||
+                          widget.model.title.toString() == 'برائات أختراع'
+                          ? SvgPicture.asset(
+                        'assets/icons/account/certificate.svg',
+                        // "assets/icons/account/wishlist.svg",
+                        height: icSize,
+                        width: icSize,
+                        fit: BoxFit.cover,
+                      )
+                          : widget.model.title.toString() == 'Jobs' ||
+                          widget.model.title.toString() == 'وظائف'
 
-                                 ? SvgPicture.asset(
-                                                      'assets/icons/account/job_search.svg',
-                                                      // "assets/icons/account/wishlist.svg",
-                                                      height: icSize,
-                                                      width: icSize,
-                                                      fit: BoxFit.cover,
-                                                    )
-                                                  : widget.model.title.toString() == 'Hand Made' || widget.model.title.toString() == 'صناعات يدوية'
-                                                      ? SvgPicture.asset(
-                                                          'assets/icons/account/handmade.svg',
-                                                          // "assets/icons/account/wishlist.svg",
-                                                          height: icSize,
-                                                          width: icSize,
-                                                          fit: BoxFit.cover,
-                                                        )
-                                                      : widget.model.title.toString() == 'To Be Seller' || widget.model.title.toString() == 'كن بائعا'
-                                                          ? SvgPicture.asset(
-                                                              'assets/icons/account/asset.svg',
-                                                              // "assets/icons/account/wishlist.svg",
-                                                              height: icSize,
-                                                              width: icSize,
-                                                              fit: BoxFit.cover,
-                                                            )
-                                                          : widget.model.title.toString() == 'Agents' || widget.model.title.toString() == 'الوكلاء'
-                                                              ? SvgPicture
-                                                                  .asset(
-                                                                  'assets/icons/account/customer_service.svg',
-                                                                  // "assets/icons/account/wishlist.svg",
-                                                                  height:
-                                                                      icSize,
-                                                                  width: icSize,
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                )
-                                                              : widget.model.title.toString() == 'Change Language' ||  widget.model.title.toString() == 'تغيير اللغة'
-                                                                  ? Image.asset(
-                                                                      'assets/icons/language.png',
-                                                                      // "assets/icons/account/wishlist.svg",
-                                                                      height:
-                                                                          icSize,
-                                                                      width:
-                                                                          icSize,
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                    )
-                                                                  : widget.model.title.toString() == 'LogOut' || widget.model.title.toString() == 'خروج'
-                                                                      ? SvgPicture
-                                                                          .asset(
-                                                                          'assets/icons/account/arrow.svg',
-                                                                          // "assets/icons/account/wishlist.svg",
-                                                                          height:
-                                                                              icSize,
-                                                                          width:
-                                                                              icSize,
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                        )
-                                                                      : widget.model.title.toString() ==
-                                                                              'About Us' || widget.model.title.toString() == 'من نحن'
-                                                                          ? SvgPicture
-                                                                              .asset(
-                                                                              'assets/icons/account/arrow.svg',
-                                                                              // "assets/icons/account/wishlist.svg",
-                                                                              height: icSize,
-                                                                              width: icSize,
-                                                                              fit: BoxFit.cover,
-                                                                            )
-                                                                          : Container(),
+                          ? SvgPicture.asset(
+                        'assets/icons/account/job_search.svg',
+                        // "assets/icons/account/wishlist.svg",
+                        height: icSize,
+                        width: icSize,
+                        fit: BoxFit.cover,
+                      )
+                          : widget.model.title.toString() == 'Hand Made' ||
+                          widget.model.title.toString() == 'صناعات يدوية'
+                          ? SvgPicture.asset(
+                        'assets/icons/account/handmade.svg',
+                        // "assets/icons/account/wishlist.svg",
+                        height: icSize,
+                        width: icSize,
+                        fit: BoxFit.cover,
+                      )
+                          : widget.model.title.toString() == 'To Be Seller' ||
+                          widget.model.title.toString() == 'كن بائعا'
+                          ? SvgPicture.asset(
+                        'assets/icons/account/asset.svg',
+                        // "assets/icons/account/wishlist.svg",
+                        height: icSize,
+                        width: icSize,
+                        fit: BoxFit.cover,
+                      )
+                          : widget.model.title.toString() == 'Agents' ||
+                          widget.model.title.toString() == 'الوكلاء'
+                          ? SvgPicture
+                          .asset(
+                        'assets/icons/account/customer_service.svg',
+                        // "assets/icons/account/wishlist.svg",
+                        height:
+                        icSize,
+                        width: icSize,
+                        fit: BoxFit
+                            .cover,
+                      )
+                          : widget.model.title.toString() ==
+                          'Change Language' ||
+                          widget.model.title.toString() == 'تغيير اللغة'
+                          ? Image.asset(
+                        'assets/icons/language.png',
+                        // "assets/icons/account/wishlist.svg",
+                        height:
+                        icSize,
+                        width:
+                        icSize,
+                        fit: BoxFit
+                            .cover,
+                      )
+                          : widget.model.title.toString() == 'LogOut' ||
+                          widget.model.title.toString() == 'خروج'
+                          ? SvgPicture
+                          .asset(
+                        'assets/icons/account/arrow.svg',
+                        // "assets/icons/account/wishlist.svg",
+                        height:
+                        icSize,
+                        width:
+                        icSize,
+                        fit: BoxFit
+                            .cover,
+                      )
+                          : widget.model.title.toString() ==
+                          'About Us' ||
+                          widget.model.title.toString() == 'من نحن'
+                          ? SvgPicture
+                          .asset(
+                        'assets/icons/account/arrow.svg',
+                        // "assets/icons/account/wishlist.svg",
+                        height: icSize,
+                        width: icSize,
+                        fit: BoxFit.cover,
+                      )
+                          : Container(),
                       // model.icon!.endsWith(".svg")
                       //     ? SvgPicture.asset(model.icon!,
                       //         height: icSize, width: icSize)
@@ -349,15 +372,15 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                       //         height: icSize, width: icSize, fit: BoxFit.cover),
                       lang == true
                           ? Text((widget.model.title.toString()),
-                              style: TextStyle(
-                                  color: textDarkColor,
-                                  fontWeight: FontWeight.bold),
-                              maxLines: 2)
+                          style: TextStyle(
+                              color: textDarkColor,
+                              fontWeight: FontWeight.bold),
+                          maxLines: 2)
                           : Text((widget.model.titleAr.toString()),
-                              style: TextStyle(
-                                  color: textDarkColor,
-                                  fontWeight: FontWeight.bold),
-                              maxLines: 2)
+                          style: TextStyle(
+                              color: textDarkColor,
+                              fontWeight: FontWeight.bold),
+                          maxLines: 2)
                     ]))));
   }
 }

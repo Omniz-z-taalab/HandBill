@@ -1,40 +1,3 @@
-import 'package:flutter/material.dart';
-
-class AboutUsModel {
-  List<Videos>? videos;
-  Null? video;
-  List<Banners>? banners;
-
-  AboutUsModel({this.videos, this.video, this.banners});
-
-  AboutUsModel.fromJson(Map<String, dynamic> json) {
-    if (json['videos'] != null) {
-      videos = <Videos>[];
-      json['videos'].forEach((v) {
-        videos!.add(new Videos.fromJson(v));
-      });
-    }
-    video = json['video'];
-    if (json['banners'] != null) {
-      banners = <Banners>[];
-      json['banners'].forEach((v) {
-        banners!.add(Banners.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.videos != null) {
-      data['videos'] = this.videos!.map((v) => v.toJson()).toList();
-    }
-    data['video'] = this.video;
-    if (this.banners != null) {
-      data['banners'] = this.banners!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
 
 class Videos {
   String? title;
@@ -43,14 +6,14 @@ class Videos {
 
   Videos({this.title, this.name, this.link});
 
-  Videos.fromJson(Map<String, dynamic> json) {
+  Videos.fromJson(Map<dynamic, dynamic> json) {
     title = json['title'];
     name = json['name'];
     link = json['link'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+  Map<dynamic, dynamic> toJson() {
+    final Map<dynamic, dynamic> data = new Map<dynamic, dynamic>();
     data['title'] = this.title;
     data['name'] = this.name;
     data['link'] = this.link;
@@ -58,20 +21,50 @@ class Videos {
   }
 }
 class Banners {
-  String? image;
+  int? id;
+  String? modelId;
+  String? description;
+  String? modelType;
+  String? thump;
+  String? icon;
+  String? url;
+  String? createdAt;
+  String? updatedAt;
 
-  Banners({
-    this.image,
-  });
+  Banners(
+      {this.id,
+        this.modelId,
+        this.description,
+        this.modelType,
+        this.thump,
+        this.icon,
+        this.url,
+        this.createdAt,
+        this.updatedAt});
 
   Banners.fromJson(Map<String, dynamic> json) {
-    image = json['image'];
+    id = json['id'];
+    modelId = json['model_id'];
+    description = json['description'];
+    modelType = json['model_type'];
+    thump = json['thump'];
+    icon = json['icon'];
+    url = json['url'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['image'] = this.image;
-
+    data['id'] = this.id;
+    data['model_id'] = this.modelId;
+    data['description'] = this.description;
+    data['model_type'] = this.modelType;
+    data['thump'] = this.thump;
+    data['icon'] = this.icon;
+    data['url'] = this.url;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
     return data;
   }
 }

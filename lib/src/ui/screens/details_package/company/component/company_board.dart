@@ -55,6 +55,7 @@ class _CompanyBoardState extends State<CompanyBoard>
     _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
     _getData();
     super.initState();
+    print('dsdsdsdsdsddds');
   }
 
   Future<void> initializePlayer(String url) async {

@@ -13,6 +13,21 @@ import '../../data/response/search/search_companies_response.dart';
 import '../../ui/screens/services_package/shipping/ShippingBloc /ShippingState.dart';
 import '../global_bloc/global_bloc.dart';
 
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hand_bill/src/blocs/Services/Event.dart';
+import 'package:hand_bill/src/blocs/Services/states.dart';
+import 'package:hand_bill/src/data/model/serviceCategories_model.dart';
+import 'package:hand_bill/src/repositories/cubit.dart';
+import 'package:hand_bill/src/repositories/search_repository.dart';
+
+import '../../data/response/search/search_companies_response.dart';
+import '../../ui/screens/services_package/shipping/ShippingBloc /ShippingState.dart';
+import '../global_bloc/global_bloc.dart';
+
 class ServiceBlocData extends Bloc<ServiceEvent, ServiceState> {
   String tag = "ServiceBloc";
 

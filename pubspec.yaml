@@ -31,6 +31,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   easy_localization: ^3.0.1
   fluttertoast: ^8.1.1
   cupertino_icons: ^1.0.2
@@ -42,7 +43,7 @@ dependencies:
   flutter_svg: ^1.1.0
   dots_indicator: ^2.1.0
   intl: ^0.17.0
-  video_player: ^2.4.8
+  video_player:
   chewie: ^1.3.2
   flutter_secure_storage: ^6.0.0
   cached_network_image: ^3.2.1
@@ -89,8 +90,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/translate/en.json
-    - assets/translate/ar.json
+    - assets/translate/en-US.json
+    - assets/translate/ar-EG.json
     - assets/icons/
     - assets/images/
     - assets/icons/account/

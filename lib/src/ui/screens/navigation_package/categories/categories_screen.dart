@@ -933,6 +933,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
+    print('lalalalalala');
     _categoryBloc = BlocProvider.of<CategoryBloc>(context);
     if (_categoryBloc!.categories == null ||
         _categoryBloc!.categories!.length == 0)

@@ -26,14 +26,15 @@ class SearchRepository {
     Map<String, String> queryParams = ({
       // "secret": APIData.secretKey,
       "search": '$search',
-      "language": "$value"
+      "language": value!
     });
 
     late SearchProductResponse searchResponse;
     Response response;
     try {
       response =
-          await dio.get(APIData.searchProduct, queryParameters: queryParams);
+
+      await dio.get(APIData.searchProduct,queryParameters: queryParams);
       log("sss: ${jsonEncode(response.data)}");
       print(response.data);
       searchResponse = SearchProductResponse.fromJson(response.data);

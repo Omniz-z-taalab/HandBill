@@ -360,6 +360,7 @@ class _ShippingMainScreenState extends State<ShippingMainScreen>
   void initState() {
     _serviceBloc = BlocProvider.of<ServiceBlocData>(context);
     _serviceBloc!..add(FetchServiceEvent());
+    print('dataaaaaa');
     // _serviceBloc!..add(ServiceBannerCompanyEvent());
 
 
@@ -418,7 +419,6 @@ class _ShippingMainScreenState extends State<ShippingMainScreen>
           onRefresh: () async {},
           child: BlocListener<ServiceBlocData, ServiceState>(
             listener: (context, state) {
-
               if (state is CategoryErrorState) {
                 _categories = [];
                 SchedulerBinding.instance?.addPostFrameCallback((_) {
@@ -429,36 +429,33 @@ class _ShippingMainScreenState extends State<ShippingMainScreen>
               if (state is CategoriesSuccessState) {
                 if (_categories == null) {
                   _categories = [];
-                  ShippingMainScreen();
-                  if (_serviceBloc!.categories!.length == 2) {
-                    print('done');
-                  }
 
                   // print(_serviceBloc!.categories!.first.data!.first.name);
                 } else {}
               }
-              // if (state is SubCategoriesSuccessState) {
-              //   if (_subCategories == null) {
-              //     _subCategories = [];
-              //   }
-              //   if (_selectedCategory != null &&
-              //       state.items != null &&
-              //       state.items!.length != 0) {
-              //     if (_showRealLength == false) {
-              //       SchedulerBinding.instance?.addPostFrameCallback((_) {
-              //         setState(() {
-              //           _showRealLength = true;
-              //         });
-              //       });
-              //     }
-              //     if (_subCategories!.length != 0 &&
-              //         _subCategories!.first.id != state.items!.first.id) {
-              //       _subCategories!.addAll(state.items!);
-              //     } else if (_subCategories!.length == 0) {
-              //       _subCategories!.addAll(state.items!);
-              //     }
-              //   }
-              // }
+
+              if (state is SubCategoriesSuccessStatee) {
+                if (_subCategories == null) {
+                  _subCategories = [];
+                }
+                if (_selectedCategory != null &&
+                    state.items != null &&
+                    state.items!.length != 0) {
+                  if (_showRealLength == false) {
+                    SchedulerBinding.instance?.addPostFrameCallback((_) {
+                      setState(() {
+                        _showRealLength = true;
+                      });
+                    });
+                  }
+                  if (_subCategories!.length != 0 &&
+                      _subCategories!.first.id != state.items!.first.id) {
+                    _subCategories!.addAll(state.items!);
+                  } else if (_subCategories!.length == 0) {
+                    _subCategories!.addAll(state.items!);
+                  }
+                }
+              }
             },
             // child: ListView(children: [
             //   GridView.count(
@@ -661,7 +658,6 @@ class _ShippingMainScreenState extends State<ShippingMainScreen>
     //       }),
     //     ));
   }
-
   onCategoryTap(
       GetDataCategory serviceCategoryModel,
   ) {
@@ -690,6 +686,32 @@ class _ShippingMainScreenState extends State<ShippingMainScreen>
     //     .add(FetchSubCategoriesEvent(categoryId: categoryModel.id.toString()));
     // });
   }
+    //   GetDataCategory serviceCategoryModel,) {
+    // if (_serviceBloc!.categories!.first.selectedd == true) {
+    //   _serviceBloc!.categories!.first.selectedd = false;
+    // }
+    // setState(() {
+    //   if (_selectedCategory != null) {
+    //     _selectedCategory!.selectedd = false;
+    //   }
+    //   if (_subCategories != null) _subCategories!.clear();
+    //   setState(() {
+    //     _showRealLength = false;
+    //     _showRealSubLengthIndex = -100;
+    //     serviceCategoryModel.selectedd = !serviceCategoryModel.selectedd!;
+    //     _selectedCategory = serviceCategoryModel;
+    //     _serviceBloc!.subCatPage = 1;
+    //
+    //     Navigator.pushNamed(context, ShippingScreen.routeName,
+    //         arguments: RouteArgument(
+    //             param: serviceCategoryModel.name.toString(),
+    //             id: serviceCategoryModel.id.toString()));
+    //   });
+      // _serviceBloc!
+      //     .add(FetchSubCategoriesEvent(categoryId: categoryModel.id.toString()));
+      // });
+    // });}
+
 
   Widget builditem() => ListView(children: [
         GridView.count(

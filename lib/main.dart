@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hand_bill/src/blocs/Companies/bloc.dart';
 import 'package:hand_bill/src/blocs/Services/bloc.dart';
 import 'package:hand_bill/src/blocs/about_us_bloc/about_us_bloc.dart';
+import 'package:hand_bill/src/blocs/about_us/abouUsBloc.dart';
 import 'package:hand_bill/src/blocs/assets/assets_bloc.dart';
 import 'package:hand_bill/src/blocs/auction/aucations_bloc.dart';
 import 'package:hand_bill/src/blocs/auth/auth_bloc.dart';
@@ -48,13 +49,14 @@ Future<void> main() async {
   // await Firebase.initializeApp();
 
   runApp(EasyLocalization(
+      path: 'assets/translate',
       supportedLocales: const [
-        Locale('en'),
-        Locale('ar'),
+
+        Locale('en','US'),
+        Locale('ar','EG'),
         // Locale.fromSubtags(languageCode: 'ar')
       ],
-      path: 'assets/translate',
-      fallbackLocale: Locale('en'),// <-- change the path of the translation files
+      fallbackLocale: Locale( lang == null ? 'en' : lang),// <-- change the path of the translation files
       child: Phoenix(child: MyApp())
 
   ));

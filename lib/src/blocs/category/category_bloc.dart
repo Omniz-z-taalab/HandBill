@@ -33,7 +33,8 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         items!.first.selected = true;
         categories = items;
       } else {}
-      emit(CategoriesSuccessState(items: items));
+      emit(CategoriesSuccessState(items));
+
     } else {
       emit(CategoryErrorState(errors: response.message.toString()));
     }

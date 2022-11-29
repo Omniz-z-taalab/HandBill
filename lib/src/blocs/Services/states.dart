@@ -15,6 +15,12 @@ abstract class ServiceState extends Equatable {
   List<Object> get props => [];
 }
 
+class SubCategoriesSuccessStatee extends ServiceState {
+  final List<SubCategoryModel>? items;
+  final Meta? meta;
+  const SubCategoriesSuccessStatee({required this.items,this.meta});
+}
+
 class ServiceInitialState extends ServiceState {}
 class SearchCompanyLoadingState extends ServiceState {}
 class CategoriesAddLoadingState extends ServiceState {}

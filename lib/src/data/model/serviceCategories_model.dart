@@ -271,8 +271,8 @@ class GetDataCategory {
   String? _updatedAt;
   Null? _deletedAt;
   Imagess? _image;
-  bool? _selected;
-  bool? get selected => _selected;
+  bool? _selectedd;
+  bool? get selectedd => _selectedd;
 int? get id => _id;
   String? get name  => _name;
   String? get description  => _description;
@@ -282,7 +282,7 @@ int? get id => _id;
   Imagess? get image  => _image;
   GetDataCategory(
       {
-        bool? selected,
+        bool? selectedd,
         String? name,
         String? description,
         String? createdAt,
@@ -292,7 +292,7 @@ int? get id => _id;
 
       ){
     _id =id;
-    _selected = selected;
+    _selectedd = selectedd;
     _image = image;
     _deletedAt = deletedAt;
     _description= description;
@@ -309,7 +309,7 @@ int? get id => _id;
     _updatedAt = json['updated_at'];
     _deletedAt = json['deleted_at'];
     _image = json['image'] != null ? new Imagess.fromJson(json['image']) : null;
-    _selected = false;
+    _selectedd = false;
 
   }
 
@@ -326,8 +326,8 @@ int? get id => _id;
     }
     return data;
   }
-  set selected(bool? value) {
-    _selected = value;
+  set selectedd(bool? value) {
+    _selectedd = value;
   }
 }
 

@@ -46,6 +46,7 @@ class _CompanyScreenState extends State<CompanyScreen> {
 
   @override
   void initState() {
+    print('wwwwwwwwwwwwwwwwwwwwwwww');
     _companyId = widget.routeArgument.param!;
     // savedId = _company.id.toString();
     _companyBloc = BlocProvider.of<CompanyBloc>(context);
