@@ -293,10 +293,6 @@ class _SubCategoriesState extends State<SubCategories>
   List<DataPro> sliders = [];
   SubCategoryModel? subCategoryModel;
 
-  // List<CategoryModel>? _categories;
-
-  // List<SubCategoryModel>? _subCategories;
-
   // ScrollController? _scrollController;
   // double offsetVisibleThreshold = 100;
 
@@ -374,25 +370,16 @@ class _SubCategoriesState extends State<SubCategories>
         BlocConsumer<ShippingBloc, ShippingState>(
           listener: (context, state) {
             if(state is ShippingSuccessSubState){
-              print('qqqqqqqqqq');
                 subCategoryModel = state.subCategoryModel!;
-                print(subCategoryModel!.data![0].name);
-
             }
             if(state is ShippingSuccessSliderState){
               if(sliders.isEmpty){
               sliders = state.sliders!;
-              print('ssswwwww');
-               print(sliders[0].id);
+
             }}
           },
           builder: (context, state) {
 
-            // model = ShippingBloc.get(context).subCategoryModel;
-            // var bannar = ShippingBloc.get(context).sliders;
-
-            // print(model);
-            // print('dsdddddddd');
             return Scaffold(
                 backgroundColor: Color(0xfff5f5f5),
                 appBar:
@@ -448,73 +435,13 @@ class _SubCategoriesState extends State<SubCategories>
                   ),
                 ));
           },
-          // builder: (context, state) {
-          //   var model = ShippingBloc.get(context).companyModel;
-          //   return Scaffold(
-          //       backgroundColor: Color(0xfff5f5f5),
-          //       appBar:
-          //           RegularAppBar(label: widget.routeArgument!.param.toString()),
-          //       body: ConditionalBuilder(
-          //         condition: ShippingBloc.get(context).companyModel != null,
-          //         builder: (context) => item(model!),
-          //         fallback: (context) => Container(
-          //           color: Colors.white,
-          //           child: Center(
-          //             child: CircularProgressIndicator(),
-          //           ),
-          //         ),
-          //       ));
 
-          //   // return Scaffold(
-          //   //   backgroundColor: Color(0xfff5f5f5),
-          //   //   appBar:
-          //   //       RegularAppBar(label: widget.routeArgument!.param.toString()),
-          //   //   body: ConditionalBuilder(
-          //   //     condition: ShippingBloc.get(context).companyModel != null,
-          //   //     // HomeCubit.get(context).showFriendsModel != null,
-          //   //     builder: (context) {
-          //   //       return ListView.separated(
-          //   //           physics: BouncingScrollPhysics(),
-          //   //           // padding: EdgeInsets.symmetric(vertical: 16),
-          //   //           primary: false,
-          //   //           shrinkWrap: true,
-          //   //           itemCount: model!.data!.length,
-          //   //           scrollDirection: Axis.vertical,
-          //   //           itemBuilder: (context, index) {
-          //   //             return ShapWidget(
-          //   //               model: model.data.firs[index],
-          //   //             );
-          //   //           },
-          //   //           separatorBuilder: (BuildContext context, int index) =>
-          //   //               Container(height: 10, color: Color(0xffeeeeee)));
-          //   //     },
-          //   //     fallback: (context) => Container(
-          //   //       color: Colors.white,
-          //   //       child: Center(
-          //   //         child: CircularProgressIndicator(),
-          //   //       ),
-          //   //     ),
-          //   //     // builder: (BuildContext context, AsyncSnapshot snapshot) {
-          //   //     //   if (HomeCubit.get(context).categoriesModel.data == null) {
-          //   //     //     return CircularProgressIndicator();
-          //   //     //   } else {
-          //   //     //     return ListView.builder(
-          //   //     //         itemBuilder: (context, index) => buildCatItem(
-          //   //     //             HomeCubit.get(context).categoriesModel.data[index]),
-          //   //     //         itemCount:
-          //   //     //             HomeCubit.get(context).categoriesModel.data.length);
-          //   //     //   }
-          //   //     // },
-          //   //   ),
-          //   // );
-          // },
 
     );
   }
 
   Widget item(SubCategoryModel model) => ListView(children: [
         GridView.count(
-            // padding: EdgeInsets.fromLTRB(10, 0, 10, 16),
             childAspectRatio: 1 / 0.7,
             crossAxisCount: 2,
             crossAxisSpacing: 2,
@@ -524,8 +451,6 @@ class _SubCategoriesState extends State<SubCategories>
             children: List.generate(model.data!.length,(index) {
               return InkWell(
                 onTap: () {
-                  print('fdfdfdfdfdfdf');
-                  print('${model.data![index].id}');
                   Navigator.pushNamed(context, SubSubCatScreen.routeName,
                       arguments: RouteArgument(
                         id: model.data![index].id.toString(),

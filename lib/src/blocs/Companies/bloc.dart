@@ -44,7 +44,7 @@ class ServiceBloc extends Bloc<ServiceEvent, ServiceState> {
     if (response.status!) {
       final items = response.data;
       if (categories == null) {
-        // items!.first.selected = true;
+         items!.first.selectedd = true;
         categories = items;
       }
       emit(CategoriesSuccessState(categories));

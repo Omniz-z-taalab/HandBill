@@ -1,4 +1,6 @@
   {
+    "Profile": "الملف الشخصي",
+    "Products": "منتجات",
     "CompanyDetails" : "تفاصيل الشركه ",
     "ProductDetails": "تفاصيل المنتج",
     "Similarproducts": "منتجات مماثلة",
@@ -6,7 +8,7 @@
     "Description": "شرح",
     "VERIFIEDMEMBER": "عضو مصدق",
     "empty": "لايوجد",
-    "Add Image": "اضلف صوره",
+    "Add Image": "اضلف Productsصوره",
     "Images": "صور",
     "AddPatented": "اضف براءه اختراع",
     "CompleteYourProfile": "اكمل حسابك",

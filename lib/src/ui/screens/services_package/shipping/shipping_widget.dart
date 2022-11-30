@@ -5,7 +5,7 @@ import 'package:hand_bill/src/common/constns.dart';
 import 'package:hand_bill/src/data/model/serviceCategories_model.dart';
 
 class ShippingWidget extends StatelessWidget {
-  final GetDataCategory model;
+  final model;
   final Function onTap;
 
   ShippingWidget({required this.model, required this.onTap});
@@ -24,14 +24,7 @@ class ShippingWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Container(
-                    //   // height: 50,
-                    //   // width: 50,
-                    //   child: Image.asset(
-                    //     "assets/images/Hbill.jpeg",
-                    //     height: 60,
-                    //   ),
-                    // ),
+
                     model.image == null
                         ? Container(
                             // height: 50,
@@ -44,15 +37,15 @@ class ShippingWidget extends StatelessWidget {
                         : Image.network('${APIData.domainLink}${model.image!.thump}',
                             height: 40,
                           ),
-                    Text(model.name.toString(),style:
-                        // style: model.selected == true
-                             TextStyle(
+                    Text(model.name.toString(),
+                        style: model.selectedd == true
+                            ? TextStyle(
                                 color: mainColorLite,
                                 fontWeight: FontWeight.w500,
-                                fontSize: 12),
-                        //     : TextStyle(
-                        //         color: textDarkColor,
-                        //         fontWeight: FontWeight.w500,
+                                fontSize: 12)
+                            : TextStyle(
+                                color: textDarkColor,
+                                fontWeight: FontWeight.w500,),
                         maxLines: 3,
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis)

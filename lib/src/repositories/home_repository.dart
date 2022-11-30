@@ -16,6 +16,7 @@ import '../data/model/category/sub.dart';
 import '../data/model/category/sub_sub.dart';
 import '../data/response/banner/banner_service_response.dart';
 import '../data/response/banner/sub_product.dart';
+import '../data/response/services/Service_company_response/service_company_response.dart';
 
 class HomeRepository {
   String tag = "HomeRepository";
@@ -74,7 +75,6 @@ class HomeRepository {
   }
 
   Future<SubCategoryModel> getSubCategories(String? id) async {
-    print('eeeeeeeeeeee');
     String? value = await storage.read(key: "lang");
     print(id.toString());
     Map<String, dynamic> queryParams = ({
@@ -85,11 +85,22 @@ class HomeRepository {
     SubCategoryModel subCategoryModel;
     Response response = await _dio.get(APIData.getSubCategory, queryParameters: queryParams);
       subCategoryModel = SubCategoryModel.fromJson(response.data);
-      print(response.data);
-      print('aaaaaaaaaaaaa');
       return subCategoryModel;
   }
 
+  Future<ServiceCompanyResponse> getServiceCompany(String? id) async {
+    String? value = await storage.read(key: "lang");
+    print(id.toString());
+    Map<String, dynamic> queryParams = ({
+      "language":value
+    });
+    ServiceCompanyResponse serviceCompanyResponse;
+    Response response = await _dio.get('${APIData.getShippingCompanies}${id}', queryParameters: queryParams);
+    serviceCompanyResponse = ServiceCompanyResponse.fromJson(response.data);
+    print(response.data);
+    print('aaaaaaaaaaaaa');
+    return serviceCompanyResponse;
+  }
 
   Future<SubSubCategoryModel> getSubsubCategories(String? id) async {
     String? value = await storage.read(key: "lang");

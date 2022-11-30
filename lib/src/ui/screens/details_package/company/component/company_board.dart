@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chewie/chewie.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hand_bill/src/common/constns.dart';
 import 'package:hand_bill/src/data/model/category/category.dart';
@@ -52,7 +53,7 @@ class _CompanyBoardState extends State<CompanyBoard>
 
   @override
   void initState() {
-    _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
+    _tabController = TabController(length: 2, vsync: this, initialIndex: 1);
     _getData();
     super.initState();
     print('dsdsdsdsdsddds');
@@ -201,25 +202,25 @@ class _CompanyBoardState extends State<CompanyBoard>
         Container(
             color: Color(0xffffffff),
             child: TabBar(
-                controller: _tabController,
+                controller: this._tabController,
                 indicatorColor: mainColorLite,
                 labelStyle: TextStyle(fontWeight: FontWeight.w500),
                 unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
                 unselectedLabelColor: Colors.grey,
                 labelColor: mainColorLite,
-                tabs: <Widget>[Tab(text: "Products"), Tab(text: "Profile")])),
+                tabs: <Widget>[Tab(text: "Products".tr()), Tab(text: "Profile".tr())])),
         SizedBox(height: 16),
         Expanded(
             child: TabBarView(
                 physics: NeverScrollableScrollPhysics(),
-                controller: _tabController,
+                controller: this._tabController,
                 children: <Widget>[
               CompanyProducts(
                   featuredList: widget.featuredList,
                   categories: widget.categories,
                   products: widget.products),
-              // CompanyProfile(
-              //   leftDataOfCompanies: widget!.model!.leftDataOfCompanies!, ),
+              CompanyProfile(
+                leftDataOfCompanies: widget!.model!.leftDataOfCompanies!, ),
             ]))
       ])),
       SliverToBoxAdapter(child: SizedBox(height: 80))

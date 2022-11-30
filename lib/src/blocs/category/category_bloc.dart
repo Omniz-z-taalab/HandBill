@@ -30,7 +30,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     if (response.status!) {
       final items = response.data;
       if (categories == null) {
-        items!.first.selected = true;
+         items!.first.selected = true;
         categories = items;
       } else {}
       emit(CategoriesSuccessState(items));

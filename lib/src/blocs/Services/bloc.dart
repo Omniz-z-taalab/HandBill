@@ -104,6 +104,8 @@ class ServiceBlocData extends Bloc<ServiceEvent, ServiceState> {
     if (response.status!) {
       final items = response.data!;
       if (categories == null) {
+        items!.first.selectedd = true;
+
         categories = items;
         // print(items!.first.name);
         print('omniaaaaaaaaaaaaaa');

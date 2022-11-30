@@ -1,4 +1,6 @@
 import 'package:hand_bill/src/data/response/banner/sub_product.dart';
+import 'package:hand_bill/src/data/response/home/serviceCategory_reponse.dart';
+import 'package:hand_bill/src/data/response/services/Service_company_response/service_company_response.dart';
 
 import '../../../../../data/model/category/sub.dart';
 import '../../../../../data/model/category/sub_sub.dart';
@@ -9,9 +11,7 @@ class ShippingState {}
 class ShippingInitState extends ShippingState{}
 class ShippingSuccessSubState extends ShippingState{
   final SubCategoryModel? subCategoryModel;
-  ShippingSuccessSubState(this.subCategoryModel){
-    print(subCategoryModel!.data!.first.name);
-  }
+  ShippingSuccessSubState(this.subCategoryModel);
 }
 class BannerCompanyLoadingState extends ShippingState {}
 class BannerCompaniesErrorState extends ShippingState {
@@ -55,7 +55,7 @@ class ShippingErrorSliderState extends ShippingState{}
 
 class GetSubSubCatSuccessStates extends ShippingState {}
 class GebServiceCatSuccessStates extends ShippingState {
-  SubCategoryModel category;
+  ServiceCompanyResponse category;
 
 
   GebServiceCatSuccessStates(this.category);

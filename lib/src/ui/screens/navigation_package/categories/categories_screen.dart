@@ -933,29 +933,10 @@ class _CategoriesScreenState extends State<CategoriesScreen>
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
-    print('lalalalalala');
     _categoryBloc = BlocProvider.of<CategoryBloc>(context);
     if (_categoryBloc!.categories == null ||
         _categoryBloc!.categories!.length == 0)
       _categoryBloc!..add(FetchCategoriesEvent());
-    // if (_categoryBloc!.subCategories == null ||
-    //     _categoryBloc!.subCategories!.length == 0)
-    //   _categoryBloc!
-    //     ..add(FetchSubCategoriesEvent(
-    //         categoryId: _categoryBloc!.categories!.first.id.toString()));
-    // if (_categoryBloc!.subCategories != null &&
-    //     _categoryBloc!.categories!.length != 0) {
-    //   _subCategories = _categoryBloc!.subCategories;
-    // }
-    // SchedulerBinding.instance!.addPostFrameCallback((_) {
-    //   if (_categories != null) {
-    //     setState(() {
-    //       _categories![0].selected = true;
-    //       _selectedCategory = _categories![0];
-    //     });
-    //   }
-    // });
-    // _scrollController = ScrollController()..addListener(_onScroll);
     super.initState();
   }
 
@@ -967,23 +948,6 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 
   bool _showRealLength = false;
   int? _showRealSubLengthIndex;
-  // void _onScroll() {
-  //   final max = _scrollController!.position.maxScrollExtent;
-  //   final offset = _scrollController!.offset;
-  //   if (offset + offsetVisibleThreshold >= max && !_categoryBloc!.isFetching) {
-  //     _categoryBloc!.isFetching = true;
-  //     if (_selectedCategory == null)
-  //       _selectedCategory = _categoryBloc!.categories!.first;
-  //     if (_showRealLength == false)
-  //       setState(() {
-  //         _showRealLength = true;
-  //       });
-  //     Timer(Duration(seconds: 6), () {
-  //       _categoryBloc!.add(FetchSubCategoriesEvent(
-  //           categoryId: _selectedCategory!.id.toString()));
-  //     });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -1028,7 +992,6 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                 }
               }
             },
-
             child: ListView(children: [
               GridView.count(
                   padding: EdgeInsets.fromLTRB(10, 0, 10, 16),
@@ -1047,113 +1010,11 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                   })),
               SizedBox(height: 80),
             ]),
-            // child: CustomScrollView(
-            //     physics: BouncingScrollPhysics(),
-            //     controller: _scrollController,
-            //     slivers: [
-            //       SliverToBoxAdapter(
-            //         child: GridView.builder(
-            //           // scrollDirection: Axis.vertical,
 
-            //           shrinkWrap: true,
-            //           itemBuilder: (context, index) {
-            //             if (_categoryBloc!.categories!.isNotEmpty) {
-            //               return CategoryWidget(
-            //                   model: _categoryBloc!.categories![index],
-            //                   onTap: () => onCategoryTap(
-            //                       _categoryBloc!.categories![index]));
-            //             }
-            //             return CategoryEmptyWidget();
-            //           },
-            //           itemCount: _categoryBloc!.categories!.length,
-            //           gridDelegate:
-            //               const SliverGridDelegateWithFixedCrossAxisCount(
-            //             crossAxisCount: 2,
-            //           ),
-            //           // separatorBuilder:
-            //           //     (BuildContext context, int index) =>
-            //           //         SizedBox(
-            //           //   width: 10,
-            //           // ),
-            //         ),
-            //       )
-            //     ])
           ),
         ));
 
-    // Scaffold(
-    //     backgroundColor: Color(0xfff5f5f5),
-    //     body: RefreshIndicator(
-    //       onRefresh: () async {},
-    //       child: BlocBuilder<CategoryBloc, CategoryState>(
-    //           builder: (context, state) {
-    //         if (state is CategoryErrorState) {
-    //           _categories = [];
-    //           SchedulerBinding.instance?.addPostFrameCallback((_) {
-    //             displaySnackBar(title: state.errors, scaffoldKey: _scaffoldKey);
-    //           });
-    //         }
-    //         if (state is CategoriesSuccessState) {
-    //           if (_categories == null) {
-    //             _categories = [];
-    //           } else {}
-    //         }
-    //         if (state is SubCategoriesSuccessState) {
-    //           if (_subCategories == null) {
-    //             _subCategories = [];
-    //           }
-    //           if (_selectedCategory != null &&
-    //               state.items != null &&
-    //               state.items!.length != 0) {
-    //             if (_showRealLength == false) {
-    //               SchedulerBinding.instance?.addPostFrameCallback((_) {
-    //                 setState(() {
-    //                   _showRealLength = true;
-    //                 });
-    //               });
-    //             }
-    //             if (_subCategories!.length != 0 &&
-    //                 _subCategories!.first.id != state.items!.first.id) {
-    //               _subCategories!.addAll(state.items!);
-    //             } else if (_subCategories!.length == 0) {
-    //               _subCategories!.addAll(state.items!);
-    //             }
-    //           }
-    //         }
 
-    //         return CustomScrollView(
-    //             physics: BouncingScrollPhysics(),
-    //             controller: _scrollController,
-    //             slivers: [
-    //               SliverToBoxAdapter(
-    //                 child: GridView.builder(
-    //                   // scrollDirection: Axis.vertical,
-
-    //                   shrinkWrap: true,
-    //                   itemBuilder: (context, index) {
-    //                     if (_categoryBloc!.categories!.isNotEmpty) {
-    //                       return CategoryWidget(
-    //                           model: _categoryBloc!.categories![index],
-    //                           onTap: () => onCategoryTap(
-    //                               _categoryBloc!.categories![index]));
-    //                     }
-    //                     return CategoryEmptyWidget();
-    //                   },
-    //                   itemCount: _categoryBloc!.categories!.length,
-    //                   gridDelegate:
-    //                       const SliverGridDelegateWithFixedCrossAxisCount(
-    //                     crossAxisCount: 2,
-    //                   ),
-    //                   // separatorBuilder:
-    //                   //     (BuildContext context, int index) =>
-    //                   //         SizedBox(
-    //                   //   width: 10,
-    //                   // ),
-    //                 ),
-    //               )
-    //             ]);
-    //       }),
-    //     ));
   }
 
   onCategoryTap(

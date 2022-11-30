@@ -55,6 +55,7 @@ class ShippingBloc extends Bloc<ShippingInitEvent, ShippingState> {
   }
 
   Future<void> getCategory({required subNature}) async {
+    print('uuuu');
     String? value = await storage.read(key: "lang");
 
     Map<String, String> queryParams =
@@ -89,8 +90,6 @@ class ShippingBloc extends Bloc<ShippingInitEvent, ShippingState> {
       final response = await homeRepository.getSubCategories(event.id);
       if (response.status!) {
         final category = response;
-        print(category);
-        print('[[[[[[[[[[[[[[[[[[[[');
         emit(ShippingSuccessSubState(category));
       }
     } catch (e) {
@@ -101,8 +100,8 @@ class ShippingBloc extends Bloc<ShippingInitEvent, ShippingState> {
   void _mapCategoryService(
       ShippingCategoryServiceEvent event, Emitter<ShippingState> emit) async {
     try {
-      final response = await homeRepository.getSubCategories(event.id);
-      if (response.status!) {
+      final response = await homeRepository.getServiceCompany(event.id);
+      if (response.data!=null) {
         final category = response;
         print(category.data![0].name);
         print('[[[[[[[[[[[[[[[[[[[[');
