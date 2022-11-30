@@ -9,7 +9,13 @@ abstract class AboutUsState extends Equatable {
 
 class AboutUsInitial extends AboutUsState {}
 
-class ShopIntresSuccessStates extends AboutUsState {}
+class AboutUsSuccessStates extends AboutUsState {
+  final AboutResponse items;
+  AboutUsSuccessStates(this.items){
+    print('object');
+    print('object${items.banners!.first!.id}');
+  }
+}
 
 class hopIntresErrorStates extends AboutUsState {
   String error;

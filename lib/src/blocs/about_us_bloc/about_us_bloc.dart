@@ -21,19 +21,13 @@ class AboutUsBloc extends Bloc<AboutUsEvent, AboutUsState> {
     AboutResponse? response;
     response = await aboutUsRepo.getItemData();
     if (response == null) {
-      print('rrrr');
       emit(hopIntresErrorStates(error: "error"));
     } else {
       if (aboutCat == null) {
         print('wwwvvvvv');
-        final items = response.videos;
-
-        // items!.first.. = true;
-        aboutCat = items;
-        print(aboutCat);
+        final items = response;
         print('wwwvvvvv');
-      }
-      emit(ShopIntresSuccessStates());
-    }
+      emit(AboutUsSuccessStates(items));
+    }}
   }
 }

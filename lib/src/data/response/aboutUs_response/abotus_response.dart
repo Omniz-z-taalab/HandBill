@@ -1,4 +1,5 @@
 import '../../model/about_us/aboutUsModel.dart';
+import 'AboutResponse.dart';
 class AboutUsResponse {
   List<Videos>? videos;
   List<Banners>? banners;

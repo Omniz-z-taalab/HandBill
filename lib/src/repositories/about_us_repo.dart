@@ -14,17 +14,17 @@ class AboutUsRepo {
 
   Future<AboutResponse?> getItemData() async {
     String? value = await storage.read(key: "lang");
-    // Map<String, String> queryParams = ({"secret": APIData.secretKey,"language": value!,});
+    Map<String, dynamic> queryParams = ({"language": value,});
 
     AboutResponse? aboutUsResponse;
     Response? response;
     try {
-      response = await _dio.get(APIData.getAboutItem);
+      response = await _dio.get(APIData.getAboutItem,queryParameters: queryParams);
       // log(response.data);
       log('oooooooooooo');
       log("data: ${jsonEncode(response.data[0])}");
-
       aboutUsResponse = await AboutResponse.fromJson(response.data[0]);
+      return aboutUsResponse;
     } catch (error, stackTrace) {
       aboutUsResponse = null;
       log("$tag error : $error , stackTrace:  $stackTrace");
