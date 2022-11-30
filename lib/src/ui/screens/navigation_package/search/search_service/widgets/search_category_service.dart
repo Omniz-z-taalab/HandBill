@@ -7,15 +7,16 @@ import '../../../../../../common/constns.dart';
 import '../../../../../../data/model/local/route_argument.dart';
 import '../../../../../../data/model/serviceCategories_model.dart';
 import '../../../../details_package/company/company_screen.dart';
+import '../../../../services_package/shipping/Service_first_company.dart';
+import '../shipping_screen.dart';
 import '../company_service_screen.dart';
 
 Widget ServiceCompany(ServiceModel model,context) {
   return Padding(
     padding: const EdgeInsets.only(right: 10.0,left: 10),
     child: InkWell(onTap: () {
-      Navigator.pushNamed(context, CompanyServiceScreen.routeName,
-          arguments: RouteArgument(param: model.id));
-      print('omniaaaaaaaaaaaaaaa');
+      Navigator.pushNamed(context, ShippingScreen.routeName,
+          arguments: RouteArgument(param: model));
       print(model.id);
 
     }, child: LayoutBuilder(

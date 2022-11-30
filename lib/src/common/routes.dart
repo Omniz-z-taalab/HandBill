@@ -28,7 +28,7 @@ import 'package:hand_bill/src/ui/screens/services_package/patented/patented_add_
 import 'package:hand_bill/src/ui/screens/services_package/patented/patented_details_screen.dart';
 import 'package:hand_bill/src/ui/screens/services_package/patented/patents_screen.dart';
 import 'package:hand_bill/src/ui/screens/common/services_company/services_company_details_screen.dart';
-import 'package:hand_bill/src/ui/screens/services_package/shipping/shipping_screen.dart';
+import 'package:hand_bill/src/ui/screens/navigation_package/search/search_service/shipping_screen.dart';
 import 'package:hand_bill/src/ui/screens/auth/auth_screen.dart';
 import 'package:hand_bill/src/ui/screens/auth/forget_password_screen.dart';
 import 'package:hand_bill/src/ui/screens/auth/login_screen.dart';
@@ -53,6 +53,7 @@ import '../ui/screens/navigation_package/search/Search_market/search_screen1.dar
 import '../ui/screens/navigation_package/search/Search_market/sub_categoies_screen.dart';
 import '../ui/screens/navigation_package/search/Search_market/sub_sub_categorie.dart';
 import '../ui/screens/navigation_package/search/search_service/company_service_screen.dart';
+import '../ui/screens/services_package/shipping/Service_first_company.dart';
 
 class RouteGenerator {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -157,8 +158,8 @@ class RouteGenerator {
         return CustomPageRoute(widget: HandmadeAddScreen(routeArgument: args));
       case ImageFullScreen.routeName:
         return CustomPageRoute(widget: ImageFullScreen(routeArgument: args));
-      case SubCategories.routeName:
-        return CustomPageRoute(widget: SubCategories(routeArgument: args));
+      case SubCategories.routeName:return CustomPageRoute(widget: SubCategories(routeArgument: args));
+      case ServiceFirstCompany.routeName:return CustomPageRoute(widget: ServiceFirstCompany(routeArgument: args));
       case SubSubCatScreen.routeName:
         return CustomPageRoute(widget: SubSubCatScreen(routeArgument: args));
     }

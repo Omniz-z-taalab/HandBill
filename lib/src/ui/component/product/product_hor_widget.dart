@@ -74,7 +74,7 @@ class ProductHorWidget extends StatelessWidget {
                           onTap: () {
                             if (user == null) {
                               Fluttertoast.showToast(
-                                  msg: "toast.login".tr());
+                                  msg: "login".tr());
                             } else {
                               if (model.isFavourite == '0') {
                                 favoriteBloc.add(RemoveFromFavoriteEvent(

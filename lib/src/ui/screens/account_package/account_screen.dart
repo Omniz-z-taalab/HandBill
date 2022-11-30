@@ -31,7 +31,7 @@ import '../services_package/hand_made/hand_made_screen.dart';
 import '../services_package/jobs/companies_jobs_screen.dart';
 import '../services_package/offers/offers_screen.dart';
 import '../services_package/patented/patents_screen.dart';
-import '../services_package/shipping/shipping_screen.dart';
+import '../navigation_package/search/search_service/shipping_screen.dart';
 import 'edit_account_screen.dart';
 import 'help/help_center_screen.dart';
 

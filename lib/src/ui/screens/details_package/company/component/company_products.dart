@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hand_bill/src/blocs/company/company_bloc.dart';
@@ -114,7 +115,7 @@ class _CompanyProductsState extends State<CompanyProducts>
               ? SliverToBoxAdapter()
               : _featuredList!.length == 0
                   ? SliverToBoxAdapter()
-                  : HomeLabel(title: "Featured Products"),
+                  : HomeLabel(title: "FeaturedProducts".tr()),
           SliverToBoxAdapter(
               child: _featuredList == null
                   ? Container(

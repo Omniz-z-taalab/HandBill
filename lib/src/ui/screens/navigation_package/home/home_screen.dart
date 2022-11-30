@@ -32,7 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int _sliderPosition = 0;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  // FavoriteBloc? _favoriteBloc;
   late CategoryBloc _categoryBloc;
   late ExploreBloc _exploreBloc;
 

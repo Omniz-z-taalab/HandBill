@@ -46,8 +46,8 @@ class _CompanyScreenState extends State<CompanyScreen> {
 
   @override
   void initState() {
-    print('wwwwwwwwwwwwwwwwwwwwwwww');
     _companyId = widget.routeArgument.param!;
+    print('wwwqqqq');
     // savedId = _company.id.toString();
     _companyBloc = BlocProvider.of<CompanyBloc>(context);
     _companyBloc.page = 1;
@@ -96,10 +96,8 @@ class _CompanyScreenState extends State<CompanyScreen> {
                       BlocListener<CompanyBloc, CompanyState>(
                           listener: (context, state) {
                         if (state is GetCompanySuccessState) {
-                          print('seeeeeeeee');
 
                           company = state.company!;
-                          print('seeeeeeeee');
                         }
                         if (state is GetCompanyCategoriesSuccessState) {
                           setState(() {

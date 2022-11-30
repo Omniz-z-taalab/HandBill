@@ -88,7 +88,20 @@ class HomeRepository {
       return subCategoryModel;
   }
 
-  Future<ServiceCompanyResponse> getServiceCompany(String? id) async {
+  Future<ServiceCompanyResponse> getServiceCompany(int? id) async {
+    String? value = await storage.read(key: "lang");
+    print(id.toString());
+    Map<String, dynamic> queryParams = ({
+      "language":value
+    });
+    ServiceCompanyResponse serviceCompanyResponse;
+    Response response = await _dio.get('${APIData.getShippingCompanies}${id}', queryParameters: queryParams);
+    serviceCompanyResponse = ServiceCompanyResponse.fromJson(response.data);
+    print(response.data);
+    print('aaaaaaaaaaaaa');
+    return serviceCompanyResponse;
+  }
+  Future<ServiceCompanyResponse> getServiceCategory(String? id) async {
     String? value = await storage.read(key: "lang");
     print(id.toString());
     Map<String, dynamic> queryParams = ({

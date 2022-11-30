@@ -84,6 +84,7 @@ class ServiceRepository {
   }
 
   Future<ServicecategoryResponse> ServicesData() async {
+    print('yyyyyyyyyyy');
     String? value = await storage.read(key: "lang");
     var queryParameters = {"secret": APIData.secretKey,"language": value};
     ServicecategoryResponse? serviceResponse;

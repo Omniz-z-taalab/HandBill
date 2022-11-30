@@ -39,9 +39,10 @@ class _SearchSuppliersState extends State<SearchSuppliers> {
 
   @override
   Widget build(BuildContext context) {
+
     _onSubmitted(value) async {
       if (_searchController.text.length >= 1) {
-          // serviceBloc.add(SearchMarketEvent(searchKey: value));
+          serviceBloc.add(SearchMarketEvent(searchKey: value));
       }
     }
 
@@ -103,15 +104,14 @@ class _SearchSuppliersState extends State<SearchSuppliers> {
         }
         if (state is searchSuccess) {
           companies = state.company;
+          print(companies);
         }
       }, builder: (context, state) {
         return SingleChildScrollView(
           child: SafeArea(
             child: Column(children: [
               _searchController.text.isEmpty
-                  ? Container(
-
-              )
+                  ? Container()
                   : companies == null
                       ? Container(
                           height: 100,

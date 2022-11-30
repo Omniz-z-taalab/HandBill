@@ -31,6 +31,7 @@ class ShippingBloc extends Bloc<ShippingInitEvent, ShippingState> {
     on<ShippingSubSubCategoryEvent>(_mapSubCategory);
     on<ShippingSliderServiceEvent>(_mapBannerCompanies);
     on<ShippingCategoryServiceEvent>(_mapCategoryService);
+    on<CategoryFirstServiceEvent>(_mapServiceCategory);
   }
 
   // CompanyModel? companyModel;
@@ -97,8 +98,7 @@ class ShippingBloc extends Bloc<ShippingInitEvent, ShippingState> {
     }
   }
 
-  void _mapCategoryService(
-      ShippingCategoryServiceEvent event, Emitter<ShippingState> emit) async {
+  void _mapCategoryService(ShippingCategoryServiceEvent event, Emitter<ShippingState> emit) async {
     try {
       final response = await homeRepository.getServiceCompany(event.id);
       if (response.data!=null) {
@@ -106,6 +106,19 @@ class ShippingBloc extends Bloc<ShippingInitEvent, ShippingState> {
         print(category.data![0].name);
         print('[[[[[[[[[[[[[[[[[[[[');
         emit(GebServiceCatSuccessStates(category));
+      }
+    } catch (e) {
+      // emit(ShippingErrorSubState(e.toString()));
+    }
+  }
+  void _mapServiceCategory(CategoryFirstServiceEvent event, Emitter<ShippingState> emit) async {
+    try {
+      final response = await homeRepository.getServiceCategory(event.id);
+      if (response.data!=null) {
+        final category = response;
+        print(category.data![0].name);
+        print('[[[[[[[[[[[[[[[[[[[[');
+        emit(GebServiceSuccessStates(category));
       }
     } catch (e) {
       // emit(ShippingErrorSubState(e.toString()));

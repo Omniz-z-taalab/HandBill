@@ -90,8 +90,6 @@ class _CompanyBoardState extends State<CompanyBoard>
   _getData() async {
     _company = Company();
     _company = widget.model;
-    print(_company!.name!);
-    print('ddddddddddddddddddd');
     if (_company != null) {
       name = _company!.name;
       _images = widget.model.images ?? [];
@@ -143,7 +141,7 @@ class _CompanyBoardState extends State<CompanyBoard>
                               arguments:
                                   RouteArgument(param: _images[index].url)),
                           child: CachedNetworkImage(
-                              imageUrl: _images[index].url!,
+                              imageUrl: _images[index].url! == null ?placeholderLogo :_images[index].url!,
                               fit: BoxFit.cover,
                               placeholder: (context, url) => Center(
                                   heightFactor: 1,
@@ -154,6 +152,7 @@ class _CompanyBoardState extends State<CompanyBoard>
                                   new Image.asset(
                                       "assets/images/loading.gif")));
                     }
+
                   })),
           Positioned(
               bottom: 16,

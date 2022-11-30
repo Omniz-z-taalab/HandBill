@@ -32,4 +32,4 @@ class FetchSubCategoriesEvent extends ServiceEvent {
   final int? index;
   FetchSubCategoriesEvent({required this.categoryId, this.index});
 }
-class FetchData extends ServiceEvent{}
+class  FetchData extends ServiceEvent{}

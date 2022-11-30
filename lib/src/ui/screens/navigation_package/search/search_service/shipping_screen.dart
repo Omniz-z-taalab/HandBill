@@ -26,14 +26,14 @@ import 'package:hand_bill/src/ui/screens/services_package/shipping/shippinhWidge
 import 'package:hand_bill/src/ui/screens/services_package/shipping/states.dart';
 import 'package:hand_bill/src/ui/screens/services_package/shipping/widget/service_banner_widget.dart';
 
-import '../../../../common/api_data.dart';
-import '../../../../data/model/local/route_argument.dart';
-import '../../../../data/model/serviceCategories_model.dart';
-import '../../../../data/response/banner/banner_service_response.dart';
-import '../../navigation_package/categories/sub_sub_categories.dart';
-import '../../navigation_package/home/componenet/slider_empty_widget.dart';
-import 'ShippingBloc /ShippingEvent.dart';
-import 'ShippingBloc /ShippingState.dart';
+import '../../../../../common/api_data.dart';
+import '../../../../../data/model/local/route_argument.dart';
+import '../../../../../data/model/serviceCategories_model.dart';
+import '../../../../../data/response/banner/banner_service_response.dart';
+import '../../categories/sub_sub_categories.dart';
+import '../../home/componenet/slider_empty_widget.dart';
+import '../../../services_package/shipping/ShippingBloc /ShippingEvent.dart';
+import '../../../services_package/shipping/ShippingBloc /ShippingState.dart';
 
 
 class ShippingScreen extends StatefulWidget {
@@ -63,11 +63,11 @@ class _ShippingScreenState extends State<ShippingScreen> {
     // TODO: implement initState
     super.initState();
     print('[[]]');
-    model = widget.routeArgument!.param;
-    print(widget!.routeArgument!.id);
+    // print(widget!.routeArgument!);
+     model = widget.routeArgument!.param;
     shippingBloc = BlocProvider.of<ShippingBloc>(context);
     shippingBloc!.add(ShippingSliderServiceEvent());
-    shippingBloc!.add(ShippingCategoryServiceEvent(model!.id));
+    shippingBloc!.add(ShippingCategoryServiceEvent(model!.id!));
   }
 
   @override

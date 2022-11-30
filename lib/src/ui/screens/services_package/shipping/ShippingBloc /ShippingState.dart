@@ -60,6 +60,12 @@ class GebServiceCatSuccessStates extends ShippingState {
 
   GebServiceCatSuccessStates(this.category);
 }
+class GebServiceSuccessStates extends ShippingState {
+  ServiceCompanyResponse category;
+
+
+  GebServiceSuccessStates(this.category);
+}
 class GetSBannerCatSuccessStates extends ShippingState {}
 
 class GetSubSubCatLoadingState extends ShippingState {}

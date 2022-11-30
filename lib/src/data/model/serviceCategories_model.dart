@@ -118,12 +118,6 @@ class Images {
   }
 }
 class ServiceModel {
-  // List<SubCategoryModel>? subCategoryModel;
-  // set setSubCategories(List<SubCategoryModel>? value) {
-  //   subCategoryModel = value;
-  // }
-  //
-  // get subCategories => subCategoryModel;
 
   dynamic? _id;
   dynamic? _name;
@@ -185,53 +179,6 @@ class ServiceModel {
   }
 }
 
-// class ServiceCategoryModel {
-//   // List<SubCategoryModel>? subCategoryModel;
-//   // set setSubCategories(List<SubCategoryModel>? value) {
-//   //   subCategoryModel = value;
-//   // }
-//   //
-//   // get subCategories => subCategoryModel;
-//
-//   dynamic? _id;
-//   dynamic? _name;
-//   dynamic? _image;
-//   dynamic? _selected;
-//
-//   dynamic? get id => _id;
-//
-//   dynamic? get name => _name;
-//   ImageModel get image => _image;
-//
-//   bool? get selected => _selected;
-//
-//   ServiceCategoryModel(
-//       {dynamic? id, dynamic? name, dynamic? selected,ImageModel? image}) {
-//     _id = id;
-//     _name = name;
-//     _selected = selected;
-//     _image = image;
-//   }
-//
-//   ServiceCategoryModel.fromJson(dynamic json) {
-//     _id = json["id"];
-//     _name = json["name"];
-//     _image = json["image"];
-//
-//     _selected = false;
-//   }
-//
-//   Map<dynamic, dynamic> toJson() {
-//     var map = <dynamic, dynamic>{};
-//     map["id"] = _id;
-//     map["name"] = _name;
-//     map["image"] = _image;
-//
-//     return map;
-//   }
-//
-//
-// }
 class ServiceCategoryModel {
 List<GetDataCategory>? data;
 bool? status;

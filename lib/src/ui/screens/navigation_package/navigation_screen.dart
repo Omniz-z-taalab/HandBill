@@ -57,7 +57,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
     _pages = [
       HomeScreen(),
       CategoriesScreen(),
-      ShippingMainScreen(),
+      ServiceScreen(),
       // ServicesScreen(),
       // ExploreScreen(),
       AccountScreen()
