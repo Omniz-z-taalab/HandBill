@@ -473,6 +473,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                   element.isFavourite = true;
                 });
               }
+              Fluttertoast.showToast(msg: state.message!);
+
             });
             Fluttertoast.showToast(
                 msg: state.message ?? '',
@@ -537,7 +539,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                           // height: 200,
                                           imageUrl: product!.images!.isEmpty
                                               ? placeholder
-                                              : '${APIData.domainLink}${product.images![0].thump!}',
+                                              : '${product.images![0].thump!}',
                                           placeholder: (context, url) => Center(
                                               heightFactor: 1,
                                               widthFactor: 1,
@@ -557,7 +559,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                   productId: product!.id,
                                                   user: user!));
                                               product.isFavourite = true;
-                                            } else {
+                                            } else if(user == null){
+                                              Fluttertoast.showToast(msg: 'Log in first',backgroundColor: Colors.green,fontSize: 20,);
+                                              }else{
                                               favoriteBloc.add(
                                                   RemoveFromFavoriteEvent(
                                                       user: user!,

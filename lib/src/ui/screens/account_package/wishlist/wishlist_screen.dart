@@ -100,11 +100,14 @@ class _WishListScreenState extends State<WishListScreen> {
                   slivers: [
                     _items == null
                         ? SliverToBoxAdapter(
-                       child: Center(
-                          child: Text('data is empty',style: TextStyle(
-                            color: Colors.black
-                          ),) ,
-                        )
+                       child: Padding(
+                         padding: const EdgeInsets.only(top: 200.0),
+                         child: Center(
+                            child: Text('data is empty',style: TextStyle(
+                              color: Colors.black,fontSize: 25
+                            ),) ,
+                          ),
+                       )
                     )
                         // SliverToBoxAdapter(
                         //     child: StaggeredGridView.countBuilder(

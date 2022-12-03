@@ -6,11 +6,12 @@ import 'package:hand_bill/src/ui/screens/details_package/product_details/product
 import '../../../../../../data/model/local/route_argument.dart';
 import '../../../../../../data/response/search/search_product_response.dart';
 import '../../../../details_package/company/company_screen.dart';
+import '../Product_Details.dart';
 
 Widget SearchProduct(DataProductSearch model,context) {
   return InkWell(
     onTap: () {
-      Navigator.pushNamed(context, ProductDetailsScreen.routeName,
+      Navigator.pushNamed(context, ProductDetails.routeName,
           arguments: RouteArgument(param: model));
     },
     child: Padding(
