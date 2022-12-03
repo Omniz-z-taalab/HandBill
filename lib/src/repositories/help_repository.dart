@@ -12,7 +12,7 @@ class HelpRepository {
   Future<AgentResponse> getAgentData() async {
     String? value = await storage.read(key: "lang");
 
-    Map<String, String> queryParams = ({"secret": APIData.secretKey,"language":value!});
+    Map<String, dynamic> queryParams = ({"secret": APIData.secretKey,"language":value});
 
     late AgentResponse agentResponse;
     Response response;
@@ -35,13 +35,13 @@ class HelpRepository {
   Future<HelpCenterResponse> getHelpData() async {
     String? value = await storage.read(key: "lang");
 
-     Map<String, String> queryParams = ({"language": value!});
+     Map<String, dynamic> queryParams = ({"language": value});
 
     late HelpCenterResponse helpCenterResponse;
     Response response;
     try {
       response =
-      await _dio.get(APIData.helpCenter);
+      await _dio.get(APIData.helpCenter,queryParameters: queryParams);
 
       helpCenterResponse = HelpCenterResponse.fromJson(response.data);
       if (helpCenterResponse.status!) {

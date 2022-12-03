@@ -99,14 +99,12 @@ class _NavigationScreenState extends State<NavigationScreen> {
         appBar: _selectedPageIndex == 0
             ? AppBar(
           elevation: 0,
-          toolbarHeight: 33,
+          toolbarHeight: 35,
                 backgroundColor: Colors.white,
                 title:
                   Container(
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 2.0),
-                        child: Image.asset("assets/images/hb_logo.jpeg", height: 31),
-                      )),
+                      child: Image.asset("assets/images/hb_logo.jpeg", height: 100,),
+                      ),
 
 
               )
@@ -114,7 +112,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
                 ? MyAppBarSearch()
                 : _selectedPageIndex == 2
                     ? MyAppBar()
-                    : AppBar(
+                    :
+        AppBar(
           elevation: 0,
           toolbarHeight: 33,
           backgroundColor: Colors.white,
@@ -122,7 +121,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
           Container(
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 2.0),
-                child: Image.asset("assets/images/hb_logo.jpeg", height: 31),
+                child: Image.asset("assets/images/hb_logo.jpeg", height: 100),
               )),
 
         ),

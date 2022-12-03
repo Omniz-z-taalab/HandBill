@@ -10,8 +10,8 @@ class AssetsRepository {
 
   Future<AssetsResponse> getAssetsData() async {
     String? value = await storage.read(key: "lang");
-    Map<String, String> queryParams = ({
-        "language": value!,});
+    Map<String, dynamic> queryParams = ({
+        "language": value,});
     late AssetsResponse assetsResponse;
     try {
       Response response =

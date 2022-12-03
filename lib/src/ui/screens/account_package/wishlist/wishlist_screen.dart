@@ -73,8 +73,8 @@ class _WishListScreenState extends State<WishListScreen> {
             child: BlocListener<FavoriteBloc, FavoriteState>(
                 listener: (context, state) {
               if (state is FavoriteErrorState) {
-
                 _items = [];
+                print('data is empty');
                 // showToast(state.error!, context);
                 // BlocProvider.of<FavoriteBloc>(context).isFetching = false;
               }
@@ -95,10 +95,17 @@ class _WishListScreenState extends State<WishListScreen> {
             }, child: BlocBuilder<FavoriteBloc, FavoriteState>(
                     builder: (context, state) {
               return CustomScrollView(
+                controller: _scrollController,
                   physics: BouncingScrollPhysics(),
                   slivers: [
                     _items == null
-                        ? SizedBox()
+                        ? SliverToBoxAdapter(
+                       child: Center(
+                          child: Text('data is empty',style: TextStyle(
+                            color: Colors.black
+                          ),) ,
+                        )
+                    )
                         // SliverToBoxAdapter(
                         //     child: StaggeredGridView.countBuilder(
                         //         padding: EdgeInsets.symmetric(
@@ -118,7 +125,7 @@ class _WishListScreenState extends State<WishListScreen> {
                             ? CenterWidgetListSliver(
                                 label: "your wishlist is currently empty")
                             : SliverToBoxAdapter(
-                                child: Column(children: [
+                                 child: Column(children: [
                                 // SizedBox(height: 16),
                                 GridView.count(
                                     childAspectRatio: 1 / 1.5,

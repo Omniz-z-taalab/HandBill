@@ -14,8 +14,8 @@ class AuctionsRepository {
   Future<AuctionsResponse> getAuctionsData({required int page}) async {
     String? value = await storage.read(key: "lang");
 
-    Map<String, String> queryParams = ({
-      "language": value!,
+    Map<String, dynamic> queryParams = ({
+      "language": value,
       "secret": APIData.secretKey,
       "page": page.toString(),
       "paginate": "6"

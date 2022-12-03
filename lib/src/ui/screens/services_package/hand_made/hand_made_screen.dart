@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -74,7 +75,7 @@ class _HandmadeScreenState extends State<HandmadeScreen> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: RegularAppBar(
-            label: "categories.hand_made",
+            label: "hand_made".tr(),
             widget: InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, MyHandmadeScreen.routeName);

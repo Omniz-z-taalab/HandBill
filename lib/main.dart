@@ -116,7 +116,7 @@ class MyApp extends StatelessWidget {
                       debugShowCheckedModeBanner: false,
                       theme: _globalRepository.liteTheme,
                       themeMode: ThemeMode.light,
-                      locale: context.locale,
+                      locale: context.fallbackLocale,
                       // supportedLocales: [
                       //   const Locale('en'),
                       //   const Locale('ar'),

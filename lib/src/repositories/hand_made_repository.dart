@@ -17,15 +17,14 @@ class HandmadeRepository {
   Dio _dio = Dio();
 
   Future<AllHandmadeResponse?> getAllHandmadeData({required int page}) async {
-    String? value = await storage.read(key: "lang");
-
-    Map<String, String> queryParams = ({
-      "language":value!,
+    String? value = await storage.read(key: "lang") ?? 'en';
+    Map<String, dynamic> queryParams = ({
+      "language": value,
       "secret": APIData.secretKey,
       "page": page.toString(),
       "paginate": "6"
     });
-
+    print(page.toString());
     late AllHandmadeResponse handmadeResponse;
     Response response;
     try {
@@ -41,21 +40,19 @@ class HandmadeRepository {
     return handmadeResponse;
   }
 
-  Future<AllHandmadeResponse?> getMyHandmadeData(
-      { required User user}) async {
+  Future<AllHandmadeResponse?> getMyHandmadeData({required User user}) async {
     String? value = await storage.read(key: "lang");
 
     _dio.options.headers["Authorization"] =
         "Bearer " + user.apiToken.toString();
     _dio.options.headers["Accept"] = "application/json";
-    Map<String,dynamic> queryParam = ({
-      "language":value
-    });
+    Map<String, dynamic> queryParam = ({"language": value});
     late AllHandmadeResponse handmadeResponse;
     Response response;
     try {
-      response =
-          await _dio.get(APIData.myHandmade,);
+      response = await _dio.get(
+        APIData.myHandmade,
+      );
 
       log("${jsonEncode(response.data)}");
 
@@ -84,14 +81,14 @@ class HandmadeRepository {
       "title": model.title,
       "price": model.price,
       "description": model.description,
-       // "first_image_hand_made": model.images![0].url!
+      // "first_image_hand_made": model.images![0].url!
     };
     if (images.length == 1) {
       file1 = images[0] as File;
       _map["first_image_hand_made"] = await MultipartFile.fromFile(file1.path,
           filename: file1.path.split('/').last);
     } else if (images.length == 2) {
-      file1 = images[0] as File ;
+      file1 = images[0] as File;
       file2 = images[1] as File;
       _map["first_image_hand_made"] = await MultipartFile.fromFile(file1.path,
           filename: file1.path.split('/').last);
@@ -116,7 +113,7 @@ class HandmadeRepository {
 
     try {
       response = await _dio.post(APIData.addHandmade, data: formData);
-print(response.data);
+      print(response.data);
       log("${jsonEncode(response.data)}");
 
       commonResponse = CommonResponse.fromJson(response.data);
@@ -133,9 +130,11 @@ print(response.data);
         "Bearer " + user.apiToken.toString();
     _dio.options.headers["Accept"] = "application/json";
 
-    Map<String, String> queryParams =
-        ({"secret": APIData.secretKey, "id": model.id.toString(),
-        "language": value!});
+    Map<String, dynamic> queryParams = ({
+      "secret": APIData.secretKey,
+      "id": model.id.toString(),
+      "language": value
+    });
     Response response;
 
     CommonResponse? commonResponse;

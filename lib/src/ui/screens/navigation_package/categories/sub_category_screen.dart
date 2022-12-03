@@ -384,53 +384,55 @@ class _SubCategoriesState extends State<SubCategories>
                 backgroundColor: Color(0xfff5f5f5),
                 appBar:
                     RegularAppBar(label: widget.routeArgument!.param.toString()),
-                body: SizedBox(
-                  height: 700,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 200,
-                          child: CarouselSlider.builder(
-                            itemCount: sliders.length,
-                            itemBuilder: (BuildContext context, int index,
-                                int pageViewIndex) {
-                              if (sliders.isNotEmpty) {
-                                return SliderWidget(
-                                    model: sliders[index]);
-                              }
-                              return SliderEmptyWidget();
-                            },
-                            options: CarouselOptions(
-                                viewportFraction: 1,
-                                initialPage: 0,
-                                // enlargeCenterPage: true,
-                                scrollDirection: Axis.horizontal,
-                                autoPlay: true,
-                                enableInfiniteScroll: true,
-                                autoPlayInterval: Duration(milliseconds: 4000),
-                                autoPlayCurve: Curves.easeOutSine,
-                                onPageChanged: (index, reason) {
-                                  setState(() {
-                                    _sliderPosition = index;
-                                  });
-                                }),
+                body: SingleChildScrollView(
+                  child: SizedBox(
+                    height: 700,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 200,
+                            child: CarouselSlider.builder(
+                              itemCount: sliders.length,
+                              itemBuilder: (BuildContext context, int index,
+                                  int pageViewIndex) {
+                                if (sliders.isNotEmpty) {
+                                  return SliderWidget(
+                                      model: sliders[index]);
+                                }
+                                return SliderEmptyWidget();
+                              },
+                              options: CarouselOptions(
+                                  viewportFraction: 1,
+                                  initialPage: 0,
+                                  // enlargeCenterPage: true,
+                                  scrollDirection: Axis.horizontal,
+                                  autoPlay: true,
+                                  enableInfiniteScroll: true,
+                                  autoPlayInterval: Duration(milliseconds: 4000),
+                                  autoPlayCurve: Curves.easeOutSine,
+                                  onPageChanged: (index, reason) {
+                                    setState(() {
+                                      _sliderPosition = index;
+                                    });
+                                  }),
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 600,
-                          child: ConditionalBuilder(
-                            condition: subCategoryModel != null,
-                            builder: (context) => item(subCategoryModel!),
-                            fallback: (context) => Container(
-                              color: Colors.white,
-                              child: Center(
-                                child: CircularProgressIndicator(),
+                          SizedBox(
+                            height: 600,
+                            child: ConditionalBuilder(
+                              condition: subCategoryModel != null,
+                              builder: (context) => item(subCategoryModel!),
+                              fallback: (context) => Container(
+                                color: Colors.white,
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ));

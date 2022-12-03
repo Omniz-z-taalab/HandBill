@@ -96,8 +96,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                 alignment: Alignment.topLeft,
                 duration: Duration(seconds: 0),
                 child: Image(
-                  height: height * 0.2 + 20,
-                  width: width * 0.8 + 10,
+                  height: height * 0.4 + 40,
+                  width: width * 0.7 + 40,
                   fit: BoxFit.contain,
                   image: AssetImage('assets/images/hb_logo.jpeg'),
                 ),

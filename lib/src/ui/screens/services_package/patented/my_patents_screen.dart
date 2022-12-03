@@ -123,9 +123,7 @@ class _MyPatentsScreenState extends State<MyPatentsScreen> {
                   controller: _scrollController,
                   slivers: [
                     _items == null
-                        ? LoadingSliver()
-                        : _items!.length == 0
-                            ? CenterWidgetListSliver(
+                        ?  CenterWidgetListSliver(
                                 label: "your patents is empty")
                             : SliverToBoxAdapter(
                                 child: ListView.separated(

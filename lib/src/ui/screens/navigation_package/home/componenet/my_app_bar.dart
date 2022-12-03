@@ -25,8 +25,8 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Image.asset("assets/images/hb_logo.jpeg",
-                                height: 32),
+                            Image.asset(placeholderLogo,
+                                height: 82,width: 80,),
                             Row(children: [
                               SizedBox(width: 20),
                               InkWell(

@@ -24,7 +24,7 @@ class MyAppBarSearch extends StatelessWidget implements PreferredSizeWidget{
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
-    Image.asset("assets/images/hb_logo.jpeg",height: 32),
+    Image.asset("assets/images/hb_logo.jpeg",height: 62,width: 63,),
 
       InkWell(
           onTap: () => Navigator.pushNamed(

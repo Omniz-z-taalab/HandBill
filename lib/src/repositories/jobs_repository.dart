@@ -22,10 +22,10 @@ class JobsRepository {
       {required int page, int? categoryId, int? subcategoryId}) async {
     String? value = await storage.read(key: "lang");
 
-    Map<String, String> queryParams;
+    Map<String, dynamic> queryParams;
     if (categoryId == null || subcategoryId == null) {
       queryParams = ({
-        "language": value!,
+        "language": value,
         "secret": APIData.secretKey,
         "page": page.toString(),
         "paginate": "6"
@@ -63,8 +63,8 @@ class JobsRepository {
   Future<JobsCategoriesResponse?> getJobsCategories() async {
     String? value = await storage.read(key: "lang");
 
-    Map<String, String> queryParams = ({"secret": APIData.secretKey,
-    "language": value!});
+    Map<String, dynamic> queryParams = ({"secret": APIData.secretKey,
+    "language": value});
 
     late JobsCategoriesResponse jobsCategoriesResponse;
     Response response;
