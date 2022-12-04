@@ -554,7 +554,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                                       right: 12,
                                       child: InkWell(
                                           onTap: () {
-                                            if (product.isFavourite == false) {
+                                            if(user == null){
+                                              Fluttertoast.showToast(msg: 'Log in first',backgroundColor: Colors.green,fontSize: 20,);
+
+                                            }
+                                            else if (product.isFavourite == false) {
                                               favoriteBloc.add(AddToFavoriteEvent(
                                                   productId: product!.id,
                                                   user: user!));

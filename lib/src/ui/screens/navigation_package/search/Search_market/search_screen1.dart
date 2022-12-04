@@ -64,12 +64,11 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
         if (selectedPage == 1) {
           _searchBloc.add(SearchComEvent(searchKey: value));
         }
-        if (product!.isEmpty) {
+        if (_searchController.text.isEmpty) {
           product!.clear();
-          product = null;
-        } else if (companyy!.isEmpty) {
+          // product = null;
+        } else if (_searchController.text!.isEmpty) {
           companyy!.clear();
-          companyy = null;
         }
         // }
       }
@@ -100,8 +99,16 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                   _onSubmitted(value);
                   if (_searchController.text.isEmpty) {
                     setState(() {
-                      product!.clear();
-                      companyy!.clear();
+                      if (selectedPage == 0) {
+                        product!.clear();
+                        product = [];
+                      }
+                    });
+                    setState(() {
+                      if (selectedPage == 1) {
+                        companyy!.clear();
+                        companyy = [];
+                      }
                     });
                   }
                 },
@@ -149,25 +156,20 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                     listener: (context, state) {
                   if (state is SearchProductsSuccessState) {
                     if (state.products!.products!.data!.isEmpty) {
-                      product = null;
-                    } else {
                       product = [];
-                      product!.clear();
+                    } else {
                       product = state.products!.products!.data!;
-                      _searchBloc.isFetching = false;
+                      // _searchBloc.isFetching = false;
                     }
-                    product = state.products!.products!.data!;
+                    // product = state.products!.products!.data!;
                   }
                   if (state is SearchcompanySuccessState) {
                     if (state.products!.companies!.data!.isEmpty) {
-                      companyy = null;
-                    } else {
                       companyy = [];
-                      companyy!.clear();
+                    } else {
                       companyy = state.products!.companies!.data!;
-                      _searchBloc.isFetching = false;
+                      // _searchBloc.isFetching = false;
                     }
-                    companyy = state.products!.companies!.data!;
                   }
                   if (state is SearchCategoriesSuccessState) {
                     if (state.products!.isEmpty) {
@@ -191,7 +193,7 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                                     ? Container(
                                         height: 10,
                                       )
-                                    : product == null
+                                    : product!.length == 0
                                         ? Container(
                                             height: 100,
                                             width: 400,
@@ -249,12 +251,11 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                                 ),
                               ])
                             : Column(children: [
-                                selectedPage == 1 &&
-                                        _searchController.text.isEmpty
+                                selectedPage == 1 && _searchController.text.isEmpty
                                     ? Container(
                                         height: 10,
                                       )
-                                    : companyy == null
+                                    : companyy!.length == 0
                                         ? Container(
                                             height: 100,
                                             width: 400,
@@ -278,38 +279,44 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                                               ],
                                             ),
                                           )
-                                        : SizedBox(
-                                            height: 130,
-                                            child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(5.0),
-                                                child: Container(
-                                                  color: Colors.white38,
-                                                  child: ListView.separated(
-                                                    itemBuilder:
-                                                        (BuildContext context,
-                                                            int index) {
-                                                      return SearchCompanyData(
-                                                          companyy![index],
-                                                          context);
-                                                    },
-                                                    itemCount: companyy!.length,
-                                                    separatorBuilder:
-                                                        (BuildContext context,
-                                                                int index) =>
-                                                            Container(
-                                                      height: 1,
-                                                      width: double.infinity,
-                                                      color:
-                                                          Colors.grey.shade300,
-                                                    ),
-                                                  ),
-                                                ))),
-                                Container(
-                                  width: double.infinity,
-                                  height: 1,
-                                  color: Colors.grey.shade300,
-                                ),
+
+                                            : SizedBox(
+                                                height: 130,
+                                                child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            5.0),
+                                                    child: Container(
+                                                      color: Colors.white38,
+                                                      child: ListView.separated(
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          return SearchCompanyData(
+                                                              companyy![index],
+                                                              context);
+                                                        },
+                                                        itemCount:
+                                                            companyy!.length,
+                                                        separatorBuilder:
+                                                            (BuildContext
+                                                                        context,
+                                                                    int index) =>
+                                                                Container(
+                                                          height: 1,
+                                                          width:
+                                                              double.infinity,
+                                                          color: Colors
+                                                              .grey.shade300,
+                                                        ),
+                                                      ),
+                                                    ))),
+                          Container(
+                                                width: double.infinity,
+                                                height: 1,
+                                                color: Colors.grey.shade300,
+                                              ),
                               ])
                       ],
                     ),

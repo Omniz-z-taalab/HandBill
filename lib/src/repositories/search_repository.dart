@@ -23,10 +23,10 @@ class SearchRepository {
     String? value = await storage.read(key: "lang");
     print(value);
     print('omnisssss');
-    Map<String, String> queryParams = ({
+    Map<String, dynamic> queryParams = ({
       // "secret": APIData.secretKey,
       "search": '$search',
-      "language": value!
+      "language": value
     });
 
     late SearchProductResponse searchResponse;
@@ -50,20 +50,20 @@ class SearchRepository {
     return searchResponse;
   }
 
-  Future<SubSubCategoryModel> getSubsubCategories() async {
-    String? value = await storage.read(key: "lang");
-    // print(id);
-    Map<String, dynamic> queryParams =
-        ({"secret": APIData.secretKey, "language": value});
-
-    SubSubCategoryModel? subCategoryModel;
-    Response response =
-        await dio.get(APIData.getSubsubCategory, queryParameters: queryParams);
-    subCategoryModel = SubSubCategoryModel.fromJson(response.data);
-    print(response.data);
-    return subCategoryModel;
-    // emit(GetSubSubCatSuccessStates());
-  }
+  // Future<SubSubCategoryModel> getSubsubCategories() async {
+  //   String? value = await storage.read(key: "lang");
+  //   // print(id);
+  //   Map<String, dynamic> queryParams =
+  //       ({"secret": APIData.secretKey, "language": value});
+  //
+  //   SubSubCategoryModel? subCategoryModel;
+  //   Response response =
+  //       await dio.get(APIData.getSubsubCategory, queryParameters: queryParams);
+  //   subCategoryModel = SubSubCategoryModel.fromJson(response.data);
+  //   print(response.data);
+  //   return subCategoryModel;
+  //   // emit(GetSubSubCatSuccessStates());
+  // }
 
   Future<SearchCompaniesResponse?> getSearchCompanies(String search) async {
     String? value = await storage.read(key: "lang");

@@ -29,6 +29,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
   void _mapSearchProduct(
       SearchProductEvent event, Emitter<SearchState> emit) async {
+
     emit(SearchProductsLoadingState());
     var response = await searchRepository.getSearchProducts(event.searchKey!);
     try {
@@ -55,8 +56,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       print(response.data);
       if (response.status!) {
         final products = response.data!;
-        print('omniaaa');
-        print(products);
         emit(SearchcompanySuccessState(products: products));
       } else {
         emit(SearchProductsErrorState(error: response.message.toString()));
