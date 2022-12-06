@@ -39,7 +39,7 @@ Widget ServiceCompany(ServiceModel model,context) {
                         Container( child:  CachedNetworkImage(
                     width: 50,
                         // height: 200,
-                        imageUrl: placeholder,)),
+                        imageUrl: model.image == null ? ' ${placeholderLogo }':'${APIData.domainLink}${model!.image![0].icon!}' )),
                     SizedBox(
                       width: 10,
                     ),

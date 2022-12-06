@@ -17,23 +17,23 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
 
   GlobalBloc() : super(GlobalInitial()) {
     on<StartAppEvent>(_mapStartAppToState);
-    on<SaveLanguageEvent>(saveLanguageToState);
+    // on<SaveLanguageEvent>(saveLanguageToState);
     on<UserStatusChangeEvent>(_mapUserStatusChangeToState);
   }
 
-  void saveLanguageToState(
-      SaveLanguageEvent event, Emitter<GlobalState> emit) async {
-    emit(GlobalLoading());
-    String? _lang;
-    _lang = await globalRepository.getLanguage();
-    if (_lang == null) {
-      lang = null;
-    } else {
-      lang = _lang;
-      log("AppLanguage ${lang}");
-    }
-    emit(SaveLanguageState());
-  }
+  // void saveLanguageToState(
+  //     SaveLanguageEvent event, Emitter<GlobalState> emit) async {
+  //   emit(GlobalLoading());
+  //   String? _lang;
+  //   _lang = await globalRepository.getLanguage();
+  //   if (_lang == null) {
+  //     lang = null;
+  //   } else {
+  //     lang = _lang;
+  //     log("AppLanguage ${lang}");
+  //   }
+  //   emit(SaveLanguageState());
+  // }
 
   void _mapStartAppToState(
       StartAppEvent event, Emitter<GlobalState> emit) async {

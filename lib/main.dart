@@ -1,14 +1,13 @@
-import 'package:country_picker/country_picker.dart';
+
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hand_bill/src/blocs/Companies/bloc.dart';
 import 'package:hand_bill/src/blocs/Services/bloc.dart';
 import 'package:hand_bill/src/blocs/about_us_bloc/about_us_bloc.dart';
-import 'package:hand_bill/src/blocs/about_us/abouUsBloc.dart';
 import 'package:hand_bill/src/blocs/assets/assets_bloc.dart';
 import 'package:hand_bill/src/blocs/auction/aucations_bloc.dart';
 import 'package:hand_bill/src/blocs/auth/auth_bloc.dart';
@@ -33,10 +32,7 @@ import 'package:hand_bill/src/common/global.dart';
 import 'package:hand_bill/src/common/routes.dart';
 import 'package:hand_bill/src/helper/helpers.dart';
 import 'package:hand_bill/src/repositories/global_repository.dart';
-import 'package:hand_bill/src/ui/screens/auth/login_screen.dart';
-import 'package:hand_bill/src/ui/screens/auth/register_screen.dart';
 import 'package:hand_bill/src/ui/screens/auth/splash_screen.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hand_bill/src/ui/screens/services_package/shipping/ShippingBloc%20/cubit.dart';
 
 Future<void> main() async {
@@ -44,8 +40,8 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
 
   String? lang = await storage.read(key: "lang");
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  // SystemChrome.setPreferredOrientations(
+  //     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   // await Firebase.initializeApp();
 
   runApp(EasyLocalization(
@@ -54,17 +50,28 @@ Future<void> main() async {
 
         Locale('en','US'),
         Locale('ar','EG'),
-        // Locale.fromSubtags(languageCode: 'ar')
+        // Locale.fromSubtags(languageCode: 'en')
       ],
+      // useFallbackTranslations: true,
+      startLocale: Locale('en','US'),
       fallbackLocale: Locale( lang == null ? 'en' : lang),// <-- change the path of the translation files
       child: Phoenix(child: MyApp())
 
   ));
 }
 
-class MyApp extends StatelessWidget {
-  final GlobalRepository _globalRepository = GlobalRepository();
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> {
+  final GlobalRepository _globalRepository = GlobalRepository();
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     Helper.chaneStatusBarColor(
@@ -105,7 +112,7 @@ class MyApp extends StatelessWidget {
           BlocBuilder<GlobalBloc, GlobalState>(
               builder: (BuildContext context, state) {
                 if (state is StartAppSuccess) {
-                  // print("${state.user!.name}");
+                  print(context.fallbackLocale);
                 }
                 return ScreenUtilInit(
                   designSize: const Size(375, 812),
@@ -116,7 +123,7 @@ class MyApp extends StatelessWidget {
                       debugShowCheckedModeBanner: false,
                       theme: _globalRepository.liteTheme,
                       themeMode: ThemeMode.light,
-                      locale: context.fallbackLocale,
+                       locale: context.fallbackLocale,
                       // supportedLocales: [
                       //   const Locale('en'),
                       //   const Locale('ar'),

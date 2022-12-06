@@ -24,7 +24,6 @@ import 'package:hand_bill/src/ui/screens/auth/auth_screen.dart';
 import 'package:hand_bill/src/ui/screens/navigation_package/navigation_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../data/response/account/account_model.dart';
-import '../aboutUsScreen.dart';
 import '../services_package/asstes/assets_screen.dart';
 import '../services_package/auctions/auctions_screen.dart';
 import '../services_package/hand_made/hand_made_screen.dart';

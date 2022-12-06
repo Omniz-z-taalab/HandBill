@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +51,7 @@ class _SubSubCategoriesState extends State<SubSubCategories> {
           leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: Colors.black,),onPressed: (){
             Navigator.pop(context);
           },),
-          title: Text('Back',style: TextStyle(color: Colors.black),),
+          title: Text('Back'.tr(),style: TextStyle(color: Colors.black),),
 
 
       ),

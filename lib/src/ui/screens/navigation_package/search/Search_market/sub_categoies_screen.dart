@@ -43,48 +43,53 @@ class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: Colors.black,),onPressed: (){
-          Navigator.pop(context);
-        },),
-        title: Text('Back'.tr(),style: TextStyle(color: Colors.black),),
-
-      ),
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: Text(
+            'Back'.tr(),
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
         body: BlocConsumer<SearchBloc, SearchState>(listener: (context, state) {
-      if (state is SearchSubCategoriesSuccessState) {
-        if (state.subCategories!.isEmpty) {
-          list = null;
-        } else {
-          list = [];
-          list!.clear();
-          list!.addAll(state.subCategories!);
-          _searchBloc.isFetching = false;
-        }
-      }
-    }, builder: (context, state) {
-      return SingleChildScrollView(
-        controller: _scrollController,
+          if (state is SearchSubCategoriesSuccessState) {
+            if (state.subCategories!.isEmpty) {
+              list = null;
+            } else {
+              list = [];
+              list!.clear();
+              list!.addAll(state.subCategories!);
+              _searchBloc.isFetching = false;
+            }
+          }
+        }, builder: (context, state) {
+          return SingleChildScrollView(
+            controller: _scrollController,
             child: list == null
                 ? Padding(
-                  padding: const EdgeInsets.only(top: 200.0),
-                  child: Center(child: CircularProgressIndicator()),
-                )
+                    padding: const EdgeInsets.only(top: 200.0),
+                    child: Center(child: CircularProgressIndicator()),
+                  )
                 : list!.length == 0
                     ? CenterWidgetListSliver(label: "search is empty")
                     : SizedBox(
-              height: 900,
-              child:
-                ListView.builder(
+                        height: 900,
+                        child: ListView.builder(
                           itemBuilder: (BuildContext context, int index) {
                             return SearchCategories(model: list![index]);
                           },
                           itemCount: list!.length,
-
-                      )
-            ),
+                        )),
           );
-    }));
+        }));
   }
 }
 
@@ -97,7 +102,6 @@ class SearchCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(onTap: () {
-      print('omnilalalalalaalalalalaaaaaaa');
       print(model.id);
       Navigator.pushNamed(context, SubSubCategories.routeName,
           arguments: RouteArgument(param: model.id));
@@ -114,23 +118,23 @@ class SearchCategories extends StatelessWidget {
                 BoxShadow(
                     color: Color(0xfff5f5f5), blurRadius: 3, spreadRadius: 3)
               ]),
-          child: Row(
-            children: [
-              Expanded(
-                  child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      model.name!,
-                      style: TextStyle(color: Colors.black),
-                    )),
-              )),
-              
-              IconButton(onPressed: () {Navigator.pushNamed(context, SubSubCategories.routeName,
-                  arguments: RouteArgument(param: model.id));}, icon: Icon(Icons.arrow_forward_ios))
-            ],
-          ));
+          child: Row(children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  model.name!,
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ),
+            IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, SubSubCategories.routeName,
+                      arguments: RouteArgument(param: model.id));
+                },
+                icon: Icon(Icons.arrow_forward_ios))
+          ]));
     }));
   }
 }

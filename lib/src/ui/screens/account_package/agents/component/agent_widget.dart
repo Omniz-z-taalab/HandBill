@@ -20,49 +20,51 @@ class AgentWidget extends StatelessWidget {
         child: Padding(
             padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
             child: Column(children: [
-              Row(children: [
-                Container(
-                    clipBehavior: Clip.hardEdge,
-                    height: imgSize,
-                    width: imgSize,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(900),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Color(0xffeeeeee),
-                              blurRadius: 3,
-                              spreadRadius: 3)
-                        ]),
-                    child: model.flag!.endsWith(".svg")
-                        ? SvgPicture.network(model.flag!, fit: BoxFit.cover)
-                        : CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: model.flag!,
-                            placeholder: (context, url) => FittedBox(
-                                child: Transform.scale(
-                                    scale: 0.2,
-                                    child: CircularProgressIndicator(
-                                        color: mainColorLite, strokeWidth: 2))),
-                            errorWidget: (context, url, error) =>
-                                new Icon(Icons.error, color: mainColorLite))),
-                SizedBox(width: 16),
-                Expanded(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                      Text(model.name!,
-                          style: TextStyle(color: textDarkColor, fontSize: 15)),
-                      SizedBox(height: 4),
-                      Text(model.email!,
-                          style: TextStyle(color: textLiteColor, fontSize: 14))
-                    ])),
-                SizedBox(width: 16),
-                Icon(
-                  Icons.email,
-                  // color: Color(0xffE0E0E0),
-                  color: mainColor,
-                )
-              ]),
+              Container(
+                child: Row(children: [
+                  Container(
+                      clipBehavior: Clip.hardEdge,
+                      height: imgSize,
+                      width: imgSize,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(900),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color(0xffeeeeee),
+                                blurRadius: 3,
+                                spreadRadius: 3)
+                          ]),
+                      child: model.flag!.endsWith(".svg")
+                          ? SvgPicture.network(model.flag!, fit: BoxFit.cover)
+                          : CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl: model.flag!,
+                              placeholder: (context, url) => FittedBox(
+                                  child: Transform.scale(
+                                      scale: 0.2,
+                                      child: CircularProgressIndicator(
+                                          color: mainColorLite, strokeWidth: 2))),
+                              errorWidget: (context, url, error) =>
+                                  new Icon(Icons.error, color: mainColorLite))),
+                  SizedBox(width: 16),
+                  Expanded(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                        Text(model.name!,
+                            style: TextStyle(color: textDarkColor, fontSize: 15)),
+                        SizedBox(height: 4),
+                        Text(model.email!,
+                            style: TextStyle(color: textLiteColor, fontSize: 14))
+                      ])),
+                  SizedBox(width: 16),
+                  Icon(
+                    Icons.email,
+                    // color: Color(0xffE0E0E0),
+                    color: mainColor,
+                  )
+                ]),
+              ),
               Container(
                   height: 0.5,
                   margin: EdgeInsets.only(top: 16),

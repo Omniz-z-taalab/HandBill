@@ -30,6 +30,7 @@ class MyHandmadeSuccessState extends HandmadeState {
   final List<HandmadeModel>? items;
 
   MyHandmadeSuccessState({required this.items}){
+    print('ddd');
 }
 }
 

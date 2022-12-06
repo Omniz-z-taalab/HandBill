@@ -60,7 +60,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                             height: 500,
                             child: ListView.separated(
                                 itemBuilder: (context, index) =>
-                                    HelpCenter(mails![index]),
+                                    HelpCenter(mails![index],context),
                                 separatorBuilder:
                                     (BuildContext context, int index) => SizedBox(
                                           height: 10,

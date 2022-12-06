@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hand_bill/src/blocs/global_bloc/global_bloc.dart';
 import 'package:hand_bill/src/blocs/job/job_bloc.dart';
 import 'package:hand_bill/src/blocs/job/job_event.dart';
@@ -85,9 +86,14 @@ class _CompaniesJobsScreenState extends State<CompaniesJobsScreen> {
             widget: InkWell(
                 onTap: () {
                   if (_user == null) {
-                    displaySnackBar(
-                        title: "login".tr(),
-                        scaffoldKey: _scaffoldKey);
+                    Fluttertoast.showToast(
+                        msg:  'Login first'.tr(),
+                        toastLength: Toast.LENGTH_SHORT,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0
+                    );
                   } else {
                     Navigator.pushNamed(context, MyJobsScreen.routeName);
                   }

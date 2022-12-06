@@ -37,10 +37,21 @@ class _MyHandmadeScreenState extends State<MyHandmadeScreen> {
   void initState() {
     _handmaneBloc = BlocProvider.of<HandmadeBloc>(context);
     _scrollController = ScrollController()..addListener(_onScroll);
-
+      print('zzzzzzz');
     _user = BlocProvider.of<GlobalBloc>(context).user;
-    if (_user != null) {
-      // _handmaneBloc.myPage = 1;
+    if (_user == null) {
+      Fluttertoast.showToast(
+          msg:' Login first',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0
+
+      );
+      Navigator.pop(context);
+    }else{
       _handmaneBloc.add(FetchMyHandmadeEvent(user: _user!));
     }
     super.initState();
@@ -94,8 +105,7 @@ class _MyHandmadeScreenState extends State<MyHandmadeScreen> {
             });
           }
           if (state is MyHandmadeSuccessState) {
-            print('omniaaaaaaaaaaaaaa');
-            // print(_items!.first!.title!);
+            print('zzzzzzz');
             if (_items == null) {
               _items = [];
             }

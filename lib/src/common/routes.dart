@@ -44,7 +44,7 @@ import 'package:hand_bill/src/ui/screens/navigation_package/search/search_screen
 import 'package:hand_bill/src/ui/screens/details_package/subcategory_products/products_screen.dart';
 import 'package:hand_bill/src/ui/screens/account_package/wishlist/wishlist_screen.dart';
 
-import '../ui/screens/aboutUsScreen.dart';
+import '../ui/screens/account_package/aboutUs/aboutUsScreen.dart';
 import '../ui/screens/navigation_package/categories/component/sub_cat.dart';
 import '../ui/screens/navigation_package/search/Search_market/CompanySearchScreen.dart';
 import '../ui/screens/navigation_package/search/Search_market/all_products.dart';

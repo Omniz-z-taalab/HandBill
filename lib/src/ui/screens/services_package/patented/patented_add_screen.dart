@@ -91,9 +91,9 @@ class _PatentedAddScreenState extends State<PatentedAddScreen> {
   @override
   Widget build(BuildContext context) {
     _onAddButtonPressed() {
-      if (!_user!.profileCompleted()) {
+      if (_user == null) {
         Fluttertoast.showToast(
-            msg:  'CompleteYourProfile'.tr(),
+            msg:  'Login first'.tr(),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,

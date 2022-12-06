@@ -8,23 +8,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hand_bill/src/blocs/category/category_bloc.dart';
-import 'package:hand_bill/src/blocs/about_us/abouUsBloc.dart';
-import 'package:hand_bill/src/blocs/about_us/state.dart';
-import 'package:hand_bill/src/blocs/category/category_bloc.dart';
-import 'package:hand_bill/src/data/model/about_us/aboutUsModel.dart';
-import 'package:hand_bill/src/data/response/aboutUs_response/abotus_response.dart';
-import 'package:hand_bill/src/repositories/aboutUs_repository.dart';
-import 'package:hand_bill/src/ui/component/widgets.dart';
+
 import 'package:video_player/video_player.dart';
 
-import '../../blocs/about_us_bloc/about_us_bloc.dart';
-import '../../common/api_data.dart';
-import '../../common/constns.dart';
-import '../../data/model/about_us/aboutUsModel.dart';
-import '../../data/response/aboutUs_response/AboutResponse.dart';
-import 'details_package/company/company_screen.dart';
-import 'navigation_package/categories/widgets/bannersubpro_widget.dart';
-import 'navigation_package/home/componenet/slider_empty_widget.dart';
+import '../../../../blocs/about_us_bloc/about_us_bloc.dart';
+import '../../../../common/api_data.dart';
+import '../../../../common/constns.dart';
+import '../../../../data/response/aboutUs_response/AboutResponse.dart';
+import '../../navigation_package/home/componenet/slider_empty_widget.dart';
+
 
 class AboutUsScreen extends StatefulWidget {
   static const routeName = "/AboutUsScreen";
@@ -41,14 +33,15 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   List<Videos>? list;
   ScrollController? _scrollController;
-  late AboutUsBloc aboutUsBloc;
+   AboutUsBloc? aboutUsBloc;
   CategoryBloc? _categoryBloc;
   List<Banners>? banner;
+
 
   @override
   void initState() {
     aboutUsBloc = BlocProvider.of<AboutUsBloc>(context);
-    aboutUsBloc.add(FetchAboutItemEvent());
+    aboutUsBloc!.add(FetchAboutItemEvent());
     super.initState();
   }
 
@@ -60,12 +53,16 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AboutUsBloc, AboutUsState>(listener: (context, state) {
+    return BlocConsumer<AboutUsBloc, AboutUsState>(
+
+        listener: (context, state) {
       if (state is AboutUsSuccessStates) {
         banner = state.items!.banners;
         print(banner![0].id);
         list = state.items!.videos;
         print(list![0].link);
+        print('........');
+        print('........');
       }
     }, builder: (context, state) {
       return SingleChildScrollView(
@@ -87,91 +84,103 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                         'AboutUs'.tr(),
                         style: TextStyle(color: Colors.black, fontSize: 15),
                       )),
-                  body: SingleChildScrollView(
-                      child: Column(children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Center(
-                      child: Stack(
-                        children: [
-                          banner == null
-                              ? Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(30),
-                            ),
-                          )
-                              : CarouselSlider.builder(
-
-                                  itemCount:
-                                      banner!.isNotEmpty ? banner!.length : 6,
-                                  itemBuilder: (BuildContext context, int index,
-                                      int idx) {
-                                    if (banner!.isNotEmpty) {
-                                      return SliderAboutWidget(
-                                          model: banner![index]);
-                                    }
-                                    return SliderEmptyWidget();
-                                  },
-                                  options: CarouselOptions(
-                                      viewportFraction: 1,
-                                      initialPage: 0,
-                                      // enlargeCenterPage: true,
-                                      scrollDirection: Axis.horizontal,
-                                      autoPlay: true,
-                                      enableInfiniteScroll: true,
-                                      autoPlayInterval:
-                                          Duration(milliseconds: 4000),
-                                      autoPlayCurve: Curves.easeOutSine,
-                                      clipBehavior: Clip.antiAlias,
-                                      onPageChanged: (index, reason) {
-                                        setState(() {
-                                          _sliderPosition = index;
-                                        });
-                                      }),
-                                ),
-                        ],
+                  body:
+                  RefreshIndicator(
+                    onRefresh: () async {
+                      if (list != null) {
+                        list!.clear();
+                        list = null;
+                      }
+                      aboutUsBloc!.add(FetchAboutItemEvent());
+                    },
+                    child: SingleChildScrollView(
+                        child: Column(children: [
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Center(
-                      child: Text(
-                        'AboutUSVideos '.tr(),
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
+                      Center(
+                        child: Stack(
+                          children: [
+                            banner == null
+                                ? Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(30),
+                                child: CircularProgressIndicator(),
+                              ),
+                            )
+                                : CarouselSlider.builder(
+
+                                    itemCount:
+                                        banner!.isNotEmpty ? banner!.length : 6,
+                                    itemBuilder: (BuildContext context, int index,
+                                        int idx) {
+                                      if (banner!.isNotEmpty) {
+                                        return SliderAboutWidget(
+                                            model: banner![index]);
+                                      }
+                                      return SliderEmptyWidget();
+                                    },
+                                    options: CarouselOptions(
+                                        viewportFraction: 1,
+                                        initialPage: 0,
+                                        // enlargeCenterPage: true,
+                                        scrollDirection: Axis.horizontal,
+                                        autoPlay: true,
+                                        enableInfiniteScroll: true,
+                                        autoPlayInterval:
+                                            Duration(milliseconds: 4000),
+                                        autoPlayCurve: Curves.easeOutSine,
+                                        clipBehavior: Clip.antiAlias,
+                                        onPageChanged: (index, reason) {
+                                          setState(() {
+                                            _sliderPosition = index;
+                                          });
+                                        }),
+                                  ),
+                          ],
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    SizedBox(
-                      height: 500,
-                      child: ListView(children: [
-                        list == null
-                        ? Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(30),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Center(
+                        child: Text(
+                          'AboutUSVideos '.tr(),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
                           ),
-                        )
-                        :GridView.count(
-                            padding: EdgeInsets.fromLTRB(10, 0, 10, 16),
-                            childAspectRatio: 1 / 0.7,
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 2,
-                            mainAxisSpacing: 2,
-                            shrinkWrap: true,
-                            primary: false,
-                            children: List.generate(list!.length, (index) {
-                              return VideoPlayerr(data: list![index],);
-                            })),
-                        SizedBox(height: 80),
-                      ]),
-                    )
-                  ])))));
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      SizedBox(
+                        height: 500,
+                        child: ListView(children: [
+                          list == null
+                          ? Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(30),
+                              child: CircularProgressIndicator(),
+                            ),
+                          )
+                          :GridView.count(
+                              padding: EdgeInsets.fromLTRB(10, 0, 10, 16),
+                              childAspectRatio: 1 / 0.7,
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 2,
+                              mainAxisSpacing: 2,
+                              shrinkWrap: true,
+                              primary: false,
+                              children: List.generate(list!.length, (index) {
+                                return VideoPlayerr(data: list![index],);
+                              })),
+                          SizedBox(height: 80),
+                        ]),
+                      )
+                    ])),
+                  ))));
     });
   }
 }
