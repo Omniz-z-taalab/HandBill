@@ -53,7 +53,7 @@ Future<void> main() async {
         // Locale.fromSubtags(languageCode: 'en')
       ],
       // useFallbackTranslations: true,
-      // startLocale: Locale('en','US'),
+       startLocale: Locale('en','US'),
       fallbackLocale: Locale( lang == null ? 'en' : lang),// <-- change the path of the translation files
       child: Phoenix(child: MyApp())
 

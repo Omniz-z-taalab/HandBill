@@ -357,8 +357,7 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                           widget.model.title.toString() == 'من نحن'
                           ? SvgPicture
                           .asset(
-                        'assets/icons/account/images.png',
-                        // "assets/icons/account/wishlist.svg",
+                         "assets/icons/account/wishlist.svg",
                         height: icSize,
                         width: icSize,
                         fit: BoxFit.cover,
