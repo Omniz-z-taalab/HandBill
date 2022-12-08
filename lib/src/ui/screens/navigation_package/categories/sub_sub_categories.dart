@@ -42,7 +42,7 @@ class _SubSubCatScreenState extends State<SubSubCatScreen> {
     print('ssdsddrrreeee');
     shippingBloc!
       .add(ShippingSliderEvent(widget.routeArgument!.id.toString()));
-
+print(widget.routeArgument!.id.toString());
     print(widget.routeArgument!.id.toString());
     shippingBloc!
       .add(ShippingSubSubCategoryEvent(widget.routeArgument!.id.toString()));
@@ -80,9 +80,8 @@ class _SubSubCatScreenState extends State<SubSubCatScreen> {
                 height: 700,
                 child: SingleChildScrollView(
                     child: Column(children: [
-                  SizedBox(
-                    height: 200,
-                    child: CarouselSlider.builder(
+
+                     CarouselSlider.builder(
                       itemCount: sliders.length,
                       itemBuilder: (BuildContext context, int index,
                           int pageViewIndex) {
@@ -106,7 +105,7 @@ class _SubSubCatScreenState extends State<SubSubCatScreen> {
                               _sliderPosition = index;
                             });
                           }),
-                    ),
+
                   ),
                   SizedBox(
                     height: 20,
@@ -130,15 +129,16 @@ class _SubSubCatScreenState extends State<SubSubCatScreen> {
   }
 
   Widget item(SubSubCategoryModel model) => ListView(children: [
-        GridView.count(
-            padding: EdgeInsets.fromLTRB(10, 0, 10, 16),
-            childAspectRatio: 1 / 0.7,
-            crossAxisCount: 2,
-            crossAxisSpacing: 2,
-            mainAxisSpacing: 2,
-            shrinkWrap: true,
-            primary: false,
-            children: List.generate(model.data!.length, (index) {
+    GridView.count(
+         padding: EdgeInsets.fromLTRB(10, 0, 10, 16),
+        childAspectRatio: 1 / 0.7,
+        crossAxisCount: 2,
+        crossAxisSpacing: 2,
+        mainAxisSpacing: 2,
+        shrinkWrap: true,
+        primary: false,
+        children:
+        List.generate(model.data!.length, (index) {
               return SubSubCategoryWidget(
                 model: model.data![index],
               );

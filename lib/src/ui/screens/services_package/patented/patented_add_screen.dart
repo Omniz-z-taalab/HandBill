@@ -78,7 +78,7 @@ class _PatentedAddScreenState extends State<PatentedAddScreen> {
         _images.add(image!);
       });
     } else {
-      Fluttertoast.showToast(msg: "max images is $_maxImages");
+      Fluttertoast.showToast(msg: "${"max_images_is".tr()} ${_maxImages}");
     }
   }
 
@@ -240,26 +240,26 @@ class _PatentedAddScreenState extends State<PatentedAddScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   SizedBox(height: 16),
-                                  _jobLabel(label: "Title"),
+                                  _jobLabel(label: "title".tr()),
                                   SizedBox(height: 16),
                                   CustomTextFormFieldEnter(
                                       controller: _titleController,
-                                      hintText: "Enter title",
+                                      hintText: "Enter_title".tr(),
                                       validator: (input) {
                                         if (input.toString().length < 4) {
-                                          return "title is short";
+                                          return "title is short".tr();
                                         }
                                         return null;
                                       }),
                                   SizedBox(height: 16),
-                                  _jobLabel(label: "Description"),
+                                  _jobLabel(label: "Description".tr()),
                                   SizedBox(height: 16),
                                   CustomTextFormFieldEnter(
                                       controller: _descriptionController,
-                                      hintText: "Enter description",
+                                      hintText: "Enter description".tr(),
                                       validator: (input) {
                                         if (input.toString().length < 4) {
-                                          return "description is short";
+                                          return "description is short".tr();
                                         }
                                         return null;
                                       }),
@@ -281,7 +281,7 @@ class _PatentedAddScreenState extends State<PatentedAddScreen> {
                     SizedBox(height: 40),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       CustomButton(
-                          title: _model.id == null ? "Add" : "Edit",
+                          title: _model.id == null ? "Add".tr() : "Edit",
                           width: size.width * 0.7,
                           radius: 900,
                           onPress: () {

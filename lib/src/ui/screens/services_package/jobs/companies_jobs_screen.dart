@@ -51,8 +51,8 @@ class _CompaniesJobsScreenState extends State<CompaniesJobsScreen> {
 
     _jobsBloc.add(FetchCompaniesJobsEvent());
     _jobsBloc.add(FetchJobsCategoriesEvent());
-    _jobCategoryModel = JobCategoryModel(id: 0, name: "category");
-    _jobSubCategoryModel = JobCategoryModel(id: 0, name: "subcategory");
+    _jobCategoryModel = JobCategoryModel(id: 0, name: "category".tr());
+    _jobSubCategoryModel = JobCategoryModel(id: 0, name: "subcategory".tr());
     super.initState();
   }
 
@@ -130,7 +130,7 @@ class _CompaniesJobsScreenState extends State<CompaniesJobsScreen> {
                     _items == null
                         ? LoadingSliver()
                         : _items!.length == 0
-                            ? CenterWidgetListSliver(label: "Jobs is empty")
+                            ? CenterWidgetListSliver(label: "Jobs is empty".tr())
                             : SliverToBoxAdapter(
                                 child: SizedBox(
                                 height: 700,
@@ -196,7 +196,7 @@ class _CompaniesJobsScreenState extends State<CompaniesJobsScreen> {
     showDialog(
         context: context,
         builder: (context) => MyForm(
-            onSubmit: onSubmitCategory, items: _categories, label: "Category"));
+            onSubmit: onSubmitCategory, items: _categories, label: "Category".tr()));
   }
 
   void _selectSubcategory() {
@@ -205,14 +205,14 @@ class _CompaniesJobsScreenState extends State<CompaniesJobsScreen> {
         builder: (context) => MyForm(
             onSubmit: onSubmitSubCategory,
             items: _subcategories,
-            label: "Subcategory"));
+            label: "Subcategory".tr()));
   }
 
   void onSubmitCategory(JobCategoryModel model) {
     setState(() {
       _jobCategoryModel = model;
       _jobSubCategoryModel =
-          JobCategoryModel(id: 0, name: "Select job subcategory");
+          JobCategoryModel(id: 0, name: "Select job subcategory".tr());
       _subcategories.clear();
       _jobsBloc.add(FetchJobsSubcategoriesEvent(id: model.id!));
     });
@@ -267,7 +267,7 @@ class MyFormState extends State<MyForm> {
                   Navigator.pop(context);
                   widget.onSubmit(widget.items[value!]);
                 }),
-                title: Text(widget.items[index].name ?? "name"),
+                title: Text(widget.items[index].name ?? "Name".tr()),
               );
             }),
       ),

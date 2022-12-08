@@ -40,12 +40,12 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   void _mapFetchSimilarProducts(
       FetchSimilarProductsEvent event, Emitter<ProductsState> emit) async {
     emit(ProductsLoadingState());
-    final response = await productsRepository.getProductsBySubCategory(
-      subcategoryId: event.subcategoryId,
-    );
+    final response = await productsRepository.getSearchProductsub(event.subcategoryId);
 
     if (response.status!) {
-      emit(SimilarProductsSuccessState(products: response.data));
+      final products = response.data!.products!.data;
+
+      emit(SimilarProductsSuccessState(products:products));
       similarPage++;
       isFetching = false;
     } else {

@@ -12,6 +12,7 @@ import '../data/model/Search_data.dart';
 import '../data/model/category/sub_sub.dart';
 import '../data/response/banner/banner_service_response.dart';
 import '../data/response/home/serviceCategory_reponse.dart';
+import '../data/response/product/products_response.dart';
 import '../data/response/search/Search_sub_sub.dart';
 import '../data/response/search/search_sub_categorie.dart';
 
@@ -68,8 +69,8 @@ class SearchRepository {
   Future<SearchCompaniesResponse?> getSearchCompanies(String search) async {
     String? value = await storage.read(key: "lang");
 
-    Map<String, String> queryParams =
-        ({"search": '$search', "language": value!});
+    Map<String, dynamic> queryParams =
+        ({"search": '$search', "language": value});
 
     SearchCompaniesResponse? companyResponse;
     try {
@@ -167,7 +168,7 @@ class SearchRepository {
   Future<SearchSubCategoriesResponse> getAllSubCategories(int id) async {
     String? value = await storage.read(key: "lang");
 
-    Map<String, String> queryParams = ({"id": '$id', "language": value!});
+    Map<String, dynamic> queryParams = ({"id": '$id', "language": value});
 
     late SearchSubCategoriesResponse searchCategoriesResponse;
     try {
@@ -191,7 +192,7 @@ class SearchRepository {
   Future<SearchSubSubCategoriesResponse> getSubSubCategories(int id) async {
     String? value = await storage.read(key: "lang");
 
-    Map<String, String> queryParams = ({"id": '$id', "language": value!});
+    Map<String, dynamic> queryParams = ({"id": '$id', "language": value});
 
     late SearchSubSubCategoriesResponse searchSubSubCategoriesResponse;
     try {
@@ -212,15 +213,16 @@ class SearchRepository {
     return searchSubSubCategoriesResponse;
   }
 
-  Future<SearchProductResponse> getSearchProduct(int id) async {
+  List<Map<String, dynamic>> map = [];
+
+  Future<ProductsResponse> getSearchProduct(int id) async {
     String? value = await storage.read(key: "lang");
 
     Map<String, dynamic> queryParams =
-        ({"language": value!, "sub_sub_category_id ": id});
-    SearchProductResponse searchProductResponse;
-    Response response = await dio.get(APIData.searchSubSubCategories,
-        queryParameters: queryParams);
-    searchProductResponse = SearchProductResponse.fromJson(response.data);
+        ({"language": value, "sub_sub_category_id": id});
+    ProductsResponse searchProductResponse;
+    Response response = await dio.get(APIData.productDetailss, queryParameters: queryParams);
+    searchProductResponse = ProductsResponse.fromJson(response.data);
     print(response.data);
     return searchProductResponse;
   }

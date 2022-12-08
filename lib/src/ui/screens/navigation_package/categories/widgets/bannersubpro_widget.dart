@@ -26,16 +26,7 @@ class SliderWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            decoration: BoxDecoration(
-                color: Colors.black26,
-                borderRadius: BorderRadius.circular(16.0),
-                border: Border.all(color: Color(0xfff5f5f5), width: 1.5),
-                boxShadow: [
-                  BoxShadow(
-                      color: Color(0xfff5f5f5),
-                      blurRadius: 3,
-                      spreadRadius: 3)
-                ]),
+            width: MediaQuery.of(context).size.width,
             child: CachedNetworkImage(
 
                 imageUrl:'${APIData.domainLink}${model.image}',

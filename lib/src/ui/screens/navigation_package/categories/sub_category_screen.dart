@@ -302,12 +302,13 @@ class _SubCategoriesState extends State<SubCategories>
   late String id;
   int _sliderPosition = 0;
   ShippingBloc? shippingBloc;
+
   @override
   void initState() {
     id = widget.routeArgument!.id!;
     // print(widget.routeArgument!.id);
     // print(id);
-    // print('ddddddddddddd');
+     print('ddddddddddddd');
 
     // _categoryBloc = BlocProvider.of<CategoryBloc>(context);
     // if (_categoryBloc!.categories == null ||
@@ -365,80 +366,73 @@ class _SubCategoriesState extends State<SubCategories>
 
   @override
   Widget build(BuildContext context) {
-      // model;
-    return
-        BlocConsumer<ShippingBloc, ShippingState>(
-          listener: (context, state) {
-            if(state is ShippingSuccessSubState){
-                subCategoryModel = state.subCategoryModel!;
-            }
-            if(state is ShippingSuccessSliderState){
-              if(sliders.isEmpty){
-              sliders = state.sliders!;
+    // model;
+    return BlocConsumer<ShippingBloc, ShippingState>(
+      listener: (context, state) {
+        if (state is ShippingSuccessSubState) {
+          subCategoryModel = state.subCategoryModel!;
+        }
+        if (state is ShippingSuccessSliderState) {
+          if (sliders.isEmpty) {
+            sliders = state.sliders!;
+          }
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+            backgroundColor: Color(0xfff5f5f5),
+            appBar:
+                RegularAppBar(label: widget.routeArgument!.param.toString()),
+            body: SingleChildScrollView(
+              child: SizedBox(
+                height: 700,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                     CarouselSlider.builder(
+                          itemCount: sliders.length,
+                          itemBuilder: (BuildContext context, int index,
+                              int pageViewIndex) {
+                            if (sliders.isNotEmpty) {
+                              return SliderWidget(model: sliders[index]);
+                            }
+                            return SliderEmptyWidget();
+                          },
+                          options: CarouselOptions(
+                              viewportFraction: 1,
+                              initialPage: 0,
+                              // enlargeCenterPage: true,
+                              scrollDirection: Axis.horizontal,
+                              autoPlay: true,
+                              enableInfiniteScroll: true,
+                              autoPlayInterval: Duration(milliseconds: 4000),
+                              autoPlayCurve: Curves.easeOutSine,
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  _sliderPosition = index;
+                                });
+                              }),
+                        ),
 
-            }}
-          },
-          builder: (context, state) {
-
-            return Scaffold(
-                backgroundColor: Color(0xfff5f5f5),
-                appBar:
-                    RegularAppBar(label: widget.routeArgument!.param.toString()),
-                body: SingleChildScrollView(
-                  child: SizedBox(
-                    height: 700,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 200,
-                            child: CarouselSlider.builder(
-                              itemCount: sliders.length,
-                              itemBuilder: (BuildContext context, int index,
-                                  int pageViewIndex) {
-                                if (sliders.isNotEmpty) {
-                                  return SliderWidget(
-                                      model: sliders[index]);
-                                }
-                                return SliderEmptyWidget();
-                              },
-                              options: CarouselOptions(
-                                  viewportFraction: 1,
-                                  initialPage: 0,
-                                  // enlargeCenterPage: true,
-                                  scrollDirection: Axis.horizontal,
-                                  autoPlay: true,
-                                  enableInfiniteScroll: true,
-                                  autoPlayInterval: Duration(milliseconds: 4000),
-                                  autoPlayCurve: Curves.easeOutSine,
-                                  onPageChanged: (index, reason) {
-                                    setState(() {
-                                      _sliderPosition = index;
-                                    });
-                                  }),
+                      SizedBox(
+                        height: 600,
+                        child: ConditionalBuilder(
+                          condition: subCategoryModel != null,
+                          builder: (context) => item(subCategoryModel!),
+                          fallback: (context) => Container(
+                            color: Colors.white,
+                            child: Center(
+                              child: CircularProgressIndicator(),
                             ),
                           ),
-                          SizedBox(
-                            height: 600,
-                            child: ConditionalBuilder(
-                              condition: subCategoryModel != null,
-                              builder: (context) => item(subCategoryModel!),
-                              fallback: (context) => Container(
-                                color: Colors.white,
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ));
-          },
-
-
+                ),
+              ),
+            ));
+      },
     );
   }
 
@@ -450,25 +444,30 @@ class _SubCategoriesState extends State<SubCategories>
             mainAxisSpacing: 2,
             shrinkWrap: true,
             primary: false,
-            children: List.generate(model.data!.length,(index) {
+            children: List.generate(model.data!.length, (index) {
               return InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, SubSubCatScreen.routeName,
-                      arguments: RouteArgument(
-                        id: model.data![index].id.toString(),
-                        param: model.data![index].name.toString(),
-                      ));
-                },
-                child: Card(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Padding(
+                  onTap: () {
+                    Navigator.pushNamed(context, SubSubCatScreen.routeName,
+                        arguments: RouteArgument(
+                          id: model.data![index].id.toString(),
+                          param: model.data![index].name.toString(),
+                        ));
+                  },
+                  child: Card(
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Padding(
                         padding: EdgeInsets.all(10),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            // crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+
+                        // child:
+                        // Flexible(
+                        child: Container(
+                            child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
                               model.data![index].icon == null
                                   ? Container(
                                       child: Image.asset(
@@ -481,23 +480,38 @@ class _SubCategoriesState extends State<SubCategories>
                                       '${APIData.domainLink}${model.data![index].icon!.thump}',
                                       height: 50,
                                     ),
-                              SizedBox(height: 10,),
-                              Text(model.data![index].name.toString(),
-                                  style: model.data![index].id.toString() ==
-                                          model.data!.first.id.toString()
-                                      ? TextStyle(
-                                          color: mainColorLite,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 12)
-                                      : TextStyle(
-                                          color: textDarkColor,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                  maxLines: 3,
-                                  textAlign: TextAlign.center,
-                                  overflow: TextOverflow.ellipsis)
-                            ]))),
-              );
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Flexible(
+                                child: Container(
+                                  padding: new EdgeInsets.only(right: 13.0),
+                                  child:
+                                      // mainAxisAlignment: MainAxisAlignment.start,
+                                      Row(
+                                    children: [
+                                      Text(model.data![index].name.toString(),
+                                          style: model.data![index].id
+                                                      .toString() ==
+                                                  model.data!.first.id
+                                                      .toString()
+                                              ? TextStyle(
+                                                  color: mainColorLite,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 12)
+                                              : TextStyle(
+                                                  color: textDarkColor,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          maxLines: 3,
+                                          textAlign: TextAlign.start,
+                                          overflow: TextOverflow.ellipsis),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ])),
+                      )));
               // InkWell(
               //   child: Card(
               //       elevation: 5,

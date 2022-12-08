@@ -70,7 +70,7 @@ class _AllProductsState extends State<AllProducts> {
             } else {
                list = [];
                list!.clear();
-               list =state!.products;
+               list = state!.products;
             //   _searchBloc.isFetching = false;
              }
           }

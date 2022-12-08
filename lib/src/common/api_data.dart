@@ -25,7 +25,7 @@ class APIData {
   static const getTopCompanies = domainLinkApi + 'user/top-companies';
   static const getPopular = domainLinkApi + 'user/top-products';
   static const userProfile = domainLinkApi + 'user/profile';
-  static const editProfile = domainLinkApi + 'user/edit/';
+  static const editProfile = domainLinkApi + 'user/edit';
   static const changePassword = domainLinkApi + 'user/change-password';
 
   // categories
@@ -92,6 +92,7 @@ class APIData {
   static const productBySubCategory = domainLinkApi + 'user/products/2';
   static const getFeatured = domainLinkApi + 'foods';
   static const productDetails = domainLinkApi + 'user/products/';
+  static const productDetailss = domainLinkApi + 'user/products';
   static const productOfCompany = domainLinkApi + 'user/products-companies';
 
   // company
@@ -103,6 +104,7 @@ class APIData {
   //search
   static const searchCategories = domainLinkApi + 'user/categories';
   static const searchSubCategories = domainLinkApi + 'user/subcate-by-cate';
+  // https://test.hand-bill.com/api/user/products?sub_sub_category_id=20
   static const searchSubSubCategories = domainLinkApi + 'user/subsubcate-by-subcate';
   static const searchProduct = domainLinkApi + 'user/search-products';
   static const searchCompanies = domainLinkApi + 'user/search-companies-services';

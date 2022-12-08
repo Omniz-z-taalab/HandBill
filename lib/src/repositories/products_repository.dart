@@ -7,6 +7,7 @@ import 'package:hand_bill/src/data/response/product/product_details_response.dar
 import 'package:hand_bill/src/data/response/product/products_response.dart';
 
 import '../common/global.dart';
+import '../data/response/search/search_product_response.dart';
 
 class ProductsRepository {
   String tag = "ProductsRepository";
@@ -32,15 +33,16 @@ class ProductsRepository {
   Future<ProductsResponse> getProductsBySubCategory(
       {required String subcategoryId}) async {
     String? value = await storage.read(key: "lang");
-
-    Map<String, String> queryParams = ({
-      'id': subcategoryId,
-      'language': value!
+    print(subcategoryId);
+    print('ffffffff');
+    Map<String, dynamic> queryParams = ({
+      'sub_sub_category_id': subcategoryId,
+      'language': value
     });
     late ProductsResponse productsResponse;
     Response response;
     // try {
-      response = await _dio.get(APIData.productBySubCategory,
+      response = await _dio.get(APIData.productDetailss,
           queryParameters: queryParams);
       log("\ngetProductsBySubCategory: ${jsonEncode(response.data)}");
       productsResponse = ProductsResponse.fromJson(response.data);
@@ -54,4 +56,17 @@ class ProductsRepository {
     // }
     // return productsResponse;
   }
+
+  Future<SearchProductResponse> getSearchProductsub(String id) async {
+    String? value = await storage.read(key: "lang");
+
+    Map<String, dynamic> queryParams =
+    ({"language": value, "sub_sub_category_id": id});
+    SearchProductResponse searchProductResponse;
+    Response response = await _dio.get(APIData.productDetailss, queryParameters: queryParams);
+    searchProductResponse = SearchProductResponse.fromJson(response.data);
+    print(response.data);
+    return searchProductResponse;
+  }
+
 }

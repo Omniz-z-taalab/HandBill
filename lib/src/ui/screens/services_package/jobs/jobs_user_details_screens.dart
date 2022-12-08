@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hand_bill/src/common/api_data.dart';
 import 'package:hand_bill/src/common/constns.dart';
@@ -35,7 +36,7 @@ class _JobUserDetailsScreenState extends State<JobUserDetailsScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: RegularAppBar(label: 'Details'),
+        appBar: RegularAppBar(label: 'Details'.tr()),
         body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child:
@@ -115,7 +116,7 @@ class _JobUserDetailsScreenState extends State<JobUserDetailsScreen> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Description",
+                        Text("Description".tr(),
                             style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.black,

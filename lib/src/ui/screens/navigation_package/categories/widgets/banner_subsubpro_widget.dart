@@ -25,20 +25,12 @@ class SliderSubWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            decoration: BoxDecoration(
-                color: Colors.black26,
-                borderRadius: BorderRadius.circular(16.0),
-                border: Border.all(color: Color(0xfff5f5f5), width: 1.5),
-                boxShadow: [
-                  BoxShadow(
-                      color: Color(0xfff5f5f5),
-                      blurRadius: 3,
-                      spreadRadius: 3)
-                ]),
+            height: 10,
+            width: MediaQuery.of(context).size.width,
             child: CachedNetworkImage(
-
+                // height: 20,
                 imageUrl: '${APIData.domainLink}${model.image}',
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
                 placeholder: (context, url) => Center(
                     heightFactor: 3,
                     widthFactor: 2,

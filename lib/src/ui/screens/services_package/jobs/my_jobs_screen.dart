@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -73,7 +74,7 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
         key: _scaffoldKey,
         backgroundColor: Color(0xfff5f5f5),
         // backgroundColor: Colors.white,
-        appBar: RegularAppBar(label: "My Jobs"),
+        appBar: RegularAppBar(label: "My Jobs".tr()),
         floatingActionButton: FloatingActionButton(
             backgroundColor: mainColorLite,
             onPressed: () {
@@ -128,7 +129,7 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                           ? LoadingSliver()
                           : _items!.length == 0
                               ? CenterWidgetListSliver(
-                                  label: "Your Jobs is empty")
+                                  label: "Your Jobs is empty".tr())
                               : SliverToBoxAdapter(
                                   child: ListView.separated(
                                       physics: BouncingScrollPhysics(),

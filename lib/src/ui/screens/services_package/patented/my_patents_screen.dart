@@ -124,7 +124,7 @@ class _MyPatentsScreenState extends State<MyPatentsScreen> {
                   slivers: [
                     _items == null
                         ?  CenterWidgetListSliver(
-                                label: "your patents is empty")
+                                label: "your patents is empty".tr())
                             : SliverToBoxAdapter(
                                 child: ListView.separated(
                                     physics: BouncingScrollPhysics(),

@@ -5,6 +5,7 @@ import 'package:hand_bill/src/ui/component/custom/custom_page_route.dart';
 import 'package:hand_bill/src/ui/screens/account_package/agents/agents_screen.dart';
 import 'package:hand_bill/src/ui/screens/navigation_package/categories/sub_category_screen.dart';
 import 'package:hand_bill/src/ui/screens/navigation_package/categories/sub_sub_categories.dart';
+import 'package:hand_bill/src/ui/screens/navigation_package/search/Search_market/Widgets/proo.dart';
 import 'package:hand_bill/src/ui/screens/services_package/asstes/assets_details_screen.dart';
 import 'package:hand_bill/src/ui/screens/services_package/asstes/assets_screen.dart';
 import 'package:hand_bill/src/ui/screens/services_package/auctions/auction_details_screen.dart';
@@ -63,8 +64,8 @@ class RouteGenerator {
         return CustomPageRoute(widget: ForgetPasswordScreen());
       case RestPasswordScreen.routeName:return CustomPageRoute(widget: RestPasswordScreen());
       case CompanyServiceScreen.routeName:return CustomPageRoute(widget: CompanyServiceScreen(routeArgument: args!));
-      case LoginScreen.routeName:
-        return CustomPageRoute(widget: LoginScreen());
+      case LoginScreen.routeName:return CustomPageRoute(widget: LoginScreen());
+      case Producttt.routeName:return CustomPageRoute(widget: Producttt(routeArgument: args!));
       case RegisterScreen.routeName:
         return CustomPageRoute(widget: RegisterScreen());
       case VerificationScreen.routeName:

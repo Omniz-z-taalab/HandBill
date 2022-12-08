@@ -54,6 +54,13 @@ class ProductEvent extends SearchEvent{
   }
 
 }
+class ProducttEvent extends SearchEvent{
+  final int id;
+  ProducttEvent({required this.id}){
+    print(id.toString());
+  }
+
+}
 class  isFavourite extends SearchEvent{final String? num;
   isFavourite({required this.num}){
     print('ddsdsdsdd');

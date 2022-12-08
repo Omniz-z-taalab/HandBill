@@ -35,7 +35,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   late DataProductSearch _product;
   double? price = 0.0;
   int? favoriteId;
-  List<Product> _similarList = [];
+  List<DataProductSearch> _similarList = [];
 
   late ProductsBloc _productsBloc;
 

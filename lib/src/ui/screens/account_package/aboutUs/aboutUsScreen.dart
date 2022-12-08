@@ -17,7 +17,6 @@ import '../../../../common/constns.dart';
 import '../../../../data/response/aboutUs_response/AboutResponse.dart';
 import '../../navigation_package/home/componenet/slider_empty_widget.dart';
 
-
 class AboutUsScreen extends StatefulWidget {
   static const routeName = "/AboutUsScreen";
 
@@ -33,10 +32,9 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   List<Videos>? list;
   ScrollController? _scrollController;
-   AboutUsBloc? aboutUsBloc;
+  AboutUsBloc? aboutUsBloc;
   CategoryBloc? _categoryBloc;
   List<Banners>? banner;
-
 
   @override
   void initState() {
@@ -47,15 +45,12 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
 
   @override
   void dispose() {
-
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AboutUsBloc, AboutUsState>(
-
-        listener: (context, state) {
+    return BlocConsumer<AboutUsBloc, AboutUsState>(listener: (context, state) {
       if (state is AboutUsSuccessStates) {
         banner = state.items!.banners;
         print(banner![0].id);
@@ -84,8 +79,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                         'AboutUs'.tr(),
                         style: TextStyle(color: Colors.black, fontSize: 15),
                       )),
-                  body:
-                  RefreshIndicator(
+                  body: RefreshIndicator(
                     onRefresh: () async {
                       if (list != null) {
                         list!.clear();
@@ -103,17 +97,16 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                           children: [
                             banner == null
                                 ? Center(
-                              child: Padding(
-                                padding: EdgeInsets.all(30),
-                                child: CircularProgressIndicator(),
-                              ),
-                            )
+                                    child: Padding(
+                                      padding: EdgeInsets.all(30),
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  )
                                 : CarouselSlider.builder(
-
                                     itemCount:
                                         banner!.isNotEmpty ? banner!.length : 6,
-                                    itemBuilder: (BuildContext context, int index,
-                                        int idx) {
+                                    itemBuilder: (BuildContext context,
+                                        int index, int idx) {
                                       if (banner!.isNotEmpty) {
                                         return SliderAboutWidget(
                                             model: banner![index]);
@@ -145,7 +138,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                       ),
                       Center(
                         child: Text(
-                          'AboutUSVideos '.tr(),
+                          'AboutUSVideos'.tr(),
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
@@ -159,24 +152,27 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                         height: 500,
                         child: ListView(children: [
                           list == null
-                          ? Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(30),
-                              child: CircularProgressIndicator(),
-                            ),
-                          )
-                          :GridView.count(
-                              padding: EdgeInsets.fromLTRB(10, 0, 10, 16),
-                              childAspectRatio: 1 / 0.7,
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 2,
-                              mainAxisSpacing: 2,
-                              shrinkWrap: true,
-                              primary: false,
-                              children: List.generate(list!.length, (index) {
-                                return VideoPlayerr(data: list![index],);
-                              })),
-                          SizedBox(height: 80),
+                              ? Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(30),
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                )
+                              : GridView.count(
+                                  padding: EdgeInsets.all(10),
+                                  childAspectRatio: 1 / 0.7,
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 2,
+                                  mainAxisSpacing: 2,
+                                  shrinkWrap: true,
+                                  primary: false,
+                                  children:
+                                      List.generate(list!.length, (index) {
+                                    return VideoPlayerr(
+                                      data: list![index],
+                                    );
+                                  })),
+                          SizedBox(height: 100),
                         ]),
                       )
                     ])),
@@ -204,18 +200,20 @@ class _VideoPlayerrState extends State<VideoPlayerr> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-     controller!.dispose();
+    controller!.dispose();
   }
-  loadVideoPlayer(){
-    controller = VideoPlayerController.network("${widget.data.link == null? 'https://www.fluttercampus.com/video.mp4':widget!.data!.link} ");
+
+  loadVideoPlayer() {
+    controller = VideoPlayerController.network(
+        "${widget.data.link == null ? 'https://www.fluttercampus.com/video.mp4' : widget!.data!.link} ");
     controller.addListener(() {
       setState(() {});
     });
-    controller.initialize().then((value){
+    controller.initialize().then((value) {
       setState(() {});
     });
-
   }
+
   @override
   void initState() {
     loadVideoPlayer();
@@ -225,24 +223,32 @@ class _VideoPlayerrState extends State<VideoPlayerr> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-          if(controller.value.isPlaying){
-            controller.pause();
-          }else{
-            controller.play();
-          }
+    return
 
-          setState(() {
+          InkWell(
+          onTap: () {
+            if (controller.value.isPlaying) {
+              controller.pause();
+            } else {
+              controller.play();
+            }
 
-          });
-      },
-      child:  AspectRatio(
-        aspectRatio: controller.value.aspectRatio,
-        child: VideoPlayer(controller),
-      ),
-        // allowScrubbing: true,
-    );
+            setState(() {});
+          },
+          child: Card(
+              elevation: 5,
+              shape:
+                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              child:
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
+                    child: AspectRatio(
+                      aspectRatio: controller.value.aspectRatio,
+                      child: VideoPlayer(controller),
+                    ),
+                    // allowScrubbing: true,
+                  ),
+              ));
   }
 }
 
@@ -263,16 +269,7 @@ class SliderAboutWidget extends StatelessWidget {
         child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.black26,
-                  borderRadius: BorderRadius.circular(16.0),
-                  border: Border.all(color: Color(0xfff5f5f5), width: 1.5),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Color(0xfff5f5f5),
-                        blurRadius: 3,
-                        spreadRadius: 3)
-                  ]),
+              width: MediaQuery.of(context).size.width,
               child: CachedNetworkImage(
                 imageUrl: '${APIData.domainLink}${model.thump}',
                 fit: BoxFit.cover,

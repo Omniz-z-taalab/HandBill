@@ -941,10 +941,10 @@ class _CategoriesScreenState extends State<CategoriesScreen>
   }
 
   @override
-  void dispose() {
-    _scrollController!.dispose();
-    super.dispose();
-  }
+  // void dispose() {
+  //   _scrollController!.dispose();
+  //   super.dispose();
+  // }
 
   bool _showRealLength = false;
   int? _showRealSubLengthIndex;
@@ -1041,8 +1041,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
               param: categoryModel.name.toString(),
               id: categoryModel.id.toString()));
     });
-    _categoryBloc!
-        .add(FetchSubCategoriesEvent(categoryId: categoryModel.id.toString()));
+    // _categoryBloc!.add(FetchSubCategoriesEvent(categoryId: categoryModel.id.toString()));
     // });
   }
 }

@@ -30,7 +30,7 @@ class ProductsSuccessState extends ProductsState {
 
 // fetch product
 class SimilarProductsSuccessState extends ProductsState {
-  final List<Product>? products;
+  final List<DataProductSearch>? products;
 
   SimilarProductsSuccessState({required this.products});
 }

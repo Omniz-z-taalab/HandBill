@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,9 +62,9 @@ class _JobAddScreenState extends State<JobAddScreen> {
       _descriptionController.text = _model.description!;
     } else {
       _model = JobUserModel();
-      _jobCategoryModel = JobCategoryModel(id: 0, name: "Select job category");
+      _jobCategoryModel = JobCategoryModel(id: 0, name: "Select job category".tr());
       _jobSubCategoryModel =
-          JobCategoryModel(id: 0, name: "Select job subcategory");
+          JobCategoryModel(id: 0, name: "Select job subcategory".tr());
       // _titleController.text = "senior prof";
       // _descriptionController.text = "1+ years of experience";
     }
@@ -83,7 +84,7 @@ class _JobAddScreenState extends State<JobAddScreen> {
     setState(() {
       _jobCategoryModel = model;
       _jobSubCategoryModel =
-          JobCategoryModel(id: 0, name: "Select job subcategory");
+          JobCategoryModel(id: 0, name: "Select job subcategory".tr());
       _subcategories.clear();
       _jobsBloc.add(FetchJobsSubcategoriesEvent(id: model.id!));
     });
@@ -101,7 +102,7 @@ class _JobAddScreenState extends State<JobAddScreen> {
     return Scaffold(
         key: _scaffoldKey,
         appBar:
-            RegularAppBar(label: _model.id == null ? "Add Job" : "Edit Job"),
+            RegularAppBar(label: _model.id == null ? "Add Job".tr() : "Edit Job"),
         body: BlocBuilder<JobsBloc, JobsState>(builder: (context, state) {
           if (state is JobLoadingState) {
             loading = true;
@@ -154,14 +155,14 @@ class _JobAddScreenState extends State<JobAddScreen> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _jobLabel(label: "Category"),
+                          _jobLabel(label: "Category".tr()),
                           SizedBox(height: 16),
                           InkWell(
                               onTap: () {
                                 showDialog(
                                     context: context,
                                     builder: (context) => MyForm(
-                                        label: "Category",
+                                        label: "Category".tr(),
                                         onSubmit: onSubmitCategory,
                                         items: _categories));
                               },
@@ -178,14 +179,14 @@ class _JobAddScreenState extends State<JobAddScreen> {
                                           color: textDarkColor,
                                           fontSize: 16)))),
                           SizedBox(height: 16),
-                          _jobLabel(label: "SubCategory"),
+                          _jobLabel(label: "Subcategory".tr()),
                           SizedBox(height: 16),
                           InkWell(
                               onTap: () {
                                 showDialog(
                                     context: context,
                                     builder: (context) => MyForm(
-                                        label: "SubCategory",
+                                        label: "Subcategory".tr(),
                                         onSubmit: onSubmitSubCategory,
                                         items: _subcategories));
                               },
@@ -202,7 +203,7 @@ class _JobAddScreenState extends State<JobAddScreen> {
                                           color: textDarkColor,
                                           fontSize: 16)))),
                           SizedBox(height: 16),
-                          _jobLabel(label: "Title"),
+                          _jobLabel(label: "title".tr()),
                           SizedBox(height: 16),
                           Form(
                               key: _formKey,
@@ -211,22 +212,22 @@ class _JobAddScreenState extends State<JobAddScreen> {
                                   children: [
                                     CustomTextFormFieldEnter(
                                         controller: _titleController,
-                                        hintText: "Enter title",
+                                        hintText: "Enter_title".tr(),
                                         validator: (input) {
                                           if (input.toString().length < 4) {
-                                            return "title is short";
+                                            return "title is short".tr();
                                           }
                                           return null;
                                         }),
                                     SizedBox(height: 16),
-                                    _jobLabel(label: "Description"),
+                                    _jobLabel(label: "Description".tr()),
                                     SizedBox(height: 16),
                                     CustomTextFormFieldEnter(
                                         controller: _descriptionController,
-                                        hintText: "Enter description",
+                                        hintText: "Enter description".tr(),
                                         validator: (input) {
                                           if (input.toString().length < 4) {
-                                            return "description is short";
+                                            return "description is short".tr();
                                           }
                                           return null;
                                         })
@@ -247,7 +248,7 @@ class _JobAddScreenState extends State<JobAddScreen> {
                             ])),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   CustomButton(
-                      title: _model.id == null ? "Add" : "Edit",
+                      title: _model.id == null ? "Add".tr() : "Edit",
                       width: size.width * 0.7,
                       radius: 900,
                       onPress: () {
@@ -262,14 +263,36 @@ class _JobAddScreenState extends State<JobAddScreen> {
   void _onAddButtonPressed() {
     if (_formKey!.currentState!.validate()) {
       if (!_user!.profileCompleted()) {
-        displaySnackBar(
-            title: "Complete your profile", scaffoldKey: _scaffoldKey);
+        Fluttertoast.showToast(
+            msg: 'Complete your profile'.tr(),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
       } else if (_jobCategoryModel.id == 0) {
-        displaySnackBar(
-            title: "Select job category", scaffoldKey: _scaffoldKey);
+        Fluttertoast.showToast(
+            msg: 'Select job category'.tr(),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+
       } else if (_jobSubCategoryModel.id == 0) {
-        displaySnackBar(
-            title: "Select job subcategory", scaffoldKey: _scaffoldKey);
+        Fluttertoast.showToast(
+            msg: 'Select job subcategory'.tr(),
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
       } else {
         _model.title = _titleController.text;
         _model.description = _descriptionController.text;
@@ -327,8 +350,8 @@ class _MyFormState extends State<MyForm> {
                     Navigator.pop(context);
                     widget.onSubmit(widget.items[value!]);
                   }),
-                  title: Text(widget.items[index].name ?? "name"),
-                );
+                  title: Text(widget.items[index].name ?? "Name".tr(),
+                  ) );
               }),
         ));
   }

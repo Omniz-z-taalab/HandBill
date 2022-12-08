@@ -218,8 +218,9 @@ class _CompanyBoardState extends State<CompanyBoard>
                   featuredList: widget.featuredList,
                   categories: widget.categories,
                   products: widget.products),
+                  // widget!.model!.leftDataOfCompanies != null ?
               CompanyProfile(
-                leftDataOfCompanies: widget!.model!.leftDataOfCompanies!, ),
+                leftDataOfCompanies: widget!.model!.leftDataOfCompanies! )
             ]))
       ])),
       SliverToBoxAdapter(child: SizedBox(height: 80))

@@ -30,7 +30,7 @@ import '../../../component/product/product_ver_empty_widget.dart';
 
 class ProductDetailsBoard extends StatefulWidget {
   late DataProductSearch model;
-  List<Product>? similarList = [];
+  List<DataProductSearch>? similarList = [];
   User? user;
   bool favotrite;
 
@@ -122,7 +122,7 @@ class _ProductDetailsBoardState extends State<ProductDetailsBoard> {
       _company = _product.company!;
       _flag = _product.flag;
       _natureActivity = _company.natureActivity;
-      _similarList = widget.similarList!;
+      // _similarList = widget.similarList!;
       _favorite = widget.favotrite;
       if (_product.video != null && _addVideo == false) {
         initializePlayer(_product.video!.url!);

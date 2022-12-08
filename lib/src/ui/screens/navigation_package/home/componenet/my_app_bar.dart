@@ -22,13 +22,12 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                   child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Image.asset(placeholderLogo,
-                                height: 82,width: 80,),
-                            Row(children: [
-                              SizedBox(width: 20),
+                            Image.asset("assets/images/hb_logo2.jpeg",
+                              height: 40,width: 140,),
+
                               InkWell(
                                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> SearchSuppliers())),
                                 child: Stack(
@@ -41,7 +40,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                                     ]),
                               )
                             ])
-                          ]))),
+                          )),
               Container(
                   width: double.infinity, color: Color(0xffeeeeee), height: 1.5)
             ]));

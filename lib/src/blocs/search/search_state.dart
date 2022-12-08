@@ -136,7 +136,15 @@ class ProductLoadingState extends SearchState {}
 class ProductSuccessState extends SearchState {
   final List<DataProductSearch>? products;
 
-  const ProductSuccessState({required this.products});
+   ProductSuccessState({required this.products}){
+  }
+}
+class ProductSuccesssState extends SearchState {
+  final List<Product>? products;
+   ProductSuccesssState({required this.products}){
+    print('ddddfffffgggggg');
+
+  }
 }
 
 class ProductErrorState extends SearchState {

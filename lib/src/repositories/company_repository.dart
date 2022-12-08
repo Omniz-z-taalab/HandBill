@@ -63,8 +63,8 @@ class CompanyRepository {
       "language": value,
       // "secret": APIData.secretKey,
       "company_id": companyId,
-      'paginate': '8',
-      'page': '$page'
+      // 'paginate': '8',
+      // 'page': '$page'
     });
     late CompanyProductsResponse companyProductsResponse;
     // try {

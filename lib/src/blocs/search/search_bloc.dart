@@ -24,6 +24,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     on<SearchAllSubCategoriesEvent>(_mapSearchSubCategories);
     on<SearchSubSubCategoriesEvent>(_mapSearchSubSubCategories);
     on<ProductEvent>(SearchProduct);
+    on<ProducttEvent>(SearchProduuct);
     // on<isFavourite>(isFavouriteSuccessState);
   }
 
@@ -104,9 +105,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       SearchAllSubCategoriesEvent event, Emitter<SearchState> emit) async {
     emit(SearchSubCategoriesLoadingState());
     final response = await searchRepository.getAllSubCategories(event.id);
-    print(event.id);
-    print(response.data);
-    print('lalalaalalalalaalalalalal');
+
     try {
       if (response.data != null) {
         final subCategories = response.data;
@@ -124,9 +123,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       SearchSubSubCategoriesEvent event, Emitter<SearchState> emit) async {
     emit(SearchSubSubCategoriesLoadingState());
     final response = await searchRepository.getSubSubCategories(event.id);
-    print(event.id);
-    print(response.data);
-    print('lalalaalalalalaalalalalal');
+
     try {
       if (response.data != null) {
         final subSubCategories = response.data;
@@ -147,8 +144,24 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     final response = await searchRepository.getSearchProduct(event.id);
     try {
       if (response.status!) {
-        final products = response.data!.products!.data;
-        emit(ProductSuccessState(products: products));
+        print('wwwweeeeee');
+        // final products = response.data!.products!.data;
+        emit(ProductSuccesssState(products: response.data));
+      } else {
+        emit(ProductErrorState(error: response.message.toString()));
+      }
+    } catch (err) {
+      emit(SearchProductsErrorState(error: err.toString()));
+    }
+  }
+  void SearchProduuct(ProducttEvent event, Emitter<SearchState> emit) async {
+    emit(ProductLoadingState());
+    final response = await searchRepository.getSearchProduct(event.id);
+    try {
+      if (response.status!) {
+        print('wwwweeeeee');
+        // final products = response.data!.products!.data;
+        emit(ProductSuccesssState(products: response.data));
       } else {
         emit(ProductErrorState(error: response.message.toString()));
       }

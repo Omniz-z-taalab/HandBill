@@ -60,8 +60,12 @@ class ProfileRepository {
     ({
       "language": value
     });
-    Response response = await dio.get('${APIData.editProfile}${user.id}',queryParameters: queryParams);
+    print(user.apiToken);
+    print('omnnnnn');
 
+    Response response = await dio.post('${APIData.editProfile}${user.apiToken}',data: queryParams);
+    print(response.data);
+    print('omnnnnn');
     ProfileResponse? profileResponse;
     try {
       profileResponse = ProfileResponse.fromJson(response.data);

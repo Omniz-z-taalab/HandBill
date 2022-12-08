@@ -64,7 +64,7 @@ class _JobCompanyDetailsScreenState extends State<JobCompanyDetailsScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: RegularAppBar(label: 'Details'),
+        appBar: RegularAppBar(label: 'Details'.tr()),
         // floatingActionButton: FloatingActionButton(
         //     backgroundColor: mainColorLite,
         //     onPressed: () {
@@ -191,13 +191,13 @@ class _JobCompanyDetailsScreenState extends State<JobCompanyDetailsScreen> {
                         borderRadius: BorderRadius.circular(30)
                     ),
                     padding: EdgeInsets.all(12),
-                    child: Icon(showContact?Icons.close:Icons.chat,size: 60.w,
+                    child: Icon(showContact?Icons.close:Icons.chat,size: 30.w,
                       color: Colors.white,),
                   ),
                 ),),
               if(showContact==true)...[
                 Positioned(
-                  bottom: 500.h,
+                  bottom: 400.h,
                   right: 30.w,
                   child:  Container(
                     decoration: BoxDecoration(
@@ -207,7 +207,7 @@ class _JobCompanyDetailsScreenState extends State<JobCompanyDetailsScreen> {
                     child: IconButton(
                       onPressed: ()async{
                         if (_user == null) {
-                          Fluttertoast.showToast(msg:"toast.login".tr());
+                          Fluttertoast.showToast(msg:"login".tr());
                         }else{
                           if (_model.company!.deviceToken != null){
                             //?text=${Uri.parse(description)}
@@ -228,7 +228,7 @@ class _JobCompanyDetailsScreenState extends State<JobCompanyDetailsScreen> {
                         height: 100.h,width: 100.w,fit: BoxFit.cover,),),
                   ),),
                 Positioned(
-                  bottom: 360.h,
+                  bottom: 300.h,
                   right: 30.w,
                   child:  Container(
                     decoration: BoxDecoration(
@@ -238,7 +238,7 @@ class _JobCompanyDetailsScreenState extends State<JobCompanyDetailsScreen> {
                     child: IconButton(
                       onPressed: ()async{
                         if (_user == null) {
-                          Fluttertoast.showToast(msg: "toast.login".tr());
+                          Fluttertoast.showToast(msg: "login".tr());
                         }else{
                           if (_model.company!.deviceToken != null){
                             await canLaunch("tel:${_model.company!.leftDataOfCompanies!.firstMobile!=null&&
@@ -254,10 +254,10 @@ class _JobCompanyDetailsScreenState extends State<JobCompanyDetailsScreen> {
                         }
                       },
                       color: Colors.white,
-                      icon: Icon(Icons.phone,size: 60.w,),),
+                      icon: Icon(Icons.phone,size: 25.w,),),
                   ),),
                 Positioned(
-                  bottom: 220.h,
+                  bottom: 190.h,
                   right: 30.w,
                   child: Container(
                     decoration: BoxDecoration(
@@ -281,7 +281,7 @@ class _JobCompanyDetailsScreenState extends State<JobCompanyDetailsScreen> {
                         }
                       },
                       color: Colors.white,
-                      icon: Icon(Icons.email,size: 60.w,),),
+                      icon: Icon(Icons.email,size: 25.w,),),
                   ),
                 ),
               ],

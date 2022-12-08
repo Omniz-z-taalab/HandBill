@@ -12,6 +12,7 @@ import '../../../../../data/model/Search_data.dart';
 import '../../../../../data/model/local/route_argument.dart';
 import '../../../../component/custom/login_first_widget_sliver.dart';
 import '../../../services_package/patented/patents_screen.dart';
+import 'Widgets/proo.dart';
 import 'all_products.dart';
 
 class SubSubCategories extends StatefulWidget {
@@ -37,6 +38,7 @@ class _SubSubCategoriesState extends State<SubSubCategories> {
     id = widget!.routeArgument!.param;
     print(id);
     print('id');
+    print('eeeeeeeee');
     _searchBloc = BlocProvider.of<SearchBloc>(context);
     _searchBloc.add(SearchSubSubCategoriesEvent(id: id));
 
@@ -96,7 +98,9 @@ class SearchSubCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(onTap: () {
-      Navigator.pushNamed(context, AllProducts.routeName,
+      print(model.id);
+      print('ewwwwqqqqqq');
+      Navigator.pushNamed(context, Producttt.routeName,
           arguments: RouteArgument(param: model.id));
     }, child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {

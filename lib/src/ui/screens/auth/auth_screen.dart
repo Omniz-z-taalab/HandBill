@@ -37,7 +37,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
               Transform.scale(
-                  scale: 0.5, child: Image.asset("assets/images/hb_logo.jpeg"))
+                  scale: 0.5, child: Image.asset("assets/images/hb_logo2.jpeg"))
             ])),
         Container(
             height: size.height * 0.40,

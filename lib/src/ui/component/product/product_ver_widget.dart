@@ -43,6 +43,11 @@ class ProductVerWidget extends StatelessWidget {
           child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                // Container(
+                //   height: 100,
+                //   width: 200,
+                //   color: Colors.green,
+                // ),
             Stack(children: [
               Container(
                 height: constraints.maxWidth * 0.65,
@@ -66,7 +71,7 @@ class ProductVerWidget extends StatelessWidget {
                   child: InkWell(
                       onTap: () {
                         if (user == null) {
-                          Fluttertoast.showToast(msg: "toast.login".tr());
+                          Fluttertoast.showToast(msg: "login".tr());
                         } else {
                           if (model.isFavourite == '0') {
                             favoriteBloc.add(RemoveFromFavoriteEvent(

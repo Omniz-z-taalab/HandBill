@@ -47,7 +47,7 @@ Widget HelpCenter(HelpCenterModel mails,context) {
           ),
           Padding(
             padding: const EdgeInsets.all(18.0),
-            child: Icon( mails!.icon != null? mails.icon : Icons.email, color: Colors.black26),
+            child: Icon( mails!.icon != null ? mails.icon : Icons.email, color: Colors.black26),
           ),
         ],
       ),

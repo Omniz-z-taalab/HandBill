@@ -29,4 +29,4 @@ const fcmKey =
     "AAAAG5V--H8:APA91bHYmwpIw0VAJKo7ioM-w2IE19FJ7vt-oxaPNqKgpUH6KQ88ga9sIeXzmIYkvkWObfvN9fiImHI-MVuvmbuJkDVBKLGc75J2FOxhTr9mu121jqVSBGciHxu-Oq2gNjmCfa8DUP12";
 // images
 
-const String logo = "assets/images/hb_logo.jpeg";
+const String logo = "assets/images/hb_logo2.jpeg";
