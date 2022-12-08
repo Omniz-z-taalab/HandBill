@@ -165,7 +165,7 @@ class _AuctionDetailsScreenState extends State<AuctionDetailsScreen> {
                                             image: CachedNetworkImageProvider(
                                                 _model.company!.logo == null
                                                     ? placeholder
-                                                    : "${_model.company!.logo!.thump}"),
+                                                    : "${APIData.domainLink}${_model.company!.logo!.thump}"),
                                             fit: BoxFit.cover),
                                         color: Color(0xffeeeeee),
                                         borderRadius: BorderRadius.circular(8),

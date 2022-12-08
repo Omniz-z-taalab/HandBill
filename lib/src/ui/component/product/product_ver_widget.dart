@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hand_bill/src/blocs/favorite/favorite_bloc.dart';
 import 'package:hand_bill/src/blocs/favorite/favorite_event.dart';
+import 'package:hand_bill/src/common/api_data.dart';
 import 'package:hand_bill/src/common/constns.dart';
 import 'package:hand_bill/src/data/model/local/route_argument.dart';
 import 'package:hand_bill/src/data/model/product.dart';
@@ -55,7 +56,7 @@ class ProductVerWidget extends StatelessWidget {
                 child: CachedNetworkImage(
                     imageUrl: isHome
                         ? model.images![0].url!
-                        : model.images!.length!=0?model.images!.first.thump!
+                        : model.images!.length!=0? '${APIData.domainLink}${model.images!.first.thump!}'
                         :placeholder,
                     placeholder: (context, url) => Center(
                         heightFactor: 1,
@@ -103,13 +104,18 @@ class ProductVerWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                              child: Text(model.name!,
-                                  style: TextStyle(
-                                      fontSize: 15, color: Colors.black),
-                                  textAlign: TextAlign.start,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis)),
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: Text(model.name!,
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.black),
+                                      textAlign: TextAlign.start,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis)),
+
+                         ],
+                          ),
                           Expanded(
                               child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

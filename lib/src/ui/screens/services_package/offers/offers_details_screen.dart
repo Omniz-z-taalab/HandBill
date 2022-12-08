@@ -73,8 +73,8 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
               if (_user == null) {
                 Fluttertoast.showToast(msg: "login".tr());
               } else {
-                // Navigator.pushNamed(context, InboxScreen.routeName,
-                //     arguments: RouteArgument(param: _conversation));
+                 // Navigator.pushNamed(context, InboxScreen.routeName,
+                 //     arguments: RouteArgument(param: _conversation));
               }
             },
             child: Icon(Icons.chat_outlined)),

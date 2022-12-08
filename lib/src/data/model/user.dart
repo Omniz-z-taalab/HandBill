@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:hand_bill/src/data/model/local/chat_user.dart';
 import 'package:hand_bill/src/data/model/local/images.dart';
 
@@ -10,13 +11,11 @@ class User {
   String? _address;
   String? _country;
   String? _email;
-  String? _name;
+  dynamic? _name;
   String? _phone;
   String? _password;
-  String? _confirmpassword;
-  String? _namear;
-
-  SaveImageModel? _image;
+  dynamic? _namear;
+  ImageModel? _image;
 
   int? get id => _id;
 
@@ -40,27 +39,27 @@ class User {
 
   String? get password => _password;
 
-  String? get confirmpassword => _confirmpassword;
+  // String? get confirmpassword => _confirmpassword;
 
   String? get namear => _namear;
 
-  SaveImageModel? get image => _image;
+  ImageModel? get image => _image;
 
-  User(
-      {int? id,
-      String? isVerified,
-      String? deviceToken,
-      String? active,
-      String? apiToken,
-      String? address,
-      String? country,
-      String? email,
-      String? username,
-      String? phone,
-      SaveImageModel? image,
-      String? name,
-      String? namear,
-      }) {
+  User({
+    int? id,
+    String? isVerified,
+    String? deviceToken,
+    String? active,
+    String? apiToken,
+    String? address,
+    String? country,
+    String? email,
+    String? username,
+    String? phone,
+    ImageModel? image,
+    String? name,
+    dynamic? namear,
+  }) {
     _id = id;
     _isVerified = isVerified;
     _deviceToken = deviceToken;
@@ -75,20 +74,19 @@ class User {
     _image = image;
   }
 
-  User.fromJson(dynamic json) {
-    _id = json["id"];
-    _isVerified = json["is_verified"];
-    _deviceToken = json["device_token"];
-    _active = json["active"];
-    _apiToken = json["api_token"];
-    _address = json["address"];
-    _country = json["country"];
-    _email = json["email"];
-    _namear = json["name_ar"];
-    _name = json["name"];
-    _phone = json["phone"];
-    _image =
-        json["image"] != null ? SaveImageModel.fromJson(json["image"]) : null;
+  User.fromJson(Map<String, dynamic> json){
+    _id = json['id'];
+    _isVerified = json['is_verified'];
+    _namear = json['name_ar'];
+    _country = json['country'];
+    _deviceToken = json['device_token'];
+    _active = json['active'];
+    _apiToken = json['api_token'];
+    _address = json['address'];
+    _email = json['email'];
+    _name = json['name'];
+    _phone = json['phone'];
+    _image = json['image'] != null ? new ImageModel.fromJson(json['image']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -130,33 +128,30 @@ class User {
   set country(String? value) {
     _country = value;
     print(_country);
-
   }
 
   set password(String? value) {
     _password = value;
     print(_password);
-
   }
 
-  set confirmpassword(String? value) {
-    _confirmpassword = value;
-  }
+  // set confirmpassword(String? value) {
+  //   _confirmpassword = value;
+  // }
 
   set name(String? value) {
     _name = value;
     print(_name);
   }
+
   set namear(String? value) {
     _namear = value;
     print(_namear);
   }
 
-
   set email(String? value) {
     _email = value;
     print(_email);
-
   }
 
   set deviceToken(String? value) {

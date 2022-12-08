@@ -66,10 +66,10 @@ class _ServiceScreenState extends State<ServiceScreen>
   }
 
   @override
-  void dispose() {
-    _scrollController!.dispose();
-    super.dispose();
-  }
+  // void dispose() {
+  //   _scrollController!.dispose();
+  //   super.dispose();
+  // }
 
   bool _showRealLength = false;
   int? _showRealSubLengthIndex;

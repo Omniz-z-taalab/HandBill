@@ -20,6 +20,7 @@ import 'package:hand_bill/src/ui/component/custom/custom_icon_btn.dart';
 import 'package:hand_bill/src/ui/component/custom/custom_text_filed_enter.dart';
 import 'package:hand_bill/src/ui/component/custom/regular_app_bar.dart';
 import 'package:hand_bill/src/ui/component/widgets.dart';
+import 'package:hand_bill/src/ui/screens/account_package/account_screen.dart';
 import 'package:hand_bill/src/ui/screens/common/image_full_screen.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -37,6 +38,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   GlobalKey<FormState>? _profileFormKey;
   GlobalKey<FormState>? _passwordFormKey;
   TextEditingController _userNameController = TextEditingController();
+  TextEditingController _userNameArController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
   TextEditingController _addressController = TextEditingController();
   TextEditingController _currentPasswordController = TextEditingController();
@@ -214,8 +216,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                       ? CachedNetworkImage(
                                           imageUrl: _user!.image == null
                                               ? placeholder
-                                              : APIData.domainLink +
-                                                  _user!.image!.url!,
+                                              : _user!.image!.url!,
                                           fit: BoxFit.cover,
                                           placeholder: (context, url) =>
                                               Transform.scale(
@@ -248,7 +249,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       _editLabel(label: "Name".tr()),
-                                      CustomTextFormFieldEnter(
+                                      CustomTextFormFieldtitle(
                                           controller: _userNameController,
                                           hintText: "Enter_name".tr(),
                                           validator: (input) {
@@ -257,8 +258,18 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                             }
                                             return null;
                                           }),
+                                      _editLabel(label: "NameAr".tr()),
+                                      CustomTextFormFieldtitle(
+                                          controller: _userNameArController,
+                                          hintText: "Enter_name".tr(),
+                                          validator: (input) {
+                                            if (input.toString().length < 4) {
+                                              return "name_is_short".tr();
+                                            }
+                                            return null;
+                                          }),
                                       _editLabel(label: "phone".tr()),
-                                      CustomTextFormFieldEnter(
+                                      CustomTextFormFieldtitle(
                                           controller: _phoneController,
                                           hintText: "Enter_phone".tr(),
                                           validator: (input) {
@@ -268,7 +279,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                             return null;
                                           }),
                                       _editLabel(label: "Country".tr()),
-                                      CustomTextFormFieldEnter(
+                                      CustomTextFormFieldtitle(
                                           controller: _addressController,
                                           hintText: "Enter_country".tr(),
                                           validator: (input) {
@@ -317,7 +328,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       _editLabel(label: "password".tr()),
-                                      CustomTextFormFieldEnter(
+                                      CustomTextFormFieldtitle(
                                           controller:
                                               _currentPasswordController,
                                           hintText: "enter_password".tr(),
@@ -328,7 +339,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                             return null;
                                           }),
                                       _editLabel(label: "new_password".tr()),
-                                      CustomTextFormFieldEnter(
+                                      CustomTextFormFieldtitle(
                                           controller: _newPasswordController,
                                           hintText: "Enter_new_password".tr(),
                                           validator: (input) {

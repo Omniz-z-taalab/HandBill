@@ -60,10 +60,12 @@ class ProfileRepository {
     ({
       "language": value
     });
+    dio.options.headers["Authorization"] = "Bearer " + user.apiToken.toString();
+    dio.options.headers["Accept"] = "application/json";
     print(user.apiToken);
-    print('omnnnnn');
+        print(APIData.editProfile);
+    Response response = await dio.post('${APIData.editProfile}',data: queryParams);
 
-    Response response = await dio.post('${APIData.editProfile}${user.apiToken}',data: queryParams);
     print(response.data);
     print('omnnnnn');
     ProfileResponse? profileResponse;

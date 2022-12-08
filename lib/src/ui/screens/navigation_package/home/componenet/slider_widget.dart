@@ -14,30 +14,31 @@ class SliderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-        onTap: () {
+    return
+       InkWell(
+          onTap: () {
 
-            Navigator.pushNamed(context, CompanyScreen.routeName,
-                arguments: RouteArgument(param: model.company!.id));
+              Navigator.pushNamed(context, CompanyScreen.routeName,
+                  arguments: RouteArgument(param: model.company!.id));
 
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-          width: MediaQuery.of(context).size.width,
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
 
-            child: CachedNetworkImage(
-
-                imageUrl: model.image!,
-                fit: BoxFit.cover,
-                placeholder: (context, url) => Center(
-                    heightFactor: 3,
-                    widthFactor: 2,
-                    child: CircularProgressIndicator(
-                        color: mainColorLite, strokeWidth: 1)),
-                errorWidget: (context, url, error) =>
-                    new Icon(Icons.error, color: mainColorLite)),
+            width: MediaQuery.of(context).size.width,
+              child: CachedNetworkImage(
+                  imageUrl: model.image!,
+                  fit: BoxFit.fill,
+                  placeholder: (context, url) => Center(
+                      heightFactor: 3,
+                      widthFactor: 2,
+                      child: CircularProgressIndicator(
+                          color: mainColorLite, strokeWidth: 1)),
+                  errorWidget: (context, url, error) =>
+                      new Icon(Icons.error, color: mainColorLite)),
+            ),
           ),
-        ));
+    );
   }
 }

@@ -163,32 +163,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   alignment: Alignment.topCenter,
                   child: Stack(
                     children: [
-                      CarouselSlider.builder(
-                        itemCount: _homeBloc.sliders.isNotEmpty
-                            ? _homeBloc.sliders.length
-                            : 6,
-                        itemBuilder:
-                            (BuildContext context, int index, int idx) {
-                          if (_homeBloc.sliders.isNotEmpty) {
-                            return SliderWidget(
-                                model: _homeBloc.sliders[index]);
-                          }
-                          return SliderEmptyWidget();
-                        },
-                        options: CarouselOptions(
-                            viewportFraction: 1,
-                            initialPage: 0,
-                            // enlargeCenterPage: true,
-                            scrollDirection: Axis.horizontal,
-                            autoPlay: true,
-                            enableInfiniteScroll: true,
-                            autoPlayInterval: Duration(milliseconds: 4000),
-                            autoPlayCurve: Curves.easeOutSine,
-                            onPageChanged: (index, reason) {
-                              setState(() {
-                                _sliderPosition = index;
-                              });
-                            }),
+                      Container(
+                        height:200,
+                        width: MediaQuery.of(context).size.width,
+                        child: CarouselSlider.builder(
+                          itemCount: _homeBloc.sliders.isNotEmpty
+                              ? _homeBloc.sliders.length
+                              : 6,
+                          itemBuilder:
+                              (BuildContext context, int index, int idx) {
+                            if (_homeBloc.sliders.isNotEmpty) {
+                              return SliderWidget(
+                                  model: _homeBloc.sliders[index]);
+                            }
+                            return SliderEmptyWidget();
+                          },
+                          options: CarouselOptions(
+                              viewportFraction: 1,
+                              initialPage: 0,
+                              // enlargeCenterPage: true,
+                              scrollDirection: Axis.horizontal,
+                              autoPlay: true,
+                              enableInfiniteScroll: true,
+                              autoPlayInterval: Duration(milliseconds: 4000),
+                              autoPlayCurve: Curves.easeOutSine,
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  _sliderPosition = index;
+                                });
+                              }),
+                        ),
                       ),
                       _homeBloc.sliders.isEmpty
                           ? SizedBox()

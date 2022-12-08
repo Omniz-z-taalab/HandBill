@@ -78,7 +78,7 @@ class _ServiceFirstCompanyState extends State<ServiceFirstCompany> {
                       )
                           : SizedBox(
                         height: 200,
-                        width: double.infinity,
+                        width: MediaQuery.of(context).size.width,
                         child: CarouselSlider.builder(
                           itemCount: banner!.length,
                           itemBuilder: (BuildContext context, int index,

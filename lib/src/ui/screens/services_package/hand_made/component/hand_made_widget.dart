@@ -28,7 +28,7 @@ class HandmadeWidget extends StatelessWidget {
             decoration: BoxDecoration(color: Colors.white),
             child: Column(children: [
               CachedNetworkImage(
-                  imageUrl:"${model.images![0].thump}",
+                  imageUrl:"${APIData.domainLink}${model.images![0].thump}",
                 width: 200,height: 200,),
               Container(
                   color: Color(0xfffafafa), height: 2, width: double.infinity),

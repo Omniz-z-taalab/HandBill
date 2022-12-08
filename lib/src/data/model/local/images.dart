@@ -43,7 +43,7 @@ class ImageModel {
 
     _thump = json["thump"] == null
         ? placeholder
-        : APIData.domainLink + json["thump"];
+        :  json["thump"];
     _icon =
         json["icon"] == null ? placeholder : APIData.domainLink + json["icon"];
     _url =
@@ -112,9 +112,9 @@ class SaveImageModel {
       _icon = json["icon"];
       _url = json["url"];
     } catch (e) {
-      // _thump = APIData.domainLink + json["thump"];
-      // _icon = APIData.domainLink + json["icon"];
-      // _url = APIData.domainLink + json["url"];
+       _thump = APIData.domainLink + json["thump"];
+       _icon = APIData.domainLink + json["icon"];
+       _url = APIData.domainLink + json["url"];
       print(e);
     }
   }

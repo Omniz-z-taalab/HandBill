@@ -24,7 +24,7 @@ class FavoriteSuccessState extends FavoriteState {
 
   FavoriteSuccessState({required this.items}){
     print('sddd');
-    print(items![0].product);
+    // print(items![0].product);
 }
 }
 /////// is fav

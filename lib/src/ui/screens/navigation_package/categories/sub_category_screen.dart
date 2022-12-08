@@ -389,30 +389,34 @@ class _SubCategoriesState extends State<SubCategories>
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                     CarouselSlider.builder(
-                          itemCount: sliders.length,
-                          itemBuilder: (BuildContext context, int index,
-                              int pageViewIndex) {
-                            if (sliders.isNotEmpty) {
-                              return SliderWidget(model: sliders[index]);
-                            }
-                            return SliderEmptyWidget();
-                          },
-                          options: CarouselOptions(
-                              viewportFraction: 1,
-                              initialPage: 0,
-                              // enlargeCenterPage: true,
-                              scrollDirection: Axis.horizontal,
-                              autoPlay: true,
-                              enableInfiniteScroll: true,
-                              autoPlayInterval: Duration(milliseconds: 4000),
-                              autoPlayCurve: Curves.easeOutSine,
-                              onPageChanged: (index, reason) {
-                                setState(() {
-                                  _sliderPosition = index;
-                                });
-                              }),
-                        ),
+                     Container(
+                       height: 170,
+                       width: MediaQuery.of(context).size.width,
+                       child: CarouselSlider.builder(
+                            itemCount: sliders.length,
+                            itemBuilder: (BuildContext context, int index,
+                                int pageViewIndex) {
+                              if (sliders.isNotEmpty) {
+                                return SliderWidget(model: sliders[index]);
+                              }
+                              return SliderEmptyWidget();
+                            },
+                            options: CarouselOptions(
+                                viewportFraction: 1,
+                                initialPage: 0,
+                                // enlargeCenterPage: true,
+                                scrollDirection: Axis.horizontal,
+                                autoPlay: true,
+                                enableInfiniteScroll: true,
+                                autoPlayInterval: Duration(milliseconds: 4000),
+                                autoPlayCurve: Curves.easeOutSine,
+                                onPageChanged: (index, reason) {
+                                  setState(() {
+                                    _sliderPosition = index;
+                                  });
+                                }),
+                          ),
+                     ),
 
                       SizedBox(
                         height: 600,

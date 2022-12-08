@@ -56,7 +56,7 @@ class JobUserWidget extends StatelessWidget {
                                                 imageUrl: model.user!.image ==
                                                         null
                                                     ? placeholder
-                                                    : APIData.domainLink +
+                                                    :
                                                         model.user!.image!.url!,
                                                 fit: BoxFit.cover,
                                                 placeholder: (context, url) =>

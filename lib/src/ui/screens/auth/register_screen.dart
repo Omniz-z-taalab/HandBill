@@ -409,8 +409,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _subNatureOfActivityModel =
         NatureOfActivityModel(id: 0, name: "Select Sub Nature Of Activity");
 
-    _countryModel =
-        CountryModel(id: 0, name: "signup.select_country".tr());
+    _countryModel = CountryModel(id: 0, name: "signup.select_country".tr());
     _authBloc = BlocProvider.of<AuthBloc>(context);
     _authBloc!.add(FetchCountriesEvent());
     super.initState();
@@ -456,7 +455,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Widget build(BuildContext context) {
-
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -468,8 +466,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 setState(() => loading = true);
               }
               if (state is AuthFailure) {
-                displaySnackBar(
-                    scaffoldKey: _scaffoldKey, title: state.error ?? "error");
+                Fluttertoast.showToast(
+                    msg: state.error ?? '',
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.green,
+                    textColor: Colors.white,
+                    fontSize: 16.0
+                );
                 setState(() => loading = false);
               }
               if (state is RegisterSuccess) {
@@ -497,7 +502,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 scale: 0.5,
                                 alignment: Alignment.center,
                                 child: Image.asset(
-                                    "assets/images/hb_logo.jpeg")))),
+                                    "assets/images/hb_logo2.jpeg")))),
                     Form(
                         key: _key,
                         child: Padding(
@@ -512,8 +517,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       controller: _nameController,
                                       validator: (input) {
                                         if (input.toString().length < 4) {
-                                          return
-                                              "enter_user_name".tr();
+                                          return "enter_user_name".tr();
                                         }
                                         return null;
                                       }),
@@ -524,8 +528,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       controller: _namearController,
                                       validator: (input) {
                                         if (input.toString().length < 4) {
-                                          return
-                                              "enter_arabic_name".tr();
+                                          return "enter_arabic_name".tr();
                                         }
                                         return null;
                                       }),
@@ -542,8 +545,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               if (!input
                                                   .toString()
                                                   .contains('@')) {
-                                                return
-                                                    "valid_email".tr();
+                                                return "valid_email".tr();
                                               }
                                               return null;
                                             }))
@@ -614,8 +616,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                   borderSide: new BorderSide(
                                                       color: borderColor)),
                                           // contentPadding: EdgeInsets.all(0),
-                                          hintText:
-                                              "password".tr(),
+                                          hintText: "password".tr(),
                                           hintStyle:
                                               TextStyle(color: textLiteColor)),
                                       controller: _passwordController,
@@ -658,16 +659,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   Row(children: [
                                     Expanded(
                                         child: CustomTextFormField(
-                                            hintText:
-                                                "toast_sure".tr(),
+                                            hintText: "toast_sure".tr(),
                                             icon: Icons.lock_outline_rounded,
                                             controller:
                                                 _confirmpasswordController,
                                             isPassword: true,
                                             validator: (input) {
                                               if (input.toString().length < 6) {
-                                                return
-                                                    "pass_short".tr();
+                                                return "pass_short".tr();
                                               }
                                               return null;
                                             }))
@@ -805,25 +804,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               if (_key.currentState!
                                                   .validate()) {
                                                 print(countryname);
-                                                print('khaled');
-                                                _authBloc!
-                                                  .add(RegisterButtonPressed(
-                                                     namear:_namearController.text.trim(),
-                                                      confirimpassword:
-                                                          _confirmpasswordController
-                                                              .text
-                                                              .trim(),
-                                                      name: _nameController.text
-                                                          .trim(),
-                                                      email: _emailController
-                                                          .text
-                                                          .trim(),
-                                                      password:
-                                                          _passwordController
-                                                              .text
-                                                              .trim(),
-                                                      country: countryname!,
-                                                      phone: phoneNumber));
+                                                _authBloc!.add(
+                                                    RegisterButtonPressed(
+                                                        namear: _namearController.text,
+                                                        confirimpassword: _passwordController.text,
+                                                        name: _nameController.text,
+                                                        email: _emailController.text,
+                                                        password: _passwordController.text,
+                                                        country: countryname!,
+                                                        phone: phoneNumber));
                                               }
                                             }),
                                       ]),

@@ -210,7 +210,7 @@ class _JobAddScreenState extends State<JobAddScreen> {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    CustomTextFormFieldEnter(
+                                    CustomTextFormFieldtitle(
                                         controller: _titleController,
                                         hintText: "Enter_title".tr(),
                                         validator: (input) {

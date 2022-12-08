@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hand_bill/src/blocs/global_bloc/global_bloc.dart';
 import 'package:hand_bill/src/data/model/country_model.dart';
+import 'package:hand_bill/src/data/model/services/handmade_model.dart';
 import 'package:hand_bill/src/data/model/user.dart';
 import 'package:hand_bill/src/data/response/auth/common_response.dart';
 import 'package:hand_bill/src/data/response/auth/login_response_.dart';
@@ -18,7 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   String tag = "AuthBloc";
   AuthRepository authRepository = AuthRepository();
   GlobalBloc? globalBloc;
-  User? _user;
+ Userr? _user;
   List<CountryModel> countries = [];
 
   AuthBloc({required BuildContext context}) : super(AuthInitial()) {
@@ -74,31 +75,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void _mapRegisterToState(
       RegisterButtonPressed event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    _user!.name = event.name;
-    _user!.namear = event.namear;
-    _user!.email = event.email;
-    _user!.password = event.password;
-    // _user!.password = event.password;
-    _user!.confirmpassword = event.confirimpassword;
-    _user!.country = event.country;
-    print(_user!.country);
-    print('111111111111111111111111');
-    _user!.phone = event.phone;
+
     RegisterResponse? response;
     try {
-      if (_user!.deviceToken == null) {
-        emit(AuthFailure(error: "not device token"));
-        return;
-      } else {
-        response = await authRepository.register(user: _user!);
+        response = await authRepository.register(name: event.name,password: event.password,phone: event.phone,email: event.email,country: event.country);
         if (response!.status!) {
+          print('dddddd');
           globalBloc!.user = response.data;
           authRepository.setCurrentUser(response.data);
           emit(RegisterSuccess(message: response.message, user: response.data));
         } else {
           emit(AuthFailure(error: response.message));
         }
-      }
+
     } catch (err) {
       emit(AuthFailure(error: err.toString()));
     }

@@ -317,7 +317,7 @@ class _AssetsDetailsScreenState extends State<AssetsDetailsScreen> {
               ),),
             if(showContact==true)...[
               Positioned(
-                bottom: 500.h,
+                bottom: 400.h,
                 right: 30.w,
                 child:  Container(
                   decoration: BoxDecoration(
@@ -348,7 +348,7 @@ class _AssetsDetailsScreenState extends State<AssetsDetailsScreen> {
                       height: 100.h,width: 100.w,fit: BoxFit.cover,),),
                 ),),
               Positioned(
-                bottom: 360.h,
+                bottom: 300.h,
                 right: 30.w,
                 child:  Container(
                   decoration: BoxDecoration(
@@ -374,10 +374,10 @@ class _AssetsDetailsScreenState extends State<AssetsDetailsScreen> {
                       }
                     },
                     color: Colors.white,
-                    icon: Icon(Icons.phone,size: 60.w,),),
+                    icon: Icon(Icons.phone,size: 30.w,),),
                 ),),
               Positioned(
-                bottom: 220.h,
+                bottom: 200.h,
                 right: 30.w,
                 child: Container(
                   decoration: BoxDecoration(
@@ -401,7 +401,7 @@ class _AssetsDetailsScreenState extends State<AssetsDetailsScreen> {
                       }
                     },
                     color: Colors.white,
-                    icon: Icon(Icons.email,size: 60.w,),),
+                    icon: Icon(Icons.email,size: 30.w,),),
                 ),
               ),
             ],

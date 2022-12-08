@@ -10,7 +10,7 @@ class HandmadeModel {
   String? _title;
   String? _price;
   List<ImageModel>? _images;
-  User? _user;
+  Userr? _user;
 
   int? get id => _id;
   String? get userId => _userId;
@@ -19,7 +19,7 @@ class HandmadeModel {
   String? get price => _price;
   String? get titleAr => _titleAr;
   String? get descriptionAr => _descriptionAr;
-  User? get user => _user;
+  Userr? get user => _user;
   List<ImageModel>? get images => _images;
 
   HandmadeModel({
@@ -30,7 +30,7 @@ class HandmadeModel {
     String? price,
     String? createdAt,
     String? updatedAt,
-    User? user,
+    Userr? user,
     List<ImageModel>? images}){
     _id = id;
     _userId = userId;
@@ -51,7 +51,7 @@ class HandmadeModel {
     _price = json["price"];
     _titleAr = json["title_ar"];
     _descriptionAr = json["description_ar"];
-    _user = json["user"] != null ? User.fromJson(json["user"]) : null;
+    _user = json['user'] != null ? new Userr.fromJson(json['user']) : null;
     if (json["images"] != null) {
       _images = [];
       json["images"].forEach((v) {
@@ -88,5 +88,47 @@ class HandmadeModel {
 
   set description(String? value) {
     _description = value;
+  }
+}
+class Userr {
+  int? id;
+  String? name;
+  String? email;
+  String? phone;
+  String? address;
+  String? deviceToken;
+  ImageModel? image;
+
+  Userr(
+      {this.id,
+        this.name,
+        this.email,
+        this.phone,
+        this.address,
+        this.deviceToken,
+        this.image});
+
+  Userr.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    email = json['email'];
+    phone = json['phone'];
+    address = json['address'];
+    deviceToken = json['device_token'];
+    image = json['image'] != null ? new ImageModel.fromJson(json['image']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['email'] = this.email;
+    data['phone'] = this.phone;
+    data['address'] = this.address;
+    data['device_token'] = this.deviceToken;
+    if (this.image != null) {
+      data['image'] = this.image!.toJson();
+    }
+    return data;
   }
 }

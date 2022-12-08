@@ -90,7 +90,6 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
               });
               await storage.write(key: "lang", value: en);
 
-              print(context.locale);
               Phoenix.rebirth(context);
             }
           }
@@ -358,7 +357,7 @@ class _DrawerItemWidgetState extends State<DrawerItemWidget> {
                           widget.model.title.toString() == 'من نحن'
                           ? SvgPicture
                           .asset(
-                        'assets/about.jpeg',
+                        'assets/icons/account/images.png',
                         // "assets/icons/account/wishlist.svg",
                         height: icSize,
                         width: icSize,

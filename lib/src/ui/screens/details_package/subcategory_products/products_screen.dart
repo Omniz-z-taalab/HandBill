@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hand_bill/src/blocs/favorite/favorite_bloc.dart';
 import 'package:hand_bill/src/blocs/favorite/favorite_state.dart';
 import 'package:hand_bill/src/blocs/global_bloc/global_bloc.dart';
@@ -131,9 +132,15 @@ class _ProductsScreenState extends State<ProductsScreen> {
                               });
                             }
                           });
-                          displaySnackBar(
-                              scaffoldKey: _scaffoldKey,
-                              title: state.message.toString());
+                          Fluttertoast.showToast(
+                              msg: state.message ?? '',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.green,
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                          );
                         }
 
                         if (state is RemoveFromFavoriteSuccessState) {
@@ -144,9 +151,15 @@ class _ProductsScreenState extends State<ProductsScreen> {
                               });
                             }
                           });
-                          displaySnackBar(
-                              scaffoldKey: _scaffoldKey,
-                              title: state.message.toString());
+                          Fluttertoast.showToast(
+                              msg: state.message ?? '',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.green,
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                          );
                         }
                       })
                 ],

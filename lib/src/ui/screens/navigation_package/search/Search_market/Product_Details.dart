@@ -384,6 +384,7 @@
 
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -458,7 +459,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           Navigator.pop(context);
 
         },),
-        title: Text('Back',style: TextStyle(
+        title: Text('Back'.tr(),style: TextStyle(
           color: Colors.black,
           fontSize: 25
         ),),
@@ -539,7 +540,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                           // height: 200,
                                           imageUrl: product!.images!.isEmpty
                                               ? placeholder
-                                              : '${product.images![0].thump!}',
+                                              : '${APIData.domainLink}${product.images![0].thump!}',
                                           placeholder: (context, url) => Center(
                                               heightFactor: 1,
                                               widthFactor: 1,

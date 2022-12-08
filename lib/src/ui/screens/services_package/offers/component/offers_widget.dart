@@ -83,6 +83,19 @@ class OfferWidget extends StatelessWidget {
                                           TextSpan(text: " \$")
                                         ]))
                                   ]),
+                              RichText(
+                                  text: TextSpan(
+                                      style: TextStyle(
+                                          color: Color(0xffDD2C00),
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold),
+                                      children: [
+                                        TextSpan(
+                                            text: model.company!.name.toString(),
+                                            style: TextStyle(
+                                                color: Colors.black)),
+                                      ]))
+
                             ]),
                         SizedBox(height: marginBetween),
                         Row(

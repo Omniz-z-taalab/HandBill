@@ -55,19 +55,19 @@ class AuthRepository {
     return loginResponse;
   }
 
-  Future<RegisterResponse?> register({required User user}) async {
+  Future<RegisterResponse?> register({required String name,required String password,required String email,required String country,required String phone}) async {
     String? value = await storage.read(key: "lang");
 
     FormData formData = new FormData.fromMap({
       "language": value,
-      "secret": APIData.secretKey,
-      "email": user.email,
-      "password": user.password,
-      "confirm_password": user.confirmpassword,
-      "name": user.name,
-      "device_token": user.deviceToken,
-      "country": user.country,
-      "phone": user.phone,
+      // "secret": APIData.secretKey,
+      "email": email,
+      "password": password,
+      "confirm_password": password,
+      "name":name,
+      // "device_token": deviceToken,
+      "country": country,
+      "phone": phone,
       // "name_ar":user.namear,
     });
     RegisterResponse? registerResponse;

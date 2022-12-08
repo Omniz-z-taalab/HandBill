@@ -74,7 +74,7 @@ class Company {
   dynamic? get flag => _flag;
 
   Company({
-    int? id,
+    dynamic? id,
     dynamic? natureActivity,
     dynamic? subNatureActivity,
     bool? isVerified,

@@ -60,11 +60,13 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                             height: 500,
                             child: ListView.separated(
                                 itemBuilder: (context, index) =>
-                                    HelpCenter(mails![index],context),
+                                    HelpCenter( mails: mails![index],
+                                        onTap: () => launchEmailSubmission(
+                                            mails![index].email!)),
                                 separatorBuilder:
-                                    (BuildContext context, int index) => SizedBox(
-                                          height: 10,
-                                        ),
+                                    (BuildContext context, int index) =>  Container(
+            height: 6,
+            color: Color(0xffeeeeee)),
                                 itemCount: mails!.length),
                           ),
                         )
@@ -72,5 +74,18 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
           },
         ));
   }
+  void launchEmailSubmission(String email) async {
+    final Uri params = Uri(scheme: 'mailto', path: email, queryParameters: {
+      // 'subject': 'Default Subject',
+      // 'body': 'Default body'
+    });
+    String url = params.toString();
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print('Could not launch $url');
+    }
+  }
+
 }
 

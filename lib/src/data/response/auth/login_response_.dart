@@ -1,3 +1,4 @@
+import 'package:hand_bill/src/data/model/services/handmade_model.dart';
 import 'package:hand_bill/src/data/model/user.dart';
 
 class LoginResponse {

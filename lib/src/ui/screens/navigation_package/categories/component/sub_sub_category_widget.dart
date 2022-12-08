@@ -40,7 +40,7 @@ class SubSubCategoryWidget extends StatelessWidget {
                                 flex: 2,
                                 child: model!.image != null
                                     ? CachedNetworkImage(
-                                        imageUrl: '${model!.image!.thump!}',
+                                        imageUrl: '${APIData.domainLink}${model!.image!.thump!}',
                                         // height: 60.h,
                                         // width: 60.w,
                                         // fit: BoxFit.cover,

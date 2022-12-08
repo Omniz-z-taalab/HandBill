@@ -89,8 +89,8 @@ class FavoriteRepository {
         "Bearer " + user.apiToken.toString();
     _dio.options.headers["Accept"] = "application/json";
 
-    Map<String, String> queryParams =
-        ({"secret": APIData.secretKey, "product_id": "$favoriteId","language":value!});
+    Map<String, dynamic> queryParams =
+        ({"secret": APIData.secretKey, "product_id": "$favoriteId","language":value});
     late GeneralResponse generalResponse;
     Response response;
 

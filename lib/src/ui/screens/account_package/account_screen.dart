@@ -35,6 +35,8 @@ import 'edit_account_screen.dart';
 import 'help/help_center_screen.dart';
 
 class AccountScreen extends StatefulWidget {
+  static const routeName = '/accountScreen';
+
   @override
   _AccountScreenState createState() => _AccountScreenState();
 }
@@ -63,18 +65,26 @@ class _AccountScreenState extends State<AccountScreen> {
     Timer(Duration(seconds: 2), () {
       if (_user != null) _profileBloc.add(ProfileFetchEvent(user: _user!));
     });
+    print(_user!.email);
+    print(_user!.email);
+    print('ssss');
     super.initState();
+    if (_user!.image != null) {
+      _avatar = _user!.image!.url!;
+    }
+    // print(_user!.image!.thump);
   }
 
   @override
   void didChangeDependencies() {
     _items.clear();
+
     if (_user != null) {
       _name = _user!.name ?? "Guest";
       _label = "log_out".tr();
       _name = _globalBloc.user!.name!;
       if (_user!.image != null) {
-        _avatar = APIData.domainLink + _user!.image!.url!;
+        _avatar = _user!.image!.url!;
       }
     }
     super.didChangeDependencies();
@@ -82,10 +92,14 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
     var model;
     return BlocProvider(
-      create: ((context) => AccountBloc()..getItems()),
+      create: ((context) =>
+      AccountBloc()
+        ..getItems()),
       child: BlocConsumer<AccountBloc, AccountState>(
         listener: (context, state) {
           if (state is AccountSuccessStates) {
@@ -103,14 +117,17 @@ class _AccountScreenState extends State<AccountScreen> {
         builder: (context, state) {
           model = AccountBloc.get(context).acountModel;
           return ConditionalBuilder(
-            condition: AccountBloc.get(context).acountModel != null,
+            condition: AccountBloc
+                .get(context)
+                .acountModel != null,
             builder: (context) => item(model, size),
-            fallback: (context) => Container(
-              color: Colors.white,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            ),
+            fallback: (context) =>
+                Container(
+                  color: Colors.white,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
           );
         },
 
@@ -118,147 +135,156 @@ class _AccountScreenState extends State<AccountScreen> {
       ),
     );
   }
-  Widget item(AcountModel model, Size size) => Scaffold(
-      // backgroundColor: Color(0xffeeeeee),
-      backgroundColor: Color(0xfff5f5f5),
-      body: RefreshIndicator(
-          onRefresh: () async {
-            if (_globalBloc.user!.image != null) {
-              setState(() {
-                _avatar = APIData.domainLink + _globalBloc.user!.image!.url!;
-                _name = _globalBloc.user!.name!;
-              });
-            }
-          },
-          child: Stack(children: [
-            ListView(
-                // physics: BouncingScrollPhysics(),
-                children: [
-                  Column(
-                      // crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        InkWell(
-                            onTap: () {
-                              if (_user == null) {
-                                Fluttertoast.showToast(
-                                    msg:"login".tr(),
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.CENTER,
-                                    timeInSecForIosWeb: 1,
-                                    backgroundColor: Colors.green,
-                                    textColor: Colors.white,
-                                    fontSize: 16.0
-                                );                              } else {
-                                Navigator.pushNamed(
-                                    context, EditAccountScreen.routeName);
-                              }
-                            },
-                            child: Container(
-                                height: size.height * 0.11,
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 16),
-                                child: Row(children: [
-                                  AspectRatio(
-                                      aspectRatio: 1 / 1,
-                                      child: Container(
-                                          clipBehavior: Clip.hardEdge,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
+
+  Widget item(AcountModel model, Size size) =>
+      Scaffold(
+        // backgroundColor: Color(0xffeeeeee),
+          backgroundColor: Color(0xfff5f5f5),
+          body: RefreshIndicator(
+              onRefresh: () async {
+                if (_globalBloc.user!.image != null) {
+                  setState(() {
+                    _avatar =
+                        _globalBloc.user!.image!.url!;
+                    _name = _globalBloc.user!.name!;
+                  });
+                }
+              },
+              child: Stack(children: [
+                ListView(
+                  // physics: BouncingScrollPhysics(),
+                    children: [
+                      Column(
+                        // crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            InkWell(
+                                onTap: () {
+                                  if (_user == null) {
+                                    Fluttertoast.showToast(
+                                        msg: "login".tr(),
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.CENTER,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.green,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
+                                  } else {
+                                    Navigator.pushNamed(
+                                        context, EditAccountScreen.routeName);
+                                  }
+                                },
+                                child: Container(
+                                    height: size.height * 0.11,
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: 16, vertical: 16),
+                                    child: Row(children: [
+                                      AspectRatio(
+                                          aspectRatio: 1 / 1,
+                                          child: Container(
+                                              clipBehavior: Clip.hardEdge,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
                                                   BorderRadius.circular(90)),
-                                          child: CachedNetworkImage(
-                                              imageUrl: _avatar,
-                                              fit: BoxFit.contain,
-                                              placeholder: (context, url) =>
-                                                  Transform.scale(
-                                                      scale: 0.4,
-                                                      child:
+                                              child: CachedNetworkImage(
+                                                  imageUrl: _user!.image == null?
+                                                   placeholder : _user!.image!.thump!,
+                                                  fit: BoxFit.contain,
+                                                  placeholder: (context, url) =>
+                                                      Transform.scale(
+                                                          scale: 0.4,
+                                                          child:
                                                           CircularProgressIndicator(
                                                               color:
-                                                                  mainColorLite)),
-                                              errorWidget: (context, url,
+                                                              mainColorLite)),
+                                                  errorWidget: (context, url,
                                                       error) =>
                                                   new Icon(Icons.error,
                                                       color: mainColorLite)))),
-                                  SizedBox(width: 16),
-                                  Column(
-                                      mainAxisAlignment:
+                                      SizedBox(width: 16),
+                                      Column(
+                                          mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      crossAxisAlignment:
+                                          crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                      children: [
-                                        Text(_name,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold)),
-                                        SizedBox(height: 4),
-                                        InkWell(
-                                            child: Row(children: [
-                                          Text(
-                                             "account_info".tr(),
-                                              style: TextStyle(
-                                                  // fontSize: 13,
-                                                  color: textLiteColor)),
-                                          Icon(Icons.keyboard_arrow_right,
-                                              color: iconColors, size: 18)
-                                        ]))
-                                      ]),
-                                ]))),
-                        // SizedBox(height: 8),
-                        for (int i = 0; i < model.data!.length; i++)
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
+                                          children: [
+                                            Text(_name,
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight
+                                                        .bold)),
+                                            SizedBox(height: 4),
+                                            InkWell(
+                                                child: Row(children: [
+                                                  Text("account_info".tr(),
+                                                      style: TextStyle(
+                                                        // fontSize: 13,
+                                                          color: textLiteColor)),
+                                                  Icon(Icons
+                                                      .keyboard_arrow_right,
+                                                      color: iconColors,
+                                                      size: 18)
+                                                ]))
+                                          ]),
+                                    ]))),
+                            // SizedBox(height: 8),
+                            for (int i = 0; i < model.data!.length; i++)
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SizedBox(
-                                    width: 20,
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Text(
+                                        model.data![i].title!.toString(),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    model.data![i].title!.toString(),
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: GridView.count(
+                                        padding: EdgeInsets.fromLTRB(
+                                            10, 0, 10, 16),
+                                        childAspectRatio: 1 / 0.7,
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 2,
+                                        mainAxisSpacing: 2,
+                                        shrinkWrap: true,
+                                        primary: false,
+                                        children: List.generate(
+                                            model.data![i].pages!.length, (
+                                            index) {
+                                          return DrawerItemWidget(
+                                              model: model.data![i]
+                                                  .pages![index]);
+                                        })),
                                   ),
                                 ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: GridView.count(
-                                    padding: EdgeInsets.fromLTRB(10, 0, 10, 16),
-                                    childAspectRatio: 1 / 0.7,
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 2,
-                                    mainAxisSpacing: 2,
-                                    shrinkWrap: true,
-                                    primary: false,
-                                    children: List.generate(
-                                        model.data![i].pages!.length, (index) {
-                                      return DrawerItemWidget(
-                                          model: model.data![i].pages![index]);
-                                    })),
-                              ),
-                            ],
-                          ),
 
-                        // SizedBox(height: 80),
-                      ])
-                ])
-          ])));
+                            // SizedBox(height: 80),
+                          ])
+                    ])
+              ])));
 
-  // Padding(
-  //       padding: const EdgeInsets.all(8.0),
-  //       child: GridView.count(
-  //           padding: EdgeInsets.fromLTRB(10, 0, 10, 16),
-  //           childAspectRatio: 1 / 0.7,
-  //           crossAxisCount: 2,
-  //           crossAxisSpacing: 2,
-  //           mainAxisSpacing: 2,
-  //           shrinkWrap: true,
-  //           primary: false,
-  //           children: List.generate(model., (index) {
-  //             return DrawerItemWidget(model: model[index]);
-  //           })),
-  //     );
+// Padding(
+//       padding: const EdgeInsets.all(8.0),
+//       child: GridView.count(
+//           padding: EdgeInsets.fromLTRB(10, 0, 10, 16),
+//           childAspectRatio: 1 / 0.7,
+//           crossAxisCount: 2,
+//           crossAxisSpacing: 2,
+//           mainAxisSpacing: 2,
+//           shrinkWrap: true,
+//           primary: false,
+//           children: List.generate(model., (index) {
+//             return DrawerItemWidget(model: model[index]);
+//           })),
+//     );
 }

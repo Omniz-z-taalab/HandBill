@@ -121,11 +121,11 @@ class JobsRepository {
     _dio.options.headers["Authorization"] =
         "Bearer " + user.apiToken.toString();
     _dio.options.headers["Accept"] = "application/json";
-    Map<String, String> queryParams = ({
+    Map<String, dynamic> queryParams = ({
       "secret": APIData.secretKey,
       "page": page.toString(),
       "paginate": "6",
-      "language":value!,
+      "language":value,
 
     });
 

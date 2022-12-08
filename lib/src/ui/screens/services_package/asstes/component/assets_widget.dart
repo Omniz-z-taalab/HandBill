@@ -43,12 +43,17 @@ class AssetsWidget extends StatelessWidget {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(model.title.toString(),
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold),
-                            maxLines: 3),
+                        Row(
+                          children: [
+
+                            Text(model.title.toString(),
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold),
+                                maxLines: 3),
+                          ],
+                        ),
                         SizedBox(height: 12),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,9 +90,12 @@ class AssetsWidget extends StatelessWidget {
                                             color: Colors.black,
                                             fontSize: 12,
                                             fontWeight: FontWeight.bold)),
-                                  ]))
+                                  ])),
+
                             ]),
+
                         SizedBox(height: 10),
+
                         Row(children: [
                           Expanded(
                               child: Row(
@@ -105,7 +113,15 @@ class AssetsWidget extends StatelessWidget {
                                             color: Colors.black,
                                             fontSize: 12,
                                             fontWeight: FontWeight.bold)))
-                              ]))
+                                    ,
+                                    Text(model.company!.name.toString(),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold),
+                                        maxLines: 3),
+                                    SizedBox(height: 12),])
+                          )
                         ])
                       ]))
             ])));
