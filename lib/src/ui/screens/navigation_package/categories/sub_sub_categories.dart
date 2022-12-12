@@ -39,7 +39,7 @@ class _SubSubCatScreenState extends State<SubSubCatScreen> {
   void initState() {
     shippingBloc = BlocProvider.of<ShippingBloc>(context);
     super.initState();
-    print('ssdsddrrreeee');
+    print('eeeeeeeeeeeeeeeee');
     shippingBloc!
       .add(ShippingSliderEvent(widget.routeArgument!.id.toString()));
 print(widget.routeArgument!.id.toString());
@@ -55,19 +55,19 @@ print(widget.routeArgument!.id.toString());
         if (state is ShippingSuccessSliderState) {
           if (sliders.isEmpty) {
             sliders = state.sliders!;
-            print('ssswwwww');
-            print(sliders![0].id);
           }
         }
-
         if (state is ShippingSuccessSubSubState) {
           subCategoryModel = state.subCategoryModel;
+          print('ppppppppppppp');
+          if(subCategoryModel ==null ){
+            print('ddddddddddd');
+          }
           print(subCategoryModel!.data![0].name);
 
-          print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
         }
         if (state is ShopIntresErrorStates) {
-          print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+          print('ewwwwwwww');
         }
       },
       builder: (context, state) {
@@ -119,12 +119,12 @@ print(widget.routeArgument!.id.toString());
                     child: ConditionalBuilder(
                       condition: subCategoryModel != null,
                       builder: (context) => item(subCategoryModel!),
-                      fallback: (context) => Container(
+                      fallback: (context) =>  Container(
                         color: Colors.white,
                         child: Center(
                           child: CircularProgressIndicator(),
                         ),
-                      ),
+                      )
                     ),
                   ),
                 ]))));

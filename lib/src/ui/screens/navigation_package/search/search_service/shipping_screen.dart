@@ -79,6 +79,10 @@ class _ShippingScreenState extends State<ShippingScreen> {
         }
         if (state is GebServiceCatSuccessStates) {
           companyModel = state.category!;
+          if(companyModel == null){
+            companyModel! == [];
+            print('ssswwwwww');
+          }
         }
       },
       builder: (context, state) {
@@ -134,17 +138,24 @@ class _ShippingScreenState extends State<ShippingScreen> {
                   SizedBox(
                       height: 400,
                       child: companyModel == null
-                          ? Center()
-                          : companyModel!.data!.length == 0
+                          ? Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 50.0),
+                          child:CircularProgressIndicator()
+                        ),
+                      )
+                          : companyModel!.data!.isEmpty
                               ? Container(
                                   color: Colors.white,
                                   child: Center(
-
-                                      child: Text(
-                                        'No Companies yet',
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 25),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(top: 450.0),
+                                        child: Text(
+                                          'No Companies yet',
+                                          style: TextStyle(
+                                              color: Colors.green, fontSize: 25),
                                     ),
+                                      ),
                                   ))
                               : item(companyModel!)),
                 ]),

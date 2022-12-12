@@ -25,7 +25,7 @@ class AssetsWidget extends StatelessWidget {
             decoration: BoxDecoration(color: Colors.white),
             child: Column(mainAxisSize: MainAxisSize.max, children: [
               CachedNetworkImage(
-                  imageUrl: model.images![0].url!,
+                  imageUrl: model.images == null ? placeholderLogo : model.images![0].url!,
                   placeholder: (context, url) => Container(
                       height: height,
                       child: Center(

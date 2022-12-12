@@ -97,12 +97,12 @@ class _CompanyBoardState extends State<CompanyBoard>
       if (_company!.logo != null) {
         image = _company!.logo!.thump;
       }
-      if (_company!.images != null && _addVideo == false) {
-        initializePlayer(_company!.video!.url! == null
-            ? 'Vedio is empty'
-            : _company!.video!.url!);
-        _addVideo = true;
-      }
+      // if (_company!.images != null && _addVideo == false) {
+      //   initializePlayer(_company!.video == null
+      //       ? 'Vedio is empty'
+      //       : _company!.video!.url!);
+      //   _addVideo = true;
+      // }
     }
   }
 

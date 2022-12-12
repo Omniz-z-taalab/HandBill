@@ -106,7 +106,7 @@ class _AssetsDetailsScreenState extends State<AssetsDetailsScreen> {
                                           )),
                                       child: CachedNetworkImage(
                                           fit: BoxFit.cover,
-                                          imageUrl: _model.images![index].url!,
+                                          imageUrl:_model.images == null ? placeholderLogo : _model.images![index].url!,
                                           placeholder: (context, url) => FittedBox(
                                               child: Transform.scale(
                                                   scale: 0.2,

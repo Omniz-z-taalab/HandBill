@@ -45,7 +45,7 @@ class ImageModel {
         ? placeholder
         :  json["thump"];
     _icon =
-        json["icon"] == null ? placeholder : APIData.domainLink + json["icon"];
+        json["icon"] == null ? placeholder : json["icon"];
     _url =
         json["url"] == null ? placeholder : APIData.domainLink + json["url"];
 

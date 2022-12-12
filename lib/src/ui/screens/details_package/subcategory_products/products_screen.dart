@@ -105,12 +105,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
               items = [];
             }
             if (state is ProductsSuccessState) {
-              // setState(() {
-              //   if (_items == null) {
-              //     _items = [];
-              //   }
+
               items = state.products;
-              print(items![0].name);
+              // print(items![0].name);
               print('ccccccccc');
               // });
             }

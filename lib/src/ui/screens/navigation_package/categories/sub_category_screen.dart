@@ -462,7 +462,7 @@ class _SubCategoriesState extends State<SubCategories>
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)),
                       child: Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(5),
 
                         // child:
                         // Flexible(

@@ -81,10 +81,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                       )),
                   body: RefreshIndicator(
                     onRefresh: () async {
-                      if (list != null) {
-                        list!.clear();
-                        list = null;
-                      }
+
                       aboutUsBloc!.add(FetchAboutItemEvent());
                     },
                     child: SingleChildScrollView(

@@ -63,7 +63,7 @@ class _JobUserDetailsScreenState extends State<JobUserDetailsScreen> {
                                   child: CachedNetworkImage(
                                       imageUrl: _model.user!.image == null
                                           ? placeholder
-                                          : APIData.domainLink +
+                                          :
                                               _model.user!.image!.url!,
                                       fit: BoxFit.cover,
                                       placeholder: (context, url) =>

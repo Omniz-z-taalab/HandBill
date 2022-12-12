@@ -1,3 +1,5 @@
+import 'package:hand_bill/src/common/api_data.dart';
+
 import '../../model/Search_data.dart';
 
 class SearchCategoriesResponse {
@@ -39,7 +41,7 @@ class SubCategorySearch {
   SubCategorySearch.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    icon = json['icon'];
+    icon =   json['icon'];
   }
 
   Map<String, dynamic> toJson() {

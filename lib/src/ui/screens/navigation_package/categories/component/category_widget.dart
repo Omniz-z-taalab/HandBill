@@ -28,7 +28,7 @@ class CategoryWidget extends StatelessWidget {
                             // height: 50,
                             // width: 50,
                             child: Image.asset(
-                              "assets/images/Hbill.jpeg",
+                              "assets/images/hb_logo.jpeg",
                               height: 60,
                               // width: 20,
                             ),

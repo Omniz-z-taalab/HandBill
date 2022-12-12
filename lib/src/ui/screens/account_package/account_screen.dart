@@ -51,7 +51,7 @@ class _AccountScreenState extends State<AccountScreen> {
   List<DrawerModel> _items = [];
   late GlobalBloc _globalBloc;
   late ProfileBloc _profileBloc;
-  String _avatar = placeholder;
+  String _avatar = placeholderLogo;
   String _name = "Guest";
   String _label = "login".tr();
   final _scaffoldKey = GlobalKey();
@@ -65,13 +65,11 @@ class _AccountScreenState extends State<AccountScreen> {
     Timer(Duration(seconds: 2), () {
       if (_user != null) _profileBloc.add(ProfileFetchEvent(user: _user!));
     });
-    print(_user!.email);
-    print(_user!.email);
-    print('ssss');
+
     super.initState();
-    if (_user!.image != null) {
-      _avatar = _user!.image!.url!;
-    }
+    // if (_user!.image != null) {
+    //   _avatar = _user!.image!.url!;
+    // }
     // print(_user!.image!.thump);
   }
 
@@ -84,7 +82,7 @@ class _AccountScreenState extends State<AccountScreen> {
       _label = "log_out".tr();
       _name = _globalBloc.user!.name!;
       if (_user!.image != null) {
-        _avatar = _user!.image!.url!;
+        _avatar = _user!.image!.icon!;
       }
     }
     super.didChangeDependencies();
@@ -187,8 +185,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                   borderRadius:
                                                   BorderRadius.circular(90)),
                                               child: CachedNetworkImage(
-                                                  imageUrl: _user!.image == null?
-                                                   placeholder : _user!.image!.thump!,
+                                                  imageUrl: _avatar,
                                                   fit: BoxFit.contain,
                                                   placeholder: (context, url) =>
                                                       Transform.scale(

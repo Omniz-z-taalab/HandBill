@@ -50,16 +50,23 @@ class _SubSubCategoriesState extends State<SubSubCategories> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-          leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: Colors.black,),onPressed: (){
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
+          onPressed: () {
             Navigator.pop(context);
-          },),
-          title: Text('Back'.tr(),style: TextStyle(color: Colors.black),),
-
-
+          },
+        ),
+        title: Text(
+          'Back'.tr(),
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: BlocConsumer<SearchBloc, SearchState>(
         listener: (context, state) {
-          if(state is SearchSubSubCategoriesSuccessState){
+          if (state is SearchSubSubCategoriesSuccessState) {
             // print(state.subSubCategories![0].name!);
             if (state.subSubCategories!.isEmpty) {
               list = null;
@@ -72,23 +79,31 @@ class _SubSubCategoriesState extends State<SubSubCategories> {
           }
         },
         builder: (context, state) {
-          return  SingleChildScrollView(
-              child:  list == null
-                  ? Center(child: Padding(padding: EdgeInsets.only(top: 200),child: CircularProgressIndicator(),))
-                    :  SizedBox(
+          return SingleChildScrollView(
+              child: list == null
+                  ? Center(
+                      child: Padding(
+                      padding: EdgeInsets.only(top: 200),
+                      child: CircularProgressIndicator(),
+                    ))
+                  : SizedBox(
                       height: 900,
                       child: ListView.separated(
-                        itemBuilder: (BuildContext context, int index) {
-                          return SearchSubCategories(model: list![index]);
-                        },
-                        itemCount: list!.length, separatorBuilder: (BuildContext context, int index)  =>SizedBox(height: 10,)
-                      ),
+                          itemBuilder: (BuildContext context, int index) {
+                            return SearchSubCategories(model: list![index]);
+                          },
+                          itemCount: list!.length,
+                          separatorBuilder: (BuildContext context, int index) =>
+                              SizedBox(
+                                height: 10,
+                              )),
                     ));
         },
       ),
     );
   }
 }
+
 class SearchSubCategories extends StatelessWidget {
   final Categories model;
   final bool isHome;
@@ -104,44 +119,59 @@ class SearchSubCategories extends StatelessWidget {
           arguments: RouteArgument(param: model.id));
     }, child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          return Container(
-              clipBehavior: Clip.antiAlias,
-              height: 100,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                   border: Border.all(color: Color(0xffeeeeee), width: 1.5),
-                  boxShadow: [
-                    BoxShadow(
-                       color: Color(0xfff5f5f5), blurRadius: 3, spreadRadius: 3)
-                  ]),
-              child: Row(
-                children: [
-                   Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: InkWell(
-                              onTap: (){
-                                Navigator.pushNamed(context, AllProducts.routeName,
-                                    arguments: RouteArgument(param: model.id));
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                // color: Colors.black45,
-                                ),
-                                child: Image.network(model.image!.thump == null ? '${Icon(Icons.error,color: Colors.black,)}' :'${model.image!.thump}',width: 70,height: 50,),
+      return Container(
+          clipBehavior: Clip.antiAlias,
+          height: 100,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Color(0xffeeeeee), width: 1.5),
+              boxShadow: [
+                BoxShadow(
+                    color: Color(0xfff5f5f5), blurRadius: 3, spreadRadius: 3)
+              ]),
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, AllProducts.routeName,
+                          arguments: RouteArgument(param: model.id));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          // color: Colors.black45,
+                          ),
+                      child: model.image == ''
+                          ? Container(
+                              // height: 50,
+                              // width: 50,
+                              child: Image.asset(
+                                "assets/images/hb_logo.jpeg",
+                                height: 60,
+                                // width: 20,
                               ),
-                            )),
-
+                            )
+                          : Image.network(
+                              model.image!.url.toString(),
+                              height: 40,
+                            ),
+                    ),
                   ),
-                  // SizedBox(width: 20,),
-                  Expanded(
-                  child:
-                  Text(model.name!,style: TextStyle(color: Colors.black45,fontSize: 15),),
-                  ),
-                ],
-              ));
-        }));
+                ),
+              ),
+              // SizedBox(width: 20,),
+              Expanded(
+                child: Text(
+                  model.name!,
+                  style: TextStyle(color: Colors.black45, fontSize: 15),
+                ),
+              ),
+            ],
+          ));
+    }));
   }
 }

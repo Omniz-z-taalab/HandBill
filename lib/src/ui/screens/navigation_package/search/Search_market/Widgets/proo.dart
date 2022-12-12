@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,7 +55,7 @@ class _ProductttState extends State<Producttt> {
           },
         ),
         title: Text(
-          'Back',
+          'Back'.tr(),
           style: TextStyle(color: Colors.black),
         ),
       ),
@@ -63,10 +64,8 @@ class _ProductttState extends State<Producttt> {
           if (state is ProductSuccesssState) {
             print('sdsdsssswwwwwwww');
             list = state!.products;
-            print(state.products);
-            print('sdsdsssswwwwwwww');
-            if (state.products!.isEmpty) {
-              list = null;
+            if (list == null) {
+              list =[];
             } else {
               list = [];
               list!.clear();
@@ -83,7 +82,15 @@ class _ProductttState extends State<Producttt> {
                     padding: EdgeInsets.only(top: 200),
                     child: CircularProgressIndicator(),
                   ))
-                  : SizedBox(
+                  : list!.length== 0
+                  ?Container(
+                child: Center(
+                  child: Padding(padding: EdgeInsets.only(top:200),
+                      child: Text('empty'.tr(),style: TextStyle(
+                        color: Colors.black,fontSize: 20
+                      ),),),
+                ),
+              ) :SizedBox(
                 height: 900,
                 child: ListView.separated(
                     itemBuilder: (BuildContext context, int index) {

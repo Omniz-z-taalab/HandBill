@@ -36,10 +36,20 @@ Widget ServiceCompany(ServiceModel model,context) {
                 padding: const EdgeInsets.all(18.0),
                 child: Row(
                   children: [
-                        Container( child:  CachedNetworkImage(
-                    width: 50,
-                        // height: 200,
-                        imageUrl: model.image == null ? ' ${placeholderLogo }':'${APIData.domainLink}${model!.image![0].icon!}' )),
+                        Container(child: model.image == null
+                ? Container(
+                // height: 50,
+                // width: 50,
+                child: Image.asset(
+                "assets/images/hb_logo.jpeg",
+                  height: 60,
+                  // width: 20,
+                ),
+              )
+                  : Image.network(
+          model.image![0].url.toString(),
+          height: 40,
+          )),
                     SizedBox(
                       width: 10,
                     ),

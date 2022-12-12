@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,19 +56,18 @@ class _AllProductsState extends State<AllProducts> {
           },
         ),
         title: Text(
-          'Back',
+          'Back'.tr(),
           style: TextStyle(color: Colors.black),
         ),
       ),
       body: BlocConsumer<SearchBloc, SearchState>(
         listener: (context, state) {
           if (state is ProductSuccessState) {
-            print(state.products);
-            print('sdsdsssswwwwwwww');
-            // print(state.products![0].name!);
-             if (state.products!.isEmpty) {
-              list = null;
-            } else {
+             if(list == null){
+               print('llllllll');
+               list = [];
+
+             } else {
                list = [];
                list!.clear();
                list = state!.products;
@@ -84,7 +84,12 @@ class _AllProductsState extends State<AllProducts> {
                       padding: EdgeInsets.only(top: 200),
                       child: CircularProgressIndicator(),
                     ))
-                  : SizedBox(
+                  :list!.length == 0
+            ? Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 200),
+                    child: CircularProgressIndicator(),
+                  )): SizedBox(
                       height: 900,
                       child: ListView.separated(
                           itemBuilder: (BuildContext context, int index) {

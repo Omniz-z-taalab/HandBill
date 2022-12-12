@@ -80,7 +80,7 @@ class _WishListScreenState extends State<WishListScreen> {
               }
 
               if (state is FavoriteSuccessState) {
-                print(state.items![0].product);
+                // print(state.items![0].product);
                 _items = [];
                 _items!.addAll(state.items!);
                 // BlocProvider.of<FavoriteBloc>(context).isFetching = false;

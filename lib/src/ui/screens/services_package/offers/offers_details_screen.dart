@@ -61,6 +61,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
 
     super.initState();
   }
+  bool showContact = false;
 
   @override
   Widget build(BuildContext context) {
@@ -105,17 +106,17 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
                                   child: CachedNetworkImage(
                                       // fit: BoxFit.cover,
                                       imageUrl: _model.images!.isEmpty
-                                          ? placeholder
-                                          : _model.images![index].thump!,
+                                          ? placeholderLogo
+                                          : _model.images![index].url!,
                                       placeholder: (context, url) => FittedBox(
                                           child: Transform.scale(
                                               scale: 0.2,
                                               child: CircularProgressIndicator(
                                                   color: mainColorLite,
                                                   strokeWidth: 2))),
-                                      errorWidget: (context, url, error) =>
-                                          new Icon(Icons.error,
-                                              color: mainColorLite)));
+
+                                  )
+                              );
                             })),
                     Positioned(
                         bottom: 8,

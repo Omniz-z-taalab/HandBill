@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hand_bill/src/blocs/search/search_event.dart';
 import 'package:hand_bill/src/blocs/search/search_state.dart';
+import 'package:hand_bill/src/common/api_data.dart';
 
 import 'package:hand_bill/src/ui/screens/navigation_package/search/Search_market/sub_categoies_screen.dart';
 import '../../../../../blocs/search/search_bloc.dart';
@@ -385,8 +386,7 @@ class SearchCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(onTap: () {
-      print('omniaaaaaaaaaaaaaaa');
-      print(model.id);
+
       Navigator.pushNamed(context, SubCategoriesScreen.routeName,
           arguments: RouteArgument(param: model.id));
     }, child: LayoutBuilder(
@@ -404,7 +404,20 @@ class SearchCategories extends StatelessWidget {
               ]),
           child: Row(
             children: [
-              Expanded(child: CachedNetworkImage(imageUrl: model.icon!)),
+              Expanded(child:  model.icon == ''
+          ? Container(
+          // height: 50,
+          // width: 50,
+          child: Image.asset(
+            "assets/images/hb_logo.jpeg",
+            height: 60,
+            // width: 20,
+          ),
+      )
+              : Image.network(
+          model.icon.toString(),
+          height: 40,
+          ), ),
               Expanded(
                   child: Align(
                 alignment: Alignment.centerLeft,

@@ -109,10 +109,10 @@ class _HandmadeDetailsScreenState extends State<HandmadeDetailsScreen> {
                                             arguments: RouteArgument(
                                                 param: _model.images![index].url)),
                                         child: CachedNetworkImage(
-                                            fit: BoxFit.cover,
+                                            fit: BoxFit.contain,
                                             imageUrl: _model.images!.isEmpty
                                                 ? placeholder
-                                                : _model.images![0].thump!,
+                                                : _model.images![0].url!,
                                             placeholder: (context, url) => FittedBox(
                                                 child: Transform.scale(
                                                     scale: 0.2,
@@ -289,13 +289,13 @@ class _HandmadeDetailsScreenState extends State<HandmadeDetailsScreen> {
                         borderRadius: BorderRadius.circular(30)
                     ),
                     padding: EdgeInsets.all(12),
-                    child: Icon(showContact?Icons.close:Icons.chat,size: 60.w,
+                    child: Icon(showContact?Icons.close:Icons.chat,size: 30.w,
                       color: Colors.white,),
                   ),
                 ),),
               if(showContact==true)...[
                 Positioned(
-                  bottom: 500.h,
+                  bottom: 400.h,
                   right: 30.w,
                   child:  Container(
                     decoration: BoxDecoration(
@@ -317,10 +317,10 @@ class _HandmadeDetailsScreenState extends State<HandmadeDetailsScreen> {
                       },
                       color: Colors.transparent,
                       icon: Image.asset("assets/icons/whatsappp.png",
-                        height: 100.h,width: 100.w,fit: BoxFit.cover,),),
+                        height: 100.h,width: 30.w,fit: BoxFit.cover,),),
                   ),),
                 Positioned(
-                  bottom: 360.h,
+                  bottom: 300.h,
                   right: 30.w,
                   child:  Container(
                     decoration: BoxDecoration(
@@ -340,10 +340,10 @@ class _HandmadeDetailsScreenState extends State<HandmadeDetailsScreen> {
                         }
                       },
                       color: Colors.white,
-                      icon: Icon(Icons.phone,size: 60.w,),),
+                      icon: Icon(Icons.phone,size: 30.w,),),
                   ),),
                 Positioned(
-                  bottom: 220.h,
+                  bottom: 200.h,
                   right: 30.w,
                   child: Container(
                     decoration: BoxDecoration(
@@ -367,7 +367,7 @@ class _HandmadeDetailsScreenState extends State<HandmadeDetailsScreen> {
                         }
                       },
                       color: Colors.white,
-                      icon: Icon(Icons.email,size: 60.w,),),
+                      icon: Icon(Icons.email,size: 30.w,),),
                   ),
                 ),
               ],
