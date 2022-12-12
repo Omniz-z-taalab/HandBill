@@ -1,5 +1,6 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 
-import 'package:easy_localization/easy_localization.dart';
+// import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,11 +51,12 @@ Future<void> main() async {
 
         Locale('en','US'),
         Locale('ar','EG'),
-        // Locale.fromSubtags(languageCode: 'en')
+        Locale.fromSubtags(languageCode: 'ar')
       ],
+      saveLocale: true,
       // useFallbackTranslations: true,
-       startLocale: Locale('en','US'),
-      fallbackLocale: Locale( lang == null ? 'en' : lang),// <-- change the path of the translation files
+        startLocale: Locale('en','US'),
+      fallbackLocale: lang == null ? Locale( 'en','US'): Locale(lang),// <-- change the path of the translation files
       child: Phoenix(child: MyApp())
 
   ));
@@ -116,45 +118,49 @@ class _MyAppState extends State<MyApp> {
                 }
                 return ScreenUtilInit(
                   designSize: const Size(375, 812),
-                  builder: (context, child) => MaterialApp(
-                      localizationsDelegates: context.localizationDelegates,
-                      supportedLocales: context.supportedLocales,
-                      title: 'Handbill',
-                      debugShowCheckedModeBanner: false,
-                      theme: _globalRepository.liteTheme,
-                      themeMode: ThemeMode.light,
-                       locale: context.fallbackLocale,
-                      // supportedLocales: [
-                      //   const Locale('en'),
-                      //   const Locale('ar'),
-                      //   const Locale('es'),
-                      //   const Locale('de'),
-                      //   const Locale('fr'),
-                      //   const Locale('el'),
-                      //   const Locale('et'),
-                      //   const Locale('nb'),
-                      //   const Locale('nn'),
-                      //   const Locale('pl'),
-                      //   const Locale('pt'),
-                      //   const Locale('ru'),
-                      //   const Locale('hi'),
-                      //   const Locale('ne'),
-                      //   const Locale('uk'),
-                      //   const Locale('hr'),
-                      //   const Locale('tr'),
-                      //   const Locale('lv'),
-                      //   const Locale('lt'),
-                      //   const Locale('ku'),
-                      //   const Locale.fromSubtags(
-                      //       languageCode: 'zh',
-                      //       scriptCode: 'Hans'), // Generic Simplified Chinese 'zh_Hans'
-                      //   const Locale.fromSubtags(
-                      //       languageCode: 'zh',
-                      //       scriptCode: 'Hant'), // Generic traditional Chinese 'zh_Hant'
-                      // ],
-                      home: SplashPage(),
-                      // home: ServicesCompanyDetailsScreen(routeArgument: RouteArgument(param: 1),),
-                      onGenerateRoute: RouteGenerator.generateRoute),
+                  builder: (context, child) => Directionality(
+                    textDirection: context.locale == 'ar' ? TextDirection.ltr : TextDirection.rtl,
+                    child: MaterialApp(
+                        localizationsDelegates: context.localizationDelegates,
+                        supportedLocales: context.supportedLocales,
+                        title: 'Handbill',
+                        debugShowCheckedModeBanner: false,
+                        theme: _globalRepository.liteTheme,
+                        themeMode: ThemeMode.light,
+                         locale: context.locale,
+                        // supportedLocales: [
+                        //   const Locale('en'),
+                        //   const Locale('ar'),
+                        //   const Locale('es'),
+                        //   const Locale('de'),
+                        //   const Locale('fr'),
+                        //   const Locale('el'),
+                        //   const Locale('et'),
+                        //   const Locale('nb'),
+                        //   const Locale('nn'),
+                        //   const Locale('pl'),
+                        //   const Locale('pt'),
+                        //   const Locale('ru'),
+                        //   const Locale('hi'),
+                        //   const Locale('ne'),
+                        //   const Locale('uk'),
+                        //   const Locale('hr'),
+                        //   const Locale('tr'),
+                        //   const Locale('lv'),
+                        //   const Locale('lt'),
+                        //   const Locale('ku'),
+                        //   const Locale.fromSubtags(
+                        //       languageCode: 'zh',
+                        //       scriptCode: 'Hans'), // Generic Simplified Chinese 'zh_Hans'
+                        //   const Locale.fromSubtags(
+                        //       languageCode: 'zh',
+                        //       scriptCode: 'Hant'), // Generic traditional Chinese 'zh_Hant'
+                        // ],
+                        
+                        home: SplashPage(),
+                        // home: ServicesCompanyDetailsScreen(routeArgument: RouteArgument(param: 1),),
+                        onGenerateRoute: RouteGenerator.generateRoute),
+                  ),
                 );
               }));
   }
