@@ -90,9 +90,9 @@ class JobsRepository {
       {required int id}) async {
     String? value = await storage.read(key: "lang");
 
-    Map<String, String> queryParams =
+    Map<String, dynamic> queryParams =
         ({"secret": APIData.secretKey, "category_id": id.toString(),
-        'language':value!});
+        'language':value});
 
     late JobsCategoriesResponse jobsCategoriesResponse;
     Response response;
@@ -154,7 +154,7 @@ class JobsRepository {
     FormData formData;
 
     formData = FormData.fromMap({
-      "language":value!,
+      "language":value,
       "secret": APIData.secretKey,
       "title": model.title,
       "description": model.description,
@@ -185,9 +185,9 @@ class JobsRepository {
         "Bearer " + user.apiToken.toString();
     _dio.options.headers["Accept"] = "application/json";
 
-    Map<String, String> queryParams =
+    Map<String, dynamic> queryParams =
         ({"secret": APIData.secretKey, "id": model.id.toString(),
-        "language":value!});
+        "language":value});
     Response response;
 
     CommonResponse? commonResponse;

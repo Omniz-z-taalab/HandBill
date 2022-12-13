@@ -27,7 +27,7 @@ class PatentedWidget extends StatelessWidget {
 
             decoration: BoxDecoration(color: Colors.white),
             child: Column(mainAxisSize: MainAxisSize.min, children: [
-            CachedNetworkImage( imageUrl:'${model!.image![0].thump!}',width: 200,height: 200,
+            CachedNetworkImage( imageUrl:'${model!.image![0].url!}',width: 200,height: 200,
             ),
               Container(
                   color: Color(0xfffafafa), height: 2, width: double.infinity),

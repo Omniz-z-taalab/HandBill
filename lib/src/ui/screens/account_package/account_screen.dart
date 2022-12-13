@@ -51,7 +51,7 @@ class _AccountScreenState extends State<AccountScreen> {
   List<DrawerModel> _items = [];
   late GlobalBloc _globalBloc;
   late ProfileBloc _profileBloc;
-  String _avatar = placeholderLogo;
+  String _avatar = placeholder;
   String _name = "Guest";
   String _label = "login".tr();
   final _scaffoldKey = GlobalKey();
@@ -82,7 +82,7 @@ class _AccountScreenState extends State<AccountScreen> {
       _label = "log_out".tr();
       _name = _globalBloc.user!.name!;
       if (_user!.image != null) {
-        _avatar = _user!.image!.icon!;
+        _avatar ='${APIData.domainLink}${_user!.image!.thump}';
       }
     }
     super.didChangeDependencies();
@@ -140,11 +140,10 @@ class _AccountScreenState extends State<AccountScreen> {
           backgroundColor: Color(0xfff5f5f5),
           body: RefreshIndicator(
               onRefresh: () async {
-                if (_globalBloc.user!.image != null) {
+                if (_user!.image != null) {
                   setState(() {
-                    _avatar =
-                        _globalBloc.user!.image!.url!;
-                    _name = _globalBloc.user!.name!;
+                     // _avatar = _user!.image!.url!;
+                    // _name = _user!.name!;
                   });
                 }
               },
@@ -194,10 +193,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                           CircularProgressIndicator(
                                                               color:
                                                               mainColorLite)),
-                                                  errorWidget: (context, url,
-                                                      error) =>
-                                                  new Icon(Icons.error,
-                                                      color: mainColorLite)))),
+                                                  ))),
                                       SizedBox(width: 16),
                                       Column(
                                           mainAxisAlignment:

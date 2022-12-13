@@ -178,7 +178,7 @@ class _HandmadeDetailsScreenState extends State<HandmadeDetailsScreen> {
                                                             image: CachedNetworkImageProvider(
                                                                 APIData.domainLink +
                                                                     _model.user!
-                                                                        .image!.url!),
+                                                                        .image!.thump!),
                                                             fit: BoxFit.cover),
                                                         color: Color(0xffffffff),
                                                         borderRadius:

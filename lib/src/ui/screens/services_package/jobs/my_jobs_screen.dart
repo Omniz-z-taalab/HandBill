@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hand_bill/src/blocs/global_bloc/global_bloc.dart';
 import 'package:hand_bill/src/blocs/job/job_bloc.dart';
 import 'package:hand_bill/src/blocs/job/job_event.dart';
@@ -110,8 +111,15 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                     });
                   }
                   if (state is JobRemoveSuccessState) {
-                    displaySnackBar(
-                        title: state.message!, scaffoldKey: _scaffoldKey);
+                    Fluttertoast.showToast(
+                        msg: state.message ?? '',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0
+                    );
 
                     if (_items != null) {
                       setState(() {

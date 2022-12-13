@@ -242,7 +242,7 @@ class _PatentedAddScreenState extends State<PatentedAddScreen> {
                                   SizedBox(height: 16),
                                   _jobLabel(label: "title".tr()),
                                   SizedBox(height: 16),
-                                  CustomTextFormFieldEnter(
+                                  CustomTextFormFieldtitle(
                                       controller: _titleController,
                                       hintText: "Enter_title".tr(),
                                       validator: (input) {

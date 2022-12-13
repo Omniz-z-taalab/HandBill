@@ -215,7 +215,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                   child: image == null
                                       ? CachedNetworkImage(
                                           imageUrl: _user!.image == null
-                                              ? placeholder
+                                              ? placeholderLogo
                                               : _user!.image!.url!,
                                           fit: BoxFit.cover,
                                           placeholder: (context, url) =>

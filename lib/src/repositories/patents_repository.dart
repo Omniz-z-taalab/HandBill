@@ -50,10 +50,10 @@ class PatentsRepository {
     _dio.options.headers["Authorization"] =
         "Bearer " + user.apiToken.toString();
     _dio.options.headers["Accept"] = "application/json";
-    Map<String, String> queryParams =
+    Map<String, dynamic> queryParams =
         ({"secret": APIData.secretKey,
           // "paginate": "$page"
-          'language':value!
+          'language':value
         });
 
     late AllPatentsResponse patentsResponse;
@@ -127,9 +127,9 @@ class PatentsRepository {
         "Bearer " + user.apiToken.toString();
     _dio.options.headers["Accept"] = "application/json";
 
-    Map<String, String> queryParams =
+    Map<String, dynamic> queryParams =
         ({"secret": APIData.secretKey, "id": model.id.toString(),
-        'language': value!
+        'language': value
         });
     Response response;
 

@@ -33,7 +33,6 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
   late SearchBloc _searchBloc;
   List<SubCategorySearch>? data;
   bool isFetching = false;
-  var _scrollController = ScrollController();
   final _searchController = TextEditingController();
   List<TabToggleModel> labelList = [
     TabToggleModel(label: "products".tr()),
@@ -44,8 +43,9 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
   final double size = 20;
   int selectedPage = 0;
   FocusNode focusNode = FocusNode();
-  List<DataProductSearch>? product = [];
-  List<DataCompanySearch>? companyy = [];
+  List<DataProductSearch>? product;
+
+  List<DataCompanySearch>? companyy;
 
   @override
   void initState() {
@@ -67,7 +67,7 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
         }
         if (_searchController.text.isEmpty) {
           product!.clear();
-          // product = null;
+          product = null;
         } else if (_searchController.text!.isEmpty) {
           companyy!.clear();
         }
@@ -102,7 +102,7 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                     setState(() {
                       if (selectedPage == 0) {
                         product!.clear();
-                        product = [];
+                        product == null;
                       }
                     });
                     setState(() {
@@ -117,8 +117,7 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                 decoration: InputDecoration(
                     prefixIcon: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: SvgPicture.asset("assets/icons/search_ic.svg",
-                            height: size, width: size)),
+                        child: SvgPicture.asset("assets/icons/search_ic.svg", height: size, width: size)),
                     hintText: "text".tr(),
                     filled: true,
                     focusColor: mainColor,
@@ -157,18 +156,27 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                     listener: (context, state) {
                   if (state is SearchProductsSuccessState) {
                     if (state.products!.products!.data!.isEmpty) {
+                      product = null;
+                    }
+                    if (product == null) {
                       product = [];
                     } else {
                       product = state.products!.products!.data!;
+                      print('pppppppp');
                       // _searchBloc.isFetching = false;
                     }
+                    // product = state.products!.products!.data!;
                     // product = state.products!.products!.data!;
                   }
                   if (state is SearchcompanySuccessState) {
                     if (state.products!.companies!.data!.isEmpty) {
+                      companyy = null;
+                    }
+                    if (companyy == null) {
                       companyy = [];
                     } else {
                       companyy = state.products!.companies!.data!;
+                      print('aaaaaaaa');
                       // _searchBloc.isFetching = false;
                     }
                   }
@@ -194,7 +202,78 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                                     ? Container(
                                         height: 10,
                                       )
-                                    : product!.length == 0
+                                    : product == null
+                                        ? CircularProgressIndicator()
+                                        : product!.length == 0
+                                            ? Container(
+                                                height: 100,
+                                                width: 400,
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.search_off_sharp,
+                                                      color: Colors.red,
+                                                      size: 30,
+                                                    ),
+                                                    Text(
+                                                      'Search_is_empty'.tr(),
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          color:
+                                                              Colors.black54),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            : SizedBox(
+                                                height: 130,
+                                                child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            5.0),
+                                                    child: Container(
+                                                      color: Colors.white38,
+                                                      child: ListView.separated(
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          return SearchProduct(
+                                                              product![index],
+                                                              context);
+                                                        },
+                                                        itemCount:
+                                                            product!.length,
+                                                        separatorBuilder:
+                                                            (BuildContext
+                                                                        context,
+                                                                    int index) =>
+                                                                Container(
+                                                          height: 1,
+                                                          width:
+                                                              double.infinity,
+                                                          color: Colors
+                                                              .grey.shade300,
+                                                        ),
+                                                      ),
+                                                    ))),
+                                Container(
+                                  width: double.infinity,
+                                  height: 1,
+                                  color: Colors.grey.shade300,
+                                ),
+                              ])
+                            : Column(children: [
+                                selectedPage == 1 &&
+                                        _searchController.text.isEmpty
+                                    ? Container(
+                                        height: 10,
+                                      )
+                                    : companyy!.length == 0
                                         ? Container(
                                             height: 100,
                                             width: 400,
@@ -229,11 +308,11 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                                                     itemBuilder:
                                                         (BuildContext context,
                                                             int index) {
-                                                      return SearchProduct(
-                                                          product![index],
+                                                      return SearchCompanyData(
+                                                          companyy![index],
                                                           context);
                                                     },
-                                                    itemCount: product!.length,
+                                                    itemCount: companyy!.length,
                                                     separatorBuilder:
                                                         (BuildContext context,
                                                                 int index) =>
@@ -250,74 +329,6 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                                   height: 1,
                                   color: Colors.grey.shade300,
                                 ),
-                              ])
-                            : Column(children: [
-                                selectedPage == 1 && _searchController.text.isEmpty
-                                    ? Container(
-                                        height: 10,
-                                      )
-                                    : companyy!.length == 0
-                                        ? Container(
-                                            height: 100,
-                                            width: 400,
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.search_off_sharp,
-                                                  color: Colors.red,
-                                                  size: 30,
-                                                ),
-                                                Text(
-                                                  'Search_is_empty'.tr(),
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      color: Colors.black54),
-                                                ),
-                                              ],
-                                            ),
-                                          )
-
-                                            : SizedBox(
-                                                height: 130,
-                                                child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            5.0),
-                                                    child: Container(
-                                                      color: Colors.white38,
-                                                      child: ListView.separated(
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return SearchCompanyData(
-                                                              companyy![index],
-                                                              context);
-                                                        },
-                                                        itemCount:
-                                                            companyy!.length,
-                                                        separatorBuilder:
-                                                            (BuildContext
-                                                                        context,
-                                                                    int index) =>
-                                                                Container(
-                                                          height: 1,
-                                                          width:
-                                                              double.infinity,
-                                                          color: Colors
-                                                              .grey.shade300,
-                                                        ),
-                                                      ),
-                                                    ))),
-                          Container(
-                                                width: double.infinity,
-                                                height: 1,
-                                                color: Colors.grey.shade300,
-                                              ),
                               ])
                       ],
                     ),
@@ -386,7 +397,6 @@ class SearchCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(onTap: () {
-
       Navigator.pushNamed(context, SubCategoriesScreen.routeName,
           arguments: RouteArgument(param: model.id));
     }, child: LayoutBuilder(
@@ -404,20 +414,22 @@ class SearchCategories extends StatelessWidget {
               ]),
           child: Row(
             children: [
-              Expanded(child:  model.icon == ''
-          ? Container(
-          // height: 50,
-          // width: 50,
-          child: Image.asset(
-            "assets/images/hb_logo.jpeg",
-            height: 60,
-            // width: 20,
-          ),
-      )
-              : Image.network(
-          model.icon.toString(),
-          height: 40,
-          ), ),
+              Expanded(
+                child: model.icon == ''
+                    ? Container(
+                        // height: 50,
+                        // width: 50,
+                        child: Image.asset(
+                          "assets/images/hb_logo.jpeg",
+                          height: 60,
+                          // width: 20,
+                        ),
+                      )
+                    : Image.network(
+                        model.icon.toString(),
+                        height: 40,
+                      ),
+              ),
               Expanded(
                   child: Align(
                 alignment: Alignment.centerLeft,

@@ -13,6 +13,7 @@ import 'package:hand_bill/src/data/model/local/route_argument.dart';
 import 'package:hand_bill/src/data/model/services/handmade_model.dart';
 import 'package:hand_bill/src/data/model/user.dart';
 import 'package:hand_bill/src/ui/component/custom/custom_button.dart';
+import 'package:hand_bill/src/ui/component/custom/custom_text_filed.dart';
 import 'package:hand_bill/src/ui/component/custom/custom_text_filed_enter.dart';
 import 'package:hand_bill/src/ui/component/custom/image_widget.dart';
 import 'package:hand_bill/src/ui/component/custom/regular_app_bar.dart';
@@ -253,7 +254,7 @@ class _HandmadeAddScreenState extends State<HandmadeAddScreen> {
                                     SizedBox(height: 16),
                                     _jobLabel(label: "Title"),
                                     SizedBox(height: 16),
-                                    CustomTextFormFieldEnter(
+                                    CustomTextFormFieldtitle(
                                         controller: _titleController,
                                         hintText: "Enter title",
                                         validator: (input) {
@@ -277,7 +278,7 @@ class _HandmadeAddScreenState extends State<HandmadeAddScreen> {
                                     SizedBox(height: 16),
                                     _jobLabel(label: "Price"),
                                     SizedBox(height: 16),
-                                    CustomTextFormFieldEnter(
+                                    CustomTextFormFieldtitle(
                                         controller: _priceController,
                                         hintText: "Enter price",
                                         validator: (input) {

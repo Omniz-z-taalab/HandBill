@@ -106,7 +106,14 @@ class _MyPatentsScreenState extends State<MyPatentsScreen> {
             setState(() {
               _items!.removeWhere((element) => element.id == state.model.id);
             });
-            displaySnackBar(title: state.message!, scaffoldKey: _scaffoldKey);
+            Fluttertoast.showToast(
+                msg: state.message ?? '',
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.green,
+                textColor: Colors.white,
+                fontSize: 16.0);
           }
         }, builder: (context, state) {
           return RefreshIndicator(
@@ -123,7 +130,15 @@ class _MyPatentsScreenState extends State<MyPatentsScreen> {
                   controller: _scrollController,
                   slivers: [
                     _items == null
-                        ?  CenterWidgetListSliver(
+                        ? SliverToBoxAdapter(
+                            child:Padding(
+                              padding: const EdgeInsets.only(top: 80.0),
+                              child: Center(child: CircularProgressIndicator(),),
+                            ),
+
+                          )
+                        : _items!.length == 0
+                            ? CenterWidgetListSliver(
                                 label: "your patents is empty".tr())
                             : SliverToBoxAdapter(
                                 child: ListView.separated(
