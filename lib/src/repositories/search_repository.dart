@@ -23,7 +23,6 @@ class SearchRepository {
   Future<SearchProductResponse> getSearchProducts(String search) async {
     String? value = await storage.read(key: "lang");
     print(value);
-    print('omnisssss');
     Map<String, dynamic> queryParams = ({
       // "secret": APIData.secretKey,
       "search": '$search',

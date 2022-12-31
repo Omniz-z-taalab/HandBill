@@ -201,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               right: 0,
                               left: 0,
                               child: DotsIndicator(
-                                  dotsCount: _homeBloc.sliders.length,
+                                  dotsCount: _homeBloc.sliders.length == null ? 1 : _homeBloc.sliders.length,
                                   position: _sliderPosition.toDouble(),
                                   decorator: DotsDecorator(
                                       color: Color(0xffffffff),

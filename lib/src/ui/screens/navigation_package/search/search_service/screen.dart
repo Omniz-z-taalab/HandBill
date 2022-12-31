@@ -26,7 +26,6 @@ class _SearchSuppliersState extends State<SearchSuppliers> {
   List<ServiceModel>? items;
   final _searchController = TextEditingController();
   final double size = 20;
-  int selectedPage = 0;
   List<Company>? companies;
 
   @override
@@ -39,14 +38,12 @@ class _SearchSuppliersState extends State<SearchSuppliers> {
 
   @override
   Widget build(BuildContext context) {
-
     _onSubmitted(value) async {
       if (_searchController.text.length >= 1) {
         serviceBloc.add(SearchMarketEvent(searchKey: value));
-        if (_searchController.text.isEmpty) {
-          companies!.clear();
-          companies == null;
-        }}
+
+      }
+
     }
 
     Color borderColor = Color(0xffeeeeee);
@@ -68,15 +65,15 @@ class _SearchSuppliersState extends State<SearchSuppliers> {
             height: 40,
             child: TextField(
                 controller: _searchController,
-
                 textAlignVertical: TextAlignVertical.center,
                 onChanged: (value) {
                   _onSubmitted(value);
-                  if (_searchController.text.isEmpty) {
+                  if(_searchController.text.isEmpty){
                     setState(() {
-                      companies!.clear();
-                       companies == [];
+                      print('rrrrrrrr');
+                      companies = [];
                     });
+
                   }
                 },
                 style: TextStyle(color: textLiteColor),
@@ -97,78 +94,78 @@ class _SearchSuppliersState extends State<SearchSuppliers> {
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(color: borderColor, width: 1))),
                 textInputAction: TextInputAction.go,
-                onSubmitted: (value) => _onSubmitted(value),
+                onSubmitted: (value) => _onSubmitted(value.trim()),
                 focusNode: focusNode),
           )),
       body: BlocConsumer<ServiceBlocData, ServiceState>(
           listener: (context, state) {
-            // if(state is)
-            if (state is categorySuccessState) {
-              items = state.items;
-            }
-            if (state is searchSuccess) {
-              if(state.company!.isEmpty){
-                companies == null;
-                print('33######');
-              } if(companies == null){
-                print('qqqqqqqq');
-                companies =[];
-              }
-              companies = state.company;
-              print(companies);
-              print('wwww333333');
-            }
-          }, builder: (context, state) {
+        if (state is categorySuccessState) {
+          items = state.items;
+        }
+        if (state is searchSuccess) {
+          if (state.company!.isEmpty) {
+            companies = null;
+          }
+          if (companies == null) {
+            companies = [];
+          }
+            companies = state.company;
+            print(companies);
+            print('wwww333333');
+        }
+      }, builder: (context, state) {
         return SingleChildScrollView(
           child: SafeArea(
             child: Column(children: [
               _searchController.text.isEmpty
                   ? Container(
-                height: 10,
-              )
+                      height: 10,
+
+                    )
                   : companies == null
-                  ? CircularProgressIndicator()
-                  :companies!.length ==0
-                  ? Container(
-                height: 100,
-                width: 400,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.search_off_sharp,
-                      color: Colors.red,
-                      size: 30,
-                    ),
-                    Text(
-                      'Search_is_empty'.tr(),
-                      style: TextStyle(
-                          fontSize: 20, color: Colors.black54),
-                    ),
-                  ],
-                ),
-              )
-                  : SizedBox(
-                height: 170,
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    child: ListView.separated(
-                      itemBuilder: (context, index) =>
-                          SearchCompany(companies![index], context),
-                      itemCount: companies!.length,
-                      separatorBuilder:
-                          (BuildContext context, int index) =>
-                          Container(
-                            height: 1,
-                            width: 20,
-                            color: Colors.grey.shade500,
-                          ),
-                    ),
-                  ),
-                ),
-              ),
+                      ? CircularProgressIndicator()
+                      : companies!.length == 0
+                          ? Container(
+                              height: 100,
+                              width: 400,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.search_off_sharp,
+                                    color: Colors.red,
+                                    size: 30,
+                                  ),
+                                  Text(
+                                    'Search_is_empty'.tr(),
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.black54),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : SizedBox(
+                              height: 170,
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Container(
+                                  child: ListView.separated(
+                                    itemBuilder: (context, index) =>
+                                        SearchCompany(
+                                            companies![index], context),
+                                    itemCount: companies!.length,
+                                    separatorBuilder:
+                                        (BuildContext context, int index) =>
+                                            Container(
+                                      height: 1,
+                                      width: 20,
+                                      color: Colors.grey.shade500,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
               SizedBox(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -186,28 +183,28 @@ class _SearchSuppliersState extends State<SearchSuppliers> {
               ),
               items == null
                   ? Padding(
-                padding: const EdgeInsets.all(120.0),
-                child: Center(child: CircularProgressIndicator()),
-              )
+                      padding: const EdgeInsets.all(120.0),
+                      child: Center(child: CircularProgressIndicator()),
+                    )
                   : SingleChildScrollView(
-                child: SizedBox(
-                  height: 600,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      child: ListView.separated(
-                        itemBuilder: (context, index) =>
-                            ServiceCompany(items![index], context),
-                        itemCount: items!.length,
-                        separatorBuilder:
-                            (BuildContext context, int index) => SizedBox(
-                          height: 10,
+                      child: SizedBox(
+                        height: 600,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            child: ListView.separated(
+                              itemBuilder: (context, index) =>
+                                  ServiceCompany(items![index], context),
+                              itemCount: items!.length,
+                              separatorBuilder:
+                                  (BuildContext context, int index) => SizedBox(
+                                height: 10,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ),
             ]),
           ),
         );

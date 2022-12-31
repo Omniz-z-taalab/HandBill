@@ -31,6 +31,8 @@ class CategoriesSuccessState extends ServiceState {
 class CategoryLoadingState extends ServiceState {}
 class searchSuccess extends ServiceState {
 List<Company>? company;
+@override
+List<Object> get props => company?? [];
 searchSuccess({required this.company});
 }
 class SearchCompaniesErrorState extends ServiceState{

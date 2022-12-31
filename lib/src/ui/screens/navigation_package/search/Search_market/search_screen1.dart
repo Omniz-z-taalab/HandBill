@@ -165,8 +165,6 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                       print('pppppppp');
                       // _searchBloc.isFetching = false;
                     }
-                    // product = state.products!.products!.data!;
-                    // product = state.products!.products!.data!;
                   }
                   if (state is SearchcompanySuccessState) {
                     if (state.products!.companies!.data!.isEmpty) {
@@ -177,7 +175,6 @@ class _SearchByCategoriesScreenState extends State<SearchByCategoriesScreen> {
                     } else {
                       companyy = state.products!.companies!.data!;
                       print('aaaaaaaa');
-                      // _searchBloc.isFetching = false;
                     }
                   }
                   if (state is SearchCategoriesSuccessState) {
